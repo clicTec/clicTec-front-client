@@ -1,17 +1,81 @@
+$color-background: #fefefe;
+$color-surface: #ffffff;
+$color-border: #a7c0c9;
+$color-text-primary: #0c0f1a;
+$color-text-muted: #565f67;
+$color-accent: #3a718c;
+$color-accent-soft: #dbe8ed;
+$color-transparent: transparent;
+
+$font-heading: 'Space Grotesk', 'Trebuchet MS', sans-serif;
+$font-body: 'Manrope', 'Segoe UI', sans-serif;
+$font-size-eyebrow: 0.82rem;
+$font-size-nav-link: 0.95rem;
+$font-size-cta: 0.9rem;
+$font-size-title: clamp(2rem, 4vw, 3rem);
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+$layout-max-width: 1120px;
+$layout-content-width: min(760px, 100%);
+$viewport-height: 100vh;
+$full-width: 100%;
+$breakpoint-tablet: 760px;
+
+$radius-sm: 8px;
+$radius-md: 14px;
+$radius-pill: 999px;
+$border-width-thin: 1px;
+$shadow-soft: 0 18px 32px -28px rgba($color-text-primary, 0.45);
+
+$space-0: 0;
+$space-2xs: 0.35rem;
+$space-xs: 0.45rem;
+$space-sm: 0.5rem;
+$space-md: 0.52rem;
+$space-lg: 0.85rem;
+$space-xl: 0.9rem;
+$space-2xl: 0.95rem;
+$space-3xl: 1.1rem;
+$space-4xl: 1.25rem;
+$space-5xl: 1.7rem;
+$space-6xl: 1.8rem;
+$space-7xl: 2rem;
+$space-8xl: 2.5rem;
+$space-9xl: 4rem;
+
+$line-height-body: 1.65;
+$letter-spacing-eyebrow: 0.18em;
+$letter-spacing-title: -0.03em;
+$transition-fast-duration: 0.2s;
+$transition-fast-easing: ease;
+$text-rendering-default: optimizeLegibility;
+
+$header-z-index: 10;
+$header-blur: 12px;
+$header-background-opacity: 86%;
+$header-padding-left: clamp(1.1rem, 2.8vw, 1.8rem);
+$header-container-gap: clamp(0.85rem, 1.6vw, 1.1rem);
+$header-logo-width: clamp(96px, 10.5vw, 132px);
+$header-nav-offset: clamp(0.9rem, 2.4vw, 1.7rem);
+$header-mobile-nav-order: 3;
+
+$body-background: radial-gradient(circle at 8% 8%, $color-accent-soft 0%, $color-background 42%);
+
 :root {
-  --color-background: #fefefe;
-  --color-surface: #ffffff;
-  --color-border: #a7c0c9;
-  --color-text-primary: #0c0f1a;
-  --color-text-muted: #565f67;
-  --color-accent: #3a718c;
-  --color-accent-soft: #dbe8ed;
+  --color-background: #{$color-background};
+  --color-surface: #{$color-surface};
+  --color-border: #{$color-border};
+  --color-text-primary: #{$color-text-primary};
+  --color-text-muted: #{$color-text-muted};
+  --color-accent: #{$color-accent};
+  --color-accent-soft: #{$color-accent-soft};
 
-  --font-heading: 'Space Grotesk', 'Trebuchet MS', sans-serif;
-  --font-body: 'Manrope', 'Segoe UI', sans-serif;
+  --font-heading: #{$font-heading};
+  --font-body: #{$font-body};
 
-  --layout-max-width: 1120px;
-  --radius-md: 14px;
-  --radius-pill: 999px;
-  --shadow-soft: 0 18px 32px -28px rgba(12, 15, 26, 0.45);
+  --layout-max-width: #{$layout-max-width};
+  --radius-md: #{$radius-md};
+  --radius-pill: #{$radius-pill};
+  --shadow-soft: #{$shadow-soft};
 }

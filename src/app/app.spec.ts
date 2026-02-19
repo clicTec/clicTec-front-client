@@ -1,10 +1,13 @@
 import { TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { App } from './app';
+import { routes } from './app.routes';
 
 describe('App', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [App],
+      providers: [provideRouter(routes)]
     }).compileComponents();
   });
 
@@ -14,10 +17,12 @@ describe('App', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render title', async () => {
+  it('should render header navigation', async () => {
     const fixture = TestBed.createComponent(App);
     await fixture.whenStable();
+    fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.home-intro__title')?.textContent).toContain('clicTec');
+    expect(compiled.querySelector('app-header')).toBeTruthy();
+    expect(compiled.querySelector('.site-header__link')?.textContent).toContain('Moviles');
   });
 });

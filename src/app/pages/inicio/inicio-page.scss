@@ -1,0 +1,32 @@
+@use '../../../styles/abstracts/variables' as vars;
+
+.inicio-page {
+  width: vars.$layout-content-width;
+  background-color: vars.$color-surface;
+  border: vars.$border-width-thin solid vars.$color-border;
+  border-radius: vars.$radius-md;
+  padding: vars.$space-7xl;
+  box-shadow: vars.$shadow-soft;
+}
+
+.inicio-page__eyebrow {
+  margin: vars.$space-0;
+  color: vars.$color-accent;
+  font-size: vars.$font-size-eyebrow;
+  letter-spacing: vars.$letter-spacing-eyebrow;
+  text-transform: uppercase;
+  font-weight: vars.$font-weight-bold;
+}
+
+.inicio-page__title {
+  margin: vars.$space-sm vars.$space-0 vars.$space-0;
+  font-size: vars.$font-size-title;
+  font-family: vars.$font-heading;
+  letter-spacing: vars.$letter-spacing-title;
+}
+
+.inicio-page__description {
+  margin: vars.$space-lg vars.$space-0 vars.$space-0;
+  color: vars.$color-text-muted;
+  line-height: vars.$line-height-body;
+}

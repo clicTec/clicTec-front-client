@@ -1,40 +1,11 @@
+@use '../styles/abstracts/variables' as vars;
+
 .page {
-  min-height: 100vh;
+  min-height: vars.$viewport-height;
 }
 
 .page__main {
-  max-width: var(--layout-max-width);
-  margin: 0 auto;
-  padding: 2.5rem 1.25rem 4rem;
-}
-
-.home-intro {
-  width: min(760px, 100%);
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: 2rem;
-  box-shadow: var(--shadow-soft);
-}
-
-.home-intro__eyebrow {
-  margin: 0;
-  color: var(--color-accent);
-  font-size: 0.82rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  font-weight: 700;
-}
-
-.home-intro__title {
-  margin: 0.5rem 0 0;
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-family: var(--font-heading);
-  letter-spacing: -0.03em;
-}
-
-.home-intro__description {
-  margin: 0.85rem 0 0;
-  color: var(--color-text-muted);
-  line-height: 1.65;
+  max-width: vars.$layout-max-width;
+  margin: vars.$space-0 auto;
+  padding: vars.$space-8xl vars.$space-4xl vars.$space-9xl;
 }
