@@ -23,6 +23,6 @@ describe('App', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('app-header')).toBeTruthy();
-    expect(compiled.querySelector('.site-header__link')?.textContent).toContain('Moviles');
+    expect(compiled.querySelector('.nav-link')?.textContent).toContain('Inicio');
   });
 });

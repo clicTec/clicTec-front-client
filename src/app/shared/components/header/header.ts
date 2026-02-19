@@ -6,6 +6,16 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   standalone: true,
   imports: [RouterLink, RouterLinkActive],
   templateUrl: './header.html',
-  styleUrl: './header.scss'
+  styleUrls: ['./header.scss']
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+  protected isMenuOpen = false;
+
+  protected toggleMenu(): void {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  protected closeMenu(): void {
+    this.isMenuOpen = false;
+  }
+}

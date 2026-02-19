@@ -1,37 +1,30 @@
-<header class="site-header">
-  <div class="site-header__container">
-    <a class="site-header__brand" routerLink="/inicio" aria-label="Ir al inicio de clicTec">
-      <img
-        class="site-header__logo"
-        src="/logo/logosinfondo.png"
-        alt="clicTec"
-        decoding="async"
-      >
+<header class="topbar" [class.is-open]="isMenuOpen">
+  <div class="topbar-inner">
+    <a class="logo-link" routerLink="/inicio" aria-label="Ir al inicio de clicTec" (click)="closeMenu()">
+      <img class="header-logo" src="/logo/logosinfondo.png" alt="Logo clicTec" decoding="async">
     </a>
 
-    <nav class="site-header__nav" aria-label="Navegacion principal">
-      <a
-        class="site-header__link"
-        routerLink="/moviles"
-        routerLinkActive="site-header__link--active"
-        [routerLinkActiveOptions]="{ exact: true }"
-      >
-        Moviles
-      </a>
-      <a class="site-header__link" routerLink="/comparativas" routerLinkActive="site-header__link--active">
-        Comparativas
-      </a>
-      <a class="site-header__link" routerLink="/reviews" routerLinkActive="site-header__link--active">
-        Reviews
-      </a>
-      <a class="site-header__link" routerLink="/guias" routerLinkActive="site-header__link--active">
-        Guias
-      </a>
-      <a class="site-header__link" routerLink="/ranking" routerLinkActive="site-header__link--active">
-        Ranking
-      </a>
+    <nav class="nav" id="primary-nav" aria-label="Navegacion principal">
+      <div class="nav-center">
+        <a class="nav-link" routerLink="/inicio" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Inicio</a>
+        <a class="nav-link" routerLink="/moviles" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Moviles</a>
+        <a class="nav-link" routerLink="/comparativas" routerLinkActive="is-active" (click)="closeMenu()">Comparativas</a>
+        <a class="nav-link" routerLink="/reviews" routerLinkActive="is-active" (click)="closeMenu()">Reviews</a>
+        <a class="nav-link" routerLink="/guias" routerLinkActive="is-active" (click)="closeMenu()">Guias</a>
+        <a class="nav-link" routerLink="/ranking" routerLinkActive="is-active" (click)="closeMenu()">Ranking</a>
+      </div>
     </nav>
 
-    <button class="site-header__cta" type="button">Suscribete</button>
+    <button
+      class="nav-toggle"
+      type="button"
+      [attr.aria-expanded]="isMenuOpen"
+      aria-controls="primary-nav"
+      (click)="toggleMenu()"
+    >
+      <span class="nav-toggle-line"></span>
+      <span class="nav-toggle-line"></span>
+      <span class="nav-toggle-line"></span>
+    </button>
   </div>
 </header>

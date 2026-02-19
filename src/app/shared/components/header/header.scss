@@ -1,88 +1,148 @@
-@use '../../../../styles/abstracts/variables' as vars;
-
-.site-header {
-  position: sticky;
-  top: vars.$space-0;
-  z-index: vars.$header-z-index;
-  backdrop-filter: blur(vars.$header-blur);
-  background-color: color-mix(in srgb, vars.$color-background vars.$header-background-opacity, vars.$color-transparent);
-  border-bottom: vars.$border-width-thin solid vars.$color-border;
+.topbar {
+  position: fixed;
+  top: 16px;
+  z-index: 30;
+  width: 100%;
+  padding: 8px 0 0;
+  background: transparent;
 }
 
-.site-header__container {
-  max-width: none;
-  width: vars.$full-width;
-  margin: vars.$space-0;
-  padding: vars.$space-lg vars.$space-4xl vars.$space-lg vars.$header-padding-left;
+.topbar-inner {
+  position: relative;
   display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: vars.$header-container-gap;
-}
-
-.site-header__brand {
-  display: inline-flex;
+  justify-content: center;
   align-items: center;
 }
 
-.site-header__logo {
-  width: vars.$header-logo-width;
-  height: auto;
+.logo-link {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.header-logo {
   display: block;
+  width: 220px;
+  height: auto;
+  filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.45));
 }
 
-.site-header__nav {
-  margin-left: vars.$header-nav-offset;
+.nav {
+  width: fit-content;
+  max-width: calc(100% - 32px);
+  margin: 0 auto;
+  padding: 14px 30px;
   display: flex;
   align-items: center;
-  gap: vars.$space-3xl;
+  justify-content: center;
+  letter-spacing: 0.6px;
+  border-radius: 14px;
+  background: rgba(10, 22, 26, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
 }
 
-.site-header__link {
-  padding: vars.$space-2xs vars.$space-xs;
-  border-radius: vars.$radius-sm;
-  color: vars.$color-text-muted;
-  font-weight: vars.$font-weight-semibold;
-  font-size: vars.$font-size-nav-link;
-  transition:
-    color vars.$transition-fast-duration vars.$transition-fast-easing,
-    background-color vars.$transition-fast-duration vars.$transition-fast-easing;
+.nav-center {
+  display: flex;
+  align-items: center;
+  gap: 22px;
 }
 
-.site-header__link:hover {
-  color: vars.$color-text-primary;
-  background-color: vars.$color-accent-soft;
+.nav-link {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.9rem;
+  text-transform: uppercase;
 }
 
-.site-header__link--active {
-  color: vars.$color-text-primary;
+.nav-link.is-active {
+  color: #ffffff;
+  font-weight: 600;
 }
 
-.site-header__cta {
-  margin-left: auto;
-  border: vars.$space-0;
-  border-radius: vars.$radius-pill;
-  background: vars.$color-accent;
-  color: vars.$color-surface;
-  font-family: vars.$font-heading;
-  font-weight: vars.$font-weight-bold;
-  font-size: vars.$font-size-cta;
-  padding: vars.$space-md vars.$space-2xl;
+.nav-toggle {
+  display: none;
+  position: absolute;
+  right: 18px;
+  top: 6px;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0;
   cursor: pointer;
-  box-shadow: vars.$shadow-soft;
 }
 
-@media (max-width: vars.$breakpoint-tablet) {
-  .site-header__container {
-    flex-wrap: wrap;
-    justify-content: flex-start;
+.nav-toggle-line {
+  width: 20px;
+  height: 2px;
+  background: #ffffff;
+  display: block;
+  border-radius: 999px;
+}
+
+@media (max-width: 900px) {
+  .header-logo {
+    width: 170px;
+  }
+}
+
+@media (max-width: 720px) {
+  .topbar-inner {
+    min-height: 70px;
   }
 
-  .site-header__nav {
-    order: vars.$header-mobile-nav-order;
-    width: vars.$full-width;
+  .header-logo {
+    width: 210px;
+  }
+
+  .logo-link {
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    width: 210px;
+  }
+
+  .nav-toggle {
+    display: grid;
+  }
+
+  .nav {
+    position: absolute;
+    top: 70px;
+    left: 16px;
+    right: 16px;
     justify-content: flex-start;
-    gap: vars.$space-2xs;
-    flex-wrap: wrap;
+    padding: 0 22px;
+    opacity: 0;
+    pointer-events: none;
+    max-height: 0;
+    overflow: hidden;
+    transform: translateY(-6px);
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease,
+      max-height 0.25s ease,
+      padding 0.25s ease;
+  }
+
+  .topbar.is-open .nav {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+    max-height: 320px;
+    padding: 18px 22px;
+  }
+
+  .nav-center {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
   }
 }
