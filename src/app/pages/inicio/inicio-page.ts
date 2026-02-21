@@ -6,6 +6,6 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [RouterLink],
   templateUrl: './inicio-page.html',
-  styleUrl: './inicio-page.scss'
+  styleUrls: ['./inicio-page.scss']
 })
 export class InicioPageComponent {}

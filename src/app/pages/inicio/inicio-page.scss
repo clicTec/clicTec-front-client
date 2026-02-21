@@ -1,122 +1,405 @@
 @use '../../../styles/abstracts/variables' as vars;
 
-.inicio-hero {
-  width: min(100%, 1120px);
-  margin: 0 auto;
-  padding: 2rem 1.4rem 2.2rem;
-  border-radius: 1rem;
+.inicio-home {
+  --inicio-shell-gutter: clamp(0.2rem, 0.9vw, 0.6rem);
+  position: relative;
+  isolation: isolate;
+  left: 50%;
+  width: min(calc(100vw - (var(--inicio-shell-gutter) * 2)), 1440px);
+  margin: -0.9rem 0 0;
+  transform: translateX(-50%);
+  padding: clamp(1.1rem, 3vw, 2rem);
+  border-radius: 1.2rem;
   border: vars.$border-width-thin solid rgba(vars.$color-border, 0.9);
   background:
-    radial-gradient(circle at 12% 8%, rgba(vars.$color-accent-soft, 0.58), transparent 42%),
-    vars.$color-surface;
-  box-shadow: 0 24px 38px -28px rgba(vars.$color-ink-900, 0.35);
+    radial-gradient(circle at 10% -6%, rgba(vars.$color-accent-strong, 0.24), transparent 30%),
+    linear-gradient(132deg, rgba(vars.$color-accent-soft, 0.78), vars.$color-surface 42%);
+  box-shadow: 0 30px 48px -34px rgba(vars.$color-ink-900, 0.4);
 }
 
-.inicio-hero__kicker {
+.inicio-home::before,
+.inicio-home::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.inicio-home::before {
+  width: clamp(160px, 28vw, 300px);
+  aspect-ratio: 1;
+  top: -70px;
+  right: -60px;
+  background: radial-gradient(circle, rgba(vars.$color-accent-strong, 0.25), transparent 70%);
+}
+
+.inicio-home::after {
+  width: clamp(140px, 26vw, 260px);
+  aspect-ratio: 1;
+  left: -70px;
+  bottom: -80px;
+  background: radial-gradient(circle, rgba(vars.$color-accent, 0.2), transparent 72%);
+}
+
+.inicio-home__masthead {
+  margin-bottom: 1.2rem;
+  animation: inicio-rise 0.55s ease both;
+}
+
+.inicio-home__eyebrow {
   margin: 0;
   font-family: vars.$font-subheading;
-  font-size: 0.75rem;
+  font-size: 0.74rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: vars.$color-accent;
+}
+
+.inicio-home__title {
+  margin: 0.6rem 0 0;
+  max-width: 22ch;
+  font-family: vars.$font-title;
+  font-size: clamp(1.8rem, 4vw, 2.85rem);
+  line-height: 1.08;
+  letter-spacing: vars.$letter-spacing-title;
+  color: vars.$color-ink-800;
+}
+
+.inicio-home__subtitle {
+  margin: 0.85rem 0 0;
+  max-width: 62ch;
+  color: vars.$color-text-muted;
+  line-height: 1.64;
+}
+
+.inicio-home__top {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  gap: 0.85rem;
+}
+
+.inicio-card {
+  border-radius: 1rem;
+  border: vars.$border-width-thin solid rgba(vars.$color-border, 0.82);
+  background: rgba(vars.$color-surface, 0.88);
+  box-shadow: 0 16px 28px -30px rgba(vars.$color-ink-900, 0.48);
+  backdrop-filter: blur(1px);
+  animation: inicio-rise 0.6s ease both;
+}
+
+.inicio-card--feature {
+  padding: clamp(1rem, 2vw, 1.4rem);
+  background:
+    linear-gradient(160deg, rgba(vars.$color-accent-soft, 0.7), rgba(vars.$color-surface, 0.95)),
+    vars.$color-surface;
+}
+
+.inicio-card__tag {
+  margin: 0;
+  font-family: vars.$font-subheading;
+  font-size: 0.7rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: vars.$color-accent;
 }
 
-.inicio-hero__title {
-  margin: 0.55rem 0 0;
+.inicio-card__title {
+  margin: 0.72rem 0 0;
   font-family: vars.$font-title;
-  font-size: clamp(1.7rem, 4.2vw, 2.5rem);
-  line-height: 1.15;
+  font-size: clamp(1.2rem, 3vw, 1.85rem);
+  line-height: 1.2;
   color: vars.$color-ink-800;
 }
 
-.inicio-hero__description {
-  margin: 0.95rem 0 0;
-  max-width: 58ch;
+.inicio-card__description {
+  margin: 0.75rem 0 0;
   color: vars.$color-text-muted;
-  line-height: 1.65;
+  line-height: 1.62;
 }
 
-.inicio-hero__actions {
+.inicio-card__actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.65rem;
-  margin-top: 1.3rem;
+  gap: 0.52rem;
+  margin-top: 1rem;
 }
 
-.inicio-hero__button {
+.inicio-chip {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 44px;
-  padding: 0 1.1rem;
-  border-radius: 0.72rem;
-  border: vars.$border-width-thin solid transparent;
+  min-height: 40px;
+  padding: 0 1rem;
+  border-radius: vars.$radius-pill;
+  border: vars.$border-width-thin solid rgba(vars.$color-accent, 0.42);
   font-family: vars.$font-button;
-  font-size: 0.82rem;
+  font-size: 0.77rem;
   font-weight: 700;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  color: vars.$color-ink-700;
+  text-decoration: none;
   transition:
-    transform 0.18s ease,
-    background-color 0.18s ease;
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
 }
 
-.inicio-hero__button:hover {
+.inicio-chip:hover {
   transform: translateY(-1px);
+  border-color: rgba(vars.$color-accent, 0.8);
 }
 
-.inicio-hero__button--primary {
+.inicio-chip--fill {
+  border-color: transparent;
   background: vars.$color-accent;
   color: vars.$color-surface;
 }
 
-.inicio-hero__button--ghost {
-  background: rgba(vars.$color-accent-soft, 0.42);
-  border-color: rgba(vars.$color-accent, 0.45);
-  color: vars.$color-ink-700;
+.inicio-chip--fill:hover {
+  background: vars.$color-accent-strong;
 }
 
-.inicio-hero__stats {
-  margin-top: 1.55rem;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.65rem;
+.inicio-card--latest {
+  padding: 1rem;
 }
 
-.inicio-hero__stat {
-  padding: 0.75rem 0.8rem;
-  border-radius: 0.72rem;
-  background: rgba(vars.$color-accent-soft, 0.34);
-  border: vars.$border-width-thin solid rgba(vars.$color-border, 0.65);
-}
-
-.inicio-hero__value {
+.inicio-card__heading {
   margin: 0;
   font-family: vars.$font-title;
-  font-size: clamp(1rem, 2vw, 1.3rem);
+  font-size: 1rem;
   color: vars.$color-ink-800;
 }
 
-.inicio-hero__label {
-  margin: 0.3rem 0 0;
+.inicio-latest-item {
+  display: grid;
+  gap: 0.25rem;
+  margin-top: 0.68rem;
+  padding: 0.72rem;
+  border-radius: 0.78rem;
+  text-decoration: none;
+  border: vars.$border-width-thin solid rgba(vars.$color-border, 0.45);
+  background: rgba(vars.$color-surface, 0.78);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.inicio-latest-item:hover {
+  transform: translateX(3px);
+  border-color: rgba(vars.$color-accent, 0.58);
+  background: rgba(vars.$color-accent-soft, 0.52);
+}
+
+.inicio-latest-item__category {
   font-family: vars.$font-subheading;
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
+  color: vars.$color-accent;
+}
+
+.inicio-latest-item__title {
+  color: vars.$color-ink-800;
+  line-height: 1.36;
+  font-weight: 600;
+}
+
+.inicio-latest-item__time {
+  font-size: 0.78rem;
   color: vars.$color-text-muted;
 }
 
-@media (max-width: 760px) {
-  .inicio-hero {
-    padding: 1.4rem 0.95rem 1.45rem;
+.inicio-home__topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+  animation: inicio-rise 0.62s ease both;
+}
+
+.inicio-topic {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.42rem 0.72rem;
+  border-radius: 0.66rem;
+  border: vars.$border-width-thin solid rgba(vars.$color-border, 0.65);
+  background: rgba(vars.$color-surface, 0.72);
+  font-size: 0.78rem;
+  font-family: vars.$font-subheading;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: vars.$color-ink-700;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.inicio-topic:hover {
+  background: vars.$color-accent;
+  color: vars.$color-surface;
+}
+
+.inicio-home__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.95rem;
+}
+
+.inicio-card--story {
+  display: grid;
+  align-content: start;
+  gap: 0.42rem;
+  padding: 0.95rem 0.92rem;
+}
+
+.inicio-card__link {
+  margin-top: 0.36rem;
+  font-family: vars.$font-button;
+  font-size: 0.78rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: vars.$color-accent;
+  text-decoration: none;
+}
+
+.inicio-card__link:hover {
+  color: vars.$color-accent-strong;
+}
+
+.inicio-home__grid .inicio-card:nth-child(1) {
+  animation-delay: 0.08s;
+}
+
+.inicio-home__grid .inicio-card:nth-child(2) {
+  animation-delay: 0.16s;
+}
+
+.inicio-home__grid .inicio-card:nth-child(3) {
+  animation-delay: 0.24s;
+}
+
+@keyframes inicio-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 980px) {
+  .inicio-home {
+    --inicio-shell-gutter: 0.4rem;
   }
 
-  .inicio-hero__actions {
+  .inicio-home__top {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .inicio-home__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .inicio-home {
+    --inicio-shell-gutter: 0.45rem;
+    margin-top: -1.15rem;
+    padding: 0.85rem;
+    border-radius: 1rem;
+  }
+
+  .inicio-home::before,
+  .inicio-home::after {
+    display: none;
+  }
+
+  .inicio-home__masthead {
+    margin-bottom: 0.9rem;
+  }
+
+  .inicio-home__title {
+    font-size: clamp(1.55rem, 8vw, 2.15rem);
+  }
+
+  .inicio-home__subtitle {
+    margin-top: 0.65rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .inicio-card {
+    border-radius: 0.85rem;
+  }
+
+  .inicio-card--feature,
+  .inicio-card--latest,
+  .inicio-card--story {
+    padding: 0.85rem;
+  }
+
+  .inicio-card__title {
+    margin-top: 0.55rem;
+    font-size: clamp(1.1rem, 5.2vw, 1.35rem);
+  }
+
+  .inicio-card__description {
+    margin-top: 0.6rem;
+    font-size: 0.93rem;
+    line-height: 1.5;
+  }
+
+  .inicio-card__actions {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
+    margin-top: 0.8rem;
   }
 
-  .inicio-hero__stats {
+  .inicio-chip {
+    width: 100%;
+  }
+
+  .inicio-latest-item {
+    margin-top: 0.55rem;
+    padding: 0.65rem;
+  }
+
+  .inicio-home__topics {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    margin-top: 0.75rem;
+    padding-bottom: 0.2rem;
+  }
+
+  .inicio-topic {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  .inicio-home__grid {
     grid-template-columns: minmax(0, 1fr);
+    gap: 0.65rem;
+    margin-top: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .inicio-home {
+    margin-top: -1.35rem;
+    padding: 0.78rem;
+  }
+
+  .inicio-home__title {
+    font-size: clamp(1.42rem, 8.8vw, 1.9rem);
   }
 }
