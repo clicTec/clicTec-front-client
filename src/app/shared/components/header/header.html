@@ -7,27 +7,27 @@
         </a>
       </div>
 
-      <nav class="nav" id="primary-nav" aria-label="Navegacion principal">
+      <nav class="nav" id="primary-nav" aria-label="Navegación principal">
         <div class="nav-center">
           <a class="nav-link" routerLink="/inicio" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Inicio</a>
           <a class="nav-link" routerLink="/guias" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Soporte</a>
-          <a class="nav-link" routerLink="/moviles" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Ofertas</a>
+          <a class="nav-link" routerLink="/moviles" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Móviles</a>
           <a class="nav-link" routerLink="/comparativas" routerLinkActive="is-active" (click)="closeMenu()">Comparativas</a>
           <a class="nav-link" routerLink="/reviews" routerLinkActive="is-active" (click)="closeMenu()">Reviews</a>
-          <button class="nav-search" type="button" aria-label="Abrir buscador (proximamente)" title="Buscador proximamente">
+          <button class="nav-search" type="button" aria-label="Abrir buscador (próximamente)" title="Buscador próximamente">
             <svg class="nav-search-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <circle cx="11" cy="11" r="6.8"></circle>
               <path d="M16.4 16.4L20.2 20.2"></path>
             </svg>
           </button>
-          <a class="nav-link nav-link--button" routerLink="/inicio" fragment="registro" (click)="closeMenu()">Suscribete</a>
+          <a class="nav-link nav-link--button" routerLink="/inicio" fragment="registro" (click)="closeMenu()">Suscríbete</a>
         </div>
       </nav>
 
       <button
         class="nav-toggle"
         type="button"
-        [attr.aria-label]="isMenuOpen ? 'Cerrar menu principal' : 'Abrir menu principal'"
+        [attr.aria-label]="isMenuOpen ? 'Cerrar menú principal' : 'Abrir menú principal'"
         [attr.aria-expanded]="isMenuOpen ? 'true' : 'false'"
         aria-controls="primary-nav"
         (click)="toggleMenu()"
@@ -37,7 +37,7 @@
           <span class="nav-toggle-line"></span>
           <span class="nav-toggle-line"></span>
         </span>
-        <span class="nav-toggle-text">{{ isMenuOpen ? 'Cerrar' : 'Menu' }}</span>
+        <span class="nav-toggle-text">{{ isMenuOpen ? 'Cerrar' : 'Menú' }}</span>
       </button>
     </div>
 

@@ -2,10 +2,17 @@
 
 .page {
   min-height: vars.$viewport-height;
+  overflow-x: clip;
 }
 
 .page__main {
-  max-width: vars.$layout-max-width;
+  max-width: 1440px;
   margin: vars.$space-0 auto;
-  padding: 7.6rem vars.$space-4xl vars.$space-9xl;
+  padding: 7.6rem clamp(0.2rem, 0.9vw, 0.6rem) 2rem;
+}
+
+@media (max-width: 760px) {
+  .page__main {
+    padding: 6.9rem 0.45rem 2.5rem;
+  }
 }
