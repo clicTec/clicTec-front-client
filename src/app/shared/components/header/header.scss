@@ -5,11 +5,11 @@
   inset-inline: 0;
   top: max(0.5rem, env(safe-area-inset-top));
   z-index: 40;
-  padding-inline: clamp(0.35rem, 1.4vw, 0.9rem);
+  padding-inline: clamp(0.2rem, 0.9vw, 0.6rem);
 }
 
 .topbar-inner {
-  width: min(100%, 1320px);
+  width: min(100%, 1440px);
   margin-inline: auto;
   position: relative;
 }
@@ -23,11 +23,12 @@
   min-height: 66px;
   padding: 0.65rem 1rem;
   border-radius: 1rem;
-  border: vars.$border-width-thin solid rgba(vars.$color-surface, 0.28);
-  background: rgba(vars.$color-ink-700, 0.86);
+  border: vars.$border-width-thin solid rgba(vars.$color-surface, 0.22);
+  background: rgba(vars.$color-accent, 0.9);
   box-shadow:
-    0 18px 42px rgba(vars.$color-ink-900, 0.35),
-    inset 0 1px 0 rgba(vars.$color-surface, 0.2);
+    0 16px 30px -18px rgba(vars.$color-ink-900, 0.52),
+    inset 0 1px 0 rgba(vars.$color-surface, 0.18);
+  overflow: hidden;
   backdrop-filter: blur(14px) saturate(170%);
   -webkit-backdrop-filter: blur(14px) saturate(170%);
 }
@@ -109,6 +110,36 @@
     inset 0 0 0 1px rgba(vars.$color-surface, 0.14);
 }
 
+.nav-search {
+  width: 42px;
+  height: 42px;
+  border: vars.$border-width-thin solid rgba(vars.$color-surface, 0.26);
+  border-radius: 999px;
+  background: rgba(vars.$color-surface, 0.1);
+  color: vars.$color-surface;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.nav-search:hover {
+  background: rgba(vars.$color-surface, 0.17);
+}
+
+.nav-search + .nav-link--button {
+  margin-left: 0.55rem;
+}
+
+.nav-search-icon {
+  width: 17px;
+  height: 17px;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .nav-toggle {
   display: none;
   position: absolute;
@@ -161,7 +192,7 @@
 
 @media (max-width: 980px) {
   .topbar {
-    padding-inline: 0.55rem;
+    padding-inline: 0.4rem;
   }
 
   .topbar-shell {
@@ -198,6 +229,11 @@
 
   .header-logo {
     width: 84px;
+  }
+
+  .nav-search {
+    width: 40px;
+    height: 40px;
   }
 
   .nav-toggle {
@@ -244,6 +280,7 @@
   }
 
   .nav-link--button {
+    margin-left: 0;
     margin-top: 0.35rem;
     justify-content: center;
   }
