@@ -1,0 +1,8 @@
+@use '../01_utilities/variables/system' as vars;
+
+.c-blockquote {
+  border-left: 4px solid vars.$color-accent;
+  padding-left: 1rem;
+  color: vars.$color-text-muted;
+  font-style: italic;
+}

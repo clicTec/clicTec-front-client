@@ -1,0 +1,27 @@
+@use '../../01_utilities/variables/system' as vars;
+
+.c-ofertas {
+  border-radius: vars.$radius-md;
+  background-color: vars.$color-surface;
+  box-shadow: vars.$shadow-soft;
+  overflow: hidden;
+}
+
+.c-ofertas__image {
+  height: 100px;
+  background: linear-gradient(135deg, rgba(vars.$color-ink-700, 0.9), rgba(vars.$color-accent, 0.7));
+}
+
+.c-ofertas__content {
+  padding: 1rem;
+}
+
+.c-ofertas__familia {
+  color: vars.$color-accent;
+  font-family: vars.$font-subheading;
+}
+
+.c-ofertas__puesto {
+  padding: 0.66rem 0;
+  border-top: vars.$border-width-thin solid rgba(vars.$color-border, 0.7);
+}

@@ -1,0 +1,13 @@
+@use '../../01_utilities/variables/system' as vars;
+
+.c-banner {
+  min-height: 70vh;
+  min-height: 500px;
+  background:
+    radial-gradient(circle at 75% 20%, rgba(vars.$color-accent-strong, 0.35), transparent 44%),
+    linear-gradient(145deg, rgba(vars.$color-ink-800, 0.95), rgba(vars.$color-ink-700, 0.86));
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: vars.$radius-md;
+}

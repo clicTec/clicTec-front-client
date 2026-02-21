@@ -1,30 +1,39 @@
 <header class="topbar" [class.is-open]="isMenuOpen">
   <div class="topbar-inner">
-    <a class="logo-link" routerLink="/inicio" aria-label="Ir al inicio de clicTec" (click)="closeMenu()">
-      <img class="header-logo" src="/logo/logosinfondo.png" alt="Logo clicTec" decoding="async">
-    </a>
-
-    <nav class="nav" id="primary-nav" aria-label="Navegacion principal">
-      <div class="nav-center">
-        <a class="nav-link" routerLink="/inicio" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Inicio</a>
-        <a class="nav-link" routerLink="/moviles" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Moviles</a>
-        <a class="nav-link" routerLink="/comparativas" routerLinkActive="is-active" (click)="closeMenu()">Comparativas</a>
-        <a class="nav-link" routerLink="/reviews" routerLinkActive="is-active" (click)="closeMenu()">Reviews</a>
-        <a class="nav-link" routerLink="/guias" routerLinkActive="is-active" (click)="closeMenu()">Guias</a>
-        <a class="nav-link" routerLink="/ranking" routerLinkActive="is-active" (click)="closeMenu()">Ranking</a>
+    <div class="topbar-shell">
+      <div class="brand-cluster">
+        <a class="logo-link" routerLink="/inicio" aria-label="Ir al inicio de clicTec" (click)="closeMenu()">
+          <img class="header-logo" src="/logo/logosinfondo.png" alt="Logo clicTec" decoding="async">
+        </a>
       </div>
-    </nav>
 
-    <button
-      class="nav-toggle"
-      type="button"
-      [attr.aria-expanded]="isMenuOpen"
-      aria-controls="primary-nav"
-      (click)="toggleMenu()"
-    >
-      <span class="nav-toggle-line"></span>
-      <span class="nav-toggle-line"></span>
-      <span class="nav-toggle-line"></span>
-    </button>
+      <nav class="nav" id="primary-nav" aria-label="Navegacion principal">
+        <div class="nav-center">
+          <a class="nav-link" routerLink="/guias" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Soporte</a>
+          <a class="nav-link" routerLink="/moviles" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Ofertas</a>
+          <a class="nav-link" routerLink="/comparativas" routerLinkActive="is-active" (click)="closeMenu()">Comparativas</a>
+          <a class="nav-link" routerLink="/reviews" routerLinkActive="is-active" (click)="closeMenu()">Reviews</a>
+          <a class="nav-link nav-link--button" routerLink="/inicio" fragment="registro" (click)="closeMenu()">Suscribete</a>
+        </div>
+      </nav>
+
+      <button
+        class="nav-toggle"
+        type="button"
+        [attr.aria-label]="isMenuOpen ? 'Cerrar menu principal' : 'Abrir menu principal'"
+        [attr.aria-expanded]="isMenuOpen ? 'true' : 'false'"
+        aria-controls="primary-nav"
+        (click)="toggleMenu()"
+      >
+        <span class="nav-toggle-icon" aria-hidden="true">
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+          <span class="nav-toggle-line"></span>
+        </span>
+        <span class="nav-toggle-text">{{ isMenuOpen ? 'Cerrar' : 'Menu' }}</span>
+      </button>
+    </div>
+
+    <div class="topbar-backdrop" aria-hidden="true" (click)="closeMenu()"></div>
   </div>
 </header>

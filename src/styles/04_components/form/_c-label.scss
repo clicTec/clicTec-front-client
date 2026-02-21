@@ -1,0 +1,8 @@
+@use '../../01_utilities/variables/system' as vars;
+
+.c-label {
+  font-family: vars.$font-subheading;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}

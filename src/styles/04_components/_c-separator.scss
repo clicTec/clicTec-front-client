@@ -1,0 +1,7 @@
+@use '../01_utilities/variables/system' as vars;
+
+.c-separator {
+  width: 100%;
+  border: 0;
+  border-top: vars.$border-width-thin solid vars.$color-border;
+}

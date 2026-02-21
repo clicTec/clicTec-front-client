@@ -1,0 +1,27 @@
+@use '../../01_utilities/variables/system' as vars;
+
+.c-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 1rem;
+  border-radius: vars.$radius-sm;
+  border: vars.$border-width-thin solid transparent;
+  font-family: vars.$font-button;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+}
+
+.c-button--primary {
+  background: vars.$color-accent;
+  color: vars.$color-surface;
+}
+
+.c-button--tertiary {
+  border-color: rgba(vars.$color-accent, 0.4);
+  color: vars.$color-ink-700;
+  background: rgba(vars.$color-accent-soft, 0.25);
+}

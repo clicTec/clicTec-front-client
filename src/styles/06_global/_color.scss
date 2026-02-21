@@ -1,0 +1,24 @@
+@use '../01_utilities/variables/system' as vars;
+
+:root {
+  --palette-black: #{vars.$palette-black};
+  --palette-midnight: #{vars.$palette-midnight};
+  --palette-slate: #{vars.$palette-slate};
+  --palette-steel: #{vars.$palette-steel};
+  --palette-ocean: #{vars.$palette-ocean};
+  --palette-cyan: #{vars.$palette-cyan};
+  --palette-white: #{vars.$palette-white};
+
+  --color-ink-900: #{vars.$color-ink-900};
+  --color-ink-800: #{vars.$color-ink-800};
+  --color-ink-700: #{vars.$color-ink-700};
+  --color-ink-600: #{vars.$color-ink-600};
+  --color-background: #{vars.$color-background};
+  --color-surface: #{vars.$color-surface};
+  --color-border: #{vars.$color-border};
+  --color-text-primary: #{vars.$color-text-primary};
+  --color-text-muted: #{vars.$color-text-muted};
+  --color-accent: #{vars.$color-accent};
+  --color-accent-strong: #{vars.$color-accent-strong};
+  --color-accent-soft: #{vars.$color-accent-soft};
+}

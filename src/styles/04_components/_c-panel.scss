@@ -1,0 +1,14 @@
+@use '../01_utilities/variables/system' as vars;
+
+.c-panel {
+  position: relative;
+  border-top: 6px solid vars.$color-accent;
+  background-color: rgba(vars.$color-surface, 0.96);
+  border-radius: vars.$radius-md;
+  box-shadow: vars.$shadow-soft;
+  padding: 1.1rem;
+}
+
+.c-panel--tall {
+  min-height: 420px;
+}

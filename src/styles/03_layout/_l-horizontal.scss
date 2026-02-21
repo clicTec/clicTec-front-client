@@ -1,0 +1,21 @@
+.l-horizontal {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.l-horizontal--space-around {
+  justify-content: space-around;
+}
+
+.l-horizontal--center {
+  justify-content: center;
+}
+
+.l-horizontal--space-between {
+  justify-content: space-between;
+}
+
+.l-horizontal--space-evenly {
+  justify-content: space-evenly;
+}

@@ -1,0 +1,31 @@
+@use '../01_utilities/variables/system' as vars;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;600;700&family=Orbitron:wght@600;700&family=Rajdhani:wght@600;700&display=swap');
+
+body {
+  min-height: vars.$viewport-height;
+  background: vars.$body-background;
+  color: vars.$color-text-primary;
+  font-family: vars.$font-body;
+  text-rendering: vars.$text-rendering-default;
+}
+
+h1,
+h2 {
+  font-family: vars.$font-title;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-family: vars.$font-subheading;
+}
+
+button {
+  font-family: vars.$font-button;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

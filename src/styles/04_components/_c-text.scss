@@ -1,0 +1,15 @@
+@use '../01_utilities/variables/system' as vars;
+
+.c-text {
+  font-family: vars.$font-body;
+  color: vars.$color-text-muted;
+  line-height: vars.$line-height-body;
+}
+
+.c-text--center {
+  text-align: center;
+}
+
+.c-text--justify {
+  text-align: justify;
+}

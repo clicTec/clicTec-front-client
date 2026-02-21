@@ -1,0 +1,19 @@
+@use '../../01_utilities/variables/system' as vars;
+
+.c-header-bar {
+  display: flex;
+  align-items: center;
+  min-height: 80px;
+  width: 100%;
+  background: rgba(vars.$color-ink-700, 0.94);
+  color: vars.$color-surface;
+  box-shadow: 0 11px 10px -13px rgba(vars.$color-ink-900, 0.7);
+}
+
+.c-header-bar__item {
+  padding-inline: 1rem;
+}
+
+.c-header-bar__item--right {
+  margin-left: auto;
+}

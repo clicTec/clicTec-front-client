@@ -1,0 +1,37 @@
+@use '../variables/system' as vars;
+
+@function get-page-max-width() {
+  @return vars.$layout-max-width;
+}
+
+@function get-radius($size: md) {
+  @if $size == sm {
+    @return vars.$radius-sm;
+  }
+
+  @if $size == pill {
+    @return vars.$radius-pill;
+  }
+
+  @return vars.$radius-md;
+}
+
+@function get-space($size) {
+  @if $size == 0 { @return vars.$space-0; }
+  @if $size == 2xs { @return vars.$space-2xs; }
+  @if $size == xs { @return vars.$space-xs; }
+  @if $size == sm { @return vars.$space-sm; }
+  @if $size == md { @return vars.$space-md; }
+  @if $size == lg { @return vars.$space-lg; }
+  @if $size == xl { @return vars.$space-xl; }
+  @if $size == 2xl { @return vars.$space-2xl; }
+  @if $size == 3xl { @return vars.$space-3xl; }
+  @if $size == 4xl { @return vars.$space-4xl; }
+  @if $size == 5xl { @return vars.$space-5xl; }
+  @if $size == 6xl { @return vars.$space-6xl; }
+  @if $size == 7xl { @return vars.$space-7xl; }
+  @if $size == 8xl { @return vars.$space-8xl; }
+  @if $size == 9xl { @return vars.$space-9xl; }
+
+  @return vars.$space-md;
+}

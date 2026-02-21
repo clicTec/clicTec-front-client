@@ -1,0 +1,10 @@
+@use '../01_utilities/variables/system' as vars;
+
+:root {
+  --font-title: #{vars.$font-title};
+  --font-subtitle: #{vars.$font-subtitle};
+  --font-subheading: #{vars.$font-subheading};
+  --font-heading: #{vars.$font-heading};
+  --font-body: #{vars.$font-body};
+  --font-button: #{vars.$font-button};
+}

@@ -1,0 +1,9 @@
+@use '../../01_utilities/variables/system' as vars;
+
+.c-input {
+  width: 100%;
+  min-height: 40px;
+  padding: 0 0.8rem;
+  border-radius: vars.$radius-sm;
+  border: vars.$border-width-thin solid vars.$color-border;
+}

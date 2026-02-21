@@ -1,0 +1,7 @@
+@mixin class-responsive-variants($class-name, $variants) {
+  @each $name, $value in $variants {
+    .#{$class-name}#{$name} {
+      @content ($value);
+    }
+  }
+}

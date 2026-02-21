@@ -1,0 +1,13 @@
+@use '../../01_utilities/variables/system' as vars;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: vars.$space-0;
+  padding: vars.$space-0;
+}

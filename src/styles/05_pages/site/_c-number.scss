@@ -1,0 +1,19 @@
+@use '../../01_utilities/variables/system' as vars;
+
+.c-number {
+  text-align: center;
+}
+
+.c-number__value {
+  margin: 0;
+  color: vars.$color-accent;
+  font-family: vars.$font-title;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.c-number__label {
+  margin: 0.4rem 0 0;
+  font-family: vars.$font-subheading;
+  text-transform: uppercase;
+  color: vars.$color-ink-700;
+}

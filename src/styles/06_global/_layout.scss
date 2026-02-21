@@ -1,0 +1,8 @@
+@use '../01_utilities/variables/system' as vars;
+
+:root {
+  --layout-max-width: #{vars.$layout-max-width};
+  --radius-md: #{vars.$radius-md};
+  --radius-pill: #{vars.$radius-pill};
+  --shadow-soft: #{vars.$shadow-soft};
+}

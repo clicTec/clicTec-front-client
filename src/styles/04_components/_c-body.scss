@@ -1,0 +1,6 @@
+@use '../01_utilities/variables/system' as vars;
+
+.c-body {
+  background: vars.$body-background;
+  color: vars.$color-text-primary;
+}

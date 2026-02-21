@@ -1,0 +1,25 @@
+@use '../01_utilities/variables/system' as vars;
+
+.c-title {
+  font-family: vars.$font-title;
+  color: vars.$color-ink-800;
+  font-size: clamp(1.5rem, 2.6vw, 2.3rem);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.c-title--left {
+  text-align: left;
+}
+
+.c-title--color-alt {
+  color: vars.$color-accent;
+}
+
+.c-title__pre {
+  display: block;
+  font-family: vars.$font-subheading;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}

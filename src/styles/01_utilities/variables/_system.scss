@@ -1,0 +1,82 @@
+@use 'sass:color';
+
+$palette-black: #000000;
+$palette-midnight: #181e34;
+$palette-slate: #274158;
+$palette-steel: #36637c;
+$palette-ocean: #4585a0;
+$palette-cyan: #53a7c3;
+$palette-white: #ffffff;
+
+$color-ink-900: $palette-black;
+$color-ink-800: $palette-midnight;
+$color-ink-700: $palette-slate;
+$color-ink-600: $palette-steel;
+$color-background: $palette-white;
+$color-surface: $palette-white;
+$color-border: rgba($palette-steel, 0.28);
+$color-text-primary: $palette-midnight;
+$color-text-muted: rgba($palette-slate, 0.78);
+$color-accent: $palette-ocean;
+$color-accent-strong: $palette-cyan;
+$color-accent-soft: color.mix($palette-white, $palette-cyan, 82%);
+$color-transparent: transparent;
+
+$font-title: 'Orbitron', 'Rajdhani', 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+$font-subtitle: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+$font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+$font-button: 'Rajdhani', 'Orbitron', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+$font-heading: $font-title;
+$font-subheading: $font-subtitle;
+$font-size-eyebrow: 0.82rem;
+$font-size-nav-link: 0.95rem;
+$font-size-cta: 0.9rem;
+$font-size-title: clamp(2rem, 4vw, 3rem);
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+$layout-max-width: 1120px;
+$layout-content-width: min(760px, 100%);
+$viewport-height: 100vh;
+$full-width: 100%;
+$breakpoint-tablet: 760px;
+
+$radius-sm: 8px;
+$radius-md: 14px;
+$radius-pill: 999px;
+$border-width-thin: 1px;
+$shadow-soft: 0 18px 32px -28px rgba($color-ink-900, 0.45);
+
+$space-0: 0;
+$space-2xs: 0.35rem;
+$space-xs: 0.45rem;
+$space-sm: 0.5rem;
+$space-md: 0.52rem;
+$space-lg: 0.85rem;
+$space-xl: 0.9rem;
+$space-2xl: 0.95rem;
+$space-3xl: 1.1rem;
+$space-4xl: 1.25rem;
+$space-5xl: 1.7rem;
+$space-6xl: 1.8rem;
+$space-7xl: 2rem;
+$space-8xl: 2.5rem;
+$space-9xl: 4rem;
+
+$line-height-body: 1.65;
+$letter-spacing-eyebrow: 0.18em;
+$letter-spacing-title: -0.03em;
+$transition-fast-duration: 0.2s;
+$transition-fast-easing: ease;
+$text-rendering-default: optimizeLegibility;
+
+$header-z-index: 10;
+$header-blur: 12px;
+$header-background-opacity: 86%;
+$header-padding-left: clamp(1.1rem, 2.8vw, 1.8rem);
+$header-container-gap: clamp(0.85rem, 1.6vw, 1.1rem);
+$header-logo-width: clamp(42px, 4.8vw, 60px);
+$header-nav-offset: clamp(0.9rem, 2.4vw, 1.7rem);
+$header-mobile-nav-order: 3;
+
+$body-background: radial-gradient(circle at 8% 8%, $color-accent-soft 0%, $color-background 42%);

@@ -1,0 +1,20 @@
+@use '../01_utilities/functions/system' as fn;
+
+.c-section {
+  width: 100%;
+}
+
+.c-section__content {
+  width: 100%;
+  max-width: fn.get-page-max-width();
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+.c-section__content--size-alt {
+  max-width: 760px;
+}
+
+.c-section--dark-color {
+  background-color: #181e34;
+}
