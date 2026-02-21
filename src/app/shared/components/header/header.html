@@ -9,6 +9,7 @@
 
       <nav class="nav" id="primary-nav" aria-label="Navegacion principal">
         <div class="nav-center">
+          <a class="nav-link" routerLink="/inicio" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Inicio</a>
           <a class="nav-link" routerLink="/guias" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Soporte</a>
           <a class="nav-link" routerLink="/moviles" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Ofertas</a>
           <a class="nav-link" routerLink="/comparativas" routerLinkActive="is-active" (click)="closeMenu()">Comparativas</a>
