@@ -23,7 +23,7 @@
 
 .header-logo {
   display: block;
-  width: 220px;
+  width: 100px;
   height: auto;
   filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.45));
 }
@@ -89,7 +89,7 @@
 
 @media (max-width: 900px) {
   .header-logo {
-    width: 170px;
+    width: 90px;
   }
 }
 
@@ -99,14 +99,14 @@
   }
 
   .header-logo {
-    width: 210px;
+    width: 82px;
   }
 
   .logo-link {
     left: 50%;
     top: 0;
     transform: translateX(-50%);
-    width: 210px;
+    width: 82px;
   }
 
   .nav-toggle {
