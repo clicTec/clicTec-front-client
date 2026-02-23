@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
 
 type FocusId = 'global' | 'camera' | 'performance' | 'battery' | 'value';
 type Winner = 'left' | 'right' | 'tie';
@@ -48,7 +47,6 @@ interface FeaturedDuel {
 @Component({
   selector: 'app-comparativas-page',
   standalone: true,
-  imports: [RouterLink],
   templateUrl: './comparativas-page.html',
   styleUrl: './comparativas-page.scss'
 })

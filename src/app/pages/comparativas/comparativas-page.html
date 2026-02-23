@@ -8,9 +8,16 @@
         soporte de software.
       </p>
     </div>
+  </header>
 
-    <article class="comparativas-focus" aria-label="Enfoques de comparacion">
-      <h2 class="comparativas-focus__title">Enfoque de comparacion</h2>
+  <section class="comparador" aria-label="Comparador rapido de moviles">
+    <header class="comparador__head">
+      <h2 class="comparador__title">Comparador rapido</h2>
+      <p class="comparador__text">Selecciona dos modelos para ver diferencias clave al instante.</p>
+    </header>
+
+    <article class="comparativas-focus comparador__focus" aria-label="Enfoques de comparacion">
+      <h3 class="comparativas-focus__title">Enfoque de comparacion</h3>
       <div class="comparativas-focus__chips">
         @for (focus of focusOptions; track focus.id) {
           <button
@@ -25,13 +32,6 @@
       </div>
       <p class="comparativas-focus__description">{{ activeFocus.description }}</p>
     </article>
-  </header>
-
-  <section class="comparador" aria-label="Comparador rapido de moviles">
-    <header class="comparador__head">
-      <h2 class="comparador__title">Comparador rapido</h2>
-      <p class="comparador__text">Selecciona dos modelos para ver diferencias clave al instante.</p>
-    </header>
 
     <div class="comparador__controls">
       <label class="comparador-select">

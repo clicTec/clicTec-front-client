@@ -13,9 +13,7 @@
 }
 
 .comparativas-page__hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-  gap: 0.7rem;
+  display: block;
 }
 
 .comparativas-page__intro {
@@ -119,6 +117,13 @@
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 0.5rem;
+}
+
+.comparador__focus {
+  margin-top: 0.66rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
 }
 
 .comparador__text,
@@ -311,12 +316,6 @@
   border: vars.$border-width-thin solid rgba(vars.$color-border, 0.75);
   background: rgba(vars.$color-surface, 0.9);
   padding: 0.88rem;
-}
-
-@media (max-width: 1060px) {
-  .comparativas-page__hero {
-    grid-template-columns: minmax(0, 1fr);
-  }
 }
 
 @media (max-width: 860px) {
