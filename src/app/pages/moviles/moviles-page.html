@@ -1,7 +1,153 @@
 <section class="moviles-page">
-  <p class="moviles-page__eyebrow">Especializados en smartphones</p>
-  <h1 class="moviles-page__title">Moviles</h1>
-  <p class="moviles-page__description">
-    Listado general, de smartphones con filtros por marca, gama, precio, ano y sistema operativo.
-  </p>
+  <header class="moviles-page__hero">
+    <div class="moviles-page__intro">
+      <p class="moviles-page__eyebrow">Catalogo de moviles</p>
+      <h1 class="moviles-page__title">Encuentra el smartphone ideal por perfil y presupuesto</h1>
+      <p class="moviles-page__description">
+        Seleccion editorial de modelos recomendados con foco en camara, bateria, rendimiento y soporte
+        de software.
+      </p>
+      <div class="moviles-page__actions">
+        <a class="moviles-page__action moviles-page__action--fill" routerLink="/comparativas"
+          >Ver comparativas</a
+        >
+        <a class="moviles-page__action" routerLink="/ranking">Ir al ranking</a>
+      </div>
+    </div>
+
+    <article class="moviles-launches" aria-label="Proximos lanzamientos">
+      <h2 class="moviles-launches__title">Radar de lanzamientos</h2>
+      <div class="moviles-launches__list">
+        @for (entry of launchCalendar; track entry.device) {
+          <article class="moviles-launch">
+            <p class="moviles-launch__month">{{ entry.month }}</p>
+            <h3 class="moviles-launch__device">{{ entry.device }}</h3>
+            <p class="moviles-launch__target">{{ entry.target }}</p>
+            <p class="moviles-launch__notes">{{ entry.notes }}</p>
+          </article>
+        }
+      </div>
+    </article>
+  </header>
+
+  <section class="moviles-bottom">
+    <article class="moviles-checklist" aria-label="Checklist para comprar mejor">
+      <h2 class="moviles-checklist__title">Checklist antes de comprar</h2>
+      <ul class="moviles-checklist__list">
+        @for (item of buyingChecklist; track item) {
+          <li class="moviles-checklist__item">{{ item }}</li>
+        }
+      </ul>
+      <a class="moviles-checklist__cta" routerLink="/guias">Ver guias practicas</a>
+    </article>
+  </section>
+
+  <section class="moviles-filters" aria-label="Filtros sugeridos">
+    <div class="moviles-filters__head">
+      <h2 class="moviles-filters__title">Filtros rapidos</h2>
+      <p class="moviles-filters__text">Combinaciones sugeridas para empezar a explorar.</p>
+    </div>
+
+    <div class="moviles-filters__groups">
+      @for (group of filterGroups; track group.title) {
+        <article class="moviles-filter-group">
+          <h3 class="moviles-filter-group__title">{{ group.title }}</h3>
+          <div class="moviles-filter-group__options">
+            @for (option of group.options; track option) {
+              <button
+                class="moviles-filter-chip"
+                type="button"
+                [class.is-selected]="isSelectedFilter(group.key, option)"
+                [attr.aria-pressed]="isSelectedFilter(group.key, option)"
+                (click)="setFilter(group.key, option)"
+              >
+                {{ option }}
+              </button>
+            }
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="moviles-catalog" aria-label="Listado de moviles">
+    <header class="moviles-catalog__header">
+      <h2 class="moviles-catalog__title">Modelos recomendados</h2>
+      <a class="moviles-catalog__link" routerLink="/reviews">Ver todas las reviews</a>
+    </header>
+
+    @if (filteredCatalog.length > 0) {
+      <div class="moviles-catalog__grid">
+        @for (phone of paginatedCatalog; track phone.slug) {
+          <article class="moviles-phone">
+            <header class="moviles-phone__top">
+              <p class="moviles-phone__segment">{{ phone.segment }}</p>
+              <p class="moviles-phone__score">{{ phone.score }}</p>
+            </header>
+
+            <h3 class="moviles-phone__name">{{ phone.model }}</h3>
+            <p class="moviles-phone__meta">{{ phone.brand }} · {{ phone.price }}</p>
+            <p class="moviles-phone__summary">{{ phone.summary }}</p>
+
+            <ul class="moviles-phone__specs">
+              @for (spec of phone.specs; track spec.label) {
+                <li class="moviles-phone__spec">
+                  <span class="moviles-phone__spec-label">{{ spec.label }}</span>
+                  <span class="moviles-phone__spec-value">{{ spec.value }}</span>
+                </li>
+              }
+            </ul>
+
+            <div class="moviles-phone__chips">
+              @for (chip of phone.chips; track chip) {
+                <span class="moviles-phone__chip">{{ chip }}</span>
+              }
+            </div>
+
+            <a class="moviles-phone__cta" [routerLink]="phone.route">{{ phone.routeLabel }}</a>
+          </article>
+        }
+      </div>
+
+      <nav class="moviles-pagination" aria-label="Paginacion de modelos recomendados">
+        <p class="moviles-pagination__summary">
+          Mostrando {{ visibleStart }}-{{ visibleEnd }} de {{ filteredCatalog.length }} modelos
+        </p>
+        <div class="moviles-pagination__controls">
+          <button
+            class="moviles-pagination__button"
+            type="button"
+            (click)="previousPage()"
+            [disabled]="currentPage === 1"
+          >
+            Anterior
+          </button>
+          @for (page of pageNumbers; track page) {
+            <button
+              class="moviles-pagination__button"
+              type="button"
+              [class.is-active]="page === currentPage"
+              [attr.aria-current]="page === currentPage ? 'page' : null"
+              (click)="goToPage(page)"
+            >
+              {{ page }}
+            </button>
+          }
+          <button
+            class="moviles-pagination__button"
+            type="button"
+            (click)="nextPage()"
+            [disabled]="currentPage === totalPages"
+          >
+            Siguiente
+          </button>
+        </div>
+      </nav>
+    } @else {
+      <p class="moviles-catalog__empty">
+        No hay modelos con esa combinacion de filtros. Prueba otra marca, gama o sistema.
+      </p>
+    }
+  </section>
+
 </section>

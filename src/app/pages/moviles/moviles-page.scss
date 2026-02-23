@@ -1,33 +1,477 @@
 @use '../../../styles/abstracts/variables' as vars;
 
 .moviles-page {
-  width: vars.$layout-content-width;
-  background-color: vars.$color-surface;
-  border: vars.$border-width-thin solid vars.$color-border;
-  border-radius: vars.$radius-md;
-  padding: vars.$space-7xl;
-  box-shadow: vars.$shadow-soft;
+  width: min(100%, 1440px);
+  margin: -0.7rem auto 0;
+  padding: clamp(1.1rem, 3vw, 2rem);
+  border-radius: 1.1rem;
+  border: vars.$border-width-thin solid rgba(vars.$color-border, 0.92);
+  background: linear-gradient(145deg, rgba(vars.$color-accent-soft, 0.84), vars.$color-surface 46%);
+  box-shadow: 0 26px 42px -34px rgba(vars.$color-ink-900, 0.4);
+  display: grid;
+  gap: 0.88rem;
+}
+
+.moviles-page__hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 0.74rem;
 }
 
 .moviles-page__eyebrow {
-  margin: vars.$space-0;
-  color: vars.$color-accent;
-  font-size: vars.$font-size-eyebrow;
-  letter-spacing: vars.$letter-spacing-eyebrow;
+  margin: 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  font-weight: vars.$font-weight-bold;
-  font-family: vars.$font-subheading;
+  color: vars.$color-accent;
 }
 
 .moviles-page__title {
-  margin: vars.$space-sm vars.$space-0 vars.$space-0;
-  font-size: vars.$font-size-title;
-  font-family: vars.$font-heading;
+  margin: 0.55rem 0 0;
+  max-width: 24ch;
+  font-size: clamp(1.72rem, 4vw, 2.65rem);
+  line-height: 1.1;
   letter-spacing: vars.$letter-spacing-title;
+  color: vars.$color-ink-800;
 }
 
 .moviles-page__description {
-  margin: vars.$space-lg vars.$space-0 vars.$space-0;
+  margin: 0.78rem 0 0;
+  max-width: 62ch;
   color: vars.$color-text-muted;
-  line-height: vars.$line-height-body;
+  line-height: 1.62;
+}
+
+.moviles-page__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.94rem;
+}
+
+.moviles-page__action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 0 0.94rem;
+  border-radius: vars.$radius-pill;
+  border: vars.$border-width-thin solid rgba(vars.$color-accent, 0.46);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: vars.$color-ink-700;
+  text-decoration: none;
+}
+
+.moviles-page__action--fill {
+  border-color: transparent;
+  background: vars.$color-accent;
+  color: vars.$color-surface;
+}
+
+.moviles-filters {
+  padding: 0.9rem;
+}
+
+.moviles-filters__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.4rem;
+}
+
+.moviles-filters__title {
+  margin: 0;
+  font-size: 0.98rem;
+  color: vars.$color-ink-800;
+}
+
+.moviles-filters__text {
+  margin: 0;
+  color: vars.$color-text-muted;
+  font-size: 0.84rem;
+}
+
+.moviles-filters__groups {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.56rem;
+  margin-top: 0.65rem;
+}
+
+.moviles-filter-group {
+  padding: 0.7rem;
+}
+
+.moviles-filter-group__title {
+  margin: 0;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: vars.$color-text-muted;
+}
+
+.moviles-filter-group__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: 0.46rem;
+}
+
+.moviles-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 0.58rem;
+  border-radius: vars.$radius-pill;
+  border: vars.$border-width-thin solid rgba(vars.$color-border, 0.7);
+  background: rgba(vars.$color-surface, 0.72);
+  font-size: 0.7rem;
+  color: vars.$color-ink-700;
+  cursor: pointer;
+}
+
+.moviles-filter-chip.is-selected {
+  border-color: transparent;
+  background: vars.$color-accent;
+  color: vars.$color-surface;
+}
+
+.moviles-catalog__header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.moviles-catalog__title {
+  margin: 0;
+  font-size: clamp(1.02rem, 2.4vw, 1.3rem);
+  color: vars.$color-ink-800;
+}
+
+.moviles-catalog__link {
+  color: vars.$color-accent;
+  text-decoration: none;
+  font-size: 0.74rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.moviles-catalog__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.66rem;
+  margin-top: 0.66rem;
+}
+
+.moviles-catalog__empty {
+  margin: 0.66rem 0 0;
+  padding: 0.88rem;
+  border-radius: 0.9rem;
+  border: vars.$border-width-thin dashed rgba(vars.$color-border, 0.84);
+  color: vars.$color-text-muted;
+  line-height: 1.5;
+}
+
+.moviles-phone__top {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.48rem;
+}
+
+.moviles-phone__segment {
+  margin: 0;
+  font-size: 0.68rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: vars.$color-accent;
+}
+
+.moviles-phone__score {
+  margin: 0;
+  min-width: 40px;
+  height: 28px;
+  padding: 0 0.45rem;
+  border-radius: 999px;
+  background: rgba(vars.$color-accent, 0.12);
+  border: vars.$border-width-thin solid rgba(vars.$color-accent, 0.35);
+  font-size: 0.82rem;
+  color: vars.$color-ink-700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.moviles-phone__name {
+  margin: 0.45rem 0 0;
+  font-size: 1.04rem;
+  line-height: 1.22;
+  color: vars.$color-ink-800;
+}
+
+.moviles-phone__meta {
+  margin: 0.25rem 0 0;
+  color: vars.$color-text-muted;
+  font-size: 0.82rem;
+}
+
+.moviles-phone__summary {
+  margin: 0.65rem 0 0;
+  color: vars.$color-text-muted;
+  line-height: 1.5;
+  font-size: 0.88rem;
+}
+
+.moviles-phone__specs {
+  margin: 0.7rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.32rem;
+}
+
+.moviles-phone__spec {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  border-bottom: vars.$border-width-thin dashed rgba(vars.$color-border, 0.78);
+  padding-bottom: 0.28rem;
+}
+
+.moviles-phone__spec-label {
+  color: vars.$color-text-muted;
+  font-size: 0.76rem;
+}
+
+.moviles-phone__spec-value {
+  font-size: 0.77rem;
+  font-weight: 600;
+  color: vars.$color-ink-700;
+  text-align: right;
+}
+
+.moviles-phone__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.32rem;
+  margin-top: 0.65rem;
+}
+
+.moviles-phone__chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0 0.52rem;
+  border-radius: vars.$radius-pill;
+  background: rgba(vars.$color-accent-soft, 0.85);
+  font-size: 0.68rem;
+  color: vars.$color-ink-700;
+}
+
+.moviles-phone__cta {
+  margin-top: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  min-height: 33px;
+  padding: 0 0.72rem;
+  border-radius: 0.72rem;
+  border: vars.$border-width-thin solid rgba(vars.$color-accent, 0.34);
+  background: rgba(vars.$color-surface, 0.9);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: vars.$color-ink-700;
+}
+
+.moviles-pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.56rem;
+  margin-top: 0.72rem;
+}
+
+.moviles-pagination__summary {
+  margin: 0;
+  color: vars.$color-text-muted;
+  font-size: 0.78rem;
+}
+
+.moviles-pagination__controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.34rem;
+}
+
+.moviles-pagination__button {
+  min-width: 34px;
+  height: 32px;
+  padding: 0 0.66rem;
+  border-radius: 0.62rem;
+  border: vars.$border-width-thin solid rgba(vars.$color-border, 0.88);
+  background: rgba(vars.$color-surface, 0.88);
+  color: vars.$color-ink-700;
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+
+.moviles-pagination__button.is-active {
+  border-color: transparent;
+  background: vars.$color-accent;
+  color: vars.$color-surface;
+}
+
+.moviles-pagination__button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.moviles-bottom {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.7rem;
+}
+
+.moviles-launches__title,
+.moviles-checklist__title {
+  margin: 0;
+  font-size: 0.98rem;
+  color: vars.$color-ink-800;
+}
+
+.moviles-launches__list {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 0.66rem;
+}
+
+.moviles-launch {
+  padding: 0.64rem 0.68rem;
+}
+
+.moviles-launch__month {
+  margin: 0;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: vars.$color-accent;
+}
+
+.moviles-launch__device {
+  margin: 0.32rem 0 0;
+  font-size: 0.92rem;
+  color: vars.$color-ink-800;
+}
+
+.moviles-launch__target {
+  margin: 0.22rem 0 0;
+  color: vars.$color-ink-700;
+  font-size: 0.8rem;
+}
+
+.moviles-launch__notes {
+  margin: 0.4rem 0 0;
+  color: vars.$color-text-muted;
+  line-height: 1.47;
+  font-size: 0.82rem;
+}
+
+.moviles-checklist__list {
+  margin: 0.66rem 0 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.4rem;
+  color: vars.$color-text-muted;
+  line-height: 1.5;
+}
+
+.moviles-checklist__item::marker {
+  color: vars.$color-accent;
+}
+
+.moviles-checklist__cta {
+  margin-top: 0.74rem;
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 0.72rem;
+  border-radius: 0.72rem;
+  text-decoration: none;
+  border: vars.$border-width-thin solid rgba(vars.$color-accent, 0.45);
+  color: vars.$color-ink-700;
+  font-size: 0.71rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.moviles-page__intro,
+.moviles-filters,
+.moviles-filter-group,
+.moviles-phone,
+.moviles-launches,
+.moviles-checklist,
+.moviles-launch {
+  border-radius: 0.9rem;
+  border: vars.$border-width-thin solid rgba(vars.$color-border, 0.72);
+  background: rgba(vars.$color-surface, 0.92);
+}
+
+.moviles-page__intro,
+.moviles-phone,
+.moviles-launches,
+.moviles-checklist {
+  padding: 0.88rem;
+}
+
+@media (max-width: 1180px) {
+  .moviles-filters__groups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .moviles-catalog__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 860px) {
+  .moviles-page__hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .moviles-page {
+    margin-top: -0.4rem;
+    padding: 0.9rem;
+    border-radius: 1rem;
+  }
+
+  .moviles-filters__groups {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .moviles-catalog__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .moviles-pagination {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .moviles-phone__spec {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .moviles-phone__spec-value {
+    text-align: left;
+  }
 }
