@@ -26,11 +26,15 @@
   color: vars.$color-accent;
 }
 
+.moviles-page__intro {
+  padding-top: 0.1rem;
+}
+
 .moviles-page__title {
-  margin: 0.55rem 0 0;
-  max-width: 24ch;
-  font-size: clamp(1.72rem, 4vw, 2.65rem);
-  line-height: 1.1;
+  margin: 0.6rem 0 0;
+  max-width: 22ch;
+  font-size: clamp(1.8rem, 4vw, 2.85rem);
+  line-height: 1.08;
   letter-spacing: vars.$letter-spacing-title;
   color: vars.$color-ink-800;
 }
@@ -392,6 +396,39 @@
   line-height: 1.5;
 }
 
+.moviles-checklist {
+  position: relative;
+  overflow: clip;
+  border-color: rgba(vars.$color-accent, 0.45);
+  background:
+    linear-gradient(150deg, rgba(vars.$color-accent-soft, 0.92), rgba(vars.$color-surface, 0.98)),
+    vars.$color-surface;
+  box-shadow: 0 18px 30px -30px rgba(vars.$color-ink-900, 0.46);
+}
+
+.moviles-checklist::before {
+  content: 'Clave antes de comprar';
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 0.62rem;
+  border-radius: vars.$radius-pill;
+  background: vars.$color-accent;
+  color: vars.$color-surface;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.moviles-checklist__title {
+  margin-top: 0.52rem;
+  font-size: 1.1rem;
+}
+
+.moviles-checklist__item {
+  padding-left: 0.08rem;
+}
+
 .moviles-checklist__item::marker {
   color: vars.$color-accent;
 }
@@ -404,14 +441,19 @@
   padding: 0 0.72rem;
   border-radius: 0.72rem;
   text-decoration: none;
-  border: vars.$border-width-thin solid rgba(vars.$color-accent, 0.45);
-  color: vars.$color-ink-700;
+  border: vars.$border-width-thin solid transparent;
+  background: vars.$color-accent;
+  color: vars.$color-surface;
   font-size: 0.71rem;
+  font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-.moviles-page__intro,
+.moviles-checklist__cta:hover {
+  background: vars.$color-accent-strong;
+}
+
 .moviles-filters,
 .moviles-filter-group,
 .moviles-phone,
@@ -423,7 +465,6 @@
   background: rgba(vars.$color-surface, 0.92);
 }
 
-.moviles-page__intro,
 .moviles-phone,
 .moviles-launches,
 .moviles-checklist {
@@ -464,6 +505,11 @@
   .moviles-pagination {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .moviles-checklist::before {
+    min-height: 26px;
+    font-size: 0.62rem;
   }
 
   .moviles-phone__spec {

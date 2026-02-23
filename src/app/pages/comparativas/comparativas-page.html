@@ -1,10 +1,123 @@
 <section class="comparativas-page">
-  <p class="comparativas-page__eyebrow">Analisis directos</p>
-  <h1 class="comparativas-page__title">Comparativas</h1>
-  <ul class="comparativas-page__list">
-    <li class="comparativas-page__item">iPhone vs Samsung</li>
-    <li class="comparativas-page__item">Mejor gama media 2026</li>
-    <li class="comparativas-page__item">Mejor movil calidad-precio</li>
-    <li class="comparativas-page__item">Android vs iOS</li>
-  </ul>
+  <header class="comparativas-page__hero">
+    <div class="comparativas-page__intro">
+      <p class="comparativas-page__eyebrow">Analisis directos</p>
+      <h1 class="comparativas-page__title">Comparativas reales para elegir sin perder tiempo</h1>
+      <p class="comparativas-page__description">
+        Compara dos moviles con el mismo criterio de prueba: precio, camara, rendimiento, bateria y
+        soporte de software.
+      </p>
+    </div>
+
+    <article class="comparativas-focus" aria-label="Enfoques de comparacion">
+      <h2 class="comparativas-focus__title">Enfoque de comparacion</h2>
+      <div class="comparativas-focus__chips">
+        @for (focus of focusOptions; track focus.id) {
+          <button
+            class="comparativas-focus__chip"
+            type="button"
+            [class.is-active]="isFocusActive(focus.id)"
+            (click)="setFocus(focus.id)"
+          >
+            {{ focus.label }}
+          </button>
+        }
+      </div>
+      <p class="comparativas-focus__description">{{ activeFocus.description }}</p>
+    </article>
+  </header>
+
+  <section class="comparador" aria-label="Comparador rapido de moviles">
+    <header class="comparador__head">
+      <h2 class="comparador__title">Comparador rapido</h2>
+      <p class="comparador__text">Selecciona dos modelos para ver diferencias clave al instante.</p>
+    </header>
+
+    <div class="comparador__controls">
+      <label class="comparador-select">
+        <span class="comparador-select__label">Modelo A</span>
+        <select
+          class="comparador-select__input"
+          [value]="leftDeviceId"
+          (change)="setLeftDevice($any($event.target).value)"
+        >
+          @for (device of devices; track device.id) {
+            <option [value]="device.id">{{ device.name }}</option>
+          }
+        </select>
+      </label>
+
+      <label class="comparador-select">
+        <span class="comparador-select__label">Modelo B</span>
+        <select
+          class="comparador-select__input"
+          [value]="rightDeviceId"
+          (change)="setRightDevice($any($event.target).value)"
+        >
+          @for (device of devices; track device.id) {
+            <option [value]="device.id">{{ device.name }}</option>
+          }
+        </select>
+      </label>
+    </div>
+
+    @if (leftDevice && rightDevice) {
+      <div class="comparador__duel">
+        <article class="comparador-card">
+          <p class="comparador-card__brand">{{ leftDevice.brand }}</p>
+          <h3 class="comparador-card__name">{{ leftDevice.name }}</h3>
+          <p class="comparador-card__meta">{{ leftDevice.priceLabel }} · {{ leftDevice.segment }}</p>
+          <p class="comparador-card__spec">{{ leftDevice.chipset }}</p>
+          <p class="comparador-card__spec">{{ leftDevice.cameraMain }}</p>
+        </article>
+
+        <article class="comparador-card comparador-card--right">
+          <p class="comparador-card__brand">{{ rightDevice.brand }}</p>
+          <h3 class="comparador-card__name">{{ rightDevice.name }}</h3>
+          <p class="comparador-card__meta">{{ rightDevice.priceLabel }} · {{ rightDevice.segment }}</p>
+          <p class="comparador-card__spec">{{ rightDevice.chipset }}</p>
+          <p class="comparador-card__spec">{{ rightDevice.cameraMain }}</p>
+        </article>
+      </div>
+
+      <div class="comparador__table">
+        @for (row of comparisonRows; track row.label) {
+          <article class="comparador-row">
+            <p class="comparador-row__value" [class.is-winner]="row.winner === 'left'">
+              {{ row.leftValue }}
+            </p>
+            <p class="comparador-row__label">{{ row.label }}</p>
+            <p
+              class="comparador-row__value comparador-row__value--right"
+              [class.is-winner]="row.winner === 'right'"
+            >
+              {{ row.rightValue }}
+            </p>
+          </article>
+        }
+      </div>
+
+      <p class="comparador__verdict">{{ focusWinnerText }}</p>
+    }
+  </section>
+
+  <section class="comparativas-duels" aria-label="Duelos recomendados">
+    <header class="comparativas-duels__head">
+      <h2 class="comparativas-duels__title">Duelos destacados</h2>
+      <p class="comparativas-duels__text">Cargalos en un clic y compara con el enfoque que te interesa.</p>
+    </header>
+
+    <div class="comparativas-duels__grid">
+      @for (duel of filteredDuels; track duel.id) {
+        <article class="duel-card">
+          <p class="duel-card__tag">{{ duel.tag }}</p>
+          <h3 class="duel-card__title">{{ duel.title }}</h3>
+          <p class="duel-card__summary">{{ duel.summary }}</p>
+          <button class="duel-card__button" type="button" (click)="loadDuel(duel)">
+            Cargar en comparador
+          </button>
+        </article>
+      }
+    </div>
+  </section>
 </section>
