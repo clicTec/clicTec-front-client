@@ -1,4 +1,12 @@
 <section class="comparativas-page">
+  @if (isLoading) {
+    <p>Cargando comparativas...</p>
+  }
+
+  @if (errorMessage) {
+    <p>{{ errorMessage }}</p>
+  }
+
   <header class="comparativas-page__hero">
     <div class="comparativas-page__intro">
       <p class="comparativas-page__eyebrow">Analisis directos</p>

@@ -1,4 +1,12 @@
 <section class="moviles-page">
+  @if (isLoading) {
+    <p>Cargando catalogo...</p>
+  }
+
+  @if (errorMessage) {
+    <p>{{ errorMessage }}</p>
+  }
+
   <header class="moviles-page__hero">
     <div class="moviles-page__intro">
       <p class="moviles-page__eyebrow">Catalogo de moviles</p>
@@ -105,7 +113,7 @@
 
       <nav class="moviles-pagination" aria-label="Paginacion de modelos recomendados">
         <p class="moviles-pagination__summary">
-          Mostrando {{ visibleStart }}-{{ visibleEnd }} de {{ filteredCatalog.length }} modelos
+          Mostrando {{ visibleStart }}-{{ visibleEnd }} de {{ totalItems }} modelos
         </p>
         <div class="moviles-pagination__controls">
           <button

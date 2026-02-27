@@ -1,7 +1,11 @@
 <section class="reviews-page">
-  <p class="reviews-page__eyebrow">Revision tecnica</p>
-  <h1 class="reviews-page__title">Reviews</h1>
-  <p class="reviews-page__description">
-    Analisis detallado de diseno, pantalla, rendimiento, camara, bateria, software y conclusion tecnica.
-  </p>
+  @if (isLoading) {
+    <p>Cargando reviews...</p>
+  } @else if (errorMessage) {
+    <p>{{ errorMessage }}</p>
+  } @else if (review) {
+    <p class="reviews-page__eyebrow">{{ review.eyebrow }}</p>
+    <h1 class="reviews-page__title">{{ review.title }}</h1>
+    <p class="reviews-page__description">{{ review.description }}</p>
+  }
 </section>

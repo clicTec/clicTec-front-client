@@ -1,83 +1,52 @@
 <section class="inicio-home">
-  <header class="inicio-home__masthead">
-    <p class="inicio-home__eyebrow">Portada clicTec</p>
-    <h1 class="inicio-home__title">Tecnología clara para elegir tu próximo móvil sin ruido</h1>
-    <p class="inicio-home__subtitle">
-      Análisis directos, comparativas rápidas y guías prácticas para decidir mejor en menos tiempo.
-    </p>
-  </header>
+  @if (isLoading) {
+    <p>Cargando portada...</p>
+  } @else if (errorMessage) {
+    <p>{{ errorMessage }}</p>
+  } @else if (home) {
+    <header class="inicio-home__masthead">
+      <p class="inicio-home__eyebrow">{{ home.eyebrow }}</p>
+      <h1 class="inicio-home__title">{{ home.title }}</h1>
+      <p class="inicio-home__subtitle">{{ home.subtitle }}</p>
+    </header>
 
-  <section class="inicio-home__top" aria-label="Contenido principal">
-    <article class="inicio-card inicio-card--feature">
-      <p class="inicio-card__tag">Destacado</p>
-      <h2 class="inicio-card__title">Top gamas medias 2026: los modelos que de verdad valen la pena</h2>
-      <p class="inicio-card__description">
-        Resumimos rendimiento, batería, pantalla y cámara en una guía corta para acertar en la compra.
-      </p>
-      <div class="inicio-card__actions">
-        <a class="inicio-chip" routerLink="/reviews">Leer reviews</a>
-      </div>
-    </article>
+    <section class="inicio-home__top" aria-label="Contenido principal">
+      <article class="inicio-card inicio-card--feature">
+        <p class="inicio-card__tag">{{ home.feature.tag }}</p>
+        <h2 class="inicio-card__title">{{ home.feature.title }}</h2>
+        <p class="inicio-card__description">{{ home.feature.description }}</p>
+        <div class="inicio-card__actions">
+          <a class="inicio-chip" [routerLink]="home.feature.actionRoute">{{ home.feature.actionLabel }}</a>
+        </div>
+      </article>
 
-    <aside class="inicio-card inicio-card--latest" aria-label="Lo último">
-      <h2 class="inicio-card__heading">Lo último</h2>
-      <a class="inicio-latest-item" routerLink="/reviews">
-        <span class="inicio-latest-item__category">Review</span>
-        <span class="inicio-latest-item__title">Probamos el nuevo plegable compacto: sorpresas reales en autonomía</span>
-        <span class="inicio-latest-item__time">Hace 2 horas</span>
-      </a>
-      <a class="inicio-latest-item" routerLink="/comparativas">
-        <span class="inicio-latest-item__category">Comparativa</span>
-        <span class="inicio-latest-item__title">iOS vs Android en 2026: qué plataforma te conviene según tu uso</span>
-        <span class="inicio-latest-item__time">Hace 4 horas</span>
-      </a>
-      <a class="inicio-latest-item" routerLink="/guias">
-        <span class="inicio-latest-item__category">Guía</span>
-        <span class="inicio-latest-item__title">7 ajustes para mejorar batería y privacidad en menos de 5 minutos</span>
-        <span class="inicio-latest-item__time">Hoy</span>
-      </a>
-      <a class="inicio-latest-item" routerLink="/ranking">
-        <span class="inicio-latest-item__category">Ranking</span>
-        <span class="inicio-latest-item__title">Los mejores móviles por rango de precio este mes</span>
-        <span class="inicio-latest-item__time">Hoy</span>
-      </a>
-    </aside>
-  </section>
+      <aside class="inicio-card inicio-card--latest" aria-label="Lo último">
+        <h2 class="inicio-card__heading">Lo último</h2>
+        @for (item of home.latest; track item.title) {
+          <a class="inicio-latest-item" [routerLink]="item.route">
+            <span class="inicio-latest-item__category">{{ item.category }}</span>
+            <span class="inicio-latest-item__title">{{ item.title }}</span>
+            <span class="inicio-latest-item__time">{{ item.timeAgo }}</span>
+          </a>
+        }
+      </aside>
+    </section>
 
-  <nav class="inicio-home__topics" aria-label="Temas principales">
-    <a class="inicio-topic" routerLink="/moviles">Lanzamientos</a>
-    <a class="inicio-topic" routerLink="/comparativas">Cámara</a>
-    <a class="inicio-topic" routerLink="/reviews">Rendimiento</a>
-    <a class="inicio-topic" routerLink="/guias">Batería</a>
-    <a class="inicio-topic" routerLink="/ranking">Calidad-precio</a>
-  </nav>
+    <nav class="inicio-home__topics" aria-label="Temas principales">
+      @for (topic of home.topics; track topic.label) {
+        <a class="inicio-topic" [routerLink]="topic.route">{{ topic.label }}</a>
+      }
+    </nav>
 
-  <section class="inicio-home__grid" aria-label="Bloques editoriales">
-    <article class="inicio-card inicio-card--story">
-      <p class="inicio-card__tag">Guía rápida</p>
-      <h2 class="inicio-card__title">Cómo leer una ficha técnica sin caer en marketing</h2>
-      <p class="inicio-card__description">
-        Qué cifras importan de verdad y cuáles puedes ignorar para comparar móviles de forma inteligente.
-      </p>
-      <a class="inicio-card__link" routerLink="/guias">Ir a guías</a>
-    </article>
-
-    <article class="inicio-card inicio-card--story">
-      <p class="inicio-card__tag">Ranking semanal</p>
-      <h2 class="inicio-card__title">5 móviles equilibrados por debajo de 500 euros</h2>
-      <p class="inicio-card__description">
-        Selección actualizada con opciones que mantienen buen rendimiento, cámara y software estable.
-      </p>
-      <a class="inicio-card__link" routerLink="/ranking">Ver ranking</a>
-    </article>
-
-    <article class="inicio-card inicio-card--story">
-      <p class="inicio-card__tag">Análisis</p>
-      <h2 class="inicio-card__title">Snapdragon vs Dimensity: dónde están las diferencias reales</h2>
-      <p class="inicio-card__description">
-        Te explicamos impacto en juegos, temperatura y eficiencia para que sepas qué esperar en uso diario.
-      </p>
-      <a class="inicio-card__link" routerLink="/reviews">Leer análisis</a>
-    </article>
-  </section>
+    <section class="inicio-home__grid" aria-label="Bloques editoriales">
+      @for (story of home.stories; track story.title) {
+        <article class="inicio-card inicio-card--story">
+          <p class="inicio-card__tag">{{ story.tag }}</p>
+          <h2 class="inicio-card__title">{{ story.title }}</h2>
+          <p class="inicio-card__description">{{ story.description }}</p>
+          <a class="inicio-card__link" [routerLink]="story.route">{{ story.routeLabel }}</a>
+        </article>
+      }
+    </section>
+  }
 </section>

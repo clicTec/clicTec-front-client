@@ -1,11 +1,15 @@
 <section class="guias-page">
-  <p class="guias-page__eyebrow">Recomendaciones practicas</p>
-  <h1 class="guias-page__title">Guias</h1>
-  <ul class="guias-page__list">
-    <li class="guias-page__item">Mejor movil por menos de 300 EUR</li>
-    <li class="guias-page__item">Mejor camara del ano</li>
-    <li class="guias-page__item">Mejor bateria</li>
-    <li class="guias-page__item">Mejor movil para gaming</li>
-    <li class="guias-page__item">Mejor movil compacto</li>
-  </ul>
+  @if (isLoading) {
+    <p>Cargando guias...</p>
+  } @else if (errorMessage) {
+    <p>{{ errorMessage }}</p>
+  } @else if (guide) {
+    <p class="guias-page__eyebrow">{{ guide.eyebrow }}</p>
+    <h1 class="guias-page__title">{{ guide.title }}</h1>
+    <ul class="guias-page__list">
+      @for (item of guide.items; track item) {
+        <li class="guias-page__item">{{ item }}</li>
+      }
+    </ul>
+  }
 </section>
