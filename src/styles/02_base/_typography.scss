@@ -1,5 +1,4 @@
 @use '../01_utilities/variables/system' as vars;
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap');
 
 body {
   min-height: vars.$viewport-height;
@@ -7,6 +6,8 @@ body {
   color: vars.$color-text-primary;
   font-family: vars.$font-body;
   text-rendering: vars.$text-rendering-default;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1,

@@ -1,38 +1,60 @@
 @use '../../../styles/abstracts/variables' as vars;
 
 .guias-page {
-  width: vars.$layout-content-width;
-  background-color: vars.$color-surface;
-  border: vars.$border-width-thin solid vars.$color-border;
-  border-radius: vars.$radius-md;
-  padding: vars.$space-7xl;
-  box-shadow: vars.$shadow-soft;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding: clamp(1.8rem, 4vw, 3.2rem) 0;
 }
 
-.guias-page__eyebrow {
-  margin: vars.$space-0;
-  color: vars.$color-accent;
-  font-size: vars.$font-size-eyebrow;
-  letter-spacing: vars.$letter-spacing-eyebrow;
-  text-transform: uppercase;
-  font-weight: vars.$font-weight-bold;
-  font-family: vars.$font-subheading;
+.guias-page::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 220px;
+  margin-bottom: 1.25rem;
+  border-radius: 1.8rem;
+  background:
+    linear-gradient(180deg, rgba(vars.$color-surface, 0.44), rgba(vars.$color-surface, 0.94)),
+    rgba(vars.$color-background, 0.96)
+    url('/store/store-glyph.svg') center/112px no-repeat;
 }
 
 .guias-page__title {
-  margin: vars.$space-sm vars.$space-0 vars.$space-0;
-  font-size: vars.$font-size-title;
-  font-family: vars.$font-heading;
-  letter-spacing: vars.$letter-spacing-title;
+  margin: 0.45rem 0 0;
+  max-width: 14ch;
+  font-size: clamp(2.4rem, 4vw, 4rem);
+  color: vars.$color-ink-900;
 }
 
 .guias-page__list {
-  margin: vars.$space-lg vars.$space-0 vars.$space-0;
-  padding-left: vars.$space-5xl;
-  color: vars.$color-text-muted;
-  line-height: vars.$line-height-body;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.8rem;
 }
 
-.guias-page__item + .guias-page__item {
-  margin-top: vars.$space-2xs;
+.guias-page__item {
+  padding: 1rem 1.1rem;
+  border-radius: 1.35rem;
+  background: vars.$color-background;
+  color: vars.$color-ink-900;
+  font-weight: 500;
+}
+
+@media (max-width: 760px) {
+  .guias-page {
+    padding: 1.4rem 0;
+  }
+
+  .guias-page::before {
+    height: 160px;
+    border-radius: 1.4rem;
+  }
+
+  .guias-page__title {
+    max-width: none;
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
 }

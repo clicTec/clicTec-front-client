@@ -4,7 +4,6 @@
   } @else if (errorMessage) {
     <p>{{ errorMessage }}</p>
   } @else if (ranking) {
-    <p class="ranking-page__eyebrow">{{ ranking.eyebrow }}</p>
     <h1 class="ranking-page__title">{{ ranking.title }}</h1>
     <ul class="ranking-page__list">
       @for (item of ranking.items; track item) {

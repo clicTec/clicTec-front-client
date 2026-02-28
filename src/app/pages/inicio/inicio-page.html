@@ -5,7 +5,6 @@
     <p>{{ errorMessage }}</p>
   } @else if (home) {
     <header class="inicio-home__masthead">
-      <p class="inicio-home__eyebrow">{{ home.eyebrow }}</p>
       <h1 class="inicio-home__title">{{ home.title }}</h1>
       <p class="inicio-home__subtitle">{{ home.subtitle }}</p>
     </header>
@@ -31,12 +30,6 @@
         }
       </aside>
     </section>
-
-    <nav class="inicio-home__topics" aria-label="Temas principales">
-      @for (topic of home.topics; track topic.label) {
-        <a class="inicio-topic" [routerLink]="topic.route">{{ topic.label }}</a>
-      }
-    </nav>
 
     <section class="inicio-home__grid" aria-label="Bloques editoriales">
       @for (story of home.stories; track story.title) {

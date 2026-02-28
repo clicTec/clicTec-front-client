@@ -1,6 +1,6 @@
 <section class="moviles-page">
   @if (isLoading) {
-    <p>Cargando catalogo...</p>
+    <p>Cargando Review Moviles...</p>
   }
 
   @if (errorMessage) {
@@ -9,7 +9,6 @@
 
   <header class="moviles-page__hero">
     <div class="moviles-page__intro">
-      <p class="moviles-page__eyebrow">Catalogo de moviles</p>
       <h1 class="moviles-page__title">Encuentra el smartphone ideal por perfil y presupuesto</h1>
       <p class="moviles-page__description">
         Seleccion editorial de modelos recomendados con foco en camara, bateria, rendimiento y soporte
@@ -31,18 +30,6 @@
       </div>
     </article>
   </header>
-
-  <section class="moviles-bottom">
-    <article class="moviles-checklist" aria-label="Checklist para comprar mejor">
-      <h2 class="moviles-checklist__title">Checklist antes de comprar</h2>
-      <ul class="moviles-checklist__list">
-        @for (item of buyingChecklist; track item) {
-          <li class="moviles-checklist__item">{{ item }}</li>
-        }
-      </ul>
-      <a class="moviles-checklist__cta" routerLink="/guias">Ver guias practicas</a>
-    </article>
-  </section>
 
   <section class="moviles-filters" aria-label="Filtros sugeridos">
     <div class="moviles-filters__head">
@@ -75,7 +62,7 @@
   <section class="moviles-catalog" aria-label="Listado de moviles">
     <header class="moviles-catalog__header">
       <h2 class="moviles-catalog__title">Modelos recomendados</h2>
-      <a class="moviles-catalog__link" routerLink="/reviews">Ver todas las reviews</a>
+      <a class="moviles-catalog__link" routerLink="/reviews">Ver todas las noticias tec</a>
     </header>
 
     @if (filteredCatalog.length > 0) {

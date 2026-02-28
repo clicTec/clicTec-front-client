@@ -1,31 +1,32 @@
 @use 'sass:color';
 
-$palette-black: #000000;
-$palette-midnight: #181e34;
-$palette-slate: #274158;
-$palette-steel: #36637c;
-$palette-ocean: #4585a0;
-$palette-cyan: #53a7c3;
+$palette-black: #1d1d1f;
+$palette-midnight: #2f2f33;
+$palette-slate: #6e6e73;
+$palette-steel: #d2d2d7;
+$palette-ocean: #0071e3;
+$palette-cyan: #2997ff;
 $palette-white: #ffffff;
+$palette-cloud: #f5f5f7;
 
 $color-ink-900: $palette-black;
 $color-ink-800: $palette-midnight;
 $color-ink-700: $palette-slate;
-$color-ink-600: $palette-steel;
-$color-background: $palette-white;
+$color-ink-600: #8d8d92;
+$color-background: $palette-cloud;
 $color-surface: $palette-white;
-$color-border: rgba($palette-steel, 0.28);
-$color-text-primary: $palette-midnight;
-$color-text-muted: rgba($palette-slate, 0.78);
+$color-border: rgba($palette-black, 0.08);
+$color-text-primary: $palette-black;
+$color-text-muted: rgba($palette-midnight, 0.72);
 $color-accent: $palette-ocean;
 $color-accent-strong: $palette-cyan;
-$color-accent-soft: color.mix($palette-white, $palette-cyan, 82%);
+$color-accent-soft: color.mix($palette-white, $palette-ocean, 94%);
 $color-transparent: transparent;
 
-$font-title: 'Sora', 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
-$font-subtitle: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
-$font-body: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
-$font-button: 'Sora', 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+$font-title: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Segoe UI', Helvetica, Arial, sans-serif;
+$font-subtitle: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Helvetica, Arial, sans-serif;
+$font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Helvetica, Arial, sans-serif;
+$font-button: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Helvetica, Arial, sans-serif;
 $font-heading: $font-title;
 $font-subheading: $font-subtitle;
 $font-size-eyebrow: 0.82rem;
@@ -35,17 +36,17 @@ $font-size-title: clamp(2rem, 4vw, 3rem);
 $font-weight-semibold: 600;
 $font-weight-bold: 700;
 
-$layout-max-width: 1120px;
+$layout-max-width: 1600px;
 $layout-content-width: min(760px, 100%);
 $viewport-height: 100vh;
 $full-width: 100%;
 $breakpoint-tablet: 760px;
 
-$radius-sm: 8px;
-$radius-md: 14px;
+$radius-sm: 12px;
+$radius-md: 28px;
 $radius-pill: 999px;
 $border-width-thin: 1px;
-$shadow-soft: 0 18px 32px -28px rgba($color-ink-900, 0.45);
+$shadow-soft: 0 24px 60px -42px rgba($color-ink-900, 0.24);
 
 $space-0: 0;
 $space-2xs: 0.35rem;
@@ -59,13 +60,13 @@ $space-3xl: 1.1rem;
 $space-4xl: 1.25rem;
 $space-5xl: 1.7rem;
 $space-6xl: 1.8rem;
-$space-7xl: 2rem;
-$space-8xl: 2.5rem;
-$space-9xl: 4rem;
+$space-7xl: 2.4rem;
+$space-8xl: 3rem;
+$space-9xl: 4.5rem;
 
 $line-height-body: 1.65;
-$letter-spacing-eyebrow: 0.18em;
-$letter-spacing-title: -0.03em;
+$letter-spacing-eyebrow: 0.06em;
+$letter-spacing-title: -0.025em;
 $transition-fast-duration: 0.2s;
 $transition-fast-easing: ease;
 $text-rendering-default: optimizeLegibility;
@@ -79,4 +80,6 @@ $header-logo-width: clamp(42px, 4.8vw, 60px);
 $header-nav-offset: clamp(0.9rem, 2.4vw, 1.7rem);
 $header-mobile-nav-order: 3;
 
-$body-background: radial-gradient(circle at 8% 8%, $color-accent-soft 0%, $color-background 42%);
+$body-background:
+  radial-gradient(circle at top right, rgba($color-accent-strong, 0.08), transparent 28%),
+  linear-gradient(180deg, #fbfbfd 0%, $color-background 20%, #fafafa 100%);

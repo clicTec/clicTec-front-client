@@ -1,192 +1,169 @@
 @use '../../../styles/abstracts/variables' as vars;
 
 .suscribirse-page {
-  width: min(100%, 1440px);
-  margin: -0.8rem auto 0;
-  padding: clamp(1.1rem, 3vw, 2rem);
-  border-radius: 1.15rem;
-  border: vars.$border-width-thin solid rgba(vars.$color-border, 0.9);
-  background:
-    radial-gradient(circle at 90% -8%, rgba(vars.$color-accent-strong, 0.2), transparent 34%),
-    linear-gradient(145deg, rgba(vars.$color-accent-soft, 0.82), vars.$color-surface 52%);
-  box-shadow: 0 28px 44px -34px rgba(vars.$color-ink-900, 0.42);
   display: grid;
-  gap: 0.95rem;
+  gap: 1.25rem;
+}
+
+.suscribirse-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2rem;
+  border: vars.$border-width-thin solid rgba(vars.$color-ink-900, 0.06);
+  background: rgba(vars.$color-surface, 0.94);
+  box-shadow: vars.$shadow-soft;
 }
 
 .suscribirse-page__hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 290px;
+  padding: clamp(1rem, 2.4vw, 1.6rem) 0;
   display: grid;
+  align-content: start;
   gap: 0.55rem;
+  border-bottom: vars.$border-width-thin solid rgba(vars.$color-ink-900, 0.08);
 }
 
-.suscribirse-page__eyebrow {
-  margin: 0;
-  font-size: 0.73rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: vars.$color-accent;
+.suscribirse-page__hero::after {
+  content: '';
+  position: absolute;
+  inset: 1.2rem 1.4rem auto auto;
+  width: min(30vw, 300px);
+  aspect-ratio: 1;
+  background: url('/store/store-glyph.svg') center/contain no-repeat;
 }
 
 .suscribirse-page__title {
   margin: 0;
-  max-width: 30ch;
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
-  line-height: 1.07;
-  letter-spacing: vars.$letter-spacing-title;
-  color: vars.$color-ink-800;
+  max-width: 12ch;
+  font-size: clamp(2.5rem, 5vw, 4.8rem);
+  color: vars.$color-ink-900;
 }
 
 .suscribirse-page__description {
   margin: 0;
-  max-width: 74ch;
+  max-width: 40rem;
+  line-height: 1.6;
   color: vars.$color-text-muted;
-  line-height: 1.62;
 }
 
 .suscribirse-page__layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 0.8rem;
-  max-width: 620px;
+  width: 100%;
 }
 
 .suscribirse-card {
-  border-radius: 1rem;
-  border: vars.$border-width-thin solid rgba(vars.$color-border, 0.82);
-  background: rgba(vars.$color-surface, 0.9);
-  box-shadow: 0 14px 28px -30px rgba(vars.$color-ink-900, 0.45);
-}
-
-.suscribirse-card {
-  padding: clamp(0.95rem, 2.4vw, 1.3rem);
+  padding: clamp(1.4rem, 2.8vw, 2.2rem) 0 0;
+  border-radius: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 .suscribirse-card__title {
   margin: 0;
-  font-size: clamp(1.15rem, 2.8vw, 1.45rem);
-  color: vars.$color-ink-800;
+  font-size: clamp(1.6rem, 2vw, 2.2rem);
+  color: vars.$color-ink-900;
 }
 
-.suscribirse-card__text {
-  margin: 0.55rem 0 0;
+.suscribirse-card__text,
+.suscribirse-card__status {
+  margin: 0.7rem 0 0;
+  line-height: 1.6;
   color: vars.$color-text-muted;
-  line-height: 1.56;
 }
 
 .suscribirse-form {
-  margin-top: 0.9rem;
+  margin-top: 1rem;
   display: grid;
-  gap: 0.55rem;
+  gap: 0.8rem;
 }
 
 .suscribirse-form__field {
   display: grid;
-  gap: 0.42rem;
-  color: vars.$color-ink-700;
+  gap: 0.45rem;
+  color: vars.$color-ink-900;
+  font-size: 0.92rem;
   font-weight: 600;
 }
 
 .suscribirse-form__input {
   width: 100%;
-  min-height: 44px;
-  border-radius: 0.7rem;
-  border: vars.$border-width-thin solid rgba(vars.$color-border, 0.95);
-  background: rgba(vars.$color-surface, 0.95);
-  color: vars.$color-ink-800;
-  padding: 0 0.8rem;
-  font-family: vars.$font-body;
-  font-size: 0.95rem;
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+  min-height: 52px;
+  padding: 0 1rem;
+  border: vars.$border-width-thin solid rgba(vars.$color-ink-900, 0.08);
+  border-radius: 1rem;
+  background: vars.$color-background;
+  color: vars.$color-ink-900;
+  font-size: 0.96rem;
 }
 
 .suscribirse-form__input:focus {
-  outline: none;
-  border-color: rgba(vars.$color-accent, 0.8);
-  box-shadow: 0 0 0 3px rgba(vars.$color-accent, 0.16);
+  outline: 2px solid rgba(vars.$color-accent, 0.2);
+  border-color: rgba(vars.$color-accent, 0.3);
 }
 
 .suscribirse-form__input[aria-invalid='true'] {
-  border-color: #b34545;
-  box-shadow: 0 0 0 3px rgba(179, 69, 69, 0.12);
+  border-color: rgba(179, 69, 69, 0.4);
 }
 
 .suscribirse-form__error {
   margin: 0;
-  font-size: 0.85rem;
   color: #b34545;
+  font-size: 0.84rem;
 }
 
 .suscribirse-form__submit {
-  min-height: 44px;
-  border: none;
+  min-height: 48px;
+  border: 0;
   border-radius: vars.$radius-pill;
   background: vars.$color-accent;
   color: vars.$color-surface;
-  font-family: vars.$font-button;
-  font-size: 0.79rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 0.94rem;
+  font-weight: 600;
   cursor: pointer;
-  transition:
-    transform 0.2s ease,
-    background-color 0.2s ease,
-    opacity 0.2s ease;
-}
-
-.suscribirse-form__submit:hover:not(:disabled) {
-  transform: translateY(-1px);
-  background: vars.$color-accent-strong;
 }
 
 .suscribirse-form__submit:disabled {
-  cursor: not-allowed;
-  opacity: 0.7;
+  opacity: 0.6;
+  cursor: default;
 }
 
 .suscribirse-card__status {
-  margin: 0.8rem 0 0;
-  border-radius: 0.72rem;
-  padding: 0.68rem 0.75rem;
-  line-height: 1.5;
+  padding: 0.9rem 1rem;
+  border-radius: 1.1rem;
+  background: vars.$color-background;
 }
 
 .suscribirse-card__status--ok {
-  border: vars.$border-width-thin solid rgba(43, 131, 89, 0.45);
-  background: rgba(111, 196, 150, 0.15);
   color: #1f6b48;
 }
 
 .suscribirse-card__status--error {
-  border: vars.$border-width-thin solid rgba(179, 69, 69, 0.45);
-  background: rgba(179, 69, 69, 0.1);
   color: #8e3131;
-}
-
-@media (max-width: 980px) {
-  .suscribirse-page {
-    padding: 1rem;
-  }
-
-  .suscribirse-page__layout {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (max-width: 760px) {
   .suscribirse-page {
-    margin-top: -0.5rem;
-    border-radius: 0.95rem;
-    padding: 0.9rem;
+    gap: 1rem;
+  }
+
+  .suscribirse-page__hero {
+    min-height: 0;
+    padding: 0.9rem 0 1.1rem;
+  }
+
+  .suscribirse-page__hero::after {
+    display: block;
+    position: relative;
+    inset: auto;
+    width: 100%;
+    max-width: 180px;
+    margin: 0 0 0.8rem auto;
   }
 
   .suscribirse-page__title {
-    max-width: 18ch;
-  }
-
-  .suscribirse-form__submit {
-    width: 100%;
+    max-width: none;
+    font-size: clamp(2rem, 10vw, 3.3rem);
   }
 }

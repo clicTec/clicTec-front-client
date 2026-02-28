@@ -4,7 +4,6 @@
   } @else if (errorMessage) {
     <p>{{ errorMessage }}</p>
   } @else if (guide) {
-    <p class="guias-page__eyebrow">{{ guide.eyebrow }}</p>
     <h1 class="guias-page__title">{{ guide.title }}</h1>
     <ul class="guias-page__list">
       @for (item of guide.items; track item) {

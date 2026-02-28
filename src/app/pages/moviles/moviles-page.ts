@@ -137,7 +137,7 @@ export class MovilesPageComponent implements OnInit {
           this.isLoading = false;
         },
         error: () => {
-          this.errorMessage = 'No se pudo cargar el catalogo de moviles.';
+          this.errorMessage = 'No se pudo cargar Review Moviles.';
           this.isLoading = false;
         }
       });

@@ -1,65 +1,52 @@
 @use '../../../../styles/abstracts/variables' as vars;
 
 .site-footer {
-  margin-bottom: 0.6rem;
-  padding-inline: clamp(0.45rem, 1.1vw, 1rem);
+  padding: 0 1rem 1.4rem;
 }
 
 .site-footer__inner {
-  width: min(100%, 1440px);
+  width: min(100%, 1680px);
   margin-inline: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  padding: 0.95rem 0.45rem 0.25rem;
-  border-top: vars.$border-width-thin solid rgba(vars.$color-border, 0.9);
+  padding-top: 1.35rem;
+  border-top: vars.$border-width-thin solid rgba(vars.$color-ink-900, 0.08);
 }
 
 .site-footer__brand {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  gap: 0.55rem;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .site-footer__logo-link {
   display: inline-flex;
   align-items: center;
+  padding: 0.2rem 0;
 }
 
 .site-footer__logo {
-  display: block;
-  width: 74px;
+  width: 72px;
   height: auto;
-  opacity: 0.9;
 }
 
 .site-footer__copy {
   margin: 0;
-  font-family: vars.$font-body;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: vars.$color-text-muted;
-  text-align: center;
 }
 
 @media (max-width: 760px) {
   .site-footer {
-    margin-bottom: 0.45rem;
-    padding-inline: 0.45rem;
+    padding: 0 0.75rem 1.2rem;
   }
 
-  .site-footer__inner {
-    gap: 0.45rem;
-    padding: 0.78rem 0.1rem 0.12rem;
-  }
-
-  .site-footer__logo {
-    width: 68px;
+  .site-footer__brand {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.55rem;
   }
 
   .site-footer__copy {
-    font-size: 0.75rem;
+    font-size: 0.74rem;
   }
 }

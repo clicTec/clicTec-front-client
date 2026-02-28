@@ -1,10 +1,9 @@
 <section class="reviews-page">
   @if (isLoading) {
-    <p>Cargando reviews...</p>
+    <p>Cargando Noticias Tec...</p>
   } @else if (errorMessage) {
     <p>{{ errorMessage }}</p>
   } @else if (review) {
-    <p class="reviews-page__eyebrow">{{ review.eyebrow }}</p>
     <h1 class="reviews-page__title">{{ review.title }}</h1>
     <p class="reviews-page__description">{{ review.description }}</p>
   }

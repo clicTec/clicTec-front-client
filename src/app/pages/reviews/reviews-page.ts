@@ -21,7 +21,7 @@ export class ReviewsPageComponent implements OnInit {
         this.isLoading = false;
       },
       error: () => {
-        this.errorMessage = 'No se pudo cargar reviews.';
+        this.errorMessage = 'No se pudo cargar Noticias Tec.';
         this.isLoading = false;
       }
     });
