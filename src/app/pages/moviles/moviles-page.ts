@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   ContentApiService,
@@ -18,16 +18,24 @@ type FilterKey = 'brand' | 'tier' | 'priceRange' | 'os';
 })
 export class MovilesPageComponent implements OnInit {
   private readonly contentApiService = inject(ContentApiService);
+  private readonly host = inject(ElementRef<HTMLElement>);
   private readonly pageSize = 3;
 
   protected isLoading = true;
   protected errorMessage = '';
   protected selectedFilters: Record<FilterKey, string> = {
-    brand: 'Samsung',
-    tier: 'Media',
-    priceRange: '400 - 700 EUR',
-    os: 'Android'
+    brand: '',
+    tier: '',
+    priceRange: '',
+    os: ''
   };
+  protected filterInputValues: Record<FilterKey, string> = {
+    brand: '',
+    tier: '',
+    priceRange: '',
+    os: ''
+  };
+  protected activeDropdown: FilterKey | null = null;
   protected currentPage = 1;
 
   protected filterGroups: readonly MobileFilterGroupResponse[] = [];
@@ -67,6 +75,11 @@ export class MovilesPageComponent implements OnInit {
 
   protected setFilter(key: FilterKey, value: string): void {
     if (this.selectedFilters[key] === value) {
+      this.filterInputValues = {
+        ...this.filterInputValues,
+        [key]: value
+      };
+      this.activeDropdown = null;
       return;
     }
 
@@ -74,8 +87,76 @@ export class MovilesPageComponent implements OnInit {
       ...this.selectedFilters,
       [key]: value
     };
+    this.filterInputValues = {
+      ...this.filterInputValues,
+      [key]: value
+    };
+    this.activeDropdown = null;
     this.currentPage = 1;
     this.loadMobilePage();
+  }
+
+  protected onFilterInput(key: FilterKey, value: string): void {
+    this.filterInputValues = {
+      ...this.filterInputValues,
+      [key]: value
+    };
+    this.activeDropdown = key;
+  }
+
+  protected openDropdown(key: FilterKey): void {
+    this.activeDropdown = key;
+  }
+
+  protected closeDropdown(key: FilterKey): void {
+    window.setTimeout(() => {
+      if (this.activeDropdown === key) {
+        this.activeDropdown = null;
+        this.filterInputValues = {
+          ...this.filterInputValues,
+          [key]: this.selectedFilters[key]
+        };
+      }
+    }, 120);
+  }
+
+  protected getFilteredOptions(key: FilterKey): readonly string[] {
+    const group = this.filterGroups.find((item) => item.key === key);
+    if (!group) {
+      return [];
+    }
+
+    const query = this.filterInputValues[key].trim().toLowerCase();
+    if (!query) {
+      return group.options;
+    }
+
+    return group.options.filter((option) => option.toLowerCase().includes(query));
+  }
+
+  @HostListener('document:click', ['$event'])
+  protected onDocumentClick(event: MouseEvent): void {
+    const target = event.target as Node | null;
+    if (!target) {
+      return;
+    }
+
+    const dropdowns = this.host.nativeElement.querySelectorAll('.moviles-filter-select') as NodeListOf<HTMLElement>;
+    let clickedInsideDropdown = false;
+    dropdowns.forEach((dropdown) => {
+      if (dropdown.contains(target)) {
+        clickedInsideDropdown = true;
+      }
+    });
+
+    if (!clickedInsideDropdown && this.activeDropdown) {
+      const activeKey = this.activeDropdown;
+      this.activeDropdown = null;
+      this.filterInputValues = {
+        ...this.filterInputValues,
+        [activeKey]: this.selectedFilters[activeKey]
+      };
+    }
   }
 
   protected isSelectedFilter(key: FilterKey, value: string): boolean {
@@ -106,6 +187,24 @@ export class MovilesPageComponent implements OnInit {
     this.loadMobilePage();
   }
 
+  protected resetFilters(): void {
+    this.selectedFilters = {
+      brand: '',
+      tier: '',
+      priceRange: '',
+      os: ''
+    };
+    this.filterInputValues = {
+      brand: '',
+      tier: '',
+      priceRange: '',
+      os: ''
+    };
+    this.activeDropdown = null;
+    this.currentPage = 1;
+    this.loadMobilePage();
+  }
+
   private loadMobilePage(): void {
     this.isLoading = true;
     this.errorMessage = '';
@@ -128,12 +227,6 @@ export class MovilesPageComponent implements OnInit {
           this.currentPage = response.catalog.page;
           this.totalItems = response.catalog.totalItems;
           this.totalPages = Math.max(1, response.catalog.totalPages);
-          this.selectedFilters = {
-            brand: response.selectedFilters.brand,
-            tier: response.selectedFilters.tier,
-            priceRange: response.selectedFilters.priceRange,
-            os: response.selectedFilters.os
-          };
           this.isLoading = false;
         },
         error: () => {
