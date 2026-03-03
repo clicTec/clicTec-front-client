@@ -1,9 +1,11 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { ContentApiService, ReviewResponse } from '../../shared/services/content-api.service';
 
 @Component({
   selector: 'app-reviews-page',
   standalone: true,
+  imports: [RouterLink],
   templateUrl: './reviews-page.html',
   styleUrl: './reviews-page.scss'
 })

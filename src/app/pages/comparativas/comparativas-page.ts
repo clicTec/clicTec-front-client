@@ -84,6 +84,24 @@ export class ComparativasPageComponent implements OnInit {
 
     return [
       {
+        label: 'Sistema',
+        leftValue: left.os,
+        rightValue: right.os,
+        winner: 'tie'
+      },
+      {
+        label: 'Gama',
+        leftValue: left.tier,
+        rightValue: right.tier,
+        winner: 'tie'
+      },
+      {
+        label: 'Año',
+        leftValue: String(left.manufactureYear),
+        rightValue: String(right.manufactureYear),
+        winner: this.compareHigher(left.manufactureYear, right.manufactureYear)
+      },
+      {
         label: 'Precio',
         leftValue: left.priceLabel,
         rightValue: right.priceLabel,
@@ -108,6 +126,12 @@ export class ComparativasPageComponent implements OnInit {
         winner: this.compareHigher(left.battery, right.battery)
       },
       {
+        label: 'Capacidad',
+        leftValue: `${left.batteryMah} mAh`,
+        rightValue: `${right.batteryMah} mAh`,
+        winner: this.compareHigher(left.batteryMah, right.batteryMah)
+      },
+      {
         label: 'Carga',
         leftValue: `${left.chargingW}W`,
         rightValue: `${right.chargingW}W`,
@@ -118,6 +142,12 @@ export class ComparativasPageComponent implements OnInit {
         leftValue: `${left.softwareYears} anos`,
         rightValue: `${right.softwareYears} anos`,
         winner: this.compareHigher(left.softwareYears, right.softwareYears)
+      },
+      {
+        label: 'Calidad-precio',
+        leftValue: `${left.value.toFixed(1)} / 10`,
+        rightValue: `${right.value.toFixed(1)} / 10`,
+        winner: this.compareHigher(left.value, right.value)
       }
     ];
   }

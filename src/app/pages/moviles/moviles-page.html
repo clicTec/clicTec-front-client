@@ -100,7 +100,7 @@
 
             <h3 class="moviles-phone__name">{{ phone.model }}</h3>
             <p class="moviles-phone__meta">{{ phone.brand }} · {{ phone.price }}</p>
-            <p class="moviles-phone__summary">{{ phone.summary }}</p>
+            <div class="moviles-phone__summary" [innerHTML]="phone.summary"></div>
 
             <ul class="moviles-phone__specs">
               @for (spec of phone.specs; track spec.label) {

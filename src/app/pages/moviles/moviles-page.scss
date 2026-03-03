@@ -393,6 +393,23 @@
   font-size: 0.94rem;
 }
 
+.moviles-phone__summary :is(p, ul, ol) {
+  margin: 0;
+}
+
+.moviles-phone__summary :is(p, ul, ol) + :is(p, ul, ol) {
+  margin-top: 0.55rem;
+}
+
+.moviles-phone__summary ul,
+.moviles-phone__summary ol {
+  padding-left: 1.2rem;
+}
+
+.moviles-phone__summary strong {
+  color: vars.$color-ink-900;
+}
+
 .moviles-phone__specs {
   margin: 1rem 0 0;
   padding: 0;

@@ -201,6 +201,25 @@
   font-size: 0.94rem;
 }
 
+.comparador-card__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.85rem;
+}
+
+.comparador-card__fact {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0 0.7rem;
+  border-radius: vars.$radius-pill;
+  background: rgba(vars.$color-ink-900, 0.05);
+  color: vars.$color-ink-900;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
 .comparador__table {
   display: grid;
   gap: 0.6rem;

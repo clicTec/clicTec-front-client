@@ -109,6 +109,9 @@ export interface ComparisonDeviceResponse {
   name: string;
   brand: string;
   segment: string;
+  os: string;
+  tier: string;
+  manufactureYear: number;
   priceLabel: string;
   priceValue: number;
   chipset: string;
@@ -153,10 +156,36 @@ export interface RankingResponse {
   items: string[];
 }
 
+export interface ReviewCardResponse {
+  title: string;
+  slug: string;
+  excerpt: string;
+  coverImage: string;
+  score: number;
+}
+
 export interface ReviewResponse {
   eyebrow: string;
   title: string;
   description: string;
+  items: ReviewCardResponse[];
+}
+
+export interface ReviewImageResponse {
+  url: string;
+  alt: string;
+  type: 'cover' | 'gallery';
+}
+
+export interface ReviewDetailResponse {
+  title: string;
+  slug: string;
+  excerpt: string;
+  contentHtml: string;
+  score: number;
+  coverImage: string;
+  images: ReviewImageResponse[];
+  publishedAt: string | null;
 }
 
 export interface MobilePageRequest {
@@ -209,5 +238,9 @@ export class ContentApiService {
 
   getReviewPage(): Observable<ReviewResponse> {
     return this.httpClient.get<ReviewResponse>(`${this.apiBase}/reviews`);
+  }
+
+  getReviewBySlug(slug: string): Observable<ReviewDetailResponse> {
+    return this.httpClient.get<ReviewDetailResponse>(`${this.apiBase}/reviews/${slug}`);
   }
 }

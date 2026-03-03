@@ -57,6 +57,11 @@
           <p class="comparador-card__brand">{{ leftDevice.brand }}</p>
           <h3 class="comparador-card__name">{{ leftDevice.name }}</h3>
           <p class="comparador-card__meta">{{ leftDevice.priceLabel }} · {{ leftDevice.segment }}</p>
+          <div class="comparador-card__facts">
+            <span class="comparador-card__fact">{{ leftDevice.os }}</span>
+            <span class="comparador-card__fact">{{ leftDevice.tier }}</span>
+            <span class="comparador-card__fact">{{ leftDevice.manufactureYear }}</span>
+          </div>
           <p class="comparador-card__spec">{{ leftDevice.chipset }}</p>
           <p class="comparador-card__spec">{{ leftDevice.cameraMain }}</p>
         </article>
@@ -65,6 +70,11 @@
           <p class="comparador-card__brand">{{ rightDevice.brand }}</p>
           <h3 class="comparador-card__name">{{ rightDevice.name }}</h3>
           <p class="comparador-card__meta">{{ rightDevice.priceLabel }} · {{ rightDevice.segment }}</p>
+          <div class="comparador-card__facts">
+            <span class="comparador-card__fact">{{ rightDevice.os }}</span>
+            <span class="comparador-card__fact">{{ rightDevice.tier }}</span>
+            <span class="comparador-card__fact">{{ rightDevice.manufactureYear }}</span>
+          </div>
           <p class="comparador-card__spec">{{ rightDevice.chipset }}</p>
           <p class="comparador-card__spec">{{ rightDevice.cameraMain }}</p>
         </article>

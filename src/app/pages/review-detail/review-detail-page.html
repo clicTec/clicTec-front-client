@@ -1,0 +1,46 @@
+<section class="review-detail-page">
+  @if (isLoading) {
+    <p class="review-detail-page__state">Cargando review...</p>
+  } @else if (errorMessage) {
+    <p class="review-detail-page__state review-detail-page__state--error">{{ errorMessage }}</p>
+  } @else if (review) {
+    <div class="review-detail-page__shell">
+      <a class="review-detail-page__back" routerLink="/reviews">Volver a reviews</a>
+
+      <header class="review-detail-page__hero">
+        <div class="review-detail-page__copy">
+          <div class="review-detail-page__meta">
+            <span class="review-detail-page__score">{{ review.score.toFixed(1) }}</span>
+            @if (formatDate(review.publishedAt)) {
+              <span class="review-detail-page__date">{{ formatDate(review.publishedAt) }}</span>
+            }
+          </div>
+
+          <h1 class="review-detail-page__title">{{ review.title }}</h1>
+          <p class="review-detail-page__excerpt">{{ review.excerpt }}</p>
+        </div>
+
+        @if (review.coverImage) {
+          <img class="review-detail-page__cover" [src]="review.coverImage" [alt]="review.title" loading="lazy" />
+        }
+      </header>
+
+      <article class="review-detail-page__article" [innerHTML]="review.contentHtml"></article>
+
+      @if (hasGalleryImages()) {
+        <section class="review-detail-page__gallery">
+          <h2 class="review-detail-page__gallery-title">Galeria</h2>
+          <div class="review-detail-page__gallery-grid">
+            @for (image of review.images; track image.url) {
+              @if (image.type === 'gallery') {
+                <figure class="review-detail-page__gallery-card">
+                  <img [src]="image.url" [alt]="image.alt" loading="lazy" />
+                </figure>
+              }
+            }
+          </div>
+        </section>
+      }
+    </div>
+  }
+</section>
