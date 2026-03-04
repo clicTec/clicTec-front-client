@@ -59,6 +59,7 @@ export interface MobileCardResponse {
   price: string;
   score: string;
   summary: string;
+  image: string;
   chips: string[];
   specs: MobileSpecResponse[];
   route: string;

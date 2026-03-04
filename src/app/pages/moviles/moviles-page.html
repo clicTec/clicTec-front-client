@@ -93,6 +93,12 @@
       <div class="moviles-catalog__grid">
         @for (phone of paginatedCatalog; track phone.slug) {
           <article class="moviles-phone">
+            @if (phone.image) {
+              <div class="moviles-phone__media">
+                <img [src]="phone.image" [alt]="phone.model" loading="lazy" />
+              </div>
+            }
+
             <header class="moviles-phone__top">
               <p class="moviles-phone__segment">{{ phone.segment }}</p>
               <p class="moviles-phone__score">{{ phone.score }}</p>
