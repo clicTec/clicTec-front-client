@@ -1,11 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { ContentApiService, ReviewResponse } from '../../shared/services/content-api.service';
+import { ContentApiService, TechNewsResponse } from '../../shared/services/content-api.service';
 
 @Component({
   selector: 'app-reviews-page',
   standalone: true,
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './reviews-page.html',
   styleUrl: './reviews-page.scss'
 })
@@ -14,12 +13,12 @@ export class ReviewsPageComponent implements OnInit {
 
   protected isLoading = true;
   protected errorMessage = '';
-  protected review: ReviewResponse | null = null;
+  protected techNews: readonly TechNewsResponse[] = [];
 
   ngOnInit(): void {
-    this.contentApiService.getReviewPage().subscribe({
+    this.contentApiService.getTechNews().subscribe({
       next: (response) => {
-        this.review = response;
+        this.techNews = response;
         this.isLoading = false;
       },
       error: () => {
@@ -27,5 +26,18 @@ export class ReviewsPageComponent implements OnInit {
         this.isLoading = false;
       }
     });
+  }
+
+  protected formatDate(value: string): string {
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) {
+      return 'Sin fecha';
+    }
+
+    return new Intl.DateTimeFormat('es-ES', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric'
+    }).format(date);
   }
 }

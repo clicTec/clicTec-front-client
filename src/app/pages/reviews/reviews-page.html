@@ -3,29 +3,22 @@
     <p>Cargando Noticias Tec...</p>
   } @else if (errorMessage) {
     <p>{{ errorMessage }}</p>
-  } @else if (review) {
-    <p class="reviews-page__eyebrow">{{ review.eyebrow }}</p>
-    <h1 class="reviews-page__title">{{ review.title }}</h1>
-    <p class="reviews-page__description">{{ review.description }}</p>
+  } @else {
+    <p class="reviews-page__eyebrow">Noticias Tec</p>
+    <h1 class="reviews-page__title">Actualidad tecnológica</h1>
+    <p class="reviews-page__description">Publicadas desde el panel de administración en tiempo real.</p>
 
     <div class="reviews-page__grid">
-      @for (item of review.items; track item.slug) {
+      @for (item of techNews; track item.id) {
         <article class="reviews-card">
-          @if (item.coverImage) {
-            <img class="reviews-card__image" [src]="item.coverImage" [alt]="item.title" loading="lazy" />
-          }
-
           <div class="reviews-card__body">
-            <div class="reviews-card__meta">
-              <span class="reviews-card__score">{{ item.score.toFixed(1) }}</span>
-            </div>
+            <p class="reviews-card__date">Actualizado: {{ formatDate(item.updatedAt) }}</p>
             <h2 class="reviews-card__title">{{ item.title }}</h2>
-            <p class="reviews-card__excerpt">{{ item.excerpt }}</p>
-            <a class="reviews-card__link" [routerLink]="['/moviles', item.slug]">Leer review</a>
+            <div class="reviews-card__content" [innerHTML]="item.contentHtml"></div>
           </div>
         </article>
       } @empty {
-        <p class="reviews-page__empty">Todavia no hay reviews publicadas.</p>
+        <p class="reviews-page__empty">Todavía no hay noticias publicadas.</p>
       }
     </div>
   }

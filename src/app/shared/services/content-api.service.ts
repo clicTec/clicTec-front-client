@@ -172,6 +172,14 @@ export interface ReviewResponse {
   items: ReviewCardResponse[];
 }
 
+export interface TechNewsResponse {
+  id: number;
+  title: string;
+  contentHtml: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface ReviewImageResponse {
   url: string;
   alt: string;
@@ -239,6 +247,10 @@ export class ContentApiService {
 
   getReviewPage(): Observable<ReviewResponse> {
     return this.httpClient.get<ReviewResponse>(`${this.apiBase}/reviews`);
+  }
+
+  getTechNews(): Observable<TechNewsResponse[]> {
+    return this.httpClient.get<TechNewsResponse[]>(`${this.apiBase}/tech-news`);
   }
 
   getReviewBySlug(slug: string): Observable<ReviewDetailResponse> {
