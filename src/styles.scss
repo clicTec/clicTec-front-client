@@ -1,1 +1,360 @@
 @use './styles/all';
+
+body[data-theme='dark'] {
+  --client-dark-surface: rgb(18 30 48 / 0.92);
+  --client-dark-surface-strong: rgb(22 36 56 / 0.96);
+  --client-dark-surface-soft: rgb(13 24 40 / 0.9);
+  --client-dark-border: rgb(83 124 162 / 0.42);
+  --client-dark-border-soft: rgb(83 124 162 / 0.3);
+  --client-dark-text: #eff7fb;
+  --client-dark-text-muted: #d0deea;
+  --client-dark-pill: rgb(39 62 88 / 0.92);
+  --client-dark-pill-hover: rgb(52 79 109 / 0.94);
+
+  color-scheme: dark;
+  background:
+    radial-gradient(circle at top right, rgb(41 151 255 / 0.2), transparent 30%),
+    linear-gradient(180deg, #0b1324 0%, #0f1a2d 34%, #0a1324 100%);
+  color: var(--client-dark-text);
+}
+
+body[data-theme='dark'] .page {
+  background: transparent;
+}
+
+body[data-theme='dark'] .topbar-shell,
+body[data-theme='dark'] .theme-toggle,
+body[data-theme='dark'] .nav-toggle,
+body[data-theme='dark'] .inicio-card,
+body[data-theme='dark'] .inicio-topic,
+body[data-theme='dark'] .inicio-latest-item,
+body[data-theme='dark'] .comparativas-focus,
+body[data-theme='dark'] .duel-card,
+body[data-theme='dark'] .comparador-card,
+body[data-theme='dark'] .comparador-row,
+body[data-theme='dark'] .moviles-launch,
+body[data-theme='dark'] .moviles-filter-group,
+body[data-theme='dark'] .moviles-phone,
+body[data-theme='dark'] .moviles-filter-select__menu,
+body[data-theme='dark'] .moviles-filter-select__input,
+body[data-theme='dark'] .moviles-filters__reset,
+body[data-theme='dark'] .reviews-card,
+body[data-theme='dark'] .ranking-page__item,
+body[data-theme='dark'] .guias-page__item,
+body[data-theme='dark'] .review-detail-page__article,
+body[data-theme='dark'] .review-detail-page__gallery-card,
+body[data-theme='dark'] .suscribirse-form__input,
+body[data-theme='dark'] .suscribirse-card__status {
+  background: var(--client-dark-surface);
+  border-color: var(--client-dark-border);
+  box-shadow: 0 22px 46px -36px rgb(0 0 0 / 0.72);
+}
+
+body[data-theme='dark'] .site-footer__inner,
+body[data-theme='dark'] .inicio-home__masthead,
+body[data-theme='dark'] .comparador,
+body[data-theme='dark'] .comparativas-duels,
+body[data-theme='dark'] .moviles-launches,
+body[data-theme='dark'] .moviles-checklist,
+body[data-theme='dark'] .moviles-filters,
+body[data-theme='dark'] .moviles-catalog,
+body[data-theme='dark'] .suscribirse-page__hero {
+  border-color: var(--client-dark-border-soft);
+}
+
+body[data-theme='dark'] .inicio-home__subtitle,
+body[data-theme='dark'] .inicio-card__description,
+body[data-theme='dark'] .inicio-latest-item__time,
+body[data-theme='dark'] .site-footer__copy,
+body[data-theme='dark'] .review-detail-page__back,
+body[data-theme='dark'] .moviles-pagination__summary,
+body[data-theme='dark'] .moviles-launch__target,
+body[data-theme='dark'] .moviles-phone__meta,
+body[data-theme='dark'] .comparador-select__label,
+body[data-theme='dark'] .comparador-card__meta,
+body[data-theme='dark'] .comparador-card__spec,
+body[data-theme='dark'] .moviles-filter-group__title,
+body[data-theme='dark'] .moviles-phone__spec-label,
+body[data-theme='dark'] .moviles-page__description,
+body[data-theme='dark'] .moviles-filters__text,
+body[data-theme='dark'] .moviles-catalog__empty,
+body[data-theme='dark'] .moviles-launch__notes,
+body[data-theme='dark'] .moviles-phone__summary,
+body[data-theme='dark'] .comparativas-page__description,
+body[data-theme='dark'] .comparador__text,
+body[data-theme='dark'] .comparativas-duels__text,
+body[data-theme='dark'] .comparativas-focus__description,
+body[data-theme='dark'] .duel-card__summary,
+body[data-theme='dark'] .comparador__verdict,
+body[data-theme='dark'] .suscribirse-page__description,
+body[data-theme='dark'] .suscribirse-card__text,
+body[data-theme='dark'] .suscribirse-card__status,
+body[data-theme='dark'] .reviews-page__description,
+body[data-theme='dark'] .reviews-card__content,
+body[data-theme='dark'] .reviews-page__empty,
+body[data-theme='dark'] .review-detail-page__date,
+body[data-theme='dark'] .review-detail-page__excerpt,
+body[data-theme='dark'] .review-detail-page__state,
+body[data-theme='dark'] .ranking-page__item,
+body[data-theme='dark'] .guias-page__item {
+  color: var(--client-dark-text-muted);
+}
+
+body[data-theme='dark'] .inicio-home__title,
+body[data-theme='dark'] .nav-link,
+body[data-theme='dark'] .nav-search,
+body[data-theme='dark'] .nav-toggle,
+body[data-theme='dark'] .theme-toggle,
+body[data-theme='dark'] .inicio-card__title,
+body[data-theme='dark'] .inicio-card__heading,
+body[data-theme='dark'] .inicio-latest-item__title,
+body[data-theme='dark'] .inicio-topic,
+body[data-theme='dark'] .comparativas-page__title,
+body[data-theme='dark'] .comparador__title,
+body[data-theme='dark'] .comparativas-focus__title,
+body[data-theme='dark'] .comparativas-duels__title,
+body[data-theme='dark'] .comparador-card__name,
+body[data-theme='dark'] .duel-card__title,
+body[data-theme='dark'] .comparador-row__value,
+body[data-theme='dark'] .moviles-page__title,
+body[data-theme='dark'] .moviles-launches__title,
+body[data-theme='dark'] .moviles-checklist__title,
+body[data-theme='dark'] .moviles-filters__title,
+body[data-theme='dark'] .moviles-catalog__title,
+body[data-theme='dark'] .moviles-launch__device,
+body[data-theme='dark'] .moviles-phone__name,
+body[data-theme='dark'] .moviles-phone__spec-value,
+body[data-theme='dark'] .suscribirse-page__title,
+body[data-theme='dark'] .suscribirse-card__title,
+body[data-theme='dark'] .suscribirse-form__field,
+body[data-theme='dark'] .reviews-page__title,
+body[data-theme='dark'] .reviews-card__title,
+body[data-theme='dark'] .review-detail-page__title,
+body[data-theme='dark'] .review-detail-page__gallery-title,
+body[data-theme='dark'] .review-detail-page__article :is(h1, h2, h3, h4, h5, h6),
+body[data-theme='dark'] .review-detail-page__article strong,
+body[data-theme='dark'] .ranking-page__title,
+body[data-theme='dark'] .guias-page__title {
+  color: var(--client-dark-text);
+}
+
+body[data-theme='dark'] .topbar-backdrop {
+  background: rgb(4 9 18 / 0.62);
+}
+
+body[data-theme='dark'] .header-logo,
+body[data-theme='dark'] .site-footer__logo {
+  filter: invert(1) hue-rotate(180deg) saturate(0.92) brightness(1.08);
+}
+
+body[data-theme='dark'] .theme-toggle:hover,
+body[data-theme='dark'] .nav-toggle:hover,
+body[data-theme='dark'] .nav-link:hover,
+body[data-theme='dark'] .nav-search:hover,
+body[data-theme='dark'] .nav-link.is-active {
+  background: rgb(83 167 195 / 0.18);
+}
+
+body[data-theme='dark'] .nav-link:hover,
+body[data-theme='dark'] .nav-link.is-active,
+body[data-theme='dark'] .nav-search:hover {
+  color: var(--client-dark-text);
+}
+
+body[data-theme='dark'] .theme-toggle.is-active {
+  border-color: rgb(83 167 195 / 0.72);
+  background: rgb(83 167 195 / 0.24);
+}
+
+body[data-theme='dark'] .nav-link--button,
+body[data-theme='dark'] .inicio-chip,
+body[data-theme='dark'] .inicio-card__link,
+body[data-theme='dark'] .duel-card__button,
+body[data-theme='dark'] .moviles-checklist__cta,
+body[data-theme='dark'] .moviles-phone__cta,
+body[data-theme='dark'] .suscribirse-form__submit {
+  background: linear-gradient(180deg, #7cc2d7 0%, #53a7c3 100%);
+  color: #0f2030;
+  box-shadow: 0 18px 30px -24px rgb(0 0 0 / 0.45);
+}
+
+body[data-theme='dark'] .nav-link--button:hover,
+body[data-theme='dark'] .nav-link--button.is-active,
+body[data-theme='dark'] .inicio-chip:hover,
+body[data-theme='dark'] .inicio-card__link:hover {
+  background: linear-gradient(180deg, #9ad5e6 0%, #74b9cf 100%);
+  color: #0f2030;
+}
+
+body[data-theme='dark'] .comparativas-focus__chip,
+body[data-theme='dark'] .comparador-card__fact,
+body[data-theme='dark'] .moviles-filter-chip,
+body[data-theme='dark'] .moviles-phone__chip,
+body[data-theme='dark'] .moviles-pagination__button,
+body[data-theme='dark'] .moviles-filter-select__option:hover {
+  background: var(--client-dark-pill);
+  color: var(--client-dark-text);
+}
+
+body[data-theme='dark'] .comparativas-focus__chip.is-active,
+body[data-theme='dark'] .moviles-filter-chip.is-selected,
+body[data-theme='dark'] .moviles-pagination__button.is-active,
+body[data-theme='dark'] .moviles-filter-select__option.is-selected {
+  background: var(--client-dark-pill-hover);
+  color: #fff;
+}
+
+body[data-theme='dark'] .moviles-filters__reset:hover {
+  border-color: rgb(83 167 195 / 0.7);
+  background: rgb(83 167 195 / 0.2);
+  color: var(--client-dark-text);
+}
+
+body[data-theme='dark'] .comparador__verdict,
+body[data-theme='dark'] .moviles-phone__score,
+body[data-theme='dark'] .review-detail-page__score {
+  background: rgb(83 167 195 / 0.2);
+  color: #a4e3f7;
+}
+
+body[data-theme='dark'] .comparador__table {
+  gap: 0.78rem;
+}
+
+body[data-theme='dark'] .comparador__table .comparador-row {
+  padding: 0.82rem;
+  border: 1px solid var(--client-dark-border-soft);
+  border-radius: 1.25rem;
+  background: linear-gradient(180deg, rgb(18 30 48 / 0.86), rgb(13 24 40 / 0.92));
+  box-shadow: none;
+}
+
+body[data-theme='dark'] .comparador__table .comparador-row__label {
+  padding: 0.32rem 0.72rem;
+  border-radius: 999px;
+  background: rgb(83 167 195 / 0.22);
+  color: #dff2fb;
+  font-size: 0.77rem;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+body[data-theme='dark'] .comparador__table .comparador-row__value {
+  padding: 0.6rem 0.9rem;
+  border-radius: 0.9rem;
+  background: rgb(8 18 30 / 0.72);
+  box-shadow: inset 0 0 0 1px rgb(83 124 162 / 0.35);
+}
+
+body[data-theme='dark'] .comparador__table .comparador-row__value.is-winner {
+  background: rgb(18 42 67 / 0.8);
+  box-shadow: inset 0 0 0 1px rgb(83 167 195 / 0.62);
+  color: #8edcff;
+}
+
+body[data-theme='dark'] .moviles-phone__media,
+body[data-theme='dark'] .inicio-topic::before,
+body[data-theme='dark'] .moviles-checklist::before {
+  background-color: var(--client-dark-surface-soft);
+  box-shadow: inset 0 0 0 1px var(--client-dark-border-soft);
+}
+
+body[data-theme='dark'] .moviles-filter-select__option {
+  color: var(--client-dark-text);
+}
+
+body[data-theme='dark'] .moviles-filter-select__empty,
+body[data-theme='dark'] .suscribirse-form__input::placeholder {
+  color: var(--client-dark-text-muted);
+}
+
+body[data-theme='dark'] .moviles-filter-select__input:focus,
+body[data-theme='dark'] .suscribirse-form__input:focus {
+  border-color: rgb(83 167 195 / 0.72);
+  box-shadow: 0 0 0 3px rgb(83 167 195 / 0.22);
+}
+
+body[data-theme='dark'] .review-detail-page__state--error,
+body[data-theme='dark'] .suscribirse-card__status--error,
+body[data-theme='dark'] .suscribirse-form__error {
+  color: #f3a3a3;
+}
+
+body[data-theme='dark'] .suscribirse-card__status--ok {
+  color: #9ce3bd;
+}
+
+body[data-theme='dark'] .inicio-card--feature::after,
+body[data-theme='dark'] .inicio-card--story,
+body[data-theme='dark'] .inicio-topic,
+body[data-theme='dark'] .moviles-page__intro {
+  background:
+    linear-gradient(180deg, rgb(12 21 35 / 0.52), rgb(18 30 48 / 0.94)),
+    var(--client-dark-surface);
+}
+
+body[data-theme='dark'] .reviews-page::before {
+  background:
+    linear-gradient(180deg, rgb(22 36 56 / 0.72), rgb(18 30 48 / 0.94)),
+    rgb(13 24 40 / 0.9)
+    url('/store/store-device.svg') center/160px no-repeat;
+}
+
+body[data-theme='dark'] .ranking-page::before {
+  background:
+    linear-gradient(180deg, rgb(22 36 56 / 0.72), rgb(18 30 48 / 0.94)),
+    rgb(13 24 40 / 0.9)
+    url('/store/store-hero.svg') center/220px no-repeat;
+}
+
+body[data-theme='dark'] .guias-page::before {
+  background:
+    linear-gradient(180deg, rgb(22 36 56 / 0.72), rgb(18 30 48 / 0.94)),
+    rgb(13 24 40 / 0.9)
+    url('/store/store-glyph.svg') center/112px no-repeat;
+}
+
+body[data-theme='dark'] .comparador-card::before {
+  background:
+    linear-gradient(180deg, rgb(22 36 56 / 0.72), rgb(18 30 48 / 0.94)),
+    rgb(13 24 40 / 0.9)
+    url('/store/store-device.svg') center/110px no-repeat;
+}
+
+body[data-theme='dark'] .comparador-card--right::before {
+  background:
+    linear-gradient(180deg, rgb(27 49 68 / 0.74), rgb(18 30 48 / 0.94)),
+    rgb(19 37 54 / 0.9)
+    url('/store/store-device.svg') center/110px no-repeat;
+}
+
+body[data-theme='dark'] .duel-card::before {
+  background:
+    linear-gradient(180deg, rgb(22 36 56 / 0.72), rgb(18 30 48 / 0.94)),
+    rgb(13 24 40 / 0.9)
+    url('/store/store-compare.svg') center/140px no-repeat;
+}
+
+body[data-theme='dark'] .inicio-home__masthead::after,
+body[data-theme='dark'] .moviles-page__intro::before,
+body[data-theme='dark'] .comparativas-page__hero::after,
+body[data-theme='dark'] .suscribirse-page__hero::after {
+  filter: brightness(0.84) saturate(0.88);
+  opacity: 0.88;
+}
+
+@media (max-width: 760px) {
+  body[data-theme='dark'] .nav {
+    background: var(--client-dark-surface-strong);
+    border-color: var(--client-dark-border);
+    box-shadow: 0 24px 48px -34px rgb(0 0 0 / 0.75);
+  }
+}
+
+@media (max-width: 640px) {
+  body[data-theme='dark'] .comparador__table .comparador-row {
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+}
