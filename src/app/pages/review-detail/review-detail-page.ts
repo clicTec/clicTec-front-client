@@ -26,7 +26,7 @@ export class ReviewDetailPageComponent implements OnInit {
       return;
     }
 
-    this.contentApiService.getReviewBySlug(slug).subscribe({
+    this.contentApiService.getMobileReviewBySlug(slug).subscribe({
       next: (review) => {
         this.review = review;
         this.isLoading = false;
@@ -53,5 +53,13 @@ export class ReviewDetailPageComponent implements OnInit {
 
   protected hasGalleryImages(): boolean {
     return Boolean(this.review?.images.some((image) => image.type === 'gallery'));
+  }
+
+  protected hasScore(): boolean {
+    return Boolean(this.review && this.review.score > 0);
+  }
+
+  protected hasReviewMeta(): boolean {
+    return this.hasScore() || Boolean(this.formatDate(this.review?.publishedAt ?? null));
   }
 }

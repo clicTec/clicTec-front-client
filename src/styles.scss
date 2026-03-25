@@ -200,6 +200,28 @@ body[data-theme='dark'] .moviles-filters__reset:hover {
   color: var(--client-dark-text);
 }
 
+body[data-theme='dark'] .moviles-filters__reset {
+  color: var(--client-dark-text);
+  background: var(--client-dark-pill);
+}
+
+body[data-theme='dark'] .moviles-filter-select__input {
+  color: var(--client-dark-text);
+  caret-color: var(--client-dark-text);
+}
+
+body[data-theme='dark'] .moviles-filter-select__input::placeholder {
+  color: rgb(208 222 234 / 0.52);
+}
+
+body[data-theme='dark'] .moviles-filter-select__input:-webkit-autofill,
+body[data-theme='dark'] .moviles-filter-select__input:-webkit-autofill:hover,
+body[data-theme='dark'] .moviles-filter-select__input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--client-dark-text);
+  box-shadow: inset 0 0 0 1000px var(--client-dark-surface) !important;
+  transition: background-color 9999s ease-out 0s;
+}
+
 body[data-theme='dark'] .comparador__verdict,
 body[data-theme='dark'] .moviles-phone__score,
 body[data-theme='dark'] .review-detail-page__score {
@@ -264,6 +286,12 @@ body[data-theme='dark'] .moviles-filter-select__input:focus {
 
 body[data-theme='dark'] .review-detail-page__state--error {
   color: #f3a3a3;
+}
+
+body[data-theme='dark'] .review-detail-page__article {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
 }
 
 body[data-theme='dark'] .inicio-card--feature::after,

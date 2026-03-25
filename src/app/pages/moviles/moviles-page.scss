@@ -309,6 +309,7 @@
   flex-wrap: wrap;
   gap: 0.45rem;
   margin-top: 0.75rem;
+  margin-bottom: 1.1rem;
 }
 
 .moviles-filter-chip,
@@ -349,8 +350,10 @@
 
 .moviles-phone {
   position: relative;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
-  padding: 1.2rem;
+  padding: 1.2rem 1.2rem 1.35rem;
 }
 
 .moviles-phone__media {
@@ -438,7 +441,11 @@
 }
 
 .moviles-phone__cta {
-  margin-top: 1rem;
+  align-self: flex-end;
+  min-width: 9.5rem;
+  margin-top: auto;
+  padding-inline: 1.35rem;
+  text-align: center;
 }
 
 .moviles-pagination {
@@ -531,5 +538,11 @@
 
   .moviles-phone__spec-value {
     text-align: left;
+  }
+
+  .moviles-phone__cta {
+    align-self: flex-end;
+    width: auto;
+    margin-top: 1rem;
   }
 }

@@ -5,19 +5,20 @@
     <p class="review-detail-page__state review-detail-page__state--error">{{ errorMessage }}</p>
   } @else if (review) {
     <div class="review-detail-page__shell">
-      <a class="review-detail-page__back" routerLink="/reviews">Volver a reviews</a>
+      <a class="review-detail-page__back" routerLink="/moviles">Volver a moviles</a>
 
-      <header class="review-detail-page__hero">
+      <header class="review-detail-page__hero" [class.review-detail-page__hero--single]="!review.coverImage">
         <div class="review-detail-page__copy">
-          <div class="review-detail-page__meta">
-            <span class="review-detail-page__score">{{ review.score.toFixed(1) }}</span>
-            @if (formatDate(review.publishedAt)) {
-              <span class="review-detail-page__date">{{ formatDate(review.publishedAt) }}</span>
-            }
-          </div>
+          @if (hasScore()) {
+            <div class="review-detail-page__meta">
+              <span class="review-detail-page__score">{{ review.score.toFixed(1) }}</span>
+            </div>
+          }
 
           <h1 class="review-detail-page__title">{{ review.title }}</h1>
-          <p class="review-detail-page__excerpt">{{ review.excerpt }}</p>
+          @if (review.excerpt) {
+            <p class="review-detail-page__excerpt">{{ review.excerpt }}</p>
+          }
         </div>
 
         @if (review.coverImage) {
@@ -26,6 +27,9 @@
       </header>
 
       <article class="review-detail-page__article" [innerHTML]="review.contentHtml"></article>
+      @if (formatDate(review.publishedAt)) {
+        <p class="review-detail-page__date review-detail-page__date--footer">{{ formatDate(review.publishedAt) }}</p>
+      }
 
       @if (hasGalleryImages()) {
         <section class="review-detail-page__gallery">

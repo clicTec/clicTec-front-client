@@ -256,4 +256,8 @@ export class ContentApiService {
   getReviewBySlug(slug: string): Observable<ReviewDetailResponse> {
     return this.httpClient.get<ReviewDetailResponse>(`${this.apiBase}/reviews/${slug}`);
   }
+
+  getMobileReviewBySlug(slug: string): Observable<ReviewDetailResponse> {
+    return this.httpClient.get<ReviewDetailResponse>(`${this.apiBase}/moviles/${slug}`);
+  }
 }

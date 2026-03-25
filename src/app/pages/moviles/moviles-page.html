@@ -123,7 +123,9 @@
               }
             </div>
 
-            <a class="moviles-phone__cta" [routerLink]="phone.route">{{ phone.routeLabel }}</a>
+            <a class="moviles-phone__cta" [routerLink]="['/moviles', phone.slug]" [attr.aria-label]="'Ver review de ' + phone.model">
+              Ver review
+            </a>
           </article>
         }
       </div>
