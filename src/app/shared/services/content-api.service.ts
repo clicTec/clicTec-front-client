@@ -210,7 +210,7 @@ export interface MobilePageRequest {
   providedIn: 'root'
 })
 export class ContentApiService {
-  private readonly apiBase = 'http://localhost:8080/api';
+  private readonly apiBase = '/api';
 
   constructor(private readonly httpClient: HttpClient) {}
 

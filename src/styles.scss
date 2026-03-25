@@ -42,9 +42,7 @@ body[data-theme='dark'] .reviews-card,
 body[data-theme='dark'] .ranking-page__item,
 body[data-theme='dark'] .guias-page__item,
 body[data-theme='dark'] .review-detail-page__article,
-body[data-theme='dark'] .review-detail-page__gallery-card,
-body[data-theme='dark'] .suscribirse-form__input,
-body[data-theme='dark'] .suscribirse-card__status {
+body[data-theme='dark'] .review-detail-page__gallery-card {
   background: var(--client-dark-surface);
   border-color: var(--client-dark-border);
   box-shadow: 0 22px 46px -36px rgb(0 0 0 / 0.72);
@@ -57,8 +55,7 @@ body[data-theme='dark'] .comparativas-duels,
 body[data-theme='dark'] .moviles-launches,
 body[data-theme='dark'] .moviles-checklist,
 body[data-theme='dark'] .moviles-filters,
-body[data-theme='dark'] .moviles-catalog,
-body[data-theme='dark'] .suscribirse-page__hero {
+body[data-theme='dark'] .moviles-catalog {
   border-color: var(--client-dark-border-soft);
 }
 
@@ -86,9 +83,6 @@ body[data-theme='dark'] .comparativas-duels__text,
 body[data-theme='dark'] .comparativas-focus__description,
 body[data-theme='dark'] .duel-card__summary,
 body[data-theme='dark'] .comparador__verdict,
-body[data-theme='dark'] .suscribirse-page__description,
-body[data-theme='dark'] .suscribirse-card__text,
-body[data-theme='dark'] .suscribirse-card__status,
 body[data-theme='dark'] .reviews-page__description,
 body[data-theme='dark'] .reviews-card__content,
 body[data-theme='dark'] .reviews-page__empty,
@@ -124,9 +118,6 @@ body[data-theme='dark'] .moviles-catalog__title,
 body[data-theme='dark'] .moviles-launch__device,
 body[data-theme='dark'] .moviles-phone__name,
 body[data-theme='dark'] .moviles-phone__spec-value,
-body[data-theme='dark'] .suscribirse-page__title,
-body[data-theme='dark'] .suscribirse-card__title,
-body[data-theme='dark'] .suscribirse-form__field,
 body[data-theme='dark'] .reviews-page__title,
 body[data-theme='dark'] .reviews-card__title,
 body[data-theme='dark'] .review-detail-page__title,
@@ -171,8 +162,7 @@ body[data-theme='dark'] .inicio-chip,
 body[data-theme='dark'] .inicio-card__link,
 body[data-theme='dark'] .duel-card__button,
 body[data-theme='dark'] .moviles-checklist__cta,
-body[data-theme='dark'] .moviles-phone__cta,
-body[data-theme='dark'] .suscribirse-form__submit {
+body[data-theme='dark'] .moviles-phone__cta {
   background: linear-gradient(180deg, #7cc2d7 0%, #53a7c3 100%);
   color: #0f2030;
   box-shadow: 0 18px 30px -24px rgb(0 0 0 / 0.45);
@@ -263,25 +253,17 @@ body[data-theme='dark'] .moviles-filter-select__option {
   color: var(--client-dark-text);
 }
 
-body[data-theme='dark'] .moviles-filter-select__empty,
-body[data-theme='dark'] .suscribirse-form__input::placeholder {
+body[data-theme='dark'] .moviles-filter-select__empty {
   color: var(--client-dark-text-muted);
 }
 
-body[data-theme='dark'] .moviles-filter-select__input:focus,
-body[data-theme='dark'] .suscribirse-form__input:focus {
+body[data-theme='dark'] .moviles-filter-select__input:focus {
   border-color: rgb(83 167 195 / 0.72);
   box-shadow: 0 0 0 3px rgb(83 167 195 / 0.22);
 }
 
-body[data-theme='dark'] .review-detail-page__state--error,
-body[data-theme='dark'] .suscribirse-card__status--error,
-body[data-theme='dark'] .suscribirse-form__error {
+body[data-theme='dark'] .review-detail-page__state--error {
   color: #f3a3a3;
-}
-
-body[data-theme='dark'] .suscribirse-card__status--ok {
-  color: #9ce3bd;
 }
 
 body[data-theme='dark'] .inicio-card--feature::after,
@@ -337,8 +319,7 @@ body[data-theme='dark'] .duel-card::before {
 
 body[data-theme='dark'] .inicio-home__masthead::after,
 body[data-theme='dark'] .moviles-page__intro::before,
-body[data-theme='dark'] .comparativas-page__hero::after,
-body[data-theme='dark'] .suscribirse-page__hero::after {
+body[data-theme='dark'] .comparativas-page__hero::after {
   filter: brightness(0.84) saturate(0.88);
   opacity: 0.88;
 }
