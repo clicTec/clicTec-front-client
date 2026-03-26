@@ -1,0 +1,167 @@
+@if (consentService.bannerVisible()) {
+  <aside class="cookie-banner" aria-label="Gestión de cookies">
+    <div class="cookie-banner__main">
+      <div class="cookie-banner__content">
+        <p class="cookie-banner__eyebrow">Privacidad y consentimiento</p>
+        <h2 class="cookie-banner__title">Elige cómo quieres que se activen analítica, anuncios y afiliación</h2>
+        <p class="cookie-banner__text">
+          Las categorías no esenciales permanecen bloqueadas hasta que decidas. Las cookies técnicas se
+          usan solo para seguridad, funcionamiento y para recordar la elección que hagas.
+        </p>
+      </div>
+
+      <div class="cookie-banner__highlights" aria-label="Estado por categorías">
+        <span class="cookie-banner__highlight">Técnicas activas</span>
+        <span class="cookie-banner__highlight">Analítica bloqueada por defecto</span>
+        <span class="cookie-banner__highlight">Publicidad bloqueada por defecto</span>
+      </div>
+    </div>
+
+    <div class="cookie-banner__actions">
+      <a class="cookie-banner__link" routerLink="/cookies">Ver política de cookies</a>
+      <button class="cookie-banner__button cookie-banner__button--secondary" type="button" (click)="rejectAll()">
+        Rechazar
+      </button>
+      <button class="cookie-banner__button cookie-banner__button--ghost" type="button" (click)="openPreferences()">
+        Configurar
+      </button>
+      <button class="cookie-banner__button" type="button" (click)="acceptAll()">
+        Aceptar
+      </button>
+    </div>
+  </aside>
+}
+
+@if (consentService.preferencesOpen()) {
+  <div class="cookie-preferences__backdrop" (click)="closePreferences()">
+    <section
+      class="cookie-preferences__dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="cookie-preferences-title"
+      (click)="$event.stopPropagation()"
+    >
+      <header class="cookie-preferences__header">
+        <div>
+          <p class="cookie-preferences__eyebrow">Centro de preferencias</p>
+          <h2 class="cookie-preferences__title" id="cookie-preferences-title">Configurar cookies</h2>
+        </div>
+
+        <button
+          class="cookie-preferences__close"
+          type="button"
+          aria-label="Cerrar configuración de cookies"
+          (click)="closePreferences()"
+        >
+          Cerrar
+        </button>
+      </header>
+
+      <p class="cookie-preferences__summary">
+        Última decisión registrada: {{ formatDecisionDate() }}.
+      </p>
+      <p class="cookie-preferences__summary cookie-preferences__summary--detail">
+        Ajusta categorías por separado. La publicidad y la medición comercial no se activan hasta que
+        exista una acción afirmativa tuya.
+      </p>
+
+      <div class="cookie-preferences__list">
+        <article class="cookie-category cookie-category--required">
+          <div class="cookie-category__content">
+            <h3 class="cookie-category__title">Técnicas necesarias</h3>
+            <p class="cookie-category__text">
+              Mantienen el funcionamiento básico del sitio, el modo visual elegido y el registro del
+              consentimiento.
+            </p>
+          </div>
+
+          <label class="cookie-switch">
+            <input type="checkbox" checked disabled>
+            <span>Siempre activas</span>
+          </label>
+        </article>
+
+        <article class="cookie-category">
+          <div class="cookie-category__content">
+            <h3 class="cookie-category__title">Analíticas</h3>
+            <p class="cookie-category__text">
+              Miden navegación, tráfico y rendimiento para mejorar contenidos y experiencia.
+            </p>
+          </div>
+
+          <label class="cookie-switch">
+            <input
+              type="checkbox"
+              [checked]="draft.analytics"
+              (change)="updateDraft('analytics', $any($event.target).checked)"
+            >
+            <span>{{ draft.analytics ? 'Activadas' : 'Desactivadas' }}</span>
+          </label>
+        </article>
+
+        <article class="cookie-category">
+          <div class="cookie-category__content">
+            <h3 class="cookie-category__title">Publicitarias</h3>
+            <p class="cookie-category__text">
+              Permiten activar Google Ads o Google AdSense para mostrar, medir o limitar la
+              frecuencia de la publicidad.
+            </p>
+          </div>
+
+          <label class="cookie-switch">
+            <input
+              type="checkbox"
+              [checked]="draft.ads"
+              (change)="updateDraft('ads', $any($event.target).checked)"
+            >
+            <span>{{ draft.ads ? 'Activadas' : 'Desactivadas' }}</span>
+          </label>
+        </article>
+
+        <article class="cookie-category">
+          <div class="cookie-category__content">
+            <h3 class="cookie-category__title">Afiliación y medición comercial</h3>
+            <p class="cookie-category__text">
+              Permiten atribuir compras o clics cuando navegas hacia plataformas de afiliación desde
+              enlaces comerciales.
+            </p>
+          </div>
+
+          <label class="cookie-switch">
+            <input
+              type="checkbox"
+              [checked]="draft.affiliate"
+              (change)="updateDraft('affiliate', $any($event.target).checked)"
+            >
+            <span>{{ draft.affiliate ? 'Activadas' : 'Desactivadas' }}</span>
+          </label>
+        </article>
+      </div>
+
+      <footer class="cookie-preferences__footer">
+        <a class="cookie-preferences__policy" routerLink="/cookies" (click)="closePreferences()">
+          Política de cookies
+        </a>
+        <div class="cookie-preferences__footer-actions">
+          <button
+            class="cookie-preferences__button cookie-preferences__button--secondary"
+            type="button"
+            (click)="rejectAll()"
+          >
+            Rechazar todo
+          </button>
+          <button
+            class="cookie-preferences__button cookie-preferences__button--ghost"
+            type="button"
+            (click)="acceptAll()"
+          >
+            Aceptar todo
+          </button>
+          <button class="cookie-preferences__button" type="button" (click)="savePreferences()">
+            Guardar selección
+          </button>
+        </div>
+      </footer>
+    </section>
+  </div>
+}

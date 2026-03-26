@@ -280,7 +280,17 @@
 
   .inicio-home__title {
     max-width: none;
-    font-size: clamp(2.2rem, 11vw, 3.4rem);
+    font-size: clamp(1.95rem, 8.8vw, 3rem);
+    line-height: 1.03;
+  }
+
+  .inicio-home__subtitle,
+  .inicio-card__description {
+    max-width: none;
+  }
+
+  .inicio-home__subtitle {
+    font-size: 0.98rem;
   }
 
   .inicio-card,
@@ -301,5 +311,19 @@
 
   .inicio-card--feature::before {
     width: 160px;
+  }
+
+  .inicio-card__title {
+    max-width: none;
+  }
+
+  .inicio-card__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .inicio-chip,
+  .inicio-card__link {
+    width: 100%;
   }
 }

@@ -1,0 +1,94 @@
+@use '../../../../styles/abstracts/variables' as vars;
+
+:host {
+  display: block;
+  margin-top: 1.25rem;
+}
+
+.disclosure-banner {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  gap: 1.15rem;
+  padding: 1.1rem 1.2rem;
+  border-radius: 1.7rem;
+  border: vars.$border-width-thin solid rgba(vars.$color-accent, 0.16);
+  background:
+    radial-gradient(circle at top right, rgba(vars.$color-accent-strong, 0.18), transparent 36%),
+    linear-gradient(135deg, rgba(vars.$color-accent, 0.08), rgba(vars.$color-surface, 0.94)),
+    vars.$color-surface;
+  box-shadow: 0 22px 40px -32px rgba(vars.$color-ink-900, 0.26);
+}
+
+.disclosure-banner__content {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.disclosure-banner__eyebrow {
+  margin: 0;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: vars.$color-accent;
+}
+
+.disclosure-banner__text {
+  margin: 0;
+  max-width: 52rem;
+  line-height: 1.65;
+  color: vars.$color-ink-800;
+}
+
+.disclosure-banner__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  min-height: 44px;
+  padding: 0 1rem;
+  border-radius: vars.$radius-pill;
+  border: vars.$border-width-thin solid rgba(vars.$color-accent, 0.16);
+  background: rgba(vars.$color-surface, 0.9);
+  color: vars.$color-ink-900;
+  font-weight: 700;
+  white-space: nowrap;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.disclosure-banner__link:hover {
+  transform: translateY(-1px);
+  border-color: rgba(vars.$color-accent, 0.4);
+}
+
+body[data-theme='dark'] .disclosure-banner {
+  background:
+    radial-gradient(circle at top right, rgb(83 167 195 / 0.16), transparent 38%),
+    linear-gradient(135deg, rgb(83 167 195 / 0.15), var(--client-dark-surface)),
+    var(--client-dark-surface);
+  border-color: var(--client-dark-border);
+}
+
+body[data-theme='dark'] .disclosure-banner__text,
+body[data-theme='dark'] .disclosure-banner__link {
+  color: var(--client-dark-text);
+}
+
+body[data-theme='dark'] .disclosure-banner__link {
+  background: var(--client-dark-pill);
+  border-color: var(--client-dark-border-soft);
+}
+
+@media (max-width: 760px) {
+  .disclosure-banner {
+    flex-direction: column;
+  }
+
+  .disclosure-banner__link {
+    width: 100%;
+  }
+}

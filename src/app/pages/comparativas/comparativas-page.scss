@@ -354,8 +354,12 @@
 
   .comparador__controls,
   .comparador__duel {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
     gap: 0.6rem;
+  }
+
+  .comparativas-duels__grid {
+    grid-template-columns: 1fr;
   }
 
   .comparador-card {
@@ -412,5 +416,9 @@
 
   .comparador-row__value.is-winner {
     outline: 1px solid rgba(vars.$color-accent, 0.14);
+  }
+
+  .duel-card__button {
+    width: 100%;
   }
 }

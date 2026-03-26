@@ -21,11 +21,11 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     const storedTheme = this.readStoredTheme();
     const preferredTheme = storedTheme ?? (this.prefersDarkColorScheme() ? 'dark' : 'light');
-    this.applyTheme(preferredTheme);
+    this.applyTheme(preferredTheme, false);
   }
 
   protected toggleTheme(): void {
-    this.applyTheme(this.themeMode === 'dark' ? 'light' : 'dark');
+    this.applyTheme(this.themeMode === 'dark' ? 'light' : 'dark', true);
   }
 
   protected toggleMenu(): void {
@@ -56,10 +56,12 @@ export class HeaderComponent implements OnInit {
     return this.themeMode === 'dark' ? '/icons/theme-light.svg' : '/icons/theme-dark.svg';
   }
 
-  private applyTheme(theme: ThemeMode): void {
+  private applyTheme(theme: ThemeMode, persist: boolean): void {
     this.themeMode = theme;
     this.document.body.dataset['theme'] = theme;
-    this.writeStoredTheme(theme);
+    if (persist) {
+      this.writeStoredTheme(theme);
+    }
   }
 
   private readStoredTheme(): ThemeMode | null {

@@ -130,40 +130,42 @@
         }
       </div>
 
-      <nav class="moviles-pagination" aria-label="Paginacion de modelos recomendados">
-        <p class="moviles-pagination__summary">
-          Mostrando {{ visibleStart }}-{{ visibleEnd }} de {{ totalItems }} modelos
-        </p>
-        <div class="moviles-pagination__controls">
-          <button
-            class="moviles-pagination__button"
-            type="button"
-            (click)="previousPage()"
-            [disabled]="currentPage === 1"
-          >
-            Anterior
-          </button>
-          @for (page of pageNumbers; track page) {
+      @if (totalPages > 1) {
+        <nav class="moviles-pagination" aria-label="Paginacion de modelos recomendados">
+          <p class="moviles-pagination__summary">
+            Mostrando {{ visibleStart }}-{{ visibleEnd }} de {{ totalItems }} modelos
+          </p>
+          <div class="moviles-pagination__controls">
             <button
               class="moviles-pagination__button"
               type="button"
-              [class.is-active]="page === currentPage"
-              [attr.aria-current]="page === currentPage ? 'page' : null"
-              (click)="goToPage(page)"
+              (click)="previousPage()"
+              [disabled]="currentPage === 1"
             >
-              {{ page }}
+              Anterior
             </button>
-          }
-          <button
-            class="moviles-pagination__button"
-            type="button"
-            (click)="nextPage()"
-            [disabled]="currentPage === totalPages"
-          >
-            Siguiente
-          </button>
-        </div>
-      </nav>
+            @for (page of pageNumbers; track page) {
+              <button
+                class="moviles-pagination__button"
+                type="button"
+                [class.is-active]="page === currentPage"
+                [attr.aria-current]="page === currentPage ? 'page' : null"
+                (click)="goToPage(page)"
+              >
+                {{ page }}
+              </button>
+            }
+            <button
+              class="moviles-pagination__button"
+              type="button"
+              (click)="nextPage()"
+              [disabled]="currentPage === totalPages"
+            >
+              Siguiente
+            </button>
+          </div>
+        </nav>
+      }
     } @else {
       <p class="moviles-catalog__empty">
         No hay modelos con esa combinacion de filtros. Prueba otra marca, gama o sistema.

@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { ComparativasPageComponent } from './pages/comparativas/comparativas-page';
 import { GuiasPageComponent } from './pages/guias/guias-page';
 import { InicioPageComponent } from './pages/inicio/inicio-page';
+import { LegalDocumentPageComponent } from './pages/legal-document/legal-document-page';
 import { MovilesPageComponent } from './pages/moviles/moviles-page';
 import { ReviewDetailPageComponent } from './pages/review-detail/review-detail-page';
 import { RankingPageComponent } from './pages/ranking/ranking-page';
@@ -40,6 +41,34 @@ export const routes: Routes = [
   {
     path: 'ranking',
     component: RankingPageComponent
+  },
+  {
+    path: 'privacidad',
+    component: LegalDocumentPageComponent,
+    data: {
+      documentKey: 'privacy'
+    }
+  },
+  {
+    path: 'cookies',
+    component: LegalDocumentPageComponent,
+    data: {
+      documentKey: 'cookies'
+    }
+  },
+  {
+    path: 'aviso-legal',
+    component: LegalDocumentPageComponent,
+    data: {
+      documentKey: 'legal-notice'
+    }
+  },
+  {
+    path: 'publicidad-afiliacion',
+    component: LegalDocumentPageComponent,
+    data: {
+      documentKey: 'advertising'
+    }
   },
   {
     path: '**',

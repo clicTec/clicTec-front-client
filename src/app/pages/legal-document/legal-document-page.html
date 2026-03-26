@@ -1,0 +1,98 @@
+<section class="legal-page">
+  <nav class="legal-page__nav" aria-label="Documentación legal">
+    @for (page of legalPages; track page.key) {
+      <a
+        class="legal-page__nav-link"
+        [class.is-active]="isCurrentPage(page.key)"
+        [routerLink]="page.route"
+      >
+        {{ page.label }}
+      </a>
+    }
+  </nav>
+
+  <header class="legal-page__hero">
+    <div class="legal-page__hero-main">
+      <p class="legal-page__eyebrow">{{ documentContent.eyebrow }}</p>
+      <h1 class="legal-page__title">{{ documentContent.title }}</h1>
+      <p class="legal-page__summary">{{ documentContent.summary }}</p>
+
+      <dl class="legal-page__meta">
+        <div class="legal-page__meta-item">
+          <dt>Última revisión</dt>
+          <dd>{{ documentContent.lastUpdated }}</dd>
+        </div>
+        <div class="legal-page__meta-item">
+          <dt>Dominio</dt>
+          <dd>{{ siteLegalConfig.domain }}</dd>
+        </div>
+        <div class="legal-page__meta-item">
+          <dt>Contacto</dt>
+          <dd>{{ siteLegalConfig.contactEmail }}</dd>
+        </div>
+      </dl>
+    </div>
+
+    <aside class="legal-page__hero-card">
+      <p class="legal-page__card-kicker">Marco de confianza</p>
+      <h2 class="legal-page__card-title">Privacidad clara, cookies configurables y monetización visible</h2>
+      <p class="legal-page__card-text">
+        La base legal del sitio está agrupada en un centro único para que cualquier usuario pueda revisar
+        privacidad, cookies, uso del dominio y transparencia comercial sin ambigüedad.
+      </p>
+
+      <ul class="legal-page__card-list">
+        <li>Consentimiento configurable con aceptar, rechazar y ajustar categorías.</li>
+        <li>Enlaces legales permanentes desde el pie de página.</li>
+        <li>Aviso de afiliación y señalización comercial visible.</li>
+      </ul>
+
+      @if (documentKey === 'cookies') {
+        <button class="legal-page__button" type="button" (click)="openCookiePreferences()">
+          Configurar cookies
+        </button>
+      }
+    </aside>
+  </header>
+
+  <div class="legal-page__sections">
+    @for (section of documentContent.sections; track section.title) {
+      <article class="legal-page__section">
+        <h2 class="legal-page__section-title">{{ section.title }}</h2>
+
+        @if (section.paragraphs?.length) {
+          @for (paragraph of section.paragraphs; track paragraph) {
+            <p class="legal-page__paragraph">{{ paragraph }}</p>
+          }
+        }
+
+        @if (section.items?.length) {
+          <ul class="legal-page__list">
+            @for (item of section.items; track item) {
+              <li>{{ item }}</li>
+            }
+          </ul>
+        }
+
+        @if (section.links?.length) {
+          <div class="legal-page__links">
+            @for (link of section.links; track link.href) {
+              <a
+                class="legal-page__link"
+                [href]="link.href"
+                [target]="isExternalLink(link.href) ? '_blank' : null"
+                [rel]="isExternalLink(link.href) ? 'noreferrer noopener' : null"
+              >
+                {{ link.label }}
+              </a>
+            }
+          </div>
+        }
+
+        @if (section.note) {
+          <p class="legal-page__note">{{ section.note }}</p>
+        }
+      </article>
+    }
+  </div>
+</section>

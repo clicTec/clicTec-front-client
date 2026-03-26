@@ -1,10 +1,97 @@
 <footer class="site-footer" aria-label="Pie de página">
-  <div class="site-footer__inner">
-    <div class="site-footer__brand">
-      <a class="site-footer__logo-link" routerLink="/inicio" aria-label="Ir al inicio de clicTec">
-        <img class="site-footer__logo" src="/logo/logosinfondo.png" alt="Logo clicTec" decoding="async">
-      </a>
+  <div class="site-footer__shell">
+    <div class="site-footer__utility" aria-label="Navegación secundaria del pie">
+      <nav class="site-footer__utility-nav" aria-label="Enlaces legales">
+        <a class="site-footer__utility-brand" routerLink="/inicio" aria-label="Ir al inicio de clicTec">
+          <img class="site-footer__logo site-footer__utility-logo" src="/logo/logosinfondo.png" alt="Logo clicTec">
+        </a>
+
+        @for (link of utilityLinks; track link.route) {
+          <a class="site-footer__utility-link" [routerLink]="link.route">{{ link.label }}</a>
+        }
+
+        <button
+          class="site-footer__utility-link site-footer__utility-link--button"
+          type="button"
+          (click)="openCookiePreferences()"
+        >
+          Configurar cookies
+        </button>
+      </nav>
+
+      <div class="site-footer__social" aria-label="Redes sociales">
+        <p class="site-footer__social-label">Novedades</p>
+        <div class="site-footer__social-links">
+          <a
+            class="site-footer__social-link"
+            [href]="siteLegalConfig.socialProfiles.facebook"
+            target="_blank"
+            rel="noreferrer noopener"
+            aria-label="Facebook"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M13.5 21v-7h2.3l.4-3h-2.7V9.1c0-.9.3-1.6 1.7-1.6H16V4.9c-.4-.1-1.2-.2-2.3-.2-2.3 0-3.8 1.4-3.8 4V11H7.5v3h2.4v7h3.6Z"
+                fill="currentColor"
+              />
+            </svg>
+          </a>
+
+          <a
+            class="site-footer__social-link"
+            [href]="siteLegalConfig.socialProfiles.x"
+            target="_blank"
+            rel="noreferrer noopener"
+            aria-label="X"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M4 4h3.7l4.3 6.1L17.1 4H20l-6.7 7.5L20.5 20h-3.7l-4.7-6.7L6.4 20H3.5l7.1-8L4 4Z"
+                fill="currentColor"
+              />
+            </svg>
+          </a>
+
+          <a
+            class="site-footer__social-link"
+            [href]="siteLegalConfig.socialProfiles.instagram"
+            target="_blank"
+            rel="noreferrer noopener"
+            aria-label="Instagram"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M7.8 3h8.4A4.8 4.8 0 0 1 21 7.8v8.4a4.8 4.8 0 0 1-4.8 4.8H7.8A4.8 4.8 0 0 1 3 16.2V7.8A4.8 4.8 0 0 1 7.8 3Zm0 1.8A3 3 0 0 0 4.8 7.8v8.4a3 3 0 0 0 3 3h8.4a3 3 0 0 0 3-3V7.8a3 3 0 0 0-3-3H7.8Zm8.95 1.35a1.05 1.05 0 1 1 0 2.1 1.05 1.05 0 0 1 0-2.1ZM12 7.3A4.7 4.7 0 1 1 7.3 12 4.7 4.7 0 0 1 12 7.3Zm0 1.8A2.9 2.9 0 1 0 14.9 12 2.9 2.9 0 0 0 12 9.1Z"
+                fill="currentColor"
+              />
+            </svg>
+          </a>
+
+          <a
+            class="site-footer__social-link"
+            [href]="siteLegalConfig.socialProfiles.tiktok"
+            target="_blank"
+            rel="noreferrer noopener"
+            aria-label="TikTok"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M14.46 3c.23 1.9 1.29 3.38 3.12 4.06.53.2 1.1.31 1.67.33v2.61a7.52 7.52 0 0 1-3.11-.67v6.09a5.42 5.42 0 1 1-5.42-5.42c.3 0 .57.03.85.08v2.73a2.95 2.95 0 0 0-.85-.13 2.75 2.75 0 1 0 2.75 2.75V3h.99Z"
+                fill="currentColor"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-footer__bottom">
       <p class="site-footer__copy">© {{ currentYear }} clicTec. Todos los derechos reservados.</p>
+      <div class="site-footer__signals" aria-label="Principios de transparencia">
+        <span class="site-footer__signal">Consentimiento configurable</span>
+        <span class="site-footer__signal">Afiliación informada</span>
+        <span class="site-footer__signal">Publicidad identificada</span>
+      </div>
     </div>
   </div>
 </footer>

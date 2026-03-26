@@ -176,6 +176,8 @@ export interface TechNewsResponse {
   id: number;
   title: string;
   contentHtml: string;
+  commercialLabel: string | null;
+  affiliateDisclosure: boolean;
   createdAt: string;
   updatedAt: string;
 }

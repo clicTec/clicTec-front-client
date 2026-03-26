@@ -1,32 +1,32 @@
 @use 'sass:color';
 
-$palette-black: #1d1d1f;
-$palette-midnight: #2f2f33;
-$palette-slate: #6e6e73;
-$palette-steel: #d2d2d7;
-$palette-ocean: #0071e3;
-$palette-cyan: #2997ff;
+$palette-black: #111b25;
+$palette-midnight: #223243;
+$palette-slate: #617181;
+$palette-steel: #d6dfe6;
+$palette-ocean: #0f7ea6;
+$palette-cyan: #27a9cf;
 $palette-white: #ffffff;
-$palette-cloud: #f5f5f7;
+$palette-cloud: #f3f6f8;
 
 $color-ink-900: $palette-black;
 $color-ink-800: $palette-midnight;
 $color-ink-700: $palette-slate;
-$color-ink-600: #8d8d92;
+$color-ink-600: #8d99a5;
 $color-background: $palette-cloud;
 $color-surface: $palette-white;
 $color-border: rgba($palette-black, 0.08);
 $color-text-primary: $palette-black;
-$color-text-muted: rgba($palette-midnight, 0.72);
+$color-text-muted: rgba($palette-midnight, 0.74);
 $color-accent: $palette-ocean;
 $color-accent-strong: $palette-cyan;
-$color-accent-soft: color.mix($palette-white, $palette-ocean, 94%);
+$color-accent-soft: color.mix($palette-white, $palette-ocean, 90%);
 $color-transparent: transparent;
 
-$font-title: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Segoe UI', Helvetica, Arial, sans-serif;
-$font-subtitle: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Helvetica, Arial, sans-serif;
-$font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Helvetica, Arial, sans-serif;
-$font-button: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Helvetica, Arial, sans-serif;
+$font-title: 'Space Grotesk', 'Manrope', 'Segoe UI', sans-serif;
+$font-subtitle: 'Manrope', 'Segoe UI', sans-serif;
+$font-body: 'Manrope', 'Segoe UI', sans-serif;
+$font-button: 'Manrope', 'Segoe UI', sans-serif;
 $font-heading: $font-title;
 $font-subheading: $font-subtitle;
 $font-size-eyebrow: 0.82rem;
@@ -46,7 +46,7 @@ $radius-sm: 12px;
 $radius-md: 28px;
 $radius-pill: 999px;
 $border-width-thin: 1px;
-$shadow-soft: 0 24px 60px -42px rgba($color-ink-900, 0.24);
+$shadow-soft: 0 32px 72px -50px rgba($color-ink-900, 0.26);
 
 $space-0: 0;
 $space-2xs: 0.35rem;
@@ -81,5 +81,6 @@ $header-nav-offset: clamp(0.9rem, 2.4vw, 1.7rem);
 $header-mobile-nav-order: 3;
 
 $body-background:
-  radial-gradient(circle at top right, rgba($color-accent-strong, 0.08), transparent 28%),
-  linear-gradient(180deg, #fbfbfd 0%, $color-background 20%, #fafafa 100%);
+  radial-gradient(circle at 12% 12%, rgba($color-accent-strong, 0.14), transparent 26%),
+  radial-gradient(circle at 88% 4%, rgba($color-accent, 0.1), transparent 30%),
+  linear-gradient(180deg, #fbfcfd 0%, #f6f8fb 34%, $color-background 100%);

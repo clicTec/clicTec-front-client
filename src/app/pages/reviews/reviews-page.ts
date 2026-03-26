@@ -4,7 +4,6 @@ import { ContentApiService, TechNewsResponse } from '../../shared/services/conte
 @Component({
   selector: 'app-reviews-page',
   standalone: true,
-  imports: [],
   templateUrl: './reviews-page.html',
   styleUrl: './reviews-page.scss'
 })

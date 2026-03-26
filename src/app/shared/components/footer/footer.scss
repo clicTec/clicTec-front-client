@@ -1,38 +1,169 @@
 @use '../../../../styles/abstracts/variables' as vars;
 
 .site-footer {
-  padding: 0 1rem 1.4rem;
+  padding: 0 1rem 2rem;
 }
 
-.site-footer__inner {
+.site-footer__shell {
+  position: relative;
+  overflow: hidden;
   width: min(100%, 1680px);
   margin-inline: auto;
-  padding-top: 1.35rem;
-  border-top: vars.$border-width-thin solid rgba(vars.$color-ink-900, 0.08);
+  padding: clamp(1.2rem, 2.6vw, 1.75rem);
+  border: vars.$border-width-thin solid rgba(vars.$color-ink-900, 0.08);
+  border-radius: 2rem;
+  background:
+    radial-gradient(circle at top right, rgba(vars.$color-accent-strong, 0.16), transparent 28%),
+    linear-gradient(180deg, rgba(vars.$color-surface, 0.98), rgba(vars.$color-background, 0.96)),
+    vars.$color-surface;
+  box-shadow: 0 34px 76px -52px rgba(vars.$color-ink-900, 0.34);
 }
 
-.site-footer__brand {
+.site-footer__shell::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+
+.site-footer__shell::after {
+  inset: 0 0 auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(vars.$color-accent, 0.28), transparent);
+}
+
+.site-footer__utility {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 1rem;
+  padding: 0 0 1rem;
+  border-bottom: vars.$border-width-thin solid rgba(vars.$color-ink-900, 0.08);
 }
 
-.site-footer__logo-link {
+.site-footer__utility-nav {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  gap: 0.9rem 1.25rem;
+}
+
+.site-footer__utility-brand {
   display: inline-flex;
   align-items: center;
-  padding: 0.2rem 0;
+  margin-right: 0.25rem;
+  text-decoration: none;
 }
 
-.site-footer__logo {
-  width: 72px;
+.site-footer__utility-logo {
+  width: 78px;
   height: auto;
 }
 
-.site-footer__copy {
+.site-footer__utility-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: rgba(vars.$color-ink-900, 0.84);
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.site-footer__utility-link:hover {
+  color: vars.$color-accent;
+}
+
+.site-footer__social {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-left: auto;
+}
+
+.site-footer__social-label {
   margin: 0;
-  font-size: 0.78rem;
-  color: vars.$color-text-muted;
+  color: rgba(vars.$color-ink-900, 0.72);
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
+.site-footer__social-links {
+  display: inline-flex;
+  align-items: center;
+}
+
+.site-footer__social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 0.85rem;
+  color: vars.$color-ink-900;
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.site-footer__social-link svg {
+  width: 1.28rem;
+  height: 1.28rem;
+}
+
+.site-footer__social-link:hover {
+  color: vars.$color-accent;
+  background: rgba(vars.$color-accent, 0.08);
+}
+
+.site-footer__bottom {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1.1rem;
+}
+
+.site-footer__copy {
+  font-size: 0.8rem;
+}
+
+.site-footer__signals {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.site-footer__signal {
+  position: relative;
+  color: rgba(vars.$color-ink-900, 0.74);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.site-footer__signal + .site-footer__signal::before {
+  content: '•';
+  margin-right: 0.75rem;
+  color: rgba(vars.$color-ink-900, 0.34);
+}
+
+@media (max-width: 1180px) {
+  .site-footer__utility {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .site-footer__social {
+    margin-left: 0;
+  }
 }
 
 @media (max-width: 760px) {
@@ -40,13 +171,36 @@
     padding: 0 0.75rem 1.2rem;
   }
 
-  .site-footer__brand {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.55rem;
+  .site-footer__shell {
+    padding: 1rem;
+    border-radius: 1.5rem;
   }
 
-  .site-footer__copy {
-    font-size: 0.74rem;
+  .site-footer__utility {
+    gap: 0.9rem;
+    padding-bottom: 0.9rem;
+  }
+
+  .site-footer__utility-nav {
+    gap: 0.7rem 1rem;
+  }
+
+  .site-footer__utility-logo {
+    width: 72px;
+  }
+
+  .site-footer__utility-link,
+  .site-footer__social-label {
+    font-size: 0.88rem;
+  }
+
+  .site-footer__bottom {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .site-footer__signals {
+    justify-content: flex-start;
+    gap: 0.5rem 0.9rem;
   }
 }
