@@ -1,9 +1,11 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { ConsentAwareHtmlPipe } from '../../shared/pipes/consent-aware-html.pipe';
 import { ContentApiService, TechNewsResponse } from '../../shared/services/content-api.service';
 
 @Component({
   selector: 'app-reviews-page',
   standalone: true,
+  imports: [ConsentAwareHtmlPipe],
   templateUrl: './reviews-page.html',
   styleUrl: './reviews-page.scss'
 })

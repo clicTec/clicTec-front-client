@@ -26,7 +26,7 @@
         }
       </header>
 
-      <article class="review-detail-page__article" [innerHTML]="review.contentHtml"></article>
+      <article class="review-detail-page__article" [innerHTML]="review.contentHtml | consentAwareHtml : true"></article>
       @if (formatDate(review.publishedAt)) {
         <p class="review-detail-page__date review-detail-page__date--footer">{{ formatDate(review.publishedAt) }}</p>
       }

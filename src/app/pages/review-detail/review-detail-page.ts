@@ -1,12 +1,13 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
+import { ConsentAwareHtmlPipe } from '../../shared/pipes/consent-aware-html.pipe';
 import { ContentApiService, ReviewDetailResponse } from '../../shared/services/content-api.service';
 
 @Component({
   selector: 'app-review-detail-page',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, ConsentAwareHtmlPipe],
   templateUrl: './review-detail-page.html',
   styleUrl: './review-detail-page.scss'
 })

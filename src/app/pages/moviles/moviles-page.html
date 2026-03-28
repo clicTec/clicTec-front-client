@@ -106,7 +106,7 @@
 
             <h3 class="moviles-phone__name">{{ phone.model }}</h3>
             <p class="moviles-phone__meta">{{ phone.brand }} · {{ phone.price }}</p>
-            <div class="moviles-phone__summary" [innerHTML]="phone.review"></div>
+            <div class="moviles-phone__summary" [innerHTML]="phone.review | consentAwareHtml : true"></div>
 
             <ul class="moviles-phone__specs">
               @for (spec of phone.specs; track spec.label) {

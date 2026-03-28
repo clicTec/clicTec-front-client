@@ -1,5 +1,6 @@
 import { Component, ElementRef, HostListener, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { ConsentAwareHtmlPipe } from '../../shared/pipes/consent-aware-html.pipe';
 import {
   ContentApiService,
   LaunchEntryResponse,
@@ -12,7 +13,7 @@ type FilterKey = 'brand' | 'tier' | 'priceRange' | 'os';
 @Component({
   selector: 'app-moviles-page',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, ConsentAwareHtmlPipe],
   templateUrl: './moviles-page.html',
   styleUrl: './moviles-page.scss'
 })

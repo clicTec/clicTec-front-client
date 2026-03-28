@@ -115,10 +115,25 @@
     border-color 0.2s ease;
 }
 
-.cookie-banner__button,
-.cookie-preferences__button:not(.cookie-preferences__button--secondary):not(.cookie-preferences__button--ghost) {
+.cookie-preferences__button:not(.cookie-preferences__button--secondary):not(.cookie-preferences__button--ghost):not(.cookie-preferences__button--decision) {
   background: vars.$color-accent;
   color: vars.$color-surface;
+}
+
+.cookie-banner__button--decision,
+.cookie-preferences__button--decision {
+  min-width: 148px;
+  color: vars.$color-surface;
+}
+
+.cookie-banner__button--accept,
+.cookie-preferences__button--accept {
+  background: vars.$color-accent;
+}
+
+.cookie-banner__button--reject,
+.cookie-preferences__button--reject {
+  background: vars.$color-ink-900;
 }
 
 .cookie-banner__button--secondary,
@@ -151,9 +166,21 @@
 }
 
 .cookie-banner__button:not(.cookie-banner__button--secondary):not(.cookie-banner__button--ghost):hover,
-.cookie-preferences__button:not(.cookie-preferences__button--secondary):not(.cookie-preferences__button--ghost):hover {
+.cookie-preferences__button:not(.cookie-preferences__button--secondary):not(.cookie-preferences__button--ghost):not(.cookie-preferences__button--decision):hover {
   background: #0077ed;
   box-shadow: 0 16px 28px -20px rgba(vars.$color-accent, 0.5);
+}
+
+.cookie-banner__button--accept:hover,
+.cookie-preferences__button--accept:hover {
+  background: #0077ed;
+  box-shadow: 0 16px 28px -20px rgba(vars.$color-accent, 0.5);
+}
+
+.cookie-banner__button--reject:hover,
+.cookie-preferences__button--reject:hover {
+  background: vars.$color-ink-800;
+  box-shadow: 0 16px 28px -20px rgba(vars.$color-ink-900, 0.36);
 }
 
 .cookie-preferences__backdrop {

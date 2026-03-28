@@ -42,6 +42,7 @@ export class ConsentService {
   private readonly preferencesOpenSignal = signal(false);
   private readonly initializedSignal = signal(false);
   private readonly submittingSignal = signal(false);
+  private readonly loadingSignal = signal(false);
   private readonly errorSignal = signal('');
 
   readonly siteConfig = computed(() => this.configSignal());
@@ -66,10 +67,11 @@ export class ConsentService {
     this.ensureGoogleConsentStub();
     this.applyGoogleConsent(this.pendingPreferences, 'default');
     this.applyConsentSideEffects();
-    this.loadLegalState();
+    this.loadLegalState(false);
   }
 
   openPreferences(): void {
+    this.refreshLegalState(true);
     if (this.usesExternalCmp()) {
       this.openExternalCmpPreferences();
       return;
@@ -120,12 +122,24 @@ export class ConsentService {
     );
   }
 
-  private loadLegalState(): void {
-    this.initializedSignal.set(false);
+  refreshLegalState(forceRefresh = false): void {
+    this.loadLegalState(forceRefresh);
+  }
+
+  private loadLegalState(forceRefresh: boolean): void {
+    if (this.submittingSignal() || this.loadingSignal()) {
+      return;
+    }
+
+    if (!this.initializedSignal()) {
+      this.initializedSignal.set(false);
+    }
+
     this.errorSignal.set('');
+    this.loadingSignal.set(true);
 
     this.legalApiService
-      .getLegalConfig()
+      .getLegalConfig(!forceRefresh)
       .pipe(
         take(1),
         switchMap((config) => {
@@ -145,6 +159,7 @@ export class ConsentService {
         })
       )
       .subscribe((response) => {
+        this.errorSignal.set('');
         this.recordSignal.set(this.toRecord(response));
 
         if (this.usesExternalCmp()) {
@@ -152,6 +167,7 @@ export class ConsentService {
         }
 
         this.initializedSignal.set(true);
+        this.loadingSignal.set(false);
         this.applyConsentSideEffects();
       });
   }

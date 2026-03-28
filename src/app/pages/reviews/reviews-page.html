@@ -35,7 +35,10 @@
                 contenido.
               </p>
             }
-            <div class="reviews-card__content" [innerHTML]="item.contentHtml"></div>
+            <div
+              class="reviews-card__content"
+              [innerHTML]="item.contentHtml | consentAwareHtml : (item.affiliateDisclosure || !!item.commercialLabel)"
+            ></div>
           </div>
         </article>
       } @empty {

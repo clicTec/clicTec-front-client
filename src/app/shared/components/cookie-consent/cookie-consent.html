@@ -20,7 +20,7 @@
     <div class="cookie-banner__actions">
       <a class="cookie-banner__link" routerLink="/cookies">Ver política de cookies</a>
       <button
-        class="cookie-banner__button cookie-banner__button--secondary"
+        class="cookie-banner__button cookie-banner__button--decision cookie-banner__button--reject"
         type="button"
         [disabled]="consentService.isSubmitting()"
         (click)="rejectAll()"
@@ -36,7 +36,7 @@
         Configurar
       </button>
       <button
-        class="cookie-banner__button"
+        class="cookie-banner__button cookie-banner__button--decision cookie-banner__button--accept"
         type="button"
         [disabled]="consentService.isSubmitting()"
         (click)="acceptAll()"
@@ -168,7 +168,7 @@
         </a>
         <div class="cookie-preferences__footer-actions">
           <button
-            class="cookie-preferences__button cookie-preferences__button--secondary"
+            class="cookie-preferences__button cookie-preferences__button--decision cookie-preferences__button--reject"
             type="button"
             [disabled]="consentService.isSubmitting()"
             (click)="rejectAll()"
@@ -176,7 +176,7 @@
             Rechazar todo
           </button>
           <button
-            class="cookie-preferences__button cookie-preferences__button--ghost"
+            class="cookie-preferences__button cookie-preferences__button--decision cookie-preferences__button--accept"
             type="button"
             [disabled]="consentService.isSubmitting()"
             (click)="acceptAll()"

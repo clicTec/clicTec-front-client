@@ -17,12 +17,14 @@ export class LegalApiService {
   private readonly httpClient = inject(HttpClient);
   private readonly apiBase = '/api/legal';
 
-  private readonly legalConfigRequest$ = defer(() =>
+  private readonly cachedLegalConfigRequest$ = defer(() =>
     this.httpClient.get<LegalSiteConfig>(`${this.apiBase}/config`)
   ).pipe(shareReplay({ bufferSize: 1, refCount: false }));
 
-  getLegalConfig(): Observable<LegalSiteConfig> {
-    return this.legalConfigRequest$;
+  getLegalConfig(useCached = true): Observable<LegalSiteConfig> {
+    return useCached
+      ? this.cachedLegalConfigRequest$
+      : this.httpClient.get<LegalSiteConfig>(`${this.apiBase}/config`);
   }
 
   getLegalDocument(documentKey: LegalDocumentKey): Observable<LegalDocument> {
