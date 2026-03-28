@@ -9,6 +9,7 @@ import {
 } from '../../shared/config/site-legal.config';
 import { ConsentService } from '../../shared/services/consent.service';
 import { LegalApiService } from '../../shared/services/legal-api.service';
+import { SeoService } from '../../shared/services/seo.service';
 
 @Component({
   selector: 'app-legal-document-page',
@@ -22,6 +23,7 @@ export class LegalDocumentPageComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   protected readonly consentService = inject(ConsentService);
   private readonly legalApiService = inject(LegalApiService);
+  private readonly seoService = inject(SeoService);
 
   protected readonly siteLegalConfig = this.consentService.siteConfig;
   protected readonly legalPages = computed(() => this.siteLegalConfig().documents);
@@ -61,6 +63,11 @@ export class LegalDocumentPageComponent implements OnInit {
       next: (document) => {
         this.documentContent.set(document);
         this.isLoading.set(false);
+        this.seoService.applyPage({
+          title: document.title,
+          description: document.summary,
+          path: document.route
+        });
       },
       error: () => {
         this.documentContent.set({

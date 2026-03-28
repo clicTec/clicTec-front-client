@@ -4,6 +4,7 @@ import { GuiasPageComponent } from './pages/guias/guias-page';
 import { InicioPageComponent } from './pages/inicio/inicio-page';
 import { LegalDocumentPageComponent } from './pages/legal-document/legal-document-page';
 import { MovilesPageComponent } from './pages/moviles/moviles-page';
+import { NotFoundPageComponent } from './pages/not-found/not-found-page';
 import { ReviewDetailPageComponent } from './pages/review-detail/review-detail-page';
 import { RankingPageComponent } from './pages/ranking/ranking-page';
 import { ReviewsPageComponent } from './pages/reviews/reviews-page';
@@ -12,66 +13,130 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'inicio'
+    component: InicioPageComponent,
+    data: {
+      seoTitle: 'clicTec | Comparativas, móviles, guías y actualidad tecnológica',
+      seoDescription:
+        'Comparativas, reviews, rankings y guías sobre móviles y tecnología con transparencia editorial, cookies configurables y publicidad identificada.',
+      seoCanonicalPath: '/',
+      seoSchema: 'website'
+    }
   },
   {
     path: 'inicio',
-    component: InicioPageComponent
+    pathMatch: 'full',
+    redirectTo: ''
   },
   {
     path: 'moviles',
-    component: MovilesPageComponent
+    component: MovilesPageComponent,
+    data: {
+      seoTitle: 'Reviews de móviles',
+      seoDescription:
+        'Reviews de móviles con foco en diseño, cámara, batería, software y relación calidad-precio.',
+      seoCanonicalPath: '/moviles'
+    }
   },
   {
     path: 'moviles/:slug',
-    component: ReviewDetailPageComponent
+    component: ReviewDetailPageComponent,
+    data: {
+      seoTitle: 'Review de móvil',
+      seoDescription:
+        'Análisis técnico de móviles con pros, contras, puntuación y contenido editorial transparente.'
+    }
   },
   {
     path: 'comparativas',
-    component: ComparativasPageComponent
+    component: ComparativasPageComponent,
+    data: {
+      seoTitle: 'Comparativas de móviles',
+      seoDescription:
+        'Comparativas técnicas de móviles por cámara, rendimiento, batería y relación calidad-precio.',
+      seoCanonicalPath: '/comparativas'
+    }
   },
   {
     path: 'reviews',
-    component: ReviewsPageComponent
+    component: ReviewsPageComponent,
+    data: {
+      seoTitle: 'Actualidad tecnológica',
+      seoDescription:
+        'Noticias tecnológicas y actualidad editorial publicadas desde el panel de administración.',
+      seoCanonicalPath: '/reviews'
+    }
   },
   {
     path: 'guias',
-    component: GuiasPageComponent
+    component: GuiasPageComponent,
+    data: {
+      seoTitle: 'Guías de compra y uso',
+      seoDescription:
+        'Guías prácticas para elegir móvil, entender especificaciones y comprar con más criterio.',
+      seoCanonicalPath: '/guias'
+    }
   },
   {
     path: 'ranking',
-    component: RankingPageComponent
+    component: RankingPageComponent,
+    data: {
+      seoTitle: 'Ranking de móviles',
+      seoDescription:
+        'Ranking editorial de móviles destacados por gama, cámaras, valor y rendimiento.',
+      seoCanonicalPath: '/ranking'
+    }
   },
   {
     path: 'privacidad',
     component: LegalDocumentPageComponent,
     data: {
-      documentKey: 'privacy'
+      documentKey: 'privacy',
+      seoTitle: 'Política de privacidad',
+      seoDescription:
+        'Información sobre tratamiento de datos, bases jurídicas, conservación y ejercicio de derechos en clicTec.',
+      seoCanonicalPath: '/privacidad'
     }
   },
   {
     path: 'cookies',
     component: LegalDocumentPageComponent,
     data: {
-      documentKey: 'cookies'
+      documentKey: 'cookies',
+      seoTitle: 'Política de cookies',
+      seoDescription:
+        'Detalle de categorías de cookies, bloqueo previo, registro del consentimiento y configuración por categorías.',
+      seoCanonicalPath: '/cookies'
     }
   },
   {
     path: 'aviso-legal',
     component: LegalDocumentPageComponent,
     data: {
-      documentKey: 'legal-notice'
+      documentKey: 'legal-notice',
+      seoTitle: 'Aviso legal',
+      seoDescription:
+        'Titularidad del sitio, condiciones de uso, propiedad intelectual y legislación aplicable.',
+      seoCanonicalPath: '/aviso-legal'
     }
   },
   {
     path: 'publicidad-afiliacion',
     component: LegalDocumentPageComponent,
     data: {
-      documentKey: 'advertising'
+      documentKey: 'advertising',
+      seoTitle: 'Publicidad y afiliación',
+      seoDescription:
+        'Política de transparencia comercial de clicTec para publicidad, patrocinios y enlaces de afiliación.',
+      seoCanonicalPath: '/publicidad-afiliacion'
     }
   },
   {
     path: '**',
-    redirectTo: 'inicio'
+    component: NotFoundPageComponent,
+    data: {
+      seoTitle: 'Página no encontrada',
+      seoDescription: 'La URL solicitada no existe o ya no está disponible en clicTec.',
+      seoRobots: 'noindex,follow,noarchive'
+    }
   }
 ];

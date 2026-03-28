@@ -159,7 +159,6 @@ export class ConsentService {
         })
       )
       .subscribe((response) => {
-        this.errorSignal.set('');
         this.recordSignal.set(this.toRecord(response));
 
         if (this.usesExternalCmp()) {
@@ -272,8 +271,8 @@ export class ConsentService {
       ad_user_data: preferences.ads ? 'granted' : 'denied',
       ad_personalization: preferences.ads ? 'granted' : 'denied',
       analytics_storage: preferences.analytics ? 'granted' : 'denied',
-      functionality_storage: 'granted',
-      personalization_storage: 'granted',
+      functionality_storage: 'denied',
+      personalization_storage: 'denied',
       security_storage: 'granted',
       wait_for_update: 500
     });

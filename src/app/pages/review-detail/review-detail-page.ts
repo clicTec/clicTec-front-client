@@ -3,6 +3,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import { ConsentAwareHtmlPipe } from '../../shared/pipes/consent-aware-html.pipe';
 import { ContentApiService, ReviewDetailResponse } from '../../shared/services/content-api.service';
+import { SeoService } from '../../shared/services/seo.service';
 
 @Component({
   selector: 'app-review-detail-page',
@@ -14,6 +15,7 @@ import { ContentApiService, ReviewDetailResponse } from '../../shared/services/c
 export class ReviewDetailPageComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly contentApiService = inject(ContentApiService);
+  private readonly seoService = inject(SeoService);
 
   protected isLoading = true;
   protected errorMessage = '';
@@ -24,6 +26,7 @@ export class ReviewDetailPageComponent implements OnInit {
     if (!slug) {
       this.errorMessage = 'Review no encontrada.';
       this.isLoading = false;
+      this.seoService.applyNotFound('/moviles');
       return;
     }
 
@@ -31,10 +34,26 @@ export class ReviewDetailPageComponent implements OnInit {
       next: (review) => {
         this.review = review;
         this.isLoading = false;
+        this.seoService.applyPage({
+          title: review.title,
+          description: review.excerpt,
+          path: `/moviles/${review.slug}`,
+          image: review.coverImage,
+          type: 'article',
+          structuredData: this.seoService.buildArticleSchema({
+            headline: review.title,
+            description: review.excerpt,
+            path: `/moviles/${review.slug}`,
+            image: review.coverImage,
+            publishedAt: review.publishedAt,
+            updatedAt: review.publishedAt
+          })
+        });
       },
       error: () => {
         this.errorMessage = 'No se pudo cargar la review.';
         this.isLoading = false;
+        this.seoService.applyNotFound(`/moviles/${slug}`);
       }
     });
   }
