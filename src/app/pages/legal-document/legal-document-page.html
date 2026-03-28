@@ -1,6 +1,6 @@
 <section class="legal-page">
   <nav class="legal-page__nav" aria-label="Documentación legal">
-    @for (page of legalPages; track page.key) {
+    @for (page of legalPages(); track page.key) {
       <a
         class="legal-page__nav-link"
         [class.is-active]="isCurrentPage(page.key)"
@@ -13,22 +13,35 @@
 
   <header class="legal-page__hero">
     <div class="legal-page__hero-main">
-      <p class="legal-page__eyebrow">{{ documentContent.eyebrow }}</p>
-      <h1 class="legal-page__title">{{ documentContent.title }}</h1>
-      <p class="legal-page__summary">{{ documentContent.summary }}</p>
+      <p class="legal-page__eyebrow">{{ documentContent().eyebrow || 'Documentación legal' }}</p>
+      <h1 class="legal-page__title">{{ documentContent().title || 'Cargando documento legal' }}</h1>
+      <p class="legal-page__summary">
+        {{
+          documentContent().summary
+            || 'Estamos recuperando la versión publicada de este documento desde la base de datos del sitio.'
+        }}
+      </p>
+
+      @if (isLoading()) {
+        <p class="legal-page__status">Cargando contenido legal…</p>
+      }
+
+      @if (errorMessage()) {
+        <p class="legal-page__status legal-page__status--error">{{ errorMessage() }}</p>
+      }
 
       <dl class="legal-page__meta">
         <div class="legal-page__meta-item">
           <dt>Última revisión</dt>
-          <dd>{{ documentContent.lastUpdated }}</dd>
+          <dd>{{ documentContent().lastUpdated || siteLegalConfig().lastUpdated || 'Pendiente de carga' }}</dd>
         </div>
         <div class="legal-page__meta-item">
           <dt>Dominio</dt>
-          <dd>{{ siteLegalConfig.domain }}</dd>
+          <dd>{{ siteLegalConfig().domain || 'Pendiente de carga' }}</dd>
         </div>
         <div class="legal-page__meta-item">
           <dt>Contacto</dt>
-          <dd>{{ siteLegalConfig.contactEmail }}</dd>
+          <dd>{{ siteLegalConfig().contactEmail || 'Pendiente de carga' }}</dd>
         </div>
       </dl>
     </div>
@@ -47,7 +60,7 @@
         <li>Aviso de afiliación y señalización comercial visible.</li>
       </ul>
 
-      @if (documentKey === 'cookies') {
+      @if (documentKey === 'cookies' && consentService.ready()) {
         <button class="legal-page__button" type="button" (click)="openCookiePreferences()">
           Configurar cookies
         </button>
@@ -56,17 +69,17 @@
   </header>
 
   <div class="legal-page__sections">
-    @for (section of documentContent.sections; track section.title) {
+    @for (section of documentContent().sections; track section.title) {
       <article class="legal-page__section">
         <h2 class="legal-page__section-title">{{ section.title }}</h2>
 
-        @if (section.paragraphs?.length) {
+        @if (section.paragraphs.length) {
           @for (paragraph of section.paragraphs; track paragraph) {
             <p class="legal-page__paragraph">{{ paragraph }}</p>
           }
         }
 
-        @if (section.items?.length) {
+        @if (section.items.length) {
           <ul class="legal-page__list">
             @for (item of section.items; track item) {
               <li>{{ item }}</li>
@@ -74,7 +87,7 @@
           </ul>
         }
 
-        @if (section.links?.length) {
+        @if (section.links.length) {
           <div class="legal-page__links">
             @for (link of section.links; track link.href) {
               <a

@@ -1,22 +1,16 @@
 import { DOCUMENT } from '@angular/common';
 import { Injectable, computed, inject, signal } from '@angular/core';
-import { siteLegalConfig } from '../config/site-legal.config';
-
-type ConsentSource = 'banner' | 'preferences';
-
-export interface ConsentPreferences {
-  readonly essential: true;
-  readonly analytics: boolean;
-  readonly ads: boolean;
-  readonly affiliate: boolean;
-}
-
-export interface ConsentRecord {
-  readonly version: string;
-  readonly decidedAt: string;
-  readonly source: ConsentSource;
-  readonly preferences: ConsentPreferences;
-}
+import { of } from 'rxjs';
+import { catchError, switchMap, take } from 'rxjs/operators';
+import {
+  ConsentPreferences,
+  ConsentRecord,
+  ConsentSource,
+  EMPTY_LEGAL_SITE_CONFIG,
+  LegalConsentResponse,
+  LegalSiteConfig
+} from '../config/site-legal.config';
+import { LegalApiService } from './legal-api.service';
 
 declare global {
   interface Window {
@@ -31,8 +25,7 @@ declare global {
 })
 export class ConsentService {
   private readonly document = inject(DOCUMENT);
-  private readonly storageKey = 'clictec-cookie-consent';
-  private readonly historyKey = 'clictec-cookie-consent-history';
+  private readonly legalApiService = inject(LegalApiService);
   private readonly analyticsScriptId = 'clictec-gtag-script';
   private readonly adsenseScriptId = 'clictec-adsense-script';
   private readonly cmpScriptId = 'clictec-external-cmp-script';
@@ -44,29 +37,36 @@ export class ConsentService {
     affiliate: false
   };
 
+  private readonly configSignal = signal<LegalSiteConfig>(EMPTY_LEGAL_SITE_CONFIG);
   private readonly recordSignal = signal<ConsentRecord | null>(null);
   private readonly preferencesOpenSignal = signal(false);
+  private readonly initializedSignal = signal(false);
+  private readonly submittingSignal = signal(false);
+  private readonly errorSignal = signal('');
 
+  readonly siteConfig = computed(() => this.configSignal());
   readonly record = computed(() => this.recordSignal());
-  readonly usesExternalCmp = computed(
-    () => siteLegalConfig.cmp.mode === 'external-certified' && Boolean(siteLegalConfig.cmp.scriptUrl)
-  );
+  readonly usesExternalCmp = computed(() => {
+    const cmp = this.siteConfig().cmp;
+    return cmp.mode === 'external-certified' && Boolean(cmp.scriptUrl);
+  });
   readonly preferences = computed<ConsentPreferences>(
     () => this.recordSignal()?.preferences ?? this.pendingPreferences
   );
   readonly hasAnswered = computed(() => this.recordSignal() !== null);
-  readonly bannerVisible = computed(() => !this.usesExternalCmp() && !this.hasAnswered());
+  readonly bannerVisible = computed(
+    () => this.initializedSignal() && !this.usesExternalCmp() && !this.hasAnswered()
+  );
   readonly preferencesOpen = computed(() => this.preferencesOpenSignal());
+  readonly ready = computed(() => this.initializedSignal());
+  readonly isSubmitting = computed(() => this.submittingSignal());
+  readonly errorMessage = computed(() => this.errorSignal());
 
   constructor() {
     this.ensureGoogleConsentStub();
     this.applyGoogleConsent(this.pendingPreferences, 'default');
-    if (this.usesExternalCmp()) {
-      this.ensureExternalCmpScript();
-    } else {
-      this.restoreStoredConsent();
-    }
     this.applyConsentSideEffects();
+    this.loadLegalState();
   }
 
   openPreferences(): void {
@@ -78,6 +78,9 @@ export class ConsentService {
   }
 
   closePreferences(): void {
+    if (this.submittingSignal()) {
+      return;
+    }
     this.preferencesOpenSignal.set(false);
   }
 
@@ -117,37 +120,89 @@ export class ConsentService {
     );
   }
 
-  private saveConsent(preferences: ConsentPreferences, source: ConsentSource): void {
-    const record: ConsentRecord = {
-      version: siteLegalConfig.consentVersion,
-      decidedAt: new Date().toISOString(),
-      source,
-      preferences
-    };
+  private loadLegalState(): void {
+    this.initializedSignal.set(false);
+    this.errorSignal.set('');
 
-    this.recordSignal.set(record);
-    this.persistRecord(record);
-    this.applyConsentSideEffects();
-    this.closePreferences();
+    this.legalApiService
+      .getLegalConfig()
+      .pipe(
+        take(1),
+        switchMap((config) => {
+          this.configSignal.set(config);
+
+          if (this.isExternalCmpConfig(config)) {
+            return of<LegalConsentResponse | null>(null);
+          }
+
+          return this.legalApiService.getConsent();
+        }),
+        catchError(() => {
+          this.errorSignal.set(
+            'No se pudo cargar la configuración de privacidad. Las categorías no esenciales siguen bloqueadas por defecto.'
+          );
+          return of<LegalConsentResponse | null>(null);
+        })
+      )
+      .subscribe((response) => {
+        this.recordSignal.set(this.toRecord(response));
+
+        if (this.usesExternalCmp()) {
+          this.ensureExternalCmpScript();
+        }
+
+        this.initializedSignal.set(true);
+        this.applyConsentSideEffects();
+      });
   }
 
-  private restoreStoredConsent(): void {
-    const record = this.readStoredRecord();
-    if (!record || this.isExpired(record)) {
-      this.clearStoredConsent();
-      this.recordSignal.set(null);
+  private saveConsent(preferences: ConsentPreferences, source: ConsentSource): void {
+    if (!this.ready() || this.usesExternalCmp() || this.submittingSignal()) {
       return;
     }
 
-    this.recordSignal.set(record);
+    this.submittingSignal.set(true);
+    this.errorSignal.set('');
+
+    this.legalApiService
+      .saveConsent({
+        source,
+        analytics: preferences.analytics,
+        ads: preferences.ads,
+        affiliate: preferences.affiliate
+      })
+      .pipe(take(1))
+      .subscribe({
+        next: (response) => {
+          const record = this.toRecord(response);
+          if (!record) {
+            this.errorSignal.set('No se pudo confirmar la elección de cookies. Inténtalo de nuevo.');
+            this.submittingSignal.set(false);
+            this.applyConsentSideEffects();
+            return;
+          }
+
+          this.recordSignal.set(record);
+          this.submittingSignal.set(false);
+          this.preferencesOpenSignal.set(false);
+          this.applyConsentSideEffects();
+        },
+        error: () => {
+          this.submittingSignal.set(false);
+          this.errorSignal.set('No se pudo guardar tu elección. Inténtalo de nuevo.');
+          this.applyConsentSideEffects();
+        }
+      });
   }
 
   private applyConsentSideEffects(): void {
     const root = this.document.documentElement;
     root.dataset['cmpMode'] = this.usesExternalCmp() ? 'external-certified' : 'custom-banner';
+    root.dataset['consentVersion'] = this.siteConfig().consentVersion || '';
 
     if (this.usesExternalCmp()) {
       root.dataset['consentStatus'] = 'external-cmp';
+      this.dispatchConsentChange();
       return;
     }
 
@@ -156,17 +211,27 @@ export class ConsentService {
     root.dataset['consentAnalytics'] = String(preferences.analytics);
     root.dataset['consentAds'] = String(preferences.ads);
     root.dataset['consentAffiliate'] = String(preferences.affiliate);
-    root.dataset['consentStatus'] = this.hasAnswered() ? 'configured' : 'pending';
+    root.dataset['consentStatus'] = this.hasAnswered()
+      ? 'configured'
+      : this.ready()
+        ? 'pending'
+        : 'loading';
 
     this.applyGoogleConsent(preferences, this.hasAnswered() ? 'update' : 'default');
 
     if (preferences.analytics) {
       this.ensureAnalyticsScript();
+    } else {
+      this.removeScript(this.analyticsScriptId);
     }
 
     if (preferences.ads) {
       this.ensureAdsenseScript();
+    } else {
+      this.removeScript(this.adsenseScriptId);
     }
+
+    this.dispatchConsentChange();
   }
 
   private ensureGoogleConsentStub(): void {
@@ -199,47 +264,41 @@ export class ConsentService {
   }
 
   private ensureExternalCmpScript(): void {
-    if (
-      !siteLegalConfig.cmp.scriptUrl
-      || this.document.getElementById(this.cmpScriptId)
-    ) {
+    const { scriptUrl } = this.siteConfig().cmp;
+    if (!scriptUrl || this.document.getElementById(this.cmpScriptId)) {
       return;
     }
 
     const script = this.document.createElement('script');
     script.id = this.cmpScriptId;
     script.async = true;
-    script.src = siteLegalConfig.cmp.scriptUrl;
+    script.src = scriptUrl;
     this.document.head.appendChild(script);
   }
 
   private ensureAnalyticsScript(): void {
-    if (
-      !siteLegalConfig.googleAnalyticsId
-      || this.document.getElementById(this.analyticsScriptId)
-    ) {
+    const analyticsId = this.siteConfig().googleAnalyticsId;
+    if (!analyticsId || this.document.getElementById(this.analyticsScriptId)) {
       return;
     }
 
     const script = this.document.createElement('script');
     script.id = this.analyticsScriptId;
     script.async = true;
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${siteLegalConfig.googleAnalyticsId}`;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${analyticsId}`;
     this.document.head.appendChild(script);
 
     if (typeof window.gtag === 'function') {
       window.gtag('js', new Date());
-      window.gtag('config', siteLegalConfig.googleAnalyticsId, {
+      window.gtag('config', analyticsId, {
         anonymize_ip: true
       });
     }
   }
 
   private ensureAdsenseScript(): void {
-    if (
-      !siteLegalConfig.googleAdsenseClientId
-      || this.document.getElementById(this.adsenseScriptId)
-    ) {
+    const adsenseClientId = this.siteConfig().googleAdsenseClientId;
+    if (!adsenseClientId || this.document.getElementById(this.adsenseScriptId)) {
       return;
     }
 
@@ -248,8 +307,15 @@ export class ConsentService {
     script.async = true;
     script.crossOrigin = 'anonymous';
     script.src =
-      `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${siteLegalConfig.googleAdsenseClientId}`;
+      `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClientId}`;
     this.document.head.appendChild(script);
+  }
+
+  private removeScript(id: string): void {
+    const script = this.document.getElementById(id);
+    if (script) {
+      script.remove();
+    }
   }
 
   private openExternalCmpPreferences(): void {
@@ -257,7 +323,7 @@ export class ConsentService {
       return;
     }
 
-    const functionPath = siteLegalConfig.cmp.openPreferencesFunction.trim();
+    const functionPath = this.siteConfig().cmp.openPreferencesFunction.trim();
     if (functionPath) {
       const maybeFunction = this.resolveWindowPath(functionPath);
       if (typeof maybeFunction === 'function') {
@@ -269,104 +335,53 @@ export class ConsentService {
     window.dispatchEvent(new CustomEvent('clictec:open-cmp'));
   }
 
-  private persistRecord(record: ConsentRecord): void {
-    this.writeJson(this.storageKey, record);
-
-    const history = this.readHistory();
-    const filteredHistory = history.filter((entry) => !this.isExpired(entry));
-    filteredHistory.unshift(record);
-    this.writeJson(this.historyKey, filteredHistory.slice(0, 12));
-  }
-
-  private readStoredRecord(): ConsentRecord | null {
-    const parsed = this.readJson<ConsentRecord>(this.storageKey);
-    if (!parsed) {
-      return null;
-    }
-
-    if (!this.isValidRecord(parsed)) {
-      return null;
-    }
-
-    return parsed;
-  }
-
-  private readHistory(): ConsentRecord[] {
-    const parsed = this.readJson<ConsentRecord[]>(this.historyKey);
-    if (!Array.isArray(parsed)) {
-      return [];
-    }
-
-    return parsed.filter((entry) => this.isValidRecord(entry));
-  }
-
-  private clearStoredConsent(): void {
+  private dispatchConsentChange(): void {
     if (typeof window === 'undefined') {
       return;
     }
 
-    try {
-      window.localStorage.removeItem(this.storageKey);
-      window.localStorage.removeItem(this.historyKey);
-    } catch {
-      // Ignore storage failures. The banner will remain visible for the session.
-    }
-  }
-
-  private isExpired(record: ConsentRecord): boolean {
-    const decidedAt = new Date(record.decidedAt);
-    if (Number.isNaN(decidedAt.getTime())) {
-      return true;
-    }
-
-    const expiration = new Date(decidedAt);
-    expiration.setMonth(expiration.getMonth() + siteLegalConfig.consentRetentionMonths);
-    return expiration.getTime() <= Date.now();
-  }
-
-  private isValidRecord(value: unknown): value is ConsentRecord {
-    if (!value || typeof value !== 'object') {
-      return false;
-    }
-
-    const candidate = value as Partial<ConsentRecord>;
-    const preferences = candidate.preferences as Partial<ConsentPreferences> | undefined;
-
-    return (
-      typeof candidate.version === 'string'
-      && typeof candidate.decidedAt === 'string'
-      && (candidate.source === 'banner' || candidate.source === 'preferences')
-      && Boolean(preferences)
-      && preferences?.essential === true
-      && typeof preferences?.analytics === 'boolean'
-      && typeof preferences?.ads === 'boolean'
-      && typeof preferences?.affiliate === 'boolean'
+    window.dispatchEvent(
+      new CustomEvent('clictec:consent-changed', {
+        detail: {
+          configured: this.hasAnswered(),
+          version: this.recordSignal()?.version ?? this.siteConfig().consentVersion,
+          preferences: this.preferences()
+        }
+      })
     );
   }
 
-  private readJson<T>(key: string): T | null {
-    if (typeof window === 'undefined') {
+  private toRecord(response: LegalConsentResponse | null): ConsentRecord | null {
+    if (
+      !response?.configured
+      || !response.version
+      || !response.source
+      || !response.decidedAt
+      || !response.expiresAt
+      || !this.isValidPreferences(response.preferences)
+    ) {
       return null;
     }
 
-    try {
-      const raw = window.localStorage.getItem(key);
-      return raw ? (JSON.parse(raw) as T) : null;
-    } catch {
-      return null;
-    }
+    return {
+      version: response.version,
+      source: response.source,
+      decidedAt: response.decidedAt,
+      expiresAt: response.expiresAt,
+      preferences: response.preferences
+    };
   }
 
-  private writeJson(key: string, value: unknown): void {
-    if (typeof window === 'undefined') {
-      return;
-    }
+  private isValidPreferences(preferences: ConsentPreferences | null): preferences is ConsentPreferences {
+    return Boolean(preferences)
+      && preferences?.essential === true
+      && typeof preferences?.analytics === 'boolean'
+      && typeof preferences?.ads === 'boolean'
+      && typeof preferences?.affiliate === 'boolean';
+  }
 
-    try {
-      window.localStorage.setItem(key, JSON.stringify(value));
-    } catch {
-      // Ignore storage failures. Consent still applies during the current session.
-    }
+  private isExternalCmpConfig(config: LegalSiteConfig): boolean {
+    return config.cmp.mode === 'external-certified' && Boolean(config.cmp.scriptUrl);
   }
 
   private resolveWindowPath(path: string): unknown {

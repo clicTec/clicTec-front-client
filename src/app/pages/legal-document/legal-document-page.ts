@@ -1,12 +1,14 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, computed, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import {
+  EMPTY_LEGAL_DOCUMENT,
   LegalDocument,
   LegalDocumentKey,
-  getLegalDocument,
-  siteLegalConfig
+  isLegalDocumentKey
 } from '../../shared/config/site-legal.config';
 import { ConsentService } from '../../shared/services/consent.service';
+import { LegalApiService } from '../../shared/services/legal-api.service';
 
 @Component({
   selector: 'app-legal-document-page',
@@ -16,25 +18,27 @@ import { ConsentService } from '../../shared/services/consent.service';
   styleUrl: './legal-document-page.scss'
 })
 export class LegalDocumentPageComponent implements OnInit {
+  private readonly destroyRef = inject(DestroyRef);
   private readonly route = inject(ActivatedRoute);
-  private readonly consentService = inject(ConsentService);
+  protected readonly consentService = inject(ConsentService);
+  private readonly legalApiService = inject(LegalApiService);
 
-  protected readonly siteLegalConfig = siteLegalConfig;
-  protected readonly legalPages: ReadonlyArray<{ key: LegalDocumentKey; label: string; route: string }> = [
-    { key: 'privacy', label: 'Privacidad', route: '/privacidad' },
-    { key: 'cookies', label: 'Cookies', route: '/cookies' },
-    { key: 'legal-notice', label: 'Aviso legal', route: '/aviso-legal' },
-    { key: 'advertising', label: 'Publicidad y afiliación', route: '/publicidad-afiliacion' }
-  ];
+  protected readonly siteLegalConfig = this.consentService.siteConfig;
+  protected readonly legalPages = computed(() => this.siteLegalConfig().documents);
+  protected readonly documentContent = signal<LegalDocument>(EMPTY_LEGAL_DOCUMENT);
+  protected readonly isLoading = signal(true);
+  protected readonly errorMessage = signal('');
   protected documentKey: LegalDocumentKey = 'privacy';
-  protected documentContent: LegalDocument = getLegalDocument('privacy');
 
   ngOnInit(): void {
-    this.route.data.subscribe((data) => {
-      const documentKey = (data['documentKey'] as LegalDocumentKey | undefined) ?? 'privacy';
-      this.documentKey = documentKey;
-      this.documentContent = getLegalDocument(documentKey);
-    });
+    this.route.data
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((data) => {
+        const candidateKey = String(data['documentKey'] ?? 'privacy');
+        const documentKey = isLegalDocumentKey(candidateKey) ? candidateKey : 'privacy';
+        this.documentKey = documentKey;
+        this.loadDocument(documentKey);
+      });
   }
 
   protected openCookiePreferences(): void {
@@ -45,7 +49,29 @@ export class LegalDocumentPageComponent implements OnInit {
     return href.startsWith('http');
   }
 
-  protected isCurrentPage(key: LegalDocumentKey): boolean {
+  protected isCurrentPage(key: string): boolean {
     return this.documentKey === key;
+  }
+
+  private loadDocument(documentKey: LegalDocumentKey): void {
+    this.isLoading.set(true);
+    this.errorMessage.set('');
+
+    this.legalApiService.getLegalDocument(documentKey).subscribe({
+      next: (document) => {
+        this.documentContent.set(document);
+        this.isLoading.set(false);
+      },
+      error: () => {
+        this.documentContent.set({
+          ...EMPTY_LEGAL_DOCUMENT,
+          key: documentKey
+        });
+        this.errorMessage.set(
+          'No se pudo cargar este documento legal desde el servidor. Inténtalo de nuevo en unos segundos.'
+        );
+        this.isLoading.set(false);
+      }
+    });
   }
 }

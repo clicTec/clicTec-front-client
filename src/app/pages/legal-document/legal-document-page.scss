@@ -1,10 +1,15 @@
 @use '../../../styles/abstracts/variables' as vars;
 
+:host {
+  display: block;
+}
+
 .legal-page {
   width: min(100%, 1040px);
   margin: 0 auto;
+  padding-top: clamp(0.9rem, 2.2vw, 1.6rem);
   display: grid;
-  gap: 1.1rem;
+  gap: 1.35rem;
 }
 
 .legal-page__nav {
@@ -97,6 +102,20 @@
   font-size: 1.04rem;
   line-height: 1.75;
   color: vars.$color-text-muted;
+}
+
+.legal-page__status {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  border-radius: 1.15rem;
+  background: rgba(vars.$color-accent, 0.08);
+  color: vars.$color-ink-900;
+  font-weight: 600;
+}
+
+.legal-page__status--error {
+  background: rgba(185, 56, 47, 0.12);
+  color: #8b211a;
 }
 
 .legal-page__meta {
@@ -266,51 +285,78 @@
   line-height: 1.65;
 }
 
-body[data-theme='dark'] .legal-page__hero,
-body[data-theme='dark'] .legal-page__section {
+:host-context(body[data-theme='dark']) .legal-page__hero,
+:host-context(body[data-theme='dark']) .legal-page__section {
   background: var(--client-dark-surface);
   border-color: var(--client-dark-border);
   box-shadow: 0 22px 46px -36px rgb(0 0 0 / 0.72);
 }
 
-body[data-theme='dark'] .legal-page__summary,
-body[data-theme='dark'] .legal-page__paragraph,
-body[data-theme='dark'] .legal-page__list,
-body[data-theme='dark'] .legal-page__meta-item dt,
-body[data-theme='dark'] .legal-page__card-text {
+:host-context(body[data-theme='dark']) .legal-page__summary,
+:host-context(body[data-theme='dark']) .legal-page__paragraph,
+:host-context(body[data-theme='dark']) .legal-page__list,
+:host-context(body[data-theme='dark']) .legal-page__meta-item dt,
+:host-context(body[data-theme='dark']) .legal-page__card-text {
   color: var(--client-dark-text-muted);
 }
 
-body[data-theme='dark'] .legal-page__title,
-body[data-theme='dark'] .legal-page__section-title,
-body[data-theme='dark'] .legal-page__meta-item dd,
-body[data-theme='dark'] .legal-page__card-title,
-body[data-theme='dark'] .legal-page__note,
-body[data-theme='dark'] .legal-page__link,
-body[data-theme='dark'] .legal-page__nav-link,
-body[data-theme='dark'] .legal-page__card-list {
+:host-context(body[data-theme='dark']) .legal-page__title,
+:host-context(body[data-theme='dark']) .legal-page__section-title,
+:host-context(body[data-theme='dark']) .legal-page__meta-item dd,
+:host-context(body[data-theme='dark']) .legal-page__card-title,
+:host-context(body[data-theme='dark']) .legal-page__status,
+:host-context(body[data-theme='dark']) .legal-page__note,
+:host-context(body[data-theme='dark']) .legal-page__link,
+:host-context(body[data-theme='dark']) .legal-page__nav-link,
+:host-context(body[data-theme='dark']) .legal-page__card-list {
   color: var(--client-dark-text);
 }
 
-body[data-theme='dark'] .legal-page__meta-item,
-body[data-theme='dark'] .legal-page__link,
-body[data-theme='dark'] .legal-page__nav-link {
+:host-context(body[data-theme='dark']) .legal-page__meta-item,
+:host-context(body[data-theme='dark']) .legal-page__link,
+:host-context(body[data-theme='dark']) .legal-page__nav-link {
   background: var(--client-dark-pill);
   border-color: var(--client-dark-border-soft);
 }
 
-body[data-theme='dark'] .legal-page__hero-card {
+:host-context(body[data-theme='dark']) .legal-page__nav-link:hover,
+:host-context(body[data-theme='dark']) .legal-page__nav-link.is-active {
+  background: var(--client-dark-pill-hover);
+  border-color: rgb(83 167 195 / 0.34);
+  box-shadow: 0 14px 28px -26px rgb(83 167 195 / 0.55);
+}
+
+:host-context(body[data-theme='dark']) .legal-page__link:hover {
+  background: rgb(52 79 109 / 0.9);
+  border-color: rgb(83 167 195 / 0.34);
+}
+
+:host-context(body[data-theme='dark']) .legal-page__hero-card {
   background:
     linear-gradient(160deg, rgb(83 167 195 / 0.16), var(--client-dark-surface)),
     var(--client-dark-surface);
   border-color: rgb(83 167 195 / 0.25);
 }
 
-body[data-theme='dark'] .legal-page__note {
+:host-context(body[data-theme='dark']) .legal-page__note {
   background: rgb(83 167 195 / 0.18);
 }
 
+:host-context(body[data-theme='dark']) .legal-page__status {
+  background: rgb(83 167 195 / 0.16);
+}
+
+:host-context(body[data-theme='dark']) .legal-page__status--error {
+  background: rgb(169 66 56 / 0.2);
+  color: #ffb6ad;
+}
+
 @media (max-width: 760px) {
+  .legal-page {
+    padding-top: 0.7rem;
+    gap: 1rem;
+  }
+
   .legal-page__nav {
     flex-direction: column;
   }

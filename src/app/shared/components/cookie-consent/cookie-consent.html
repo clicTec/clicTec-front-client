@@ -19,13 +19,28 @@
 
     <div class="cookie-banner__actions">
       <a class="cookie-banner__link" routerLink="/cookies">Ver política de cookies</a>
-      <button class="cookie-banner__button cookie-banner__button--secondary" type="button" (click)="rejectAll()">
+      <button
+        class="cookie-banner__button cookie-banner__button--secondary"
+        type="button"
+        [disabled]="consentService.isSubmitting()"
+        (click)="rejectAll()"
+      >
         Rechazar
       </button>
-      <button class="cookie-banner__button cookie-banner__button--ghost" type="button" (click)="openPreferences()">
+      <button
+        class="cookie-banner__button cookie-banner__button--ghost"
+        type="button"
+        [disabled]="consentService.isSubmitting()"
+        (click)="openPreferences()"
+      >
         Configurar
       </button>
-      <button class="cookie-banner__button" type="button" (click)="acceptAll()">
+      <button
+        class="cookie-banner__button"
+        type="button"
+        [disabled]="consentService.isSubmitting()"
+        (click)="acceptAll()"
+      >
         Aceptar
       </button>
     </div>
@@ -65,6 +80,12 @@
         exista una acción afirmativa tuya.
       </p>
 
+      @if (consentService.errorMessage()) {
+        <p class="cookie-preferences__summary cookie-preferences__summary--detail cookie-preferences__summary--error">
+          {{ consentService.errorMessage() }}
+        </p>
+      }
+
       <div class="cookie-preferences__list">
         <article class="cookie-category cookie-category--required">
           <div class="cookie-category__content">
@@ -93,6 +114,7 @@
             <input
               type="checkbox"
               [checked]="draft.analytics"
+              [disabled]="consentService.isSubmitting()"
               (change)="updateDraft('analytics', $any($event.target).checked)"
             >
             <span>{{ draft.analytics ? 'Activadas' : 'Desactivadas' }}</span>
@@ -112,6 +134,7 @@
             <input
               type="checkbox"
               [checked]="draft.ads"
+              [disabled]="consentService.isSubmitting()"
               (change)="updateDraft('ads', $any($event.target).checked)"
             >
             <span>{{ draft.ads ? 'Activadas' : 'Desactivadas' }}</span>
@@ -131,6 +154,7 @@
             <input
               type="checkbox"
               [checked]="draft.affiliate"
+              [disabled]="consentService.isSubmitting()"
               (change)="updateDraft('affiliate', $any($event.target).checked)"
             >
             <span>{{ draft.affiliate ? 'Activadas' : 'Desactivadas' }}</span>
@@ -146,6 +170,7 @@
           <button
             class="cookie-preferences__button cookie-preferences__button--secondary"
             type="button"
+            [disabled]="consentService.isSubmitting()"
             (click)="rejectAll()"
           >
             Rechazar todo
@@ -153,12 +178,13 @@
           <button
             class="cookie-preferences__button cookie-preferences__button--ghost"
             type="button"
+            [disabled]="consentService.isSubmitting()"
             (click)="acceptAll()"
           >
             Aceptar todo
           </button>
-          <button class="cookie-preferences__button" type="button" (click)="savePreferences()">
-            Guardar selección
+          <button class="cookie-preferences__button" type="button" [disabled]="consentService.isSubmitting()" (click)="savePreferences()">
+            {{ consentService.isSubmitting() ? 'Guardando…' : 'Guardar selección' }}
           </button>
         </div>
       </footer>

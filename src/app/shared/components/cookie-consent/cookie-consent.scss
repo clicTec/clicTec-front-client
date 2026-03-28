@@ -141,6 +141,15 @@
   transform: translateY(-1px);
 }
 
+.cookie-banner__button:disabled,
+.cookie-preferences__button:disabled,
+.cookie-preferences__close:disabled {
+  opacity: 0.64;
+  cursor: wait;
+  transform: none;
+  box-shadow: none;
+}
+
 .cookie-banner__button:not(.cookie-banner__button--secondary):not(.cookie-banner__button--ghost):hover,
 .cookie-preferences__button:not(.cookie-preferences__button--secondary):not(.cookie-preferences__button--ghost):hover {
   background: #0077ed;
@@ -185,6 +194,10 @@
 
 .cookie-preferences__summary--detail {
   margin-top: 0.45rem;
+}
+
+.cookie-preferences__summary--error {
+  color: #b9382f;
 }
 
 .cookie-preferences__list {
