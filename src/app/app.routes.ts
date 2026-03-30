@@ -50,9 +50,9 @@ export const routes: Routes = [
     path: 'comparativas',
     component: ComparativasPageComponent,
     data: {
-      seoTitle: 'Comparativas de móviles',
+      seoTitle: 'Comparador de móviles',
       seoDescription:
-        'Comparativas técnicas de móviles por cámara, rendimiento, batería y relación calidad-precio.',
+        'Comparador técnico de móviles por cámara, rendimiento, batería y relación calidad-precio.',
       seoCanonicalPath: '/comparativas'
     }
   },
@@ -63,7 +63,9 @@ export const routes: Routes = [
       seoTitle: 'Actualidad tecnológica',
       seoDescription:
         'Noticias tecnológicas y actualidad editorial publicadas desde el panel de administración.',
-      seoCanonicalPath: '/reviews'
+      seoCanonicalPath: '/reviews',
+      fullBleedMain: true,
+      immersiveNewsBackground: true
     }
   },
   {

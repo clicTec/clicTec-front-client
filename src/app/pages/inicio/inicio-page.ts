@@ -1,11 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { ContentApiService, HomeResponse } from '../../shared/services/content-api.service';
 
 @Component({
   selector: 'app-inicio-page',
   standalone: true,
-  imports: [RouterLink],
   templateUrl: './inicio-page.html',
   styleUrls: ['./inicio-page.scss']
 })

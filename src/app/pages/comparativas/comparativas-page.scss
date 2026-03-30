@@ -2,423 +2,126 @@
 
 .comparativas-page {
   display: grid;
-  gap: 1.25rem;
+  place-items: center;
+  min-height: calc(100vh - 16rem);
+  min-height: calc(100dvh - 16rem);
+  padding: clamp(1rem, 3vw, 2rem) 0;
 }
 
-.duel-card,
-.comparador-card {
-  border-radius: 2rem;
-  border: vars.$border-width-thin solid rgba(vars.$color-ink-900, 0.06);
-  background: rgba(vars.$color-surface, 0.94);
-  box-shadow: vars.$shadow-soft;
-}
-
-.comparativas-focus {
-  border-radius: 2rem;
-  border: vars.$border-width-thin solid rgba(vars.$color-ink-900, 0.06);
-  background: rgba(vars.$color-surface, 0.94);
-  box-shadow: vars.$shadow-soft;
-}
-
-.comparativas-page__hero {
-  position: relative;
-  overflow: hidden;
-  min-height: 290px;
-  padding: clamp(1rem, 2.4vw, 1.6rem) 0;
+.comparativas-page__shell {
+  width: min(100%, 920px);
   display: grid;
-  align-content: start;
-  border-bottom: vars.$border-width-thin solid rgba(vars.$color-ink-900, 0.08);
+  gap: 1rem;
+  justify-items: center;
+  padding: clamp(1.4rem, 3vw, 2.4rem);
+  border-radius: 2rem;
+  border: vars.$border-width-thin solid rgb(83 124 162 / 0.42);
+  background:
+    radial-gradient(circle at top right, rgb(83 167 195 / 0.18), transparent 34%),
+    linear-gradient(180deg, rgb(19 31 49 / 0.96), rgb(11 21 35 / 0.98)),
+    rgb(18 30 48 / 0.96);
+  box-shadow: 0 28px 56px -34px rgb(0 0 0 / 0.72);
 }
 
-.comparativas-page__hero::after {
-  content: '';
-  position: absolute;
-  inset: 1.2rem 1.5rem auto auto;
-  width: min(34vw, 360px);
-  aspect-ratio: 1.05;
-  background: url('/store/store-compare.svg') center/contain no-repeat;
-}
-
-.comparativas-page__intro {
-  display: grid;
-  gap: 0.55rem;
-  max-width: 40rem;
-}
-
-.comparador-card__brand,
-.duel-card__tag,
-.comparador-row__label {
+.comparativas-page__eyebrow {
   margin: 0;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: vars.$color-accent;
-  letter-spacing: 0.03em;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8edcff;
 }
 
 .comparativas-page__title {
   margin: 0;
-  max-width: 12ch;
-  font-size: clamp(2.6rem, 5vw, 4.8rem);
-  color: vars.$color-ink-900;
+  max-width: 10ch;
+  font-size: clamp(2.2rem, 5vw, 4.3rem);
+  line-height: 0.98;
+  color: #eff7fb;
+  text-align: center;
 }
 
-.comparativas-page__description,
-.comparador__text,
-.comparativas-duels__text,
-.comparativas-focus__description,
-.duel-card__summary,
-.comparador__verdict {
+.comparativas-page__text,
+.comparativas-page__status {
   margin: 0;
-  line-height: 1.6;
-  color: vars.$color-text-muted;
+  max-width: 42rem;
+  line-height: 1.65;
+  color: #d0deea;
+  text-align: center;
 }
 
-.comparador,
-.comparativas-duels {
-  padding: clamp(1.25rem, 2.6vw, 2rem) 0 0;
-  border-top: vars.$border-width-thin solid rgba(vars.$color-ink-900, 0.08);
-}
-
-.comparador__head,
-.comparativas-duels__head {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.comparador__title,
-.comparativas-focus__title,
-.comparativas-duels__title {
-  margin: 0;
-  font-size: clamp(1.5rem, 2vw, 2rem);
-  color: vars.$color-ink-900;
-}
-
-.comparativas-focus {
-  margin-top: 1rem;
-  padding: 1rem;
-  box-shadow: none;
-  background: vars.$color-background;
-}
-
-.comparativas-focus__chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 0.9rem;
-}
-
-.comparativas-focus__chip,
-.duel-card__button {
-  min-height: 36px;
-  padding: 0 0.95rem;
-  border: 0;
-  border-radius: vars.$radius-pill;
-  background: rgba(vars.$color-ink-900, 0.05);
-  color: vars.$color-ink-900;
-  font-size: 0.88rem;
-  font-weight: 500;
-  cursor: pointer;
-}
-
-.comparativas-focus__chip.is-active {
-  background: vars.$color-ink-900;
-  color: vars.$color-surface;
-}
-
-.comparador__controls {
+.comparativas-page__countdown {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(9rem, 10.25rem));
+  justify-content: center;
   gap: 1rem;
-  margin-top: 1rem;
-}
-
-.comparador-select {
-  display: grid;
-  gap: 0.45rem;
-}
-
-.comparador-select__label {
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: vars.$color-text-muted;
-}
-
-.comparador-select__input {
-  min-height: 48px;
-  padding: 0 1rem;
-  border: 0;
-  border-radius: 1rem;
-  background: vars.$color-background;
-  color: vars.$color-ink-900;
-  font-size: 0.95rem;
-}
-
-.comparador__duel {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.comparador-card {
-  padding: 1.2rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.comparador-card::before {
-  content: '';
-  display: block;
+  margin-top: 0.35rem;
   width: 100%;
-  height: 150px;
-  margin-bottom: 1rem;
-  border-radius: 1.5rem;
-  background:
-    linear-gradient(180deg, rgba(vars.$color-surface, 0.44), rgba(vars.$color-surface, 0.94)),
-    rgba(vars.$color-background, 0.96)
-    url('/store/store-device.svg') center/110px no-repeat;
 }
 
-.comparador-card--right::before {
-  background:
-    linear-gradient(180deg, rgba(vars.$color-surface, 0.44), rgba(vars.$color-surface, 0.94)),
-    rgba(vars.$color-accent-soft, 0.96)
-    url('/store/store-device.svg') center/110px no-repeat;
-}
-
-.comparador-card__name {
-  margin: 0.35rem 0 0;
-  font-size: 1.3rem;
-  color: vars.$color-ink-900;
-}
-
-.comparador-card__meta,
-.comparador-card__spec {
-  margin: 0.28rem 0 0;
-  color: vars.$color-text-muted;
-  font-size: 0.94rem;
-}
-
-.comparador-card__facts {
-  display: flex;
-  flex-wrap: wrap;
+.countdown-unit {
+  display: grid;
   gap: 0.45rem;
-  margin-top: 0.85rem;
+  padding: 1.2rem 1rem;
+  border-radius: 1.6rem;
+  border: vars.$border-width-thin solid rgb(83 124 162 / 0.24);
+  background:
+    linear-gradient(180deg, rgb(27 44 65 / 0.96), rgb(15 27 42 / 0.96)),
+    rgb(24 41 58 / 0.96);
+  box-shadow: inset 0 0 0 1px rgb(83 167 195 / 0.08);
+  text-align: center;
 }
 
-.comparador-card__fact {
-  display: inline-flex;
-  align-items: center;
-  min-height: 30px;
-  padding: 0 0.7rem;
-  border-radius: vars.$radius-pill;
-  background: rgba(vars.$color-ink-900, 0.05);
-  color: vars.$color-ink-900;
-  font-size: 0.82rem;
-  font-weight: 600;
-}
-
-.comparador__table {
-  display: grid;
-  gap: 0.6rem;
-  margin-top: 1rem;
-}
-
-.comparador-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-  gap: 0.7rem;
-  align-items: center;
-  padding: 1rem 1.1rem;
-  border-radius: 1.4rem;
-  background: vars.$color-background;
-}
-
-.comparador-row__label {
-  color: vars.$color-text-muted;
-}
-
-.comparador-row__value {
+.countdown-unit__value {
   margin: 0;
-  font-size: 0.94rem;
-  font-weight: 500;
-  color: vars.$color-ink-900;
-}
-
-.comparador-row__value--right {
-  text-align: right;
-}
-
-.comparador-row__value.is-winner {
-  color: vars.$color-accent;
+  font-size: clamp(2rem, 4vw, 3.25rem);
   font-weight: 700;
+  line-height: 1;
+  color: #eff7fb;
 }
 
-.comparador__verdict {
-  margin-top: 1rem;
-  padding: 1rem 1.1rem;
-  border-radius: 1.4rem;
-  background: rgba(vars.$color-accent, 0.06);
-  color: vars.$color-ink-900;
+.countdown-unit__label {
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #8edcff;
 }
 
-.comparativas-duels__grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
+.comparativas-page__status {
+  color: #eff7fb;
+  font-weight: 600;
 }
 
-.duel-card {
-  position: relative;
-  overflow: hidden;
-  padding: 1.2rem;
-}
-
-.duel-card::before {
-  content: '';
-  display: block;
-  width: 100%;
-  height: 136px;
-  margin-bottom: 1rem;
-  border-radius: 1.4rem;
-  background:
-    linear-gradient(180deg, rgba(vars.$color-surface, 0.44), rgba(vars.$color-surface, 0.94)),
-    rgba(vars.$color-background, 0.96)
-    url('/store/store-compare.svg') center/140px no-repeat;
-}
-
-.duel-card__title {
-  margin: 0.35rem 0 0;
-  font-size: 1.25rem;
-  color: vars.$color-ink-900;
-}
-
-.duel-card__button {
-  margin-top: 1rem;
-  background: vars.$color-accent;
-  color: vars.$color-surface;
-}
-
-@media (max-width: 980px) {
-  .comparativas-page__hero,
-  .comparador__controls,
-  .comparador__duel,
-  .comparativas-duels__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .comparador__head,
-  .comparativas-duels__head {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .comparativas-page__hero::after {
-    width: min(48vw, 300px);
-  }
-}
-
-@media (max-width: 640px) {
+@media (max-width: 760px) {
   .comparativas-page {
-    gap: 1rem;
+    min-height: calc(100vh - 10rem);
+    min-height: calc(100dvh - 10rem);
+    place-items: center;
+    padding: 1.25rem 0;
   }
 
-  .comparativas-page__hero,
-  .comparativas-focus,
-  .duel-card,
-  .comparador-card {
+  .comparativas-page__shell {
+    width: min(100%, 29rem);
+    gap: 0.85rem;
+    padding: 1.2rem;
     border-radius: 1.6rem;
-  }
-
-  .comparativas-page__hero {
-    min-height: 0;
-    padding: 0.9rem 0 1.1rem;
-  }
-
-  .comparativas-page__hero::after {
-    display: block;
-    position: relative;
-    inset: auto;
-    width: 100%;
-    max-width: 240px;
-    margin: 0 0 0.8rem auto;
+    text-align: center;
   }
 
   .comparativas-page__title {
+    font-size: clamp(1.9rem, 10vw, 3rem);
     max-width: none;
-    font-size: clamp(2rem, 10vw, 3.3rem);
   }
 
-  .comparador__controls,
-  .comparador__duel {
-    grid-template-columns: 1fr;
-    gap: 0.6rem;
+  .comparativas-page__countdown {
+    grid-template-columns: repeat(2, minmax(8.75rem, 10.25rem));
+    justify-content: center;
+    gap: 0.8rem;
   }
 
-  .comparativas-duels__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .comparador-card {
-    padding: 0.9rem;
-  }
-
-  .comparador-card::before {
-    height: 104px;
-    margin-bottom: 0.7rem;
-    background-size: 80px;
-  }
-
-  .comparador-card__name {
-    font-size: 1rem;
-  }
-
-  .comparador-card__meta,
-  .comparador-card__spec {
-    font-size: 0.8rem;
-  }
-
-  .comparador__table {
-    gap: 0.7rem;
-  }
-
-  .comparador-row {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.45rem;
-    padding: 0;
-    background: transparent;
-  }
-
-  .comparador-row__label {
-    grid-column: 1 / -1;
-    justify-self: center;
-    padding: 0.28rem 0.68rem;
-    border-radius: vars.$radius-pill;
-    background: rgba(vars.$color-ink-900, 0.05);
-    font-size: 0.72rem;
-  }
-
-  .comparador-row__value {
-    min-height: 72px;
-    padding: 0.85rem 0.75rem;
-    border-radius: 1.2rem;
-    background: vars.$color-background;
-    font-size: 0.82rem;
-    line-height: 1.45;
-  }
-
-  .comparador-row__value--right {
-    text-align: left;
-  }
-
-  .comparador-row__value.is-winner {
-    outline: 1px solid rgba(vars.$color-accent, 0.14);
-  }
-
-  .duel-card__button {
-    width: 100%;
+  .countdown-unit {
+    border-radius: 1.3rem;
   }
 }

@@ -2,30 +2,24 @@
   <aside class="cookie-banner" aria-label="Gestión de cookies">
     <div class="cookie-banner__main">
       <div class="cookie-banner__content">
-        <p class="cookie-banner__eyebrow">Privacidad y consentimiento</p>
-        <h2 class="cookie-banner__title">Elige cómo quieres que se activen analítica, anuncios y afiliación</h2>
+        <h2 class="cookie-banner__title">Valoramos tu privacidad</h2>
         <p class="cookie-banner__text">
-          Las categorías no esenciales permanecen bloqueadas hasta que decidas. Las cookies técnicas se
-          usan solo para seguridad, funcionamiento y para recordar la elección que hagas.
+          Las cookies técnicas permanecen activas para garantizar seguridad, funcionamiento y recordar tu
+          preferencia. La analítica, la publicidad y la afiliación siguen desactivadas hasta que otorgues
+          un consentimiento expreso.
+          <a class="cookie-banner__inline-link" routerLink="/cookies">Consulta la política de cookies</a>.
         </p>
-      </div>
-
-      <div class="cookie-banner__highlights" aria-label="Estado por categorías">
-        <span class="cookie-banner__highlight">Técnicas activas</span>
-        <span class="cookie-banner__highlight">Analítica bloqueada por defecto</span>
-        <span class="cookie-banner__highlight">Publicidad bloqueada por defecto</span>
       </div>
     </div>
 
     <div class="cookie-banner__actions">
-      <a class="cookie-banner__link" routerLink="/cookies">Ver política de cookies</a>
       <button
-        class="cookie-banner__button cookie-banner__button--decision cookie-banner__button--reject"
+        class="cookie-banner__button cookie-banner__button--decision cookie-banner__button--accept"
         type="button"
         [disabled]="consentService.isSubmitting()"
-        (click)="rejectAll()"
+        (click)="acceptAll()"
       >
-        Rechazar
+        Aceptar todo
       </button>
       <button
         class="cookie-banner__button cookie-banner__button--ghost"
@@ -33,15 +27,15 @@
         [disabled]="consentService.isSubmitting()"
         (click)="openPreferences()"
       >
-        Configurar
+        Gestionar
       </button>
       <button
-        class="cookie-banner__button cookie-banner__button--decision cookie-banner__button--accept"
+        class="cookie-banner__button cookie-banner__button--decision cookie-banner__button--reject"
         type="button"
         [disabled]="consentService.isSubmitting()"
-        (click)="acceptAll()"
+        (click)="rejectAll()"
       >
-        Aceptar
+        Rechazar todo
       </button>
     </div>
   </aside>

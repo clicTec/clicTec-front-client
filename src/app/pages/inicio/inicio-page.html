@@ -8,38 +8,5 @@
       <h1 class="inicio-home__title">{{ home.title }}</h1>
       <p class="inicio-home__subtitle">{{ home.subtitle }}</p>
     </header>
-
-    <section class="inicio-home__top" aria-label="Contenido principal">
-      <article class="inicio-card inicio-card--feature">
-        <p class="inicio-card__tag">{{ home.feature.tag }}</p>
-        <h2 class="inicio-card__title">{{ home.feature.title }}</h2>
-        <p class="inicio-card__description">{{ home.feature.description }}</p>
-        <div class="inicio-card__actions">
-          <a class="inicio-chip" [routerLink]="home.feature.actionRoute">{{ home.feature.actionLabel }}</a>
-        </div>
-      </article>
-
-      <aside class="inicio-card inicio-card--latest" aria-label="Lo último">
-        <h2 class="inicio-card__heading">Lo último</h2>
-        @for (item of home.latest; track item.title) {
-          <a class="inicio-latest-item" [routerLink]="item.route">
-            <span class="inicio-latest-item__category">{{ item.category }}</span>
-            <span class="inicio-latest-item__title">{{ item.title }}</span>
-            <span class="inicio-latest-item__time">{{ item.timeAgo }}</span>
-          </a>
-        }
-      </aside>
-    </section>
-
-    <section class="inicio-home__grid" aria-label="Bloques editoriales">
-      @for (story of home.stories; track story.title) {
-        <article class="inicio-card inicio-card--story">
-          <p class="inicio-card__tag">{{ story.tag }}</p>
-          <h2 class="inicio-card__title">{{ story.title }}</h2>
-          <p class="inicio-card__description">{{ story.description }}</p>
-          <a class="inicio-card__link" [routerLink]="story.route">{{ story.routeLabel }}</a>
-        </article>
-      }
-    </section>
   }
 </section>

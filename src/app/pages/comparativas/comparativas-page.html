@@ -1,121 +1,19 @@
 <section class="comparativas-page">
-  @if (isLoading) {
-    <p>Cargando comparativas...</p>
-  }
+  <div class="comparativas-page__shell">
+    <p class="comparativas-page__eyebrow">Comparador</p>
+    <h1 class="comparativas-page__title">Disponible en</h1>
 
-  @if (errorMessage) {
-    <p>{{ errorMessage }}</p>
-  }
-
-  <header class="comparativas-page__hero">
-    <div class="comparativas-page__intro">
-      <h1 class="comparativas-page__title">Comparativas reales para elegir sin perder tiempo</h1>
-      <p class="comparativas-page__description">
-        Compara dos moviles con el mismo criterio de prueba: precio, camara, rendimiento, bateria y
-        soporte de software.
-      </p>
-    </div>
-  </header>
-
-  <section class="comparador" aria-label="Comparador rapido de moviles">
-    <header class="comparador__head">
-      <h2 class="comparador__title">Comparador rapido</h2>
-      <p class="comparador__text">Selecciona dos modelos para ver diferencias clave al instante.</p>
-    </header>
-
-    <div class="comparador__controls">
-      <label class="comparador-select">
-        <span class="comparador-select__label">Modelo A</span>
-        <select
-          class="comparador-select__input"
-          [value]="leftDeviceId"
-          (change)="setLeftDevice($any($event.target).value)"
-        >
-          @for (device of devices; track device.id) {
-            <option [value]="device.id">{{ device.name }}</option>
-          }
-        </select>
-      </label>
-
-      <label class="comparador-select">
-        <span class="comparador-select__label">Modelo B</span>
-        <select
-          class="comparador-select__input"
-          [value]="rightDeviceId"
-          (change)="setRightDevice($any($event.target).value)"
-        >
-          @for (device of devices; track device.id) {
-            <option [value]="device.id">{{ device.name }}</option>
-          }
-        </select>
-      </label>
-    </div>
-
-    @if (leftDevice && rightDevice) {
-      <div class="comparador__duel">
-        <article class="comparador-card">
-          <p class="comparador-card__brand">{{ leftDevice.brand }}</p>
-          <h3 class="comparador-card__name">{{ leftDevice.name }}</h3>
-          <p class="comparador-card__meta">{{ leftDevice.priceLabel }} · {{ leftDevice.segment }}</p>
-          <div class="comparador-card__facts">
-            <span class="comparador-card__fact">{{ leftDevice.os }}</span>
-            <span class="comparador-card__fact">{{ leftDevice.tier }}</span>
-            <span class="comparador-card__fact">{{ leftDevice.manufactureYear }}</span>
-          </div>
-          <p class="comparador-card__spec">{{ leftDevice.chipset }}</p>
-          <p class="comparador-card__spec">{{ leftDevice.cameraMain }}</p>
-        </article>
-
-        <article class="comparador-card comparador-card--right">
-          <p class="comparador-card__brand">{{ rightDevice.brand }}</p>
-          <h3 class="comparador-card__name">{{ rightDevice.name }}</h3>
-          <p class="comparador-card__meta">{{ rightDevice.priceLabel }} · {{ rightDevice.segment }}</p>
-          <div class="comparador-card__facts">
-            <span class="comparador-card__fact">{{ rightDevice.os }}</span>
-            <span class="comparador-card__fact">{{ rightDevice.tier }}</span>
-            <span class="comparador-card__fact">{{ rightDevice.manufactureYear }}</span>
-          </div>
-          <p class="comparador-card__spec">{{ rightDevice.chipset }}</p>
-          <p class="comparador-card__spec">{{ rightDevice.cameraMain }}</p>
-        </article>
-      </div>
-
-      <div class="comparador__table">
-        @for (row of comparisonRows; track row.label) {
-          <article class="comparador-row">
-            <p class="comparador-row__value" [class.is-winner]="row.winner === 'left'">
-              {{ row.leftValue }}
-            </p>
-            <p class="comparador-row__label">{{ row.label }}</p>
-            <p
-              class="comparador-row__value comparador-row__value--right"
-              [class.is-winner]="row.winner === 'right'"
-            >
-              {{ row.rightValue }}
-            </p>
-          </article>
-        }
-      </div>
-    }
-  </section>
-
-  <section class="comparativas-duels" aria-label="Duelos recomendados">
-    <header class="comparativas-duels__head">
-      <h2 class="comparativas-duels__title">Duelos destacados</h2>
-      <p class="comparativas-duels__text">Cargalos en un clic y compara con el enfoque que te interesa.</p>
-    </header>
-
-    <div class="comparativas-duels__grid">
-      @for (duel of filteredDuels; track duel.id) {
-        <article class="duel-card">
-          <p class="duel-card__tag">{{ duel.tag }}</p>
-          <h3 class="duel-card__title">{{ duel.title }}</h3>
-          <p class="duel-card__summary">{{ duel.summary }}</p>
-          <button class="duel-card__button" type="button" (click)="loadDuel(duel)">
-            Cargar en comparador
-          </button>
+    <div class="comparativas-page__countdown" aria-label="Cuenta atras hasta el jueves 2 de abril de 2026 a las 00:00">
+      @for (unit of countdownUnits; track unit.label) {
+        <article class="countdown-unit">
+          <p class="countdown-unit__value">{{ unit.value }}</p>
+          <p class="countdown-unit__label">{{ unit.label }}</p>
         </article>
       }
     </div>
-  </section>
+
+    @if (isFinished) {
+      <p class="comparativas-page__status">La cuenta atras ha terminado.</p>
+    }
+  </div>
 </section>

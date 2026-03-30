@@ -18,9 +18,11 @@
           Configurar cookies
         </button>
       </nav>
+    </div>
 
-      <div class="site-footer__social" aria-label="Redes sociales">
-        <p class="site-footer__social-label">Novedades</p>
+    <div class="site-footer__bottom">
+      <p class="site-footer__copy">© {{ currentYear }} clicTec. Todos los derechos reservados.</p>
+      <div class="site-footer__social site-footer__social--bottom" aria-label="Redes sociales">
         <div class="site-footer__social-links">
           @if (siteLegalConfig().socialProfiles.facebook) {
             <a
@@ -90,15 +92,6 @@
             </a>
           }
         </div>
-      </div>
-    </div>
-
-    <div class="site-footer__bottom">
-      <p class="site-footer__copy">© {{ currentYear }} clicTec. Todos los derechos reservados.</p>
-      <div class="site-footer__signals" aria-label="Principios de transparencia">
-        <span class="site-footer__signal">Consentimiento configurable</span>
-        <span class="site-footer__signal">Afiliación informada</span>
-        <span class="site-footer__signal">Publicidad identificada</span>
       </div>
     </div>
   </div>

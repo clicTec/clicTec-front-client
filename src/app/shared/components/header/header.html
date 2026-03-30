@@ -11,7 +11,7 @@
         <div class="nav-center">
           <a class="nav-link" routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Inicio</a>
           <a class="nav-link" routerLink="/moviles" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Review Moviles</a>
-          <a class="nav-link" routerLink="/comparativas" routerLinkActive="is-active" (click)="closeMenu()">Comparativas</a>
+          <a class="nav-link" routerLink="/comparativas" routerLinkActive="is-active" (click)="closeMenu()">Comparador</a>
           <a class="nav-link" routerLink="/reviews" routerLinkActive="is-active" (click)="closeMenu()">Noticias Tec</a>
           <button class="nav-search" type="button" aria-label="Abrir buscador (próximamente)" title="Buscador próximamente">
             <svg class="nav-search-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -23,17 +23,6 @@
       </nav>
 
       <div class="topbar-actions">
-        <button
-          type="button"
-          class="theme-toggle"
-          [class.is-active]="themeMode === 'dark'"
-          [attr.aria-label]="themeToggleLabel"
-          [attr.aria-pressed]="themeMode === 'dark'"
-          (click)="toggleTheme()"
-        >
-          <img [src]="themeToggleIcon" alt="" aria-hidden="true">
-        </button>
-
         <button
           class="nav-toggle"
           type="button"

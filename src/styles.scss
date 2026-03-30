@@ -332,7 +332,9 @@ body[data-theme='dark'] .moviles-filters__reset {
 }
 
 body[data-theme='dark'] .moviles-filter-select__input {
+  background: var(--client-dark-surface);
   color: var(--client-dark-text);
+  -webkit-text-fill-color: var(--client-dark-text);
   caret-color: var(--client-dark-text);
 }
 
@@ -406,6 +408,9 @@ body[data-theme='dark'] .moviles-filter-select__empty {
 }
 
 body[data-theme='dark'] .moviles-filter-select__input:focus {
+  background: var(--client-dark-surface-strong);
+  color: var(--client-dark-text);
+  -webkit-text-fill-color: var(--client-dark-text);
   border-color: rgb(83 167 195 / 0.72);
   box-shadow: 0 0 0 3px rgb(83 167 195 / 0.22);
 }

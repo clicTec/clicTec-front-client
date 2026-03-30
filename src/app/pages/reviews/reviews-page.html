@@ -1,49 +1,8 @@
-<section class="reviews-page">
-  @if (isLoading) {
-    <p>Cargando Noticias Tec...</p>
-  } @else if (errorMessage) {
-    <p>{{ errorMessage }}</p>
-  } @else {
-    <p class="reviews-page__eyebrow">Noticias Tec</p>
-    <h1 class="reviews-page__title">Actualidad tecnológica</h1>
-    <p class="reviews-page__description">Publicadas desde el panel de administración en tiempo real.</p>
-
-    <div class="reviews-page__grid">
-      @for (item of techNews; track item.id) {
-        <article class="reviews-card">
-          <div class="reviews-card__body">
-            <div class="reviews-card__meta">
-              <p class="reviews-card__date">Actualizado: {{ formatDate(item.updatedAt) }}</p>
-
-              @if (item.commercialLabel || item.affiliateDisclosure) {
-                <div class="reviews-card__signals">
-                  @if (item.commercialLabel) {
-                    <span class="reviews-card__signal reviews-card__signal--commercial">
-                      {{ item.commercialLabel }}
-                    </span>
-                  }
-                  @if (item.affiliateDisclosure) {
-                    <span class="reviews-card__signal">Afiliación</span>
-                  }
-                </div>
-              }
-            </div>
-            <h2 class="reviews-card__title">{{ item.title }}</h2>
-            @if (item.affiliateDisclosure) {
-              <p class="reviews-card__disclosure">
-                Podemos recibir comisión por compras realizadas a través de enlaces incluidos en este
-                contenido.
-              </p>
-            }
-            <div
-              class="reviews-card__content"
-              [innerHTML]="item.contentHtml | consentAwareHtml : (item.affiliateDisclosure || !!item.commercialLabel)"
-            ></div>
-          </div>
-        </article>
-      } @empty {
-        <p class="reviews-page__empty">Todavía no hay noticias publicadas.</p>
-      }
+<section class="reviews-page" aria-label="Noticias Tec próximamente">
+  <div class="reviews-page__hero">
+    <div class="reviews-page__headline">
+      <span class="reviews-page__icon" aria-hidden="true">🚀</span>
+      <h1 class="reviews-page__title">Muy pronto en ClicTec</h1>
     </div>
-  }
+  </div>
 </section>
