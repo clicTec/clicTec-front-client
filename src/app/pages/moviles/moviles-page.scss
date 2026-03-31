@@ -257,13 +257,20 @@
 }
 
 .moviles-phone__cta {
-  align-self: flex-start;
-  min-width: 9.5rem;
+  align-self: stretch;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
+  min-height: 3.85rem;
   margin-top: auto;
-  padding-inline: 1.5rem;
-  border: vars.$border-width-thin solid rgba(vars.$color-accent, 0.14);
-  background: linear-gradient(180deg, rgba(vars.$color-accent, 0.92), vars.$color-accent);
-  box-shadow: 0 12px 24px -18px rgba(vars.$color-accent, 0.72);
+  padding: 0 1.35rem;
+  border: vars.$border-width-thin solid rgba(110, 196, 230, 0.24);
+  border-radius: 999px;
+  background: linear-gradient(180deg, #6ec4e6 0%, #48a8d0 100%);
+  box-shadow: 0 14px 28px -22px rgba(72, 168, 208, 0.72);
+  color: #10283b;
+  font-size: 0.95rem;
+  font-weight: 700;
   text-decoration: none;
   text-align: center;
   transition:
@@ -274,7 +281,7 @@
 
 .moviles-phone__cta:hover {
   transform: translateY(-1px);
-  box-shadow: 0 16px 28px -18px rgba(vars.$color-accent, 0.8);
+  box-shadow: 0 18px 30px -22px rgba(72, 168, 208, 0.82);
   filter: saturate(1.05);
 }
 

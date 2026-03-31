@@ -1,7 +1,6 @@
 import { NgStyle } from '@angular/common';
-import { Component, ElementRef, OnDestroy, OnInit, inject } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Component, ElementRef, OnInit, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import {
   MOBILE_CARD_IMAGE_OVERRIDES,
   MobileImageOverride,
@@ -22,21 +21,17 @@ import {
   templateUrl: './moviles-page.html',
   styleUrl: './moviles-page.scss'
 })
-export class MovilesPageComponent implements OnInit, OnDestroy {
+export class MovilesPageComponent implements OnInit {
   private readonly contentApiService = inject(ContentApiService);
   private readonly host = inject(ElementRef<HTMLElement>);
-  private readonly route = inject(ActivatedRoute);
   private readonly pageSize = 9;
   private readonly maxVisiblePages = 5;
-  private queryParamSubscription?: Subscription;
 
   protected readonly heroImage = MOVILES_HERO_IMAGE;
   protected readonly cardImageOverrides = MOBILE_CARD_IMAGE_OVERRIDES;
   protected isLoading = true;
   protected errorMessage = '';
   protected currentPage = 1;
-  protected searchDraft = '';
-  private searchQuery = '';
 
   protected mobileCatalog: readonly MobileCardResponse[] = [];
   protected launchCalendar: readonly LaunchEntryResponse[] = [];
@@ -45,17 +40,7 @@ export class MovilesPageComponent implements OnInit, OnDestroy {
   protected totalPages = 1;
 
   ngOnInit(): void {
-    this.queryParamSubscription = this.route.queryParamMap.subscribe((params) => {
-      const queryFromUrl = (params.get('q') ?? '').trim();
-      this.searchDraft = queryFromUrl;
-      this.searchQuery = queryFromUrl;
-      this.currentPage = 1;
-      this.loadMobilePage();
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.queryParamSubscription?.unsubscribe();
+    this.loadMobilePage();
   }
 
   protected get filteredCatalog(): readonly MobileCardResponse[] {
@@ -96,10 +81,6 @@ export class MovilesPageComponent implements OnInit, OnDestroy {
   }
 
   protected get emptyStateMessage(): string {
-    if (this.searchQuery.length > 0) {
-      return 'No hay móviles que coincidan con la búsqueda.';
-    }
-
     return 'No hay móviles disponibles ahora mismo.';
   }
 
@@ -143,23 +124,6 @@ export class MovilesPageComponent implements OnInit, OnDestroy {
     this.scrollToFirstMobileRow();
   }
 
-  protected updateSearchDraft(value: string): void {
-    this.searchDraft = value;
-  }
-
-  protected applySearch(value: string = this.searchDraft): void {
-    const nextQuery = value.trim();
-
-    this.searchDraft = nextQuery;
-    if (nextQuery === this.searchQuery && this.currentPage === 1) {
-      return;
-    }
-
-    this.searchQuery = nextQuery;
-    this.currentPage = 1;
-    this.loadMobilePage();
-  }
-
   private loadMobilePage(): void {
     this.isLoading = true;
     this.errorMessage = '';
@@ -170,7 +134,7 @@ export class MovilesPageComponent implements OnInit, OnDestroy {
         tier: '',
         priceRange: '',
         os: '',
-        search: this.searchQuery,
+        search: '',
         page: this.currentPage,
         size: this.pageSize
       })
@@ -205,5 +169,4 @@ export class MovilesPageComponent implements OnInit, OnDestroy {
   private getPhoneImageOverride(slug: string): MobileImageOverride | undefined {
     return this.cardImageOverrides[slug];
   }
-
 }

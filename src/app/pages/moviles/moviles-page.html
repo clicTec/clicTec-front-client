@@ -46,32 +46,6 @@
   <section class="moviles-catalog" aria-label="Listado de móviles">
     <header class="moviles-catalog__header">
       <h2 class="moviles-catalog__title">Catálogo de móviles disponibles</h2>
-      <div class="moviles-catalog__tools">
-        <div class="moviles-catalog__search">
-          <button
-            type="button"
-            class="moviles-catalog__search-button"
-            (click)="applySearch(searchInput.value)"
-            aria-label="Buscar móvil"
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M10.5 4a6.5 6.5 0 1 0 4.01 11.62l4.43 4.44 1.06-1.06-4.44-4.43A6.5 6.5 0 0 0 10.5 4Zm0 1.5a5 5 0 1 1 0 10a5 5 0 0 1 0-10Z"
-              />
-            </svg>
-          </button>
-          <input
-            #searchInput
-            type="search"
-            class="moviles-catalog__search-input"
-            placeholder="Buscar móvil"
-            aria-label="Buscar móvil"
-            [value]="searchDraft"
-            (input)="updateSearchDraft($any($event.target).value)"
-            (keydown.enter)="applySearch(searchInput.value)"
-          />
-        </div>
-      </div>
     </header>
 
     @if (filteredCatalog.length > 0) {
