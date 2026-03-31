@@ -19,6 +19,10 @@
   gap: 1.25rem;
 }
 
+.moviles-page__hero--single {
+  grid-template-columns: 1fr;
+}
+
 .moviles-launches,
 .moviles-checklist,
 .moviles-filters,
@@ -28,24 +32,10 @@
 }
 
 .moviles-page__intro {
-  position: relative;
-  overflow: hidden;
-  min-height: 300px;
   display: grid;
   align-content: start;
   gap: 0.55rem;
-  padding: clamp(1rem, 2.2vw, 1.6rem) 0;
-  background:
-    linear-gradient(180deg, transparent, rgba(vars.$color-surface, 0.72) 72%);
-}
-
-.moviles-page__intro::before {
-  content: '';
-  position: absolute;
-  inset: 1.2rem 1.2rem auto auto;
-  width: min(34vw, 340px);
-  aspect-ratio: 1;
-  background: url('/store/store-hero.svg') center/contain no-repeat;
+  padding: clamp(1rem, 2.2vw, 1.6rem) 0 0.4rem;
 }
 
 .moviles-launch__month,
@@ -104,6 +94,7 @@
 .moviles-phone__name {
   margin: 0.35rem 0 0;
   font-size: 1.2rem;
+  font-weight: 800;
   color: vars.$color-ink-900;
 }
 
@@ -173,7 +164,7 @@
 .moviles-filters__head,
 .moviles-catalog__header {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
   gap: 1rem;
 }
@@ -451,7 +442,7 @@
 .moviles-pagination {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 1rem;
   margin-top: 1rem;
 }
@@ -465,7 +456,9 @@
 .moviles-pagination__controls {
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-end;
   gap: 0.45rem;
+  margin-left: auto;
 }
 
 .moviles-pagination__button:disabled {
@@ -502,25 +495,19 @@
     padding: 1rem 0.15rem 1.2rem;
   }
 
-  .moviles-page__intro::before {
-    display: block;
-    position: relative;
-    inset: auto;
-    width: 100%;
-    max-width: 240px;
-    margin: 0 0 0.8rem auto;
-  }
-
   .moviles-page__title {
     max-width: none;
     font-size: clamp(2rem, 10vw, 3.2rem);
   }
 
   .moviles-filters__head,
-  .moviles-catalog__header,
-  .moviles-pagination {
+  .moviles-catalog__header {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .moviles-pagination {
+    justify-content: flex-end;
   }
 
   .moviles-launch,
@@ -536,6 +523,10 @@
   .moviles-filters__groups,
   .moviles-catalog__grid {
     grid-template-columns: 1fr;
+  }
+
+  .moviles-pagination__controls {
+    width: 100%;
   }
 
   .moviles-phone__spec {

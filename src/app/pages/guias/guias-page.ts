@@ -21,7 +21,7 @@ export class GuiasPageComponent implements OnInit {
         this.isLoading = false;
       },
       error: () => {
-        this.errorMessage = 'No se pudo cargar el contenido de guias.';
+        this.errorMessage = 'No se pudo cargar el contenido de guías.';
         this.isLoading = false;
       }
     });

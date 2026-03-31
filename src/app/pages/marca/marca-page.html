@@ -11,6 +11,77 @@
         <h1 class="marca-page__title">{{ brandName }}</h1>
       </header>
 
+      <div class="marca-page__tools">
+        @if (orderedFilterGroups.length > 0) {
+          <div class="marca-page__filter">
+            <button
+              type="button"
+              class="marca-page__filter-toggle"
+              [class.is-open]="isFilterMenuOpen"
+              [class.has-active-filters]="activeFilterCount > 0"
+              (click)="toggleFilterMenu()"
+              aria-haspopup="menu"
+              [attr.aria-expanded]="isFilterMenuOpen"
+            >
+              <span>Filtrar</span>
+              @if (activeFilterCount > 0) {
+                <span class="marca-page__filter-count">{{ activeFilterCount }}</span>
+              }
+              <span class="marca-page__filter-chevron" [class.is-open]="isFilterMenuOpen"></span>
+            </button>
+
+            @if (isFilterMenuOpen) {
+              <div class="marca-page__filter-menu" role="menu" aria-label="Filtros de marca">
+                @for (group of orderedFilterGroups; track group.key) {
+                  <label class="marca-page__filter-field">
+                    <span class="marca-page__filter-label">{{ group.title }}</span>
+                    <select
+                      class="marca-page__filter-select"
+                      [value]="getSelectedFilterValue(group.key)"
+                      (change)="setFilter($any(group.key), $any($event.target).value)"
+                    >
+                      <option value="">Todas</option>
+                      @for (option of group.options; track option) {
+                        <option [value]="option">{{ option }}</option>
+                      }
+                    </select>
+                  </label>
+                }
+
+                <button type="button" class="marca-page__filter-reset" (click)="resetFilters()">
+                  Limpiar filtros
+                </button>
+              </div>
+            }
+          </div>
+        }
+
+        <div class="marca-page__search">
+          <button
+            type="button"
+            class="marca-page__search-button"
+            (click)="applySearch(searchInput.value)"
+            aria-label="Buscar móvil de la marca"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M10.5 4a6.5 6.5 0 1 0 4.01 11.62l4.43 4.44 1.06-1.06-4.44-4.43A6.5 6.5 0 0 0 10.5 4Zm0 1.5a5 5 0 1 1 0 10a5 5 0 0 1 0-10Z"
+              />
+            </svg>
+          </button>
+          <input
+            #searchInput
+            type="search"
+            class="marca-page__search-input"
+            placeholder="Buscar móvil"
+            aria-label="Buscar móvil"
+            [value]="searchDraft"
+            (input)="updateSearchDraft($any($event.target).value)"
+            (keydown.enter)="applySearch(searchInput.value)"
+          />
+        </div>
+      </div>
+
       @if (mobileCatalog.length > 0) {
         <section class="marca-page__catalog" aria-label="Móviles de la marca">
           <div class="marca-page__grid">
@@ -18,7 +89,7 @@
               <article class="moviles-phone">
                 @if (phone.image) {
                   <div class="moviles-phone__media">
-                    <img [src]="phone.image" [alt]="phone.model" loading="lazy" />
+                    <img [src]="phone.image" [alt]="phone.brand + ' ' + phone.model" loading="lazy" />
                   </div>
                 }
 
@@ -27,7 +98,7 @@
                   <p class="moviles-phone__score">{{ phone.score }}</p>
                 </header>
 
-                <h2 class="moviles-phone__name">{{ phone.model }}</h2>
+                <h2 class="moviles-phone__name">{{ phone.brand }} {{ phone.model }}</h2>
                 <p class="moviles-phone__meta">{{ phone.brand }} · {{ phone.price }}</p>
                 <div class="moviles-phone__summary" [innerHTML]="phone.review | consentAwareHtml : true"></div>
 
@@ -50,10 +121,42 @@
               </article>
             }
           </div>
+
+          <nav class="marca-pagination" aria-label="Paginación de móviles de la marca">
+            <div class="marca-pagination__controls">
+              <button
+                class="marca-pagination__button"
+                type="button"
+                (click)="previousPage()"
+                [disabled]="currentPage === 1"
+              >
+                Anterior
+              </button>
+              @for (page of pageNumbers; track page) {
+                <button
+                  class="marca-pagination__button"
+                  type="button"
+                  [class.is-active]="page === currentPage"
+                  [attr.aria-current]="page === currentPage ? 'page' : null"
+                  (click)="goToPage(page)"
+                >
+                  {{ page }}
+                </button>
+              }
+              <button
+                class="marca-pagination__button"
+                type="button"
+                (click)="nextPage()"
+                [disabled]="currentPage === totalPages"
+              >
+                Siguiente
+              </button>
+            </div>
+          </nav>
         </section>
       } @else {
-        <section class="marca-page__empty" aria-label="Sin móviles publicados">
-          <p class="marca-page__empty-text">No hay móviles publicados de {{ brandName }} por ahora.</p>
+        <section class="marca-page__empty" aria-label="Estado de la marca">
+          <p class="marca-page__empty-text">{{ emptyStateMessage }}</p>
         </section>
       }
     </div>

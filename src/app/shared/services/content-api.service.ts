@@ -39,6 +39,13 @@ export interface HomeUpdateItemResponse {
   imageUrl: string;
 }
 
+export interface HomeRecommendedBrandResponse {
+  name: string;
+  slug: string;
+  route: string;
+  logoPath: string;
+}
+
 export interface HomeResponse {
   eyebrow: string;
   title: string;
@@ -48,6 +55,7 @@ export interface HomeResponse {
   topics: HomeTopicResponse[];
   stories: HomeStoryResponse[];
   updates: HomeUpdateItemResponse[];
+  recommendedBrands: HomeRecommendedBrandResponse[];
 }
 
 export interface MobileFilterGroupResponse {

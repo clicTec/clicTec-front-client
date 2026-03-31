@@ -5,6 +5,11 @@ import { ConsentAwareHtmlPipe } from '../../shared/pipes/consent-aware-html.pipe
 import { ContentApiService, ReviewDetailResponse } from '../../shared/services/content-api.service';
 import { SeoService } from '../../shared/services/seo.service';
 
+interface ReviewContentBlock {
+  title: string;
+  paragraphs: string[];
+}
+
 @Component({
   selector: 'app-review-detail-page',
   standalone: true,
@@ -20,6 +25,10 @@ export class ReviewDetailPageComponent implements OnInit {
   protected isLoading = true;
   protected errorMessage = '';
   protected review: ReviewDetailResponse | null = null;
+  protected isMobileReview = false;
+  protected reviewBlocks: readonly ReviewContentBlock[] = [];
+  protected positiveSummaryItems: readonly string[] = [];
+  protected considerationSummaryItems: readonly string[] = [];
 
   ngOnInit(): void {
     const slug = (this.route.snapshot.paramMap.get('slug') ?? '').trim();
@@ -32,12 +41,12 @@ export class ReviewDetailPageComponent implements OnInit {
 
     this.contentApiService.getMobileReviewBySlug(slug).subscribe({
       next: (review) => {
-        this.applyReview(review);
+        this.applyReview(review, 'mobile');
       },
       error: () => {
         this.contentApiService.getReviewBySlug(slug).subscribe({
           next: (review) => {
-            this.applyReview(review);
+            this.applyReview(review, 'review');
           },
           error: () => {
             this.errorMessage = 'No se pudo cargar la review.';
@@ -54,20 +63,19 @@ export class ReviewDetailPageComponent implements OnInit {
   }
 
   protected getBackLabel(): string {
-    return 'Volver a moviles';
+    return 'Volver a móviles';
   }
 
-  protected formatDate(value: string | null): string {
-    if (!value) {
+  protected get headlineTitle(): string {
+    if (!this.review) {
       return '';
     }
 
-    const date = new Date(value);
-    if (Number.isNaN(date.getTime())) {
-      return '';
+    if (this.review.slug === 'samsung-s26') {
+      return 'Samsung s26';
     }
 
-    return new Intl.DateTimeFormat('es-ES', { dateStyle: 'long' }).format(date);
+    return this.review.title;
   }
 
   protected hasGalleryImages(): boolean {
@@ -78,12 +86,18 @@ export class ReviewDetailPageComponent implements OnInit {
     return Boolean(this.review && this.review.score > 0);
   }
 
-  protected hasReviewMeta(): boolean {
-    return this.hasScore() || Boolean(this.formatDate(this.review?.publishedAt ?? null));
+  protected hasSummaryCards(): boolean {
+    return this.positiveSummaryItems.length > 0 || this.considerationSummaryItems.length > 0;
   }
 
-  private applyReview(review: ReviewDetailResponse): void {
+  private applyReview(review: ReviewDetailResponse, source: 'mobile' | 'review'): void {
     this.review = review;
+    this.isMobileReview = source === 'mobile';
+    this.reviewBlocks = this.isMobileReview ? this.buildReviewBlocks(review.contentHtml) : [];
+    this.positiveSummaryItems = this.isMobileReview ? this.buildPositiveSummaryItems(this.reviewBlocks) : [];
+    this.considerationSummaryItems = this.isMobileReview
+      ? this.buildConsiderationSummaryItems(this.reviewBlocks)
+      : [];
     this.isLoading = false;
     this.seoService.applyPage({
       title: review.title,
@@ -100,5 +114,108 @@ export class ReviewDetailPageComponent implements OnInit {
         updatedAt: review.publishedAt
       })
     });
+  }
+
+  private buildReviewBlocks(contentHtml: string): ReviewContentBlock[] {
+    if (!contentHtml.trim()) {
+      return [];
+    }
+
+    const parser = new DOMParser();
+    const document = parser.parseFromString(`<div>${contentHtml}</div>`, 'text/html');
+    const container = document.body.firstElementChild;
+    if (!container) {
+      return [];
+    }
+
+    const sectionElements = Array.from(container.children).filter((element) => element.tagName.toLowerCase() === 'section');
+    if (sectionElements.length > 0) {
+      return sectionElements
+        .map((section) => {
+          const heading = section.querySelector('h2, h3');
+          const title = heading?.textContent?.trim() ?? '';
+          const paragraphs = Array.from(section.querySelectorAll('p'))
+            .map((paragraph) => paragraph.textContent?.trim() ?? '')
+            .filter((paragraph) => paragraph.length > 0);
+
+          return { title, paragraphs };
+        })
+        .filter((block) => block.title.length > 0 && block.paragraphs.length > 0);
+    }
+
+    const blocks: ReviewContentBlock[] = [];
+    let currentBlock: ReviewContentBlock | null = null;
+    for (const element of Array.from(container.children)) {
+      const tagName = element.tagName.toLowerCase();
+      if (tagName === 'h2' || tagName === 'h3') {
+        if (currentBlock && currentBlock.paragraphs.length > 0) {
+          blocks.push(currentBlock);
+        }
+
+        currentBlock = {
+          title: element.textContent?.trim() ?? '',
+          paragraphs: []
+        };
+        continue;
+      }
+
+      if (tagName === 'p') {
+        const paragraph = element.textContent?.trim() ?? '';
+        if (!paragraph) {
+          continue;
+        }
+
+        if (!currentBlock) {
+          currentBlock = {
+            title: 'Introducción',
+            paragraphs: []
+          };
+        }
+
+        currentBlock.paragraphs.push(paragraph);
+      }
+    }
+
+    if (currentBlock && currentBlock.paragraphs.length > 0) {
+      blocks.push(currentBlock);
+    }
+
+    return blocks;
+  }
+
+  private buildPositiveSummaryItems(blocks: readonly ReviewContentBlock[]): string[] {
+    const ignoredTitles = ['introduccion', 'conclusion'];
+    const cautionKeywords = ['memoria', 'equilibrio', 'precio', 'coste', 'compromiso', 'ajuste'];
+
+    return blocks
+      .filter((block) => {
+        const normalized = this.normalizeText(block.title);
+        return (
+          !ignoredTitles.includes(normalized) && !cautionKeywords.some((keyword) => normalized.includes(keyword))
+        );
+      })
+      .slice(0, 3)
+      .map((block) => block.title);
+  }
+
+  private buildConsiderationSummaryItems(blocks: readonly ReviewContentBlock[]): string[] {
+    const cautionKeywords = ['memoria', 'equilibrio', 'precio', 'coste', 'compromiso', 'ajuste'];
+    const matchingBlocks = blocks.filter((block) =>
+      cautionKeywords.some((keyword) => this.normalizeText(block.title).includes(keyword))
+    );
+
+    if (matchingBlocks.length > 0) {
+      return matchingBlocks.slice(0, 2).map((block) => block.title);
+    }
+
+    return [];
+  }
+
+  private normalizeText(value: string): string {
+    return value
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .trim()
+      .toLowerCase();
   }
 }

@@ -20,7 +20,8 @@ type FilterKey = 'brand' | 'tier' | 'priceRange' | 'os';
 export class MovilesPageComponent implements OnInit {
   private readonly contentApiService = inject(ContentApiService);
   private readonly host = inject(ElementRef<HTMLElement>);
-  private readonly pageSize = 3;
+  private readonly pageSize = 9;
+  private readonly maxVisiblePages = 5;
 
   protected isLoading = true;
   protected errorMessage = '';
@@ -37,6 +38,7 @@ export class MovilesPageComponent implements OnInit {
     os: ''
   };
   protected activeDropdown: FilterKey | null = null;
+  protected isFilterMenuOpen = false;
   protected currentPage = 1;
   protected searchDraft = '';
   private searchQuery = '';
@@ -72,7 +74,20 @@ export class MovilesPageComponent implements OnInit {
   }
 
   protected get pageNumbers(): readonly number[] {
-    return Array.from({ length: this.totalPages }, (_, index) => index + 1);
+    if (this.totalPages <= this.maxVisiblePages) {
+      return Array.from({ length: this.totalPages }, (_, index) => index + 1);
+    }
+
+    const halfWindow = Math.floor(this.maxVisiblePages / 2);
+    let start = Math.max(1, this.currentPage - halfWindow);
+    let end = start + this.maxVisiblePages - 1;
+
+    if (end > this.totalPages) {
+      end = this.totalPages;
+      start = end - this.maxVisiblePages + 1;
+    }
+
+    return Array.from({ length: end - start + 1 }, (_, index) => start + index);
   }
 
   protected get visibleStart(): number {
@@ -89,10 +104,18 @@ export class MovilesPageComponent implements OnInit {
 
   protected get emptyStateMessage(): string {
     if (this.searchQuery.length > 0) {
-      return 'No hay moviles que coincidan con la busqueda.';
+      return 'No hay móviles que coincidan con la búsqueda.';
     }
 
-    return 'No hay moviles disponibles ahora mismo.';
+    return 'No hay móviles disponibles ahora mismo.';
+  }
+
+  protected get activeFilterCount(): number {
+    return Object.values(this.selectedFilters).filter((value) => value.trim().length > 0).length;
+  }
+
+  protected toggleFilterMenu(): void {
+    this.isFilterMenuOpen = !this.isFilterMenuOpen;
   }
 
   protected setFilter(key: FilterKey, value: string): void {
@@ -178,6 +201,11 @@ export class MovilesPageComponent implements OnInit {
         ...this.filterInputValues,
         [activeKey]: this.selectedFilters[activeKey]
       };
+    }
+
+    const filterMenu = this.host.nativeElement.querySelector('.moviles-catalog__filter');
+    if (filterMenu instanceof HTMLElement && !filterMenu.contains(target)) {
+      this.isFilterMenuOpen = false;
     }
   }
 
@@ -270,7 +298,7 @@ export class MovilesPageComponent implements OnInit {
           this.isLoading = false;
         },
         error: () => {
-          this.errorMessage = 'No se pudo cargar Review Moviles.';
+          this.errorMessage = 'No se pudo cargar Reviews de móviles.';
           this.isLoading = false;
         }
       });

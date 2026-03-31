@@ -1,11 +1,17 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { ConsentAwareHtmlPipe } from '../../shared/pipes/consent-aware-html.pipe';
-import { ContentApiService, MobileCardResponse } from '../../shared/services/content-api.service';
+import {
+  ContentApiService,
+  MobileCardResponse,
+  MobileFilterGroupResponse
+} from '../../shared/services/content-api.service';
 import { SeoService } from '../../shared/services/seo.service';
 import { resolveBrandNameFromSlug } from '../../shared/utils/brand.utils';
+
+type FilterKey = 'brand' | 'tier' | 'priceRange' | 'os';
 
 @Component({
   selector: 'app-marca-page',
@@ -18,15 +24,78 @@ export class MarcaPageComponent implements OnInit, OnDestroy {
   private readonly route = inject(ActivatedRoute);
   private readonly contentApiService = inject(ContentApiService);
   private readonly seoService = inject(SeoService);
-  private readonly pageSize = 24;
+  private readonly host = inject(ElementRef<HTMLElement>);
+  private readonly pageSize = 9;
+  private readonly maxVisiblePages = 5;
   private routeSubscription?: Subscription;
+  private searchQuery = '';
 
   protected isLoading = true;
   protected errorMessage = '';
   protected brandName = '';
   protected brandSlug = '';
   protected mobileCatalog: readonly MobileCardResponse[] = [];
+  protected filterGroups: readonly MobileFilterGroupResponse[] = [];
+  protected isFilterMenuOpen = false;
+  protected currentPage = 1;
+  protected searchDraft = '';
+  protected selectedFilters: Record<FilterKey, string> = {
+    brand: '',
+    tier: '',
+    priceRange: '',
+    os: ''
+  };
   protected totalItems = 0;
+  protected totalPages = 1;
+  protected hasPublishedMobiles = false;
+
+  protected get orderedFilterGroups(): readonly MobileFilterGroupResponse[] {
+    const order: Record<FilterKey, number> = {
+      brand: 0,
+      tier: 1,
+      os: 2,
+      priceRange: 3
+    };
+
+    return [...this.filterGroups]
+      .filter((group) => group.key !== 'brand')
+      .sort((left, right) => order[left.key] - order[right.key]);
+  }
+
+  protected get activeFilterCount(): number {
+    return Object.entries(this.selectedFilters)
+      .filter(([key, value]) => key !== 'brand' && value.trim().length > 0)
+      .length;
+  }
+
+  protected get emptyStateMessage(): string {
+    if (!this.brandName) {
+      return '';
+    }
+
+    if (!this.hasPublishedMobiles) {
+      return `Ahora mismo no hay móviles publicados de ${this.brandName}.`;
+    }
+
+    return `No hay móviles de ${this.brandName} que coincidan con la búsqueda o los filtros.`;
+  }
+
+  protected get pageNumbers(): readonly number[] {
+    if (this.totalPages <= this.maxVisiblePages) {
+      return Array.from({ length: this.totalPages }, (_, index) => index + 1);
+    }
+
+    const halfWindow = Math.floor(this.maxVisiblePages / 2);
+    let start = Math.max(1, this.currentPage - halfWindow);
+    let end = start + this.maxVisiblePages - 1;
+
+    if (end > this.totalPages) {
+      end = this.totalPages;
+      start = end - this.maxVisiblePages + 1;
+    }
+
+    return Array.from({ length: end - start + 1 }, (_, index) => start + index);
+  }
 
   ngOnInit(): void {
     this.routeSubscription = this.route.paramMap.subscribe((paramMap) => {
@@ -39,20 +108,93 @@ export class MarcaPageComponent implements OnInit, OnDestroy {
     this.routeSubscription?.unsubscribe();
   }
 
-  protected get pageDescription(): string {
-    if (!this.brandName) {
-      return '';
+  @HostListener('document:click', ['$event'])
+  protected onDocumentClick(event: MouseEvent): void {
+    const target = event.target as Node | null;
+    if (!target) {
+      return;
     }
 
-    if (this.totalItems === 0) {
-      return `Ahora mismo no hay móviles publicados de ${this.brandName}.`;
+    const filterMenu = this.host.nativeElement.querySelector('.marca-page__filter');
+    if (filterMenu instanceof HTMLElement && !filterMenu.contains(target)) {
+      this.isFilterMenuOpen = false;
+    }
+  }
+
+  protected toggleFilterMenu(): void {
+    this.isFilterMenuOpen = !this.isFilterMenuOpen;
+  }
+
+  protected setFilter(key: FilterKey, value: string): void {
+    if (this.selectedFilters[key] === value) {
+      return;
     }
 
-    if (this.totalItems === 1) {
-      return `1 móvil publicado de ${this.brandName}.`;
+    this.selectedFilters = {
+      ...this.selectedFilters,
+      [key]: value
+    };
+    this.currentPage = 1;
+    this.loadBrandCatalog(this.brandName);
+  }
+
+  protected resetFilters(): void {
+    this.selectedFilters = {
+      brand: '',
+      tier: '',
+      priceRange: '',
+      os: ''
+    };
+    this.isFilterMenuOpen = false;
+    this.currentPage = 1;
+    this.loadBrandCatalog(this.brandName);
+  }
+
+  protected updateSearchDraft(value: string): void {
+    this.searchDraft = value;
+  }
+
+  protected applySearch(value: string = this.searchDraft): void {
+    const nextQuery = value.trim();
+    this.searchDraft = nextQuery;
+    if (nextQuery === this.searchQuery && this.currentPage === 1) {
+      return;
     }
 
-    return `${this.totalItems} móviles publicados de ${this.brandName}.`;
+    this.searchQuery = nextQuery;
+    this.currentPage = 1;
+    this.loadBrandCatalog(this.brandName);
+  }
+
+  protected getSelectedFilterValue(key: string): string {
+    return this.selectedFilters[key as FilterKey] ?? '';
+  }
+
+  protected previousPage(): void {
+    if (this.currentPage === 1) {
+      return;
+    }
+
+    this.currentPage -= 1;
+    this.loadBrandCatalog(this.brandName);
+  }
+
+  protected nextPage(): void {
+    if (this.currentPage === this.totalPages) {
+      return;
+    }
+
+    this.currentPage += 1;
+    this.loadBrandCatalog(this.brandName);
+  }
+
+  protected goToPage(page: number): void {
+    if (page < 1 || page > this.totalPages || page === this.currentPage) {
+      return;
+    }
+
+    this.currentPage = page;
+    this.loadBrandCatalog(this.brandName);
   }
 
   private loadBrandPage(brandSlug: string): void {
@@ -66,7 +208,20 @@ export class MarcaPageComponent implements OnInit, OnDestroy {
     this.brandName = '';
     this.brandSlug = brandSlug;
     this.mobileCatalog = [];
+    this.filterGroups = [];
+    this.isFilterMenuOpen = false;
+    this.searchDraft = '';
+    this.searchQuery = '';
+    this.hasPublishedMobiles = false;
+    this.currentPage = 1;
+    this.selectedFilters = {
+      brand: '',
+      tier: '',
+      priceRange: '',
+      os: ''
+    };
     this.totalItems = 0;
+    this.totalPages = 1;
 
     this.contentApiService
       .getMobilePage({
@@ -76,12 +231,12 @@ export class MarcaPageComponent implements OnInit, OnDestroy {
         os: '',
         search: '',
         page: 1,
-        size: 1
+        size: 500
       })
       .subscribe({
         next: (response) => {
-          const availableBrands = response.filterGroups.find((group) => group.key === 'brand')?.options ?? [];
-          const brandName = resolveBrandNameFromSlug(brandSlug, availableBrands);
+          const existingBrands = Array.from(new Set(response.catalog.items.map((item) => item.brand)));
+          const brandName = resolveBrandNameFromSlug(brandSlug, existingBrands);
 
           if (!brandName) {
             this.handleNotFound(brandSlug);
@@ -100,25 +255,38 @@ export class MarcaPageComponent implements OnInit, OnDestroy {
   }
 
   private loadBrandCatalog(brandName: string): void {
+    if (!brandName) {
+      return;
+    }
+
+    this.isLoading = true;
+    this.errorMessage = '';
+
     this.contentApiService
       .getMobilePage({
         brand: brandName,
-        tier: '',
-        priceRange: '',
-        os: '',
-        search: '',
-        page: 1,
+        tier: this.selectedFilters.tier,
+        priceRange: this.selectedFilters.priceRange,
+        os: this.selectedFilters.os,
+        search: this.searchQuery,
+        page: this.currentPage,
         size: this.pageSize
       })
       .subscribe({
         next: (response) => {
+          this.filterGroups = response.filterGroups;
           this.mobileCatalog = response.catalog.items;
+          this.currentPage = response.catalog.page;
           this.totalItems = response.catalog.totalItems;
+          this.totalPages = Math.max(1, response.catalog.totalPages);
+          if (this.searchQuery.length === 0 && this.activeFilterCount === 0) {
+            this.hasPublishedMobiles = this.totalItems > 0;
+          }
           this.isLoading = false;
           this.seoService.applyPage({
             title: brandName,
             description:
-              this.totalItems > 0
+              this.hasPublishedMobiles
                 ? `Móviles y reviews publicadas de ${brandName} en clicTec.`
                 : `Página de marca ${brandName} en clicTec.`,
             path: `/marcas/${this.brandSlug}`,

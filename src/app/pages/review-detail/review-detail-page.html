@@ -4,47 +4,115 @@
   } @else if (errorMessage) {
     <p class="review-detail-page__state review-detail-page__state--error">{{ errorMessage }}</p>
   } @else if (review) {
-    <div class="review-detail-page__shell">
-      <a class="review-detail-page__back" [routerLink]="getBackLink()">{{ getBackLabel() }}</a>
+    @if (isMobileReview) {
+      <section class="mobile-review">
+        <div class="mobile-review__container">
+          <a class="mobile-review__back" [routerLink]="getBackLink()">{{ getBackLabel() }}</a>
 
-      <header class="review-detail-page__hero" [class.review-detail-page__hero--single]="!review.coverImage">
-        <div class="review-detail-page__copy">
-          @if (hasScore()) {
-            <div class="review-detail-page__meta">
-              <span class="review-detail-page__score">{{ review.score.toFixed(1) }}</span>
-            </div>
+          <header class="mobile-review__header">
+            <h1 class="mobile-review__title">{{ headlineTitle }}</h1>
+            @if (review.excerpt) {
+              <p class="mobile-review__subtitle">{{ review.excerpt }}</p>
+            }
+          </header>
+
+          @if (hasSummaryCards()) {
+            <section class="mobile-review__summary">
+              @if (positiveSummaryItems.length > 0) {
+                <article class="summary-card summary-card--positive">
+                  <h2 class="summary-card__title">Lo mejor</h2>
+                  <ul class="summary-card__list">
+                    @for (item of positiveSummaryItems; track item) {
+                      <li>{{ item }}</li>
+                    }
+                  </ul>
+                </article>
+              }
+
+              @if (considerationSummaryItems.length > 0) {
+                <article class="summary-card summary-card--neutral">
+                  <h2 class="summary-card__title">A tener en cuenta</h2>
+                  <ul class="summary-card__list">
+                    @for (item of considerationSummaryItems; track item) {
+                      <li>{{ item }}</li>
+                    }
+                  </ul>
+                </article>
+              }
+            </section>
           }
 
-          <h1 class="review-detail-page__title">{{ review.title }}</h1>
-          @if (review.excerpt) {
-            <p class="review-detail-page__excerpt">{{ review.excerpt }}</p>
+          @if (reviewBlocks.length > 0) {
+            <section class="mobile-review__content">
+              @for (block of reviewBlocks; track block.title) {
+                <article class="review-block">
+                  <h2>{{ block.title }}</h2>
+                  @for (paragraph of block.paragraphs; track paragraph) {
+                    <p>{{ paragraph }}</p>
+                  }
+                </article>
+              }
+            </section>
+          } @else {
+            <article class="review-detail-page__article" [innerHTML]="review.contentHtml | consentAwareHtml : true"></article>
+          }
+
+          @if (hasGalleryImages()) {
+            <section class="review-detail-page__gallery">
+              <h2 class="review-detail-page__gallery-title">Galeria</h2>
+              <div class="review-detail-page__gallery-grid">
+                @for (image of review.images; track image.url) {
+                  @if (image.type === 'gallery') {
+                    <figure class="review-detail-page__gallery-card">
+                      <img [src]="image.url" [alt]="image.alt" loading="lazy" />
+                    </figure>
+                  }
+                }
+              </div>
+            </section>
           }
         </div>
+      </section>
+    } @else {
+      <div class="review-detail-page__shell">
+        <a class="review-detail-page__back" [routerLink]="getBackLink()">{{ getBackLabel() }}</a>
 
-        @if (review.coverImage) {
-          <img class="review-detail-page__cover" [src]="review.coverImage" [alt]="review.title" loading="lazy" />
-        }
-      </header>
+        <header class="review-detail-page__hero" [class.review-detail-page__hero--single]="!review.coverImage">
+          <div class="review-detail-page__copy">
+            @if (hasScore()) {
+              <div class="review-detail-page__meta">
+                <span class="review-detail-page__score">{{ review.score.toFixed(1) }}</span>
+              </div>
+            }
 
-      <article class="review-detail-page__article" [innerHTML]="review.contentHtml | consentAwareHtml : true"></article>
-      @if (formatDate(review.publishedAt)) {
-        <p class="review-detail-page__date review-detail-page__date--footer">{{ formatDate(review.publishedAt) }}</p>
-      }
-
-      @if (hasGalleryImages()) {
-        <section class="review-detail-page__gallery">
-          <h2 class="review-detail-page__gallery-title">Galeria</h2>
-          <div class="review-detail-page__gallery-grid">
-            @for (image of review.images; track image.url) {
-              @if (image.type === 'gallery') {
-                <figure class="review-detail-page__gallery-card">
-                  <img [src]="image.url" [alt]="image.alt" loading="lazy" />
-                </figure>
-              }
+            <h1 class="review-detail-page__title">{{ review.title }}</h1>
+            @if (review.excerpt) {
+              <p class="review-detail-page__excerpt">{{ review.excerpt }}</p>
             }
           </div>
-        </section>
-      }
-    </div>
+
+          @if (review.coverImage) {
+            <img class="review-detail-page__cover" [src]="review.coverImage" [alt]="review.title" loading="lazy" />
+          }
+        </header>
+
+        <article class="review-detail-page__article" [innerHTML]="review.contentHtml | consentAwareHtml : true"></article>
+
+        @if (hasGalleryImages()) {
+          <section class="review-detail-page__gallery">
+            <h2 class="review-detail-page__gallery-title">Galeria</h2>
+            <div class="review-detail-page__gallery-grid">
+              @for (image of review.images; track image.url) {
+                @if (image.type === 'gallery') {
+                  <figure class="review-detail-page__gallery-card">
+                    <img [src]="image.url" [alt]="image.alt" loading="lazy" />
+                  </figure>
+                }
+              }
+            </div>
+          </section>
+        }
+      </div>
+    }
   }
 </section>

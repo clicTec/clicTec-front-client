@@ -16,11 +16,10 @@ export class InicioPageComponent implements OnInit {
   protected isLoading = true;
   protected errorMessage = '';
   protected home: HomeResponse | null = null;
-  protected recommendedBrands: readonly BrandLink[] = [];
+  protected recommendedBrands: readonly BrandLink[] = mapRecommendedBrands();
 
   ngOnInit(): void {
     this.loadHomePage();
-    this.loadRecommendedBrands();
   }
 
   private loadHomePage(): void {
@@ -28,8 +27,12 @@ export class InicioPageComponent implements OnInit {
       next: (response) => {
         this.home = {
           ...response,
-          updates: response.updates ?? []
+          updates: response.updates ?? [],
+          recommendedBrands: response.recommendedBrands ?? []
         };
+        this.recommendedBrands = response.recommendedBrands?.length
+          ? response.recommendedBrands
+          : mapRecommendedBrands();
         this.isLoading = false;
       },
       error: () => {
@@ -37,27 +40,5 @@ export class InicioPageComponent implements OnInit {
         this.isLoading = false;
       }
     });
-  }
-
-  private loadRecommendedBrands(): void {
-    this.contentApiService
-      .getMobilePage({
-        brand: '',
-        tier: '',
-        priceRange: '',
-        os: '',
-        search: '',
-        page: 1,
-        size: 1
-      })
-      .subscribe({
-        next: (response) => {
-          const brandOptions = response.filterGroups.find((group) => group.key === 'brand')?.options ?? [];
-          this.recommendedBrands = mapRecommendedBrands(brandOptions);
-        },
-        error: () => {
-          this.recommendedBrands = [];
-        }
-      });
   }
 }

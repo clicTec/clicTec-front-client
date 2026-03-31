@@ -49,8 +49,8 @@
 .inicio-home__updates-grid {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 22rem));
-  justify-content: start;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  align-items: stretch;
 }
 
 .inicio-update-card {

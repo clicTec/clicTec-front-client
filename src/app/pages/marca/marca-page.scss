@@ -36,14 +36,218 @@
   color: vars.$color-ink-900;
 }
 
+.marca-page__tools {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.2rem 0 0.5rem;
+}
+
+.marca-page__filter {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.marca-page__filter-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 46px;
+  padding: 0 1rem 0 1.05rem;
+  border: vars.$border-width-thin solid rgba(vars.$color-ink-900, 0.08);
+  border-radius: vars.$radius-pill;
+  background: rgba(vars.$color-surface, 0.94);
+  color: vars.$color-ink-900;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.marca-page__filter-toggle:hover {
+  transform: translateY(-1px);
+}
+
+.marca-page__filter-toggle.has-active-filters {
+  border-color: rgba(vars.$color-accent, 0.28);
+}
+
+.marca-page__filter-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.55rem;
+  height: 1.55rem;
+  padding: 0 0.3rem;
+  border-radius: 999px;
+  background: vars.$color-accent;
+  color: vars.$color-surface;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.marca-page__filter-chevron {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-1px);
+  transition: transform 0.2s ease;
+}
+
+.marca-page__filter-chevron.is-open {
+  transform: rotate(-135deg) translateY(-1px);
+}
+
+.marca-page__filter-menu {
+  position: absolute;
+  top: calc(100% + 0.65rem);
+  left: 0;
+  z-index: 5;
+  display: grid;
+  gap: 0.85rem;
+  width: min(20rem, calc(100vw - 2rem));
+  padding: 1rem;
+  border: vars.$border-width-thin solid rgba(vars.$color-ink-900, 0.08);
+  border-radius: 1.25rem;
+  background: rgba(vars.$color-surface, 0.98);
+  box-shadow: vars.$shadow-soft;
+}
+
+.marca-page__filter-field {
+  display: grid;
+  gap: 0.38rem;
+}
+
+.marca-page__filter-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: vars.$color-text-muted;
+}
+
+.marca-page__filter-select {
+  width: 100%;
+  min-height: 2.85rem;
+  padding: 0 0.95rem;
+  border: vars.$border-width-thin solid rgba(vars.$color-ink-900, 0.08);
+  border-radius: 0.95rem;
+  background: rgba(vars.$color-background, 0.94);
+  color: vars.$color-ink-900;
+  font: inherit;
+}
+
+.marca-page__filter-select:focus-visible {
+  outline: 2px solid rgba(vars.$color-accent, 0.26);
+  outline-offset: 2px;
+}
+
+.marca-page__filter-reset {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.85rem;
+  margin-top: 0.2rem;
+  border: vars.$border-width-thin solid rgba(vars.$color-ink-900, 0.08);
+  border-radius: 0.95rem;
+  background: rgba(vars.$color-ink-900, 0.03);
+  color: vars.$color-ink-900;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.marca-page__search {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: min(100%, 19rem);
+  min-height: 46px;
+  margin-left: auto;
+  padding: 0 0.7rem 0 0.55rem;
+  border: vars.$border-width-thin solid rgba(vars.$color-ink-900, 0.08);
+  border-radius: vars.$radius-pill;
+  background: rgba(vars.$color-surface, 0.94);
+}
+
+.marca-page__search-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.3rem;
+  height: 2.3rem;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(vars.$color-accent, 0.08);
+  color: vars.$color-accent;
+  cursor: pointer;
+}
+
+.marca-page__search-button svg {
+  width: 1rem;
+  height: 1rem;
+  fill: currentColor;
+}
+
+.marca-page__search-input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: vars.$color-ink-900;
+  font: inherit;
+}
+
+.marca-page__search-input::placeholder {
+  color: vars.$color-text-muted;
+}
+
 :host-context(body[data-theme='dark']) .marca-page__title {
   color: var(--client-dark-text);
 }
 
+:host-context(body[data-theme='dark']) .marca-page__tools,
 :host-context(body[data-theme='dark']) .marca-page__back,
 :host-context(body[data-theme='dark']) .marca-page__empty-text,
 :host-context(body[data-theme='dark']) .marca-page__state {
   color: var(--client-dark-text-muted);
+}
+
+:host-context(body[data-theme='dark']) .marca-page__filter-toggle,
+:host-context(body[data-theme='dark']) .marca-page__filter-menu,
+:host-context(body[data-theme='dark']) .marca-page__filter-select,
+:host-context(body[data-theme='dark']) .marca-page__filter-reset,
+:host-context(body[data-theme='dark']) .marca-page__search {
+  border-color: rgba(118, 162, 226, 0.18);
+  background: linear-gradient(180deg, rgba(21, 33, 58, 0.96) 0%, rgba(17, 28, 49, 0.96) 100%);
+  color: var(--client-dark-text);
+}
+
+:host-context(body[data-theme='dark']) .marca-page__filter-toggle.has-active-filters {
+  border-color: rgba(123, 198, 255, 0.34);
+}
+
+:host-context(body[data-theme='dark']) .marca-page__filter-label,
+:host-context(body[data-theme='dark']) .marca-page__search-input::placeholder {
+  color: var(--client-dark-text-muted);
+}
+
+:host-context(body[data-theme='dark']) .marca-page__filter-select {
+  background: rgba(11, 19, 37, 0.92);
+  color: var(--client-dark-text);
+}
+
+:host-context(body[data-theme='dark']) .marca-page__filter-reset {
+  background: rgba(118, 162, 226, 0.08);
+  color: var(--client-dark-text);
+}
+
+:host-context(body[data-theme='dark']) .marca-page__search-button {
+  background: rgba(123, 198, 255, 0.12);
+  color: #8fcfff;
 }
 
 .marca-page__catalog {
@@ -118,6 +322,7 @@
 .moviles-phone__name {
   margin: 0.35rem 0 0;
   font-size: 1.2rem;
+  font-weight: 800;
   color: vars.$color-ink-900;
 }
 
@@ -253,6 +458,24 @@
 
   .marca-page__title {
     font-size: clamp(2rem, 10vw, 3.2rem);
+  }
+
+  .marca-page__tools {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .marca-page__filter {
+    width: 100%;
+  }
+
+  .marca-page__filter-toggle,
+  .marca-page__search {
+    width: 100%;
+  }
+
+  .marca-page__filter-menu {
+    width: 100%;
   }
 
   .marca-page__grid {

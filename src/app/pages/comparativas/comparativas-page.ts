@@ -36,7 +36,7 @@ export class ComparativasPageComponent implements OnInit, OnDestroy {
     if (remainingMs <= 0) {
       this.isFinished = true;
       this.countdownUnits = [
-        { label: 'Dias', value: '00' },
+        { label: 'Días', value: '00' },
         { label: 'Horas', value: '00' },
         { label: 'Minutos', value: '00' },
         { label: 'Segundos', value: '00' }
@@ -53,7 +53,7 @@ export class ComparativasPageComponent implements OnInit, OnDestroy {
     const seconds = totalSeconds % 60;
 
     this.countdownUnits = [
-      { label: 'Dias', value: this.formatUnit(days) },
+      { label: 'Días', value: this.formatUnit(days) },
       { label: 'Horas', value: this.formatUnit(hours) },
       { label: 'Minutos', value: this.formatUnit(minutes) },
       { label: 'Segundos', value: this.formatUnit(seconds) }

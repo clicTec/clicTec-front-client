@@ -1,62 +1,110 @@
 <section class="moviles-page">
   @if (isLoading) {
-    <p>Cargando Review Moviles...</p>
+    <p>Cargando Reviews de móviles...</p>
   }
 
   @if (errorMessage) {
     <p>{{ errorMessage }}</p>
   }
 
-  <header class="moviles-page__hero">
+  <header class="moviles-page__hero" [class.moviles-page__hero--single]="launchCalendar.length === 0">
     <div class="moviles-page__intro">
       <h1 class="moviles-page__title">Encuentra el smartphone ideal por perfil y presupuesto</h1>
       <p class="moviles-page__description">
-        Seleccion editorial de modelos recomendados con foco en camara, bateria, rendimiento y soporte
+        Selección editorial de modelos recomendados con foco en cámara, batería, rendimiento y soporte
         de software.
       </p>
     </div>
 
-    <article class="moviles-launches" aria-label="Proximos lanzamientos">
-      <h2 class="moviles-launches__title">Radar de lanzamientos</h2>
-      <div class="moviles-launches__list">
-        @for (entry of launchCalendar; track entry.device) {
-          <article class="moviles-launch">
-            <p class="moviles-launch__month">{{ entry.month }}</p>
-            <h3 class="moviles-launch__device">{{ entry.device }}</h3>
-            <p class="moviles-launch__target">{{ entry.target }}</p>
-            <p class="moviles-launch__notes">{{ entry.notes }}</p>
-          </article>
-        }
-      </div>
-    </article>
+    @if (launchCalendar.length > 0) {
+      <article class="moviles-launches" aria-label="Próximos lanzamientos">
+        <h2 class="moviles-launches__title">Radar de lanzamientos</h2>
+        <div class="moviles-launches__list">
+          @for (entry of launchCalendar; track entry.device) {
+            <article class="moviles-launch">
+              <p class="moviles-launch__month">{{ entry.month }}</p>
+              <h3 class="moviles-launch__device">{{ entry.device }}</h3>
+              <p class="moviles-launch__target">{{ entry.target }}</p>
+              <p class="moviles-launch__notes">{{ entry.notes }}</p>
+            </article>
+          }
+        </div>
+      </article>
+    }
   </header>
 
-  <section class="moviles-catalog" aria-label="Listado de moviles">
+  <section class="moviles-catalog" aria-label="Listado de móviles">
     <header class="moviles-catalog__header">
-      <h2 class="moviles-catalog__title">Todos los moviles</h2>
-      <div class="moviles-catalog__search">
-        <button
-          type="button"
-          class="moviles-catalog__search-button"
-          (click)="applySearch(searchInput.value)"
-          aria-label="Buscar movil"
-        >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              d="M10.5 4a6.5 6.5 0 1 0 4.01 11.62l4.43 4.44 1.06-1.06-4.44-4.43A6.5 6.5 0 0 0 10.5 4Zm0 1.5a5 5 0 1 1 0 10a5 5 0 0 1 0-10Z"
-            />
-          </svg>
-        </button>
-        <input
-          #searchInput
-          type="search"
-          class="moviles-catalog__search-input"
-          placeholder="Buscar movil"
-          aria-label="Buscar movil"
-          [value]="searchDraft"
-          (input)="updateSearchDraft($any($event.target).value)"
-          (keydown.enter)="applySearch(searchInput.value)"
-        />
+      <h2 class="moviles-catalog__title">Catálogo de móviles disponibles</h2>
+      <div class="moviles-catalog__tools">
+        @if (orderedFilterGroups.length > 0) {
+          <div class="moviles-catalog__filter">
+            <button
+              type="button"
+              class="moviles-catalog__filter-toggle"
+              [class.is-open]="isFilterMenuOpen"
+              [class.has-active-filters]="activeFilterCount > 0"
+              (click)="toggleFilterMenu()"
+              aria-haspopup="menu"
+              [attr.aria-expanded]="isFilterMenuOpen"
+            >
+              <span>Filtrar</span>
+              @if (activeFilterCount > 0) {
+                <span class="moviles-catalog__filter-count">{{ activeFilterCount }}</span>
+              }
+              <span class="moviles-catalog__filter-chevron" [class.is-open]="isFilterMenuOpen"></span>
+            </button>
+
+            @if (isFilterMenuOpen) {
+              <div class="moviles-catalog__filter-menu" role="menu" aria-label="Filtros de móviles">
+                @for (group of orderedFilterGroups; track group.key) {
+                  <label class="moviles-catalog__filter-field">
+                    <span class="moviles-catalog__filter-label">{{ group.title }}</span>
+                    <select
+                      class="moviles-catalog__filter-select"
+                      [value]="selectedFilters[group.key]"
+                      (change)="setFilter(group.key, $any($event.target).value)"
+                    >
+                      <option value="">Todas</option>
+                      @for (option of group.options; track option) {
+                        <option [value]="option">{{ option }}</option>
+                      }
+                    </select>
+                  </label>
+                }
+
+                <button type="button" class="moviles-catalog__filter-reset" (click)="resetFilters()">
+                  Limpiar filtros
+                </button>
+              </div>
+            }
+          </div>
+        }
+
+        <div class="moviles-catalog__search">
+          <button
+            type="button"
+            class="moviles-catalog__search-button"
+            (click)="applySearch(searchInput.value)"
+            aria-label="Buscar móvil"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M10.5 4a6.5 6.5 0 1 0 4.01 11.62l4.43 4.44 1.06-1.06-4.44-4.43A6.5 6.5 0 0 0 10.5 4Zm0 1.5a5 5 0 1 1 0 10a5 5 0 0 1 0-10Z"
+              />
+            </svg>
+          </button>
+          <input
+            #searchInput
+            type="search"
+            class="moviles-catalog__search-input"
+            placeholder="Buscar móvil"
+            aria-label="Buscar móvil"
+            [value]="searchDraft"
+            (input)="updateSearchDraft($any($event.target).value)"
+            (keydown.enter)="applySearch(searchInput.value)"
+          />
+        </div>
       </div>
     </header>
 
@@ -66,7 +114,7 @@
           <article class="moviles-phone">
             @if (phone.image) {
               <div class="moviles-phone__media">
-                <img [src]="phone.image" [alt]="phone.model" loading="lazy" />
+                <img [src]="phone.image" [alt]="phone.brand + ' ' + phone.model" loading="lazy" />
               </div>
             }
 
@@ -75,7 +123,7 @@
               <p class="moviles-phone__score">{{ phone.score }}</p>
             </header>
 
-            <h3 class="moviles-phone__name">{{ phone.model }}</h3>
+            <h3 class="moviles-phone__name">{{ phone.brand }} {{ phone.model }}</h3>
             <p class="moviles-phone__meta">{{ phone.brand }} · {{ phone.price }}</p>
             <div class="moviles-phone__summary" [innerHTML]="phone.review | consentAwareHtml : true"></div>
 
@@ -94,49 +142,48 @@
               }
             </div>
 
-            <a class="moviles-phone__cta" [routerLink]="['/moviles', phone.slug]" [attr.aria-label]="'Ver review de ' + phone.model">
+            <a
+              class="moviles-phone__cta"
+              [routerLink]="['/moviles', phone.slug]"
+              [attr.aria-label]="'Ver review de ' + phone.brand + ' ' + phone.model"
+            >
               Ver review
             </a>
           </article>
         }
       </div>
 
-      @if (totalPages > 1) {
-        <nav class="moviles-pagination" aria-label="Paginacion de modelos recomendados">
-          <p class="moviles-pagination__summary">
-            Mostrando {{ visibleStart }}-{{ visibleEnd }} de {{ totalItems }} modelos
-          </p>
-          <div class="moviles-pagination__controls">
+      <nav class="moviles-pagination" aria-label="Paginación de modelos recomendados">
+        <div class="moviles-pagination__controls">
+          <button
+            class="moviles-pagination__button"
+            type="button"
+            (click)="previousPage()"
+            [disabled]="currentPage === 1"
+          >
+            Anterior
+          </button>
+          @for (page of pageNumbers; track page) {
             <button
               class="moviles-pagination__button"
               type="button"
-              (click)="previousPage()"
-              [disabled]="currentPage === 1"
+              [class.is-active]="page === currentPage"
+              [attr.aria-current]="page === currentPage ? 'page' : null"
+              (click)="goToPage(page)"
             >
-              Anterior
+              {{ page }}
             </button>
-            @for (page of pageNumbers; track page) {
-              <button
-                class="moviles-pagination__button"
-                type="button"
-                [class.is-active]="page === currentPage"
-                [attr.aria-current]="page === currentPage ? 'page' : null"
-                (click)="goToPage(page)"
-              >
-                {{ page }}
-              </button>
-            }
-            <button
-              class="moviles-pagination__button"
-              type="button"
-              (click)="nextPage()"
-              [disabled]="currentPage === totalPages"
-            >
-              Siguiente
-            </button>
-          </div>
-        </nav>
-      }
+          }
+          <button
+            class="moviles-pagination__button"
+            type="button"
+            (click)="nextPage()"
+            [disabled]="currentPage === totalPages"
+          >
+            Siguiente
+          </button>
+        </div>
+      </nav>
     } @else {
       <p class="moviles-catalog__empty">{{ emptyStateMessage }}</p>
     }
