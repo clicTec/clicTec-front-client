@@ -3,7 +3,8 @@
     <div class="site-footer__utility" aria-label="Navegación secundaria del pie">
       <nav class="site-footer__utility-nav" aria-label="Enlaces legales">
         <a class="site-footer__utility-brand" routerLink="/" aria-label="Ir al inicio de clicTec">
-          <img class="site-footer__logo site-footer__utility-logo" src="/logo/logosinfondo.png" alt="Logo clicTec">
+          <img class="site-footer__logo site-footer__logo--light site-footer__utility-logo" src="/logo/logosinfondo.png" alt="Logo clicTec">
+          <img class="site-footer__logo site-footer__logo--dark site-footer__utility-logo" src="/logo/logo.png" alt="Logo clicTec">
         </a>
 
         @for (link of utilityLinks(); track link.route) {

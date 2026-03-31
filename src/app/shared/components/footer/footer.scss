@@ -61,6 +61,10 @@
   height: auto;
 }
 
+.site-footer__logo--dark {
+  display: none;
+}
+
 .site-footer__utility-link {
   padding: 0;
   border: 0;
@@ -158,8 +162,12 @@
   color: rgb(124 205 233);
 }
 
-:host-context(body[data-theme='dark']) .site-footer__logo {
-  filter: invert(1) hue-rotate(180deg) saturate(0.92) brightness(1.08);
+:host-context(body[data-theme='dark']) .site-footer__logo--light {
+  display: none;
+}
+
+:host-context(body[data-theme='dark']) .site-footer__logo--dark {
+  display: block;
 }
 
 @media (max-width: 1180px) {
