@@ -38,6 +38,8 @@ export class MovilesPageComponent implements OnInit {
   };
   protected activeDropdown: FilterKey | null = null;
   protected currentPage = 1;
+  protected searchDraft = '';
+  private searchQuery = '';
 
   protected filterGroups: readonly MobileFilterGroupResponse[] = [];
   protected mobileCatalog: readonly MobileCardResponse[] = [];
@@ -45,6 +47,17 @@ export class MovilesPageComponent implements OnInit {
   protected buyingChecklist: readonly string[] = [];
   protected totalItems = 0;
   protected totalPages = 1;
+
+  protected get orderedFilterGroups(): readonly MobileFilterGroupResponse[] {
+    const order: Record<FilterKey, number> = {
+      brand: 0,
+      tier: 1,
+      os: 2,
+      priceRange: 3
+    };
+
+    return [...this.filterGroups].sort((left, right) => order[left.key] - order[right.key]);
+  }
 
   ngOnInit(): void {
     this.loadMobilePage();
@@ -72,6 +85,14 @@ export class MovilesPageComponent implements OnInit {
   protected get visibleEnd(): number {
     const tentativeEnd = this.currentPage * this.pageSize;
     return Math.min(tentativeEnd, this.totalItems);
+  }
+
+  protected get emptyStateMessage(): string {
+    if (this.searchQuery.length > 0) {
+      return 'No hay moviles que coincidan con la busqueda.';
+    }
+
+    return 'No hay moviles disponibles ahora mismo.';
   }
 
   protected setFilter(key: FilterKey, value: string): void {
@@ -188,6 +209,23 @@ export class MovilesPageComponent implements OnInit {
     this.loadMobilePage();
   }
 
+  protected updateSearchDraft(value: string): void {
+    this.searchDraft = value;
+  }
+
+  protected applySearch(value: string = this.searchDraft): void {
+    const nextQuery = value.trim();
+
+    this.searchDraft = nextQuery;
+    if (nextQuery === this.searchQuery && this.currentPage === 1) {
+      return;
+    }
+
+    this.searchQuery = nextQuery;
+    this.currentPage = 1;
+    this.loadMobilePage();
+  }
+
   protected resetFilters(): void {
     this.selectedFilters = {
       brand: '',
@@ -216,6 +254,7 @@ export class MovilesPageComponent implements OnInit {
         tier: this.selectedFilters.tier,
         priceRange: this.selectedFilters.priceRange,
         os: this.selectedFilters.os,
+        search: this.searchQuery,
         page: this.currentPage,
         size: this.pageSize
       })
@@ -236,4 +275,5 @@ export class MovilesPageComponent implements OnInit {
         }
       });
   }
+
 }

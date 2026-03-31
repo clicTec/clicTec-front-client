@@ -8,5 +8,58 @@
       <h1 class="inicio-home__title">{{ home.title }}</h1>
       <p class="inicio-home__subtitle">{{ home.subtitle }}</p>
     </header>
+
+    @if (home.updates.length > 0) {
+      <section class="inicio-home__updates" aria-labelledby="inicio-updates-title">
+        <div class="inicio-home__updates-header">
+          <h2 id="inicio-updates-title" class="inicio-home__updates-title">Novedades 2026</h2>
+        </div>
+
+        <div class="inicio-home__updates-grid">
+          @for (item of home.updates; track item.route) {
+            <article class="inicio-update-card">
+              @if (item.imageUrl) {
+                <div class="inicio-update-card__media">
+                  <img [src]="item.imageUrl" [alt]="item.title" loading="lazy" />
+                </div>
+              }
+
+              <div class="inicio-update-card__body">
+                <h3 class="inicio-update-card__title">{{ item.title }}</h3>
+                <p class="inicio-update-card__description">{{ item.description }}</p>
+                <a class="inicio-update-card__link" [routerLink]="item.route">{{ item.routeLabel }}</a>
+              </div>
+            </article>
+          }
+        </div>
+      </section>
+    }
+
+    @if (recommendedBrands.length > 0) {
+      <section class="inicio-home__brands" aria-labelledby="inicio-brands-title">
+        <div class="inicio-home__brands-header">
+          <h2 id="inicio-brands-title" class="inicio-home__brands-title">Marcas recomendadas</h2>
+        </div>
+
+        <div class="inicio-home__brands-grid">
+          @for (brand of recommendedBrands; track brand.slug) {
+            <a class="inicio-brand-card" [routerLink]="brand.route" [attr.aria-label]="'Ir a la marca ' + brand.name">
+              <div class="inicio-brand-card__logo-shell">
+                <img
+                  class="inicio-brand-card__logo"
+                  [class.inicio-brand-card__logo--wide]="brand.slug === 'oppo' || brand.slug === 'samsung' || brand.slug === 'vivo'"
+                  [class.inicio-brand-card__logo--wider]="brand.slug === 'samsung'"
+                  [src]="brand.logoPath"
+                  [alt]="brand.name"
+                  loading="lazy"
+                />
+              </div>
+              <span class="inicio-brand-card__title">{{ brand.name }}</span>
+              <span class="inicio-brand-card__link">Ver marca</span>
+            </a>
+          }
+        </div>
+      </section>
+    }
   }
 </section>

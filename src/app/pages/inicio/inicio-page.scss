@@ -22,10 +22,234 @@
 
 .inicio-home__subtitle {
   margin: 0;
-  max-width: 38rem;
+  max-width: 56rem;
   font-size: clamp(1.05rem, 1.7vw, 1.4rem);
   line-height: 1.55;
+  text-align: justify;
+  text-justify: inter-word;
   color: var(--color-text-muted);
+}
+
+.inicio-home__updates {
+  display: grid;
+  gap: 1rem;
+  padding: 1.75rem 0 0.25rem;
+}
+
+.inicio-home__updates-header {
+  display: block;
+}
+
+.inicio-home__updates-title {
+  margin: 0;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  color: var(--color-ink-900);
+}
+
+.inicio-home__updates-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 22rem));
+  justify-content: start;
+}
+
+.inicio-update-card {
+  display: grid;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--color-border) 100%, transparent);
+  border-radius: 1.35rem;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--color-surface) 96%, white 4%), var(--color-background));
+  box-shadow: 0 20px 48px rgb(2 6 23 / 0.18);
+}
+
+.inicio-update-card__media {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--color-surface) 80%, var(--color-ink-900) 20%);
+}
+
+.inicio-update-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.inicio-update-card__body {
+  display: grid;
+  gap: 0.8rem;
+  padding: 1.2rem;
+  align-content: start;
+}
+
+.inicio-update-card__title {
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.2;
+  font-weight: 800;
+  color: var(--color-ink-900);
+}
+
+.inicio-update-card__description {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.inicio-update-card__link {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  min-height: 2.5rem;
+  margin-top: 0.25rem;
+  padding: 0.65rem 1rem;
+  border: 1px solid color-mix(in srgb, var(--color-border) 100%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-ink-900) 8%, white 92%);
+  color: var(--color-ink-900);
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.inicio-update-card__link:hover {
+  background: color-mix(in srgb, var(--color-accent-strong) 18%, white 82%);
+  border-color: color-mix(in srgb, var(--color-accent-strong) 40%, transparent);
+}
+
+:host-context(body[data-theme='dark']) .inicio-home__updates-title,
+:host-context(body[data-theme='dark']) .inicio-home__brands-title {
+  color: var(--client-dark-text);
+}
+
+:host-context(body[data-theme='dark']) .inicio-update-card {
+  background:
+    linear-gradient(180deg, rgb(24 39 61 / 0.96), rgb(17 29 47 / 0.96)),
+    var(--client-dark-surface);
+  border-color: var(--client-dark-border);
+  box-shadow: 0 22px 46px -36px rgb(0 0 0 / 0.72);
+}
+
+:host-context(body[data-theme='dark']) .inicio-update-card__title {
+  color: var(--client-dark-text);
+}
+
+:host-context(body[data-theme='dark']) .inicio-update-card__description {
+  color: var(--client-dark-text-muted);
+}
+
+:host-context(body[data-theme='dark']) .inicio-update-card__link {
+  border-color: var(--client-dark-border-soft);
+  background: var(--client-dark-pill);
+  color: var(--client-dark-text);
+  box-shadow: none;
+}
+
+:host-context(body[data-theme='dark']) .inicio-update-card__link:hover {
+  border-color: var(--client-dark-border);
+  background: var(--client-dark-pill-hover);
+  color: var(--client-dark-text);
+}
+
+.inicio-home__brands {
+  display: grid;
+  gap: 1rem;
+  padding: 0.5rem 0 0.25rem;
+}
+
+.inicio-home__brands-header {
+  display: block;
+}
+
+.inicio-home__brands-title {
+  margin: 0;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  color: var(--color-ink-900);
+}
+
+.inicio-home__brands-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+}
+
+.inicio-brand-card {
+  display: grid;
+  gap: 1.1rem;
+  min-height: 10.75rem;
+  padding: 1.3rem;
+  border: 1px solid rgb(83 124 162 / 0.38);
+  border-radius: 1.35rem;
+  background:
+    radial-gradient(circle at top right, rgb(83 167 195 / 0.16), transparent 34%),
+    linear-gradient(180deg, rgb(17 29 46 / 0.98), rgb(12 22 38 / 0.98));
+  color: #eff7fb;
+  text-decoration: none;
+  box-shadow: 0 22px 46px -36px rgb(0 0 0 / 0.72);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.inicio-brand-card__logo-shell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 2.2rem;
+}
+
+.inicio-brand-card__logo {
+  display: block;
+  width: auto;
+  height: 1.7rem;
+  max-width: 7.5rem;
+  object-fit: contain;
+}
+
+.inicio-brand-card__logo--wide {
+  height: 2rem;
+  max-width: 8.8rem;
+}
+
+.inicio-brand-card__logo--wider {
+  height: 2.15rem;
+  max-width: 9.6rem;
+}
+
+.inicio-brand-card:hover {
+  transform: translateY(-2px);
+  border-color: rgb(107 161 205 / 0.54);
+  background:
+    radial-gradient(circle at top right, rgb(83 167 195 / 0.22), transparent 38%),
+    linear-gradient(180deg, rgb(22 36 56 / 0.98), rgb(14 25 42 / 0.98));
+}
+
+.inicio-brand-card__title {
+  margin: 0;
+  font-size: clamp(1.35rem, 2.2vw, 1.8rem);
+  font-weight: 700;
+  line-height: 1.05;
+}
+
+.inicio-brand-card__link {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  min-height: 2rem;
+  padding: 0.42rem 0.82rem;
+  border: 1px solid rgb(83 124 162 / 0.34);
+  border-radius: 999px;
+  background: rgb(39 62 88 / 0.9);
+  color: #eff7fb;
+  font-weight: 700;
+  font-size: 0.92rem;
+  line-height: 1;
 }
 
 @media (max-width: 760px) {
@@ -47,5 +271,43 @@
   .inicio-home__subtitle {
     max-width: none;
     font-size: 0.98rem;
+  }
+
+  .inicio-home__updates {
+    padding-top: 1.2rem;
+  }
+
+  .inicio-home__brands {
+    padding-top: 0.25rem;
+  }
+
+  .inicio-home__brands-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem;
+  }
+
+  .inicio-update-card__body {
+    padding: 1rem;
+  }
+
+  .inicio-brand-card {
+    min-height: 9.25rem;
+    gap: 0.9rem;
+    padding: 1.1rem;
+  }
+
+  .inicio-brand-card__logo {
+    height: 1.5rem;
+    max-width: 6.6rem;
+  }
+
+  .inicio-brand-card__logo--wide {
+    height: 1.8rem;
+    max-width: 7.8rem;
+  }
+
+  .inicio-brand-card__logo--wider {
+    height: 1.95rem;
+    max-width: 8.5rem;
   }
 }

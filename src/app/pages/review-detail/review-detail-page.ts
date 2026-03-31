@@ -32,30 +32,29 @@ export class ReviewDetailPageComponent implements OnInit {
 
     this.contentApiService.getMobileReviewBySlug(slug).subscribe({
       next: (review) => {
-        this.review = review;
-        this.isLoading = false;
-        this.seoService.applyPage({
-          title: review.title,
-          description: review.excerpt,
-          path: `/moviles/${review.slug}`,
-          image: review.coverImage,
-          type: 'article',
-          structuredData: this.seoService.buildArticleSchema({
-            headline: review.title,
-            description: review.excerpt,
-            path: `/moviles/${review.slug}`,
-            image: review.coverImage,
-            publishedAt: review.publishedAt,
-            updatedAt: review.publishedAt
-          })
-        });
+        this.applyReview(review);
       },
       error: () => {
-        this.errorMessage = 'No se pudo cargar la review.';
-        this.isLoading = false;
-        this.seoService.applyNotFound(`/moviles/${slug}`);
+        this.contentApiService.getReviewBySlug(slug).subscribe({
+          next: (review) => {
+            this.applyReview(review);
+          },
+          error: () => {
+            this.errorMessage = 'No se pudo cargar la review.';
+            this.isLoading = false;
+            this.seoService.applyNotFound(`/moviles/${slug}`);
+          }
+        });
       }
     });
+  }
+
+  protected getBackLink(): string {
+    return '/moviles';
+  }
+
+  protected getBackLabel(): string {
+    return 'Volver a moviles';
   }
 
   protected formatDate(value: string | null): string {
@@ -81,5 +80,25 @@ export class ReviewDetailPageComponent implements OnInit {
 
   protected hasReviewMeta(): boolean {
     return this.hasScore() || Boolean(this.formatDate(this.review?.publishedAt ?? null));
+  }
+
+  private applyReview(review: ReviewDetailResponse): void {
+    this.review = review;
+    this.isLoading = false;
+    this.seoService.applyPage({
+      title: review.title,
+      description: review.excerpt,
+      path: `/moviles/${review.slug}`,
+      image: review.coverImage,
+      type: 'article',
+      structuredData: this.seoService.buildArticleSchema({
+        headline: review.title,
+        description: review.excerpt,
+        path: `/moviles/${review.slug}`,
+        image: review.coverImage,
+        publishedAt: review.publishedAt,
+        updatedAt: review.publishedAt
+      })
+    });
   }
 }

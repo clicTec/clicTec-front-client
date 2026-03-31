@@ -1,0 +1,265 @@
+@use '../../../styles/abstracts/variables' as vars;
+
+:host {
+  display: block;
+}
+
+.marca-page {
+  width: 100%;
+  padding: clamp(0.9rem, 2vw, 1.35rem) 0 2rem;
+}
+
+.marca-page__shell {
+  display: grid;
+  gap: 0.9rem;
+  width: min(100% - 2rem, 76rem);
+  margin: 0 auto;
+}
+
+.marca-page__back {
+  display: inline-flex;
+  width: fit-content;
+  color: vars.$color-text-muted;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.marca-page__header {
+  display: block;
+  padding: 0.1rem 0 0.4rem;
+}
+
+.marca-page__title {
+  margin: 0;
+  font-size: clamp(2.3rem, 5vw, 4.6rem);
+  line-height: 0.98;
+  color: vars.$color-ink-900;
+}
+
+:host-context(body[data-theme='dark']) .marca-page__title {
+  color: var(--client-dark-text);
+}
+
+:host-context(body[data-theme='dark']) .marca-page__back,
+:host-context(body[data-theme='dark']) .marca-page__empty-text,
+:host-context(body[data-theme='dark']) .marca-page__state {
+  color: var(--client-dark-text-muted);
+}
+
+.marca-page__catalog {
+  display: block;
+}
+
+.marca-page__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.moviles-phone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 1.2rem 1.2rem 1.35rem;
+  border-radius: 2rem;
+  border: vars.$border-width-thin solid rgba(vars.$color-ink-900, 0.06);
+  background: rgba(vars.$color-surface, 0.94);
+  box-shadow: vars.$shadow-soft;
+}
+
+.moviles-phone__media {
+  width: 44px;
+  height: 44px;
+  margin-bottom: 0.9rem;
+  overflow: hidden;
+  border-radius: 12px;
+  border: vars.$border-width-thin solid rgba(vars.$color-ink-900, 0.08);
+  background: rgba(vars.$color-background, 0.98);
+}
+
+.moviles-phone__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.moviles-phone__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.moviles-phone__segment {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: vars.$color-accent;
+  letter-spacing: 0.03em;
+}
+
+.moviles-phone__score {
+  margin: 0;
+  min-width: 46px;
+  height: 32px;
+  padding: 0 0.6rem;
+  border-radius: vars.$radius-pill;
+  background: rgba(vars.$color-accent, 0.08);
+  color: vars.$color-accent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.moviles-phone__name {
+  margin: 0.35rem 0 0;
+  font-size: 1.2rem;
+  color: vars.$color-ink-900;
+}
+
+.moviles-phone__meta {
+  margin: 0.2rem 0 0;
+  color: vars.$color-text-muted;
+  font-size: 0.95rem;
+}
+
+.moviles-phone__summary {
+  margin: 0.75rem 0 0;
+  font-size: 0.94rem;
+  line-height: 1.6;
+  color: vars.$color-text-muted;
+}
+
+.moviles-phone__summary :is(p, ul, ol) {
+  margin: 0;
+}
+
+.moviles-phone__summary :is(p, ul, ol) + :is(p, ul, ol) {
+  margin-top: 0.55rem;
+}
+
+.moviles-phone__summary ul,
+.moviles-phone__summary ol {
+  padding-left: 1.2rem;
+}
+
+.moviles-phone__summary strong {
+  color: vars.$color-ink-900;
+}
+
+.moviles-phone__specs {
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.moviles-phone__spec {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+  padding-top: 0.5rem;
+  border-top: vars.$border-width-thin solid rgba(vars.$color-ink-900, 0.06);
+}
+
+.moviles-phone__spec-label {
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: vars.$color-text-muted;
+}
+
+.moviles-phone__spec-value {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: vars.$color-ink-900;
+  text-align: right;
+}
+
+.moviles-phone__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.75rem;
+  margin-bottom: 1.1rem;
+}
+
+.moviles-phone__chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 0 0.85rem;
+  border-radius: vars.$radius-pill;
+  border: 0;
+  background: rgba(vars.$color-ink-900, 0.05);
+  color: vars.$color-ink-900;
+  font-size: 0.84rem;
+  text-align: center;
+}
+
+.moviles-phone__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-end;
+  min-width: 9.5rem;
+  min-height: 44px;
+  margin-top: auto;
+  padding: 0 1.35rem;
+  border-radius: vars.$radius-pill;
+  background: vars.$color-accent;
+  color: vars.$color-surface;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+}
+
+.marca-page__empty {
+  padding: 1.2rem 0;
+}
+
+.marca-page__empty-text,
+.marca-page__state {
+  margin: 0;
+  color: vars.$color-text-muted;
+}
+
+.marca-page__state--error {
+  color: #b42318;
+}
+
+@media (max-width: 1180px) {
+  .marca-page__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .marca-page {
+    padding-top: 0.75rem;
+  }
+
+  .marca-page__shell {
+    width: min(100% - 1rem, 76rem);
+    gap: 0.75rem;
+  }
+
+  .marca-page__title {
+    font-size: clamp(2rem, 10vw, 3.2rem);
+  }
+
+  .marca-page__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .moviles-phone {
+    border-radius: 1.6rem;
+  }
+}

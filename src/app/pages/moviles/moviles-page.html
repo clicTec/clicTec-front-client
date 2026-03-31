@@ -31,62 +31,33 @@
     </article>
   </header>
 
-  <section class="moviles-filters" aria-label="Filtros sugeridos">
-    <div class="moviles-filters__head">
-      <h2 class="moviles-filters__title">Filtros rapidos</h2>
-      <div class="moviles-filters__actions">
-        <p class="moviles-filters__text">Combinaciones sugeridas para empezar a explorar.</p>
-        <button class="moviles-filters__reset" type="button" (click)="resetFilters()">
-          Restablecer filtros
-        </button>
-      </div>
-    </div>
-
-    <div class="moviles-filters__groups">
-      @for (group of filterGroups; track group.title) {
-        <article class="moviles-filter-group">
-          <h3 class="moviles-filter-group__title">{{ group.title }}</h3>
-          <div class="moviles-filter-select">
-            <input
-              class="moviles-filter-select__input"
-              type="text"
-              [value]="filterInputValues[group.key]"
-              placeholder="Seleccionar..."
-              autocomplete="off"
-              (focus)="openDropdown(group.key)"
-              (input)="onFilterInput(group.key, $any($event.target).value)"
-              (blur)="closeDropdown(group.key)"
-            >
-
-            @if (activeDropdown === group.key) {
-              <ul class="moviles-filter-select__menu">
-                @if (getFilteredOptions(group.key).length === 0) {
-                  <li class="moviles-filter-select__empty">Sin resultados</li>
-                } @else {
-                  @for (option of getFilteredOptions(group.key); track option) {
-                    <li>
-                      <button
-                        class="moviles-filter-select__option"
-                        type="button"
-                        [class.is-selected]="isSelectedFilter(group.key, option)"
-                        (mousedown)="setFilter(group.key, option)"
-                      >
-                        {{ option }}
-                      </button>
-                    </li>
-                  }
-                }
-              </ul>
-            }
-          </div>
-        </article>
-      }
-    </div>
-  </section>
-
   <section class="moviles-catalog" aria-label="Listado de moviles">
     <header class="moviles-catalog__header">
       <h2 class="moviles-catalog__title">Todos los moviles</h2>
+      <div class="moviles-catalog__search">
+        <button
+          type="button"
+          class="moviles-catalog__search-button"
+          (click)="applySearch(searchInput.value)"
+          aria-label="Buscar movil"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M10.5 4a6.5 6.5 0 1 0 4.01 11.62l4.43 4.44 1.06-1.06-4.44-4.43A6.5 6.5 0 0 0 10.5 4Zm0 1.5a5 5 0 1 1 0 10a5 5 0 0 1 0-10Z"
+            />
+          </svg>
+        </button>
+        <input
+          #searchInput
+          type="search"
+          class="moviles-catalog__search-input"
+          placeholder="Buscar movil"
+          aria-label="Buscar movil"
+          [value]="searchDraft"
+          (input)="updateSearchDraft($any($event.target).value)"
+          (keydown.enter)="applySearch(searchInput.value)"
+        />
+      </div>
     </header>
 
     @if (filteredCatalog.length > 0) {
@@ -167,9 +138,7 @@
         </nav>
       }
     } @else {
-      <p class="moviles-catalog__empty">
-        No hay modelos con esa combinacion de filtros. Prueba otra marca, gama o sistema.
-      </p>
+      <p class="moviles-catalog__empty">{{ emptyStateMessage }}</p>
     }
   </section>
 

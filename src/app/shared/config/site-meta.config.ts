@@ -4,7 +4,7 @@ export const SITE_META = {
   locale: 'es_ES',
   defaultTitle: 'clicTec | Comparativas, móviles, guías y actualidad tecnológica',
   defaultDescription:
-    'Comparativas, reviews, rankings y guías sobre móviles y tecnología con transparencia editorial, cookies configurables y publicidad identificada.',
+    'Descubre los mejores móviles del mercado con análisis completos, comparativas reales y guías de compra actualizadas. Comparamos iPhone, Samsung, Xiaomi y más para ayudarte a elegir el smartphone perfecto según tu presupuesto.',
   defaultRobots: 'index,follow,max-image-preview:large',
   defaultImage: 'https://clictec.es/logo/logo.png'
 } as const;

@@ -3,6 +3,7 @@ import { ComparativasPageComponent } from './pages/comparativas/comparativas-pag
 import { GuiasPageComponent } from './pages/guias/guias-page';
 import { InicioPageComponent } from './pages/inicio/inicio-page';
 import { LegalDocumentPageComponent } from './pages/legal-document/legal-document-page';
+import { MarcaPageComponent } from './pages/marca/marca-page';
 import { MovilesPageComponent } from './pages/moviles/moviles-page';
 import { NotFoundPageComponent } from './pages/not-found/not-found-page';
 import { ReviewDetailPageComponent } from './pages/review-detail/review-detail-page';
@@ -17,7 +18,7 @@ export const routes: Routes = [
     data: {
       seoTitle: 'clicTec | Comparativas, móviles, guías y actualidad tecnológica',
       seoDescription:
-        'Comparativas, reviews, rankings y guías sobre móviles y tecnología con transparencia editorial, cookies configurables y publicidad identificada.',
+        'Descubre los mejores móviles del mercado con análisis completos, comparativas reales y guías de compra actualizadas. Comparamos iPhone, Samsung, Xiaomi y más para ayudarte a elegir el smartphone perfecto según tu presupuesto.',
       seoCanonicalPath: '/',
       seoSchema: 'website'
     }
@@ -35,6 +36,14 @@ export const routes: Routes = [
       seoDescription:
         'Reviews de móviles con foco en diseño, cámara, batería, software y relación calidad-precio.',
       seoCanonicalPath: '/moviles'
+    }
+  },
+  {
+    path: 'marcas/:brandSlug',
+    component: MarcaPageComponent,
+    data: {
+      seoTitle: 'Marca de móviles',
+      seoDescription: 'Página de marca con los móviles y reviews publicados en clicTec.'
     }
   },
   {

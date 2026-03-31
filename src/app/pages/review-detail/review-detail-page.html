@@ -5,7 +5,7 @@
     <p class="review-detail-page__state review-detail-page__state--error">{{ errorMessage }}</p>
   } @else if (review) {
     <div class="review-detail-page__shell">
-      <a class="review-detail-page__back" routerLink="/moviles">Volver a moviles</a>
+      <a class="review-detail-page__back" [routerLink]="getBackLink()">{{ getBackLabel() }}</a>
 
       <header class="review-detail-page__hero" [class.review-detail-page__hero--single]="!review.coverImage">
         <div class="review-detail-page__copy">

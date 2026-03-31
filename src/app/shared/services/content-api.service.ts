@@ -30,6 +30,15 @@ export interface HomeStoryResponse {
   route: string;
 }
 
+export interface HomeUpdateItemResponse {
+  tag: string;
+  title: string;
+  description: string;
+  route: string;
+  routeLabel: string;
+  imageUrl: string;
+}
+
 export interface HomeResponse {
   eyebrow: string;
   title: string;
@@ -38,6 +47,7 @@ export interface HomeResponse {
   latest: HomeLatestItemResponse[];
   topics: HomeTopicResponse[];
   stories: HomeStoryResponse[];
+  updates: HomeUpdateItemResponse[];
 }
 
 export interface MobileFilterGroupResponse {
@@ -204,6 +214,7 @@ export interface MobilePageRequest {
   tier: string;
   priceRange: string;
   os: string;
+  search: string;
   page: number;
   size: number;
 }
@@ -227,6 +238,7 @@ export class ContentApiService {
         tier: request.tier,
         priceRange: request.priceRange,
         os: request.os,
+        search: request.search,
         page: String(request.page),
         size: String(request.size)
       }
