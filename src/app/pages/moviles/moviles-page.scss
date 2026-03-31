@@ -110,6 +110,62 @@
   color: var(--client-dark-text-muted);
 }
 
+:host-context(body[data-theme='dark']) .moviles-launch,
+:host-context(body[data-theme='dark']) .moviles-filter-group,
+:host-context(body[data-theme='dark']) .moviles-phone {
+  border-color: var(--client-dark-border);
+  background: var(--client-dark-surface);
+  box-shadow: 0 22px 46px -36px rgb(0 0 0 / 0.72);
+}
+
+:host-context(body[data-theme='dark']) .moviles-page__hero-visual,
+:host-context(body[data-theme='dark']) .moviles-phone__media {
+  border-color: var(--client-dark-border-soft);
+  background:
+    radial-gradient(circle at top, rgb(129 198 255 / 0.14), transparent 58%),
+    linear-gradient(180deg, rgb(18 31 64 / 0.88) 0%, rgb(10 19 43 / 0.92) 100%);
+  box-shadow: 0 22px 46px -36px rgb(0 0 0 / 0.72);
+}
+
+:host-context(body[data-theme='dark']) .moviles-filter-select__input,
+:host-context(body[data-theme='dark']) .moviles-filter-select__menu,
+:host-context(body[data-theme='dark']) .moviles-filters__reset {
+  border-color: var(--client-dark-border-soft);
+  background: rgb(18 30 48 / 0.96);
+  color: var(--client-dark-text);
+}
+
+:host-context(body[data-theme='dark']) .moviles-filter-select__input {
+  -webkit-text-fill-color: var(--client-dark-text);
+  caret-color: var(--client-dark-text);
+}
+
+:host-context(body[data-theme='dark']) .moviles-filter-select__option,
+:host-context(body[data-theme='dark']) .moviles-phone__chip,
+:host-context(body[data-theme='dark']) .moviles-pagination__button {
+  background: var(--client-dark-pill);
+  color: var(--client-dark-text);
+}
+
+:host-context(body[data-theme='dark']) .moviles-filter-select__option:hover,
+:host-context(body[data-theme='dark']) .moviles-phone__chip:hover {
+  background: var(--client-dark-pill-hover);
+}
+
+:host-context(body[data-theme='dark']) .moviles-filter-select__option.is-selected,
+:host-context(body[data-theme='dark']) .moviles-pagination__button.is-active {
+  background: var(--client-dark-pill-hover);
+  color: #fff;
+}
+
+:host-context(body[data-theme='dark']) .moviles-phone__summary strong {
+  color: var(--client-dark-text);
+}
+
+:host-context(body[data-theme='dark']) .moviles-phone__spec {
+  border-top-color: var(--client-dark-border-soft);
+}
+
 .moviles-launches {
   display: grid;
   align-content: start;

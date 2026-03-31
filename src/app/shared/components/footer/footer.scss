@@ -130,6 +130,38 @@
   font-size: 0.8rem;
 }
 
+:host-context(body[data-theme='dark']) .site-footer__shell {
+  background:
+    radial-gradient(circle at top right, rgb(83 167 195 / 0.18), transparent 30%),
+    linear-gradient(180deg, rgb(15 25 42 / 0.98), rgb(12 21 36 / 0.98)),
+    var(--client-dark-surface-strong);
+  border-color: var(--client-dark-border);
+  box-shadow: 0 28px 64px -46px rgb(0 0 0 / 0.82);
+}
+
+:host-context(body[data-theme='dark']) .site-footer__utility {
+  border-color: var(--client-dark-border-soft);
+}
+
+:host-context(body[data-theme='dark']) .site-footer__utility-link,
+:host-context(body[data-theme='dark']) .site-footer__copy {
+  color: var(--client-dark-text-muted);
+}
+
+:host-context(body[data-theme='dark']) .site-footer__social-link {
+  color: var(--client-dark-text);
+}
+
+:host-context(body[data-theme='dark']) .site-footer__social-link:hover,
+:host-context(body[data-theme='dark']) .site-footer__utility-link:hover {
+  background: rgb(83 167 195 / 0.16);
+  color: rgb(124 205 233);
+}
+
+:host-context(body[data-theme='dark']) .site-footer__logo {
+  filter: invert(1) hue-rotate(180deg) saturate(0.92) brightness(1.08);
+}
+
 @media (max-width: 1180px) {
   .site-footer__utility {
     flex-wrap: wrap;

@@ -262,6 +262,33 @@
   color: #8fcfff;
 }
 
+:host-context(body[data-theme='dark']) .moviles-phone {
+  border-color: var(--client-dark-border);
+  background: var(--client-dark-surface);
+  box-shadow: 0 22px 46px -36px rgb(0 0 0 / 0.72);
+}
+
+:host-context(body[data-theme='dark']) .moviles-phone__name,
+:host-context(body[data-theme='dark']) .moviles-phone__spec-value,
+:host-context(body[data-theme='dark']) .moviles-phone__summary strong {
+  color: var(--client-dark-text);
+}
+
+:host-context(body[data-theme='dark']) .moviles-phone__meta,
+:host-context(body[data-theme='dark']) .moviles-phone__summary,
+:host-context(body[data-theme='dark']) .moviles-phone__spec-label {
+  color: var(--client-dark-text-muted);
+}
+
+:host-context(body[data-theme='dark']) .moviles-phone__spec {
+  border-top-color: var(--client-dark-border-soft);
+}
+
+:host-context(body[data-theme='dark']) .moviles-phone__chip {
+  background: var(--client-dark-pill);
+  color: var(--client-dark-text);
+}
+
 .marca-page__catalog {
   display: block;
 }
