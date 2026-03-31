@@ -807,10 +807,10 @@ body[data-theme='dark'] .moviles-phone__media {
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: 10rem;
-  height: clamp(10rem, 15vw, 10.9rem);
+  min-height: 9.4rem;
+  height: clamp(9.4rem, 14vw, 10.1rem);
   margin-bottom: 0;
-  padding: 1.15rem 1.25rem 1rem;
+  padding: 1.25rem 1.35rem 1.05rem;
   overflow: hidden;
   border-bottom: 1px solid rgb(15 23 42 / 0.08);
   background: linear-gradient(180deg, rgb(246 248 252 / 0.98), rgb(235 239 246 / 0.98));
@@ -820,8 +820,8 @@ body[data-theme='dark'] .moviles-phone__media {
   display: block;
   width: auto;
   height: auto;
-  max-width: min(100%, 9.35rem);
-  max-height: 8.6rem;
+  max-width: min(100%, 8.4rem);
+  max-height: 7.7rem;
   object-fit: contain;
   object-position: center;
   filter: drop-shadow(0 16px 28px rgb(15 23 42 / 0.16));
