@@ -1002,6 +1002,15 @@ body[data-theme='dark'] .comparativas-page__hero::after {
 }
 
 @media (max-width: 760px) {
+  .moviles-catalog__header {
+    align-items: stretch;
+  }
+
+  .moviles-catalog__title {
+    max-width: none;
+    line-height: 1.08;
+  }
+
   .marca-pagination,
   .moviles-pagination {
     justify-content: center;
@@ -1061,6 +1070,48 @@ body[data-theme='dark'] .comparativas-page__hero::after {
     background: rgb(22 35 52 / 0.78);
     color: rgb(208 222 234 / 0.38);
     box-shadow: none;
+  }
+
+  .moviles-catalog__tools {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+    gap: 0.65rem;
+    align-items: stretch;
+    justify-content: initial;
+  }
+
+  .moviles-catalog__filter,
+  .moviles-catalog__search {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .moviles-catalog__filter-toggle {
+    width: 100%;
+    min-height: 3rem;
+    justify-content: space-between;
+  }
+
+  .moviles-catalog__filter-menu {
+    position: static;
+    inset: auto;
+    width: 100%;
+    margin-top: 0.55rem;
+  }
+
+  .moviles-catalog__search {
+    gap: 0.65rem;
+    padding: 0.38rem 0.72rem 0.38rem 0.38rem;
+  }
+
+  .moviles-catalog__search-button {
+    width: 2.35rem;
+    height: 2.35rem;
+  }
+
+  .moviles-catalog__search-input {
+    font-size: 1rem;
   }
 }
 

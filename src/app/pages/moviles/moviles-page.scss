@@ -86,6 +86,30 @@
   color: vars.$color-ink-900;
 }
 
+:host-context(body[data-theme='dark']) .moviles-page__title,
+:host-context(body[data-theme='dark']) .moviles-launches__title,
+:host-context(body[data-theme='dark']) .moviles-checklist__title,
+:host-context(body[data-theme='dark']) .moviles-filters__title,
+:host-context(body[data-theme='dark']) .moviles-catalog__title,
+:host-context(body[data-theme='dark']) .moviles-launch__device,
+:host-context(body[data-theme='dark']) .moviles-phone__name,
+:host-context(body[data-theme='dark']) .moviles-phone__spec-value {
+  color: var(--client-dark-text);
+}
+
+:host-context(body[data-theme='dark']) .moviles-page__description,
+:host-context(body[data-theme='dark']) .moviles-filters__text,
+:host-context(body[data-theme='dark']) .moviles-catalog__empty,
+:host-context(body[data-theme='dark']) .moviles-launch__notes,
+:host-context(body[data-theme='dark']) .moviles-phone__summary,
+:host-context(body[data-theme='dark']) .moviles-launch__target,
+:host-context(body[data-theme='dark']) .moviles-phone__meta,
+:host-context(body[data-theme='dark']) .moviles-filter-group__title,
+:host-context(body[data-theme='dark']) .moviles-phone__spec-label,
+:host-context(body[data-theme='dark']) .moviles-pagination__summary {
+  color: var(--client-dark-text-muted);
+}
+
 .moviles-launches {
   display: grid;
   align-content: start;
