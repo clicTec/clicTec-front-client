@@ -14,7 +14,8 @@ ENV API_UPSTREAM=https://api.clictec.es
 
 COPY --from=build /opt/app/dist/front-client/browser/. /usr/share/nginx/html
 
-RUN printf '%s\n' \
+RUN mkdir -p /etc/nginx/templates \
+  && printf '%s\n' \
   'server {' \
   '  listen 80;' \
   '  server_name _;' \
