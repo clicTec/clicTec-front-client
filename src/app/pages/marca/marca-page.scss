@@ -301,6 +301,9 @@
 }
 
 .moviles-phone {
+  --moviles-phone-media-height: 10.5rem;
+  --moviles-phone-image-width: 8.75rem;
+  --moviles-phone-image-height: 7.85rem;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -504,6 +507,9 @@
   }
 
   .moviles-phone {
+    --moviles-phone-media-height: 9.6rem;
+    --moviles-phone-image-width: 8.2rem;
+    --moviles-phone-image-height: 7.05rem;
     border-radius: 1.6rem;
   }
 

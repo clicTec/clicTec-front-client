@@ -140,8 +140,7 @@
 }
 
 :host-context(body[data-theme='dark']) .moviles-filter-select__option,
-:host-context(body[data-theme='dark']) .moviles-phone__chip,
-:host-context(body[data-theme='dark']) .moviles-pagination__button {
+:host-context(body[data-theme='dark']) .moviles-phone__chip {
   background: var(--client-dark-pill);
   color: var(--client-dark-text);
 }
@@ -151,8 +150,7 @@
   background: var(--client-dark-pill-hover);
 }
 
-:host-context(body[data-theme='dark']) .moviles-filter-select__option.is-selected,
-:host-context(body[data-theme='dark']) .moviles-pagination__button.is-active {
+:host-context(body[data-theme='dark']) .moviles-filter-select__option.is-selected {
   background: var(--client-dark-pill-hover);
   color: #fff;
 }
@@ -396,8 +394,7 @@
 }
 
 .moviles-filter-chip,
-.moviles-phone__chip,
-.moviles-pagination__button {
+.moviles-phone__chip {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -412,8 +409,7 @@
   cursor: pointer;
 }
 
-.moviles-filter-chip.is-selected,
-.moviles-pagination__button.is-active {
+.moviles-filter-chip.is-selected {
   background: vars.$color-ink-900;
   color: vars.$color-surface;
 }
@@ -433,6 +429,9 @@
 }
 
 .moviles-phone {
+  --moviles-phone-media-height: 10.5rem;
+  --moviles-phone-image-width: 8.75rem;
+  --moviles-phone-image-height: 7.85rem;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -537,11 +536,6 @@
   margin-left: auto;
 }
 
-.moviles-pagination__button:disabled {
-  opacity: 0.5;
-  cursor: default;
-}
-
 @media (max-width: 1180px) {
   .moviles-page__hero,
   .moviles-filters__groups,
@@ -617,6 +611,9 @@
   }
 
   .moviles-phone {
+    --moviles-phone-media-height: 9.6rem;
+    --moviles-phone-image-width: 8.2rem;
+    --moviles-phone-image-height: 7.05rem;
     padding-inline: 0;
   }
 
@@ -634,17 +631,6 @@
     max-width: 100%;
     margin-inline: auto;
     justify-content: center;
-  }
-
-  .moviles-phone__media {
-    min-height: 9.75rem;
-    height: 9.75rem;
-    padding: 0.8rem 0.95rem;
-  }
-
-  .moviles-phone__media img {
-    width: min(100%, 9.5rem);
-    height: 7.6rem;
   }
 
   .moviles-phone__body {
