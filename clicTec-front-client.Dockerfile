@@ -23,7 +23,9 @@ RUN mkdir -p /etc/nginx/templates \
   '  index index.html;' \
   '' \
   '  location /api/ {' \
-  '    proxy_pass ${API_UPSTREAM};' \
+  '    resolver 127.0.0.11 ipv6=off;' \
+  '    set $api_upstream ${API_UPSTREAM};' \
+  '    proxy_pass $api_upstream;' \
   '    proxy_http_version 1.1;' \
   '    proxy_set_header Host $host;' \
   '    proxy_set_header X-Real-IP $remote_addr;' \
