@@ -186,6 +186,7 @@ export class MarcaPageComponent implements OnInit, OnDestroy {
 
     this.currentPage += 1;
     this.loadBrandCatalog(this.brandName);
+    this.scrollToFirstMobileRow();
   }
 
   protected goToPage(page: number): void {
@@ -306,5 +307,15 @@ export class MarcaPageComponent implements OnInit, OnDestroy {
     this.errorMessage = 'Marca no encontrada.';
     this.isLoading = false;
     this.seoService.applyNotFound(brandSlug ? `/marcas/${brandSlug}` : '/marcas');
+  }
+
+  private scrollToFirstMobileRow(): void {
+    const catalogGrid = this.host.nativeElement.querySelector('.marca-page__grid');
+    if (!(catalogGrid instanceof HTMLElement)) {
+      return;
+    }
+
+    const top = catalogGrid.getBoundingClientRect().top + window.scrollY - 24;
+    window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
   }
 }

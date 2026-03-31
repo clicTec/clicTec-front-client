@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ContentApiService, HomeResponse } from '../../shared/services/content-api.service';
+import { ContentApiService, HomeResponse, HomeUpdateItemResponse } from '../../shared/services/content-api.service';
 import { BrandLink, mapRecommendedBrands } from '../../shared/utils/brand.utils';
 
 @Component({
@@ -27,7 +27,7 @@ export class InicioPageComponent implements OnInit {
       next: (response) => {
         this.home = {
           ...response,
-          updates: response.updates ?? [],
+          updates: this.selectUniqueBrandUpdates(response.updates ?? []),
           recommendedBrands: response.recommendedBrands ?? []
         };
         this.recommendedBrands = response.recommendedBrands?.length
@@ -40,5 +40,30 @@ export class InicioPageComponent implements OnInit {
         this.isLoading = false;
       }
     });
+  }
+
+  private selectUniqueBrandUpdates(updates: readonly HomeUpdateItemResponse[]): HomeUpdateItemResponse[] {
+    if (!updates.length) {
+      return [];
+    }
+
+    const seenBrands = new Set<string>();
+    const selected: HomeUpdateItemResponse[] = [];
+
+    for (const update of updates) {
+      const brandKey = update.title.split(/\s+/, 1)[0]?.trim().toLowerCase();
+      if (!brandKey || seenBrands.has(brandKey)) {
+        continue;
+      }
+
+      seenBrands.add(brandKey);
+      selected.push(update);
+
+      if (selected.length === 4) {
+        break;
+      }
+    }
+
+    return selected;
   }
 }

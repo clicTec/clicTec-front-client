@@ -41,7 +41,17 @@
         </div>
         <div class="legal-page__meta-item">
           <dt>Contacto</dt>
-          <dd>{{ siteLegalConfig().contactEmail || 'Pendiente de carga' }}</dd>
+          <dd>
+            @if (siteLegalConfig().contactEmail) {
+              {{ siteLegalConfig().contactEmail }}
+            }
+            @if (siteLegalConfig().contactPhone) {
+              <span> · {{ siteLegalConfig().contactPhone }}</span>
+            }
+            @if (!siteLegalConfig().contactEmail && !siteLegalConfig().contactPhone) {
+              Pendiente de carga
+            }
+          </dd>
         </div>
       </dl>
     </div>

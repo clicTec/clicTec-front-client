@@ -203,7 +203,7 @@ export interface TechNewsResponse {
 export interface ReviewImageResponse {
   url: string;
   alt: string;
-  type: 'cover' | 'gallery';
+  type: 'cover' | 'gallery' | 'inline';
 }
 
 export interface ReviewDetailResponse {

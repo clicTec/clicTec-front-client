@@ -13,7 +13,15 @@
           <a class="nav-link" routerLink="/moviles" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Review Móviles</a>
           <a class="nav-link" routerLink="/comparativas" routerLinkActive="is-active" (click)="closeMenu()">Comparador</a>
           <a class="nav-link" routerLink="/reviews" routerLinkActive="is-active" (click)="closeMenu()">Noticias Tec</a>
-          <button class="nav-search" type="button" aria-label="Abrir buscador (próximamente)" title="Buscador próximamente">
+          <button
+            class="nav-search"
+            type="button"
+            aria-label="Abrir buscador"
+            title="Buscar móviles"
+            aria-controls="topbar-search-panel"
+            [attr.aria-expanded]="isSearchOpen ? 'true' : 'false'"
+            (click)="toggleSearch()"
+          >
             <svg class="nav-search-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <circle cx="11" cy="11" r="6.8"></circle>
               <path d="M16.4 16.4L20.2 20.2"></path>
@@ -23,6 +31,21 @@
       </nav>
 
       <div class="topbar-actions">
+        <button
+          class="topbar-search-trigger"
+          type="button"
+          aria-label="Abrir buscador"
+          title="Buscar móviles"
+          aria-controls="topbar-search-panel"
+          [attr.aria-expanded]="isSearchOpen ? 'true' : 'false'"
+          (click)="toggleSearch()"
+        >
+          <svg class="nav-search-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="11" cy="11" r="6.8"></circle>
+            <path d="M16.4 16.4L20.2 20.2"></path>
+          </svg>
+        </button>
+
         <button
           class="nav-toggle"
           type="button"
@@ -40,6 +63,45 @@
         </button>
       </div>
     </div>
+
+    @if (isSearchOpen) {
+      <section class="topbar-search-panel" id="topbar-search-panel" aria-label="Buscador de móviles">
+        <div class="topbar-search">
+          <input
+            #headerSearchInput
+            type="search"
+            class="topbar-search__input"
+            placeholder="Buscar móvil"
+            aria-label="Buscar móvil desde el header"
+            [value]="searchDraft"
+            (input)="updateSearchDraft($any($event.target).value)"
+            (keydown.enter)="submitSearch(headerSearchInput.value)"
+          />
+          <button type="button" class="topbar-search__submit" (click)="submitSearch(headerSearchInput.value)">
+            Buscar
+          </button>
+        </div>
+
+        @if (searchDraft.trim().length > 0) {
+          <p class="topbar-search__query">Buscando: <strong>{{ searchDraft.trim() }}</strong></p>
+
+          @if (isSearching) {
+            <p class="topbar-search__state">Buscando...</p>
+          } @else if (searchSuggestions.length > 0) {
+            <div class="topbar-search__suggestions">
+              @for (item of searchSuggestions; track item.slug) {
+                <a class="topbar-search__suggestion" [routerLink]="['/moviles', item.slug]" (click)="closeSearch(true)">
+                  <span class="topbar-search__suggestion-title">{{ item.brand }} {{ item.model }}</span>
+                  <span class="topbar-search__suggestion-meta">{{ item.segment }} · {{ item.price }}</span>
+                </a>
+              }
+            </div>
+          } @else {
+            <p class="topbar-search__state">Sin resultados para esa búsqueda.</p>
+          }
+        }
+      </section>
+    }
 
     <div class="topbar-backdrop" aria-hidden="true" (click)="closeMenu()"></div>
   </div>

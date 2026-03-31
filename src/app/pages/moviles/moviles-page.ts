@@ -1,5 +1,6 @@
-import { Component, ElementRef, HostListener, OnInit, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, ElementRef, HostListener, OnDestroy, OnInit, inject } from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { ConsentAwareHtmlPipe } from '../../shared/pipes/consent-aware-html.pipe';
 import {
   ContentApiService,
@@ -17,11 +18,12 @@ type FilterKey = 'brand' | 'tier' | 'priceRange' | 'os';
   templateUrl: './moviles-page.html',
   styleUrl: './moviles-page.scss'
 })
-export class MovilesPageComponent implements OnInit {
+export class MovilesPageComponent implements OnInit, OnDestroy {
   private readonly contentApiService = inject(ContentApiService);
   private readonly host = inject(ElementRef<HTMLElement>);
+  private readonly route = inject(ActivatedRoute);
   private readonly pageSize = 9;
-  private readonly maxVisiblePages = 5;
+  private queryParamSubscription?: Subscription;
 
   protected isLoading = true;
   protected errorMessage = '';
@@ -62,7 +64,17 @@ export class MovilesPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadMobilePage();
+    this.queryParamSubscription = this.route.queryParamMap.subscribe((params) => {
+      const queryFromUrl = (params.get('q') ?? '').trim();
+      this.searchDraft = queryFromUrl;
+      this.searchQuery = queryFromUrl;
+      this.currentPage = 1;
+      this.loadMobilePage();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.queryParamSubscription?.unsubscribe();
   }
 
   protected get filteredCatalog(): readonly MobileCardResponse[] {
@@ -74,20 +86,7 @@ export class MovilesPageComponent implements OnInit {
   }
 
   protected get pageNumbers(): readonly number[] {
-    if (this.totalPages <= this.maxVisiblePages) {
-      return Array.from({ length: this.totalPages }, (_, index) => index + 1);
-    }
-
-    const halfWindow = Math.floor(this.maxVisiblePages / 2);
-    let start = Math.max(1, this.currentPage - halfWindow);
-    let end = start + this.maxVisiblePages - 1;
-
-    if (end > this.totalPages) {
-      end = this.totalPages;
-      start = end - this.maxVisiblePages + 1;
-    }
-
-    return Array.from({ length: end - start + 1 }, (_, index) => start + index);
+    return [this.currentPage];
   }
 
   protected get visibleStart(): number {
@@ -219,6 +218,7 @@ export class MovilesPageComponent implements OnInit {
     }
     this.currentPage -= 1;
     this.loadMobilePage();
+    this.scrollToFirstMobileRow();
   }
 
   protected nextPage(): void {
@@ -227,6 +227,7 @@ export class MovilesPageComponent implements OnInit {
     }
     this.currentPage += 1;
     this.loadMobilePage();
+    this.scrollToFirstMobileRow();
   }
 
   protected goToPage(page: number): void {
@@ -235,6 +236,7 @@ export class MovilesPageComponent implements OnInit {
     }
     this.currentPage = page;
     this.loadMobilePage();
+    this.scrollToFirstMobileRow();
   }
 
   protected updateSearchDraft(value: string): void {
@@ -302,6 +304,17 @@ export class MovilesPageComponent implements OnInit {
           this.isLoading = false;
         }
       });
+  }
+
+  private scrollToFirstMobileRow(): void {
+    const catalogSection = this.host.nativeElement.querySelector('.moviles-catalog');
+    if (!(catalogSection instanceof HTMLElement)) {
+      return;
+    }
+
+    const offset = window.innerWidth <= 760 ? 88 : 112;
+    const top = catalogSection.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
   }
 
 }

@@ -1,69 +1,939 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://clictec.es/</loc>
-    <lastmod>2026-03-28</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://clictec.es/moviles</loc>
-    <lastmod>2026-03-28</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://clictec.es/moviles/samsung-s26</loc>
-    <lastmod>2026-03-28</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://clictec.es/comparativas</loc>
-    <lastmod>2026-03-28</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://clictec.es/reviews</loc>
-    <lastmod>2026-03-28</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://clictec.es/guias</loc>
-    <lastmod>2026-03-28</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://clictec.es/ranking</loc>
-    <lastmod>2026-03-28</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://clictec.es/privacidad</loc>
-    <lastmod>2026-03-28</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://clictec.es/cookies</loc>
-    <lastmod>2026-03-28</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://clictec.es/aviso-legal</loc>
-    <lastmod>2026-03-28</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://clictec.es/publicidad-afiliacion</loc>
-    <lastmod>2026-03-28</lastmod>
+    <lastmod>2026-03-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://clictec.es/marcas/apple</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://clictec.es/marcas/google</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://clictec.es/marcas/oppo</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://clictec.es/marcas/samsung</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://clictec.es/marcas/vivo</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://clictec.es/marcas/xiaomi</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/google-pixel-10</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/google-pixel-10.png</image:loc>
+      <image:title>Google Pixel 10</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/google-pixel-10-pro</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/google-pixel-10-pro.png</image:loc>
+      <image:title>Google Pixel 10 Pro</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/google-pixel-10-pro-xl</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/google-pixel-10-pro-xl.png</image:loc>
+      <image:title>Google Pixel 10 Pro XL</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/google-pixel-10a</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/google-pixel-10a.png</image:loc>
+      <image:title>Google Pixel 10a</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/iphone-11</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/iphone-11.png</image:loc>
+      <image:title>Apple iPhone 11</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/iphone-12</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/iphone-12.png</image:loc>
+      <image:title>Apple iPhone 12</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/iphone-13</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/iphone-13.png</image:loc>
+      <image:title>Apple iPhone 13</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/iphone-13-pro</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/iphone-13-pro.png</image:loc>
+      <image:title>Apple iPhone 13 Pro</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/iphone-13-pro-max</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/iphone-13-pro-max.png</image:loc>
+      <image:title>Apple iPhone 13 Pro Max</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/iphone-14</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/iphone-14.png</image:loc>
+      <image:title>Apple iPhone 14</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/iphone-14-pro</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/iphone-14-pro.png</image:loc>
+      <image:title>Apple iPhone 14 Pro</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/iphone-14-pro-max</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/iphone-14-pro-max.png</image:loc>
+      <image:title>Apple iPhone 14 Pro Max</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/iphone-15</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/iphone-15.png</image:loc>
+      <image:title>Apple iPhone 15</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/iphone-15-plus</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/iphone-15-plus.png</image:loc>
+      <image:title>Apple iPhone 15 Plus</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/iphone-15-pro</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/iphone-15-pro.png</image:loc>
+      <image:title>Apple iPhone 15 Pro</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/iphone-15-pro-max</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/iphone-15-pro-max.png</image:loc>
+      <image:title>Apple iPhone 15 Pro Max</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/iphone-16</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/iphone-16.png</image:loc>
+      <image:title>Apple iPhone 16</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/iphone-16-plus</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/iphone-16-plus.png</image:loc>
+      <image:title>Apple iPhone 16 Plus</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/iphone-16-pro</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/iphone-16-pro.png</image:loc>
+      <image:title>Apple iPhone 16 Pro</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/iphone-16-pro-max</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/iphone-16-pro-max.png</image:loc>
+      <image:title>Apple iPhone 16 Pro Max</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/iphone-16e</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/iphone-16e.png</image:loc>
+      <image:title>Apple iPhone 16e</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/iphone-17</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/iphone-17.png</image:loc>
+      <image:title>Apple iPhone 17</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/iphone-17-pro</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/iphone-17-pro.png</image:loc>
+      <image:title>Apple iPhone 17 Pro</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/iphone-17-pro-max</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/iphone-17-pro-max.png</image:loc>
+      <image:title>Apple iPhone 17 Pro Max</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/iphone-17e</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/iphone-17e.png</image:loc>
+      <image:title>Apple iPhone 17e</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/iphone-air</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/iphone-air.png</image:loc>
+      <image:title>Apple iPhone Air</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/oppo-a5-pro-4g</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/oppo-a5-pro-4g.png</image:loc>
+      <image:title>Oppo A5 Pro 4G</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/oppo-a5-pro-5g</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/oppo-a5-pro-5g.png</image:loc>
+      <image:title>Oppo A5 Pro 5G</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/oppo-a6-pro-5g</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/oppo-a6-pro-5g.png</image:loc>
+      <image:title>Oppo A6 Pro 5G</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/oppo-find-x8-pro</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/oppo-find-x8-pro.png</image:loc>
+      <image:title>Oppo Find X8 Pro</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/oppo-find-x9</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/oppo-find-x9.png</image:loc>
+      <image:title>Oppo Find X9</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/oppo-find-x9-pro</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/oppo-find-x9-pro.png</image:loc>
+      <image:title>Oppo Find X9 Pro</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/oppo-reno-14</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/oppo-reno-14.png</image:loc>
+      <image:title>Oppo Reno 14</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/oppo-reno-14-f-5g</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/oppo-reno-14-f-5g.png</image:loc>
+      <image:title>Oppo Reno 14 F 5G</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/oppo-reno-14-fs-5g</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/oppo-reno-14-fs-5g.png</image:loc>
+      <image:title>Oppo Reno 14 FS 5G</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-galaxy-a05</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-galaxy-a05.png</image:loc>
+      <image:title>Samsung Galaxy A05</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-galaxy-a15</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-galaxy-a15.png</image:loc>
+      <image:title>Samsung Galaxy A15</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-galaxy-a16</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-galaxy-a16.png</image:loc>
+      <image:title>Samsung Galaxy A16</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-galaxy-a17-5g</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-galaxy-a17-5g.png</image:loc>
+      <image:title>Samsung Galaxy A17 5G</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-galaxy-a25</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-galaxy-a25.png</image:loc>
+      <image:title>Samsung Galaxy A25</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-galaxy-a34</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-galaxy-a34.png</image:loc>
+      <image:title>Samsung Galaxy A34</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-galaxy-a35</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-galaxy-a35.png</image:loc>
+      <image:title>Samsung Galaxy A35</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-galaxy-a36-5g</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-galaxy-a36-5g.png</image:loc>
+      <image:title>Samsung Galaxy A36 5G</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-galaxy-a37</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-galaxy-a37.png</image:loc>
+      <image:title>Samsung Galaxy A37</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-galaxy-a54</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-galaxy-a54.png</image:loc>
+      <image:title>Samsung Galaxy A54</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-galaxy-a55</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-galaxy-a55.png</image:loc>
+      <image:title>Samsung Galaxy A55</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-galaxy-a56</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-galaxy-a56.png</image:loc>
+      <image:title>Samsung Galaxy A56</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-galaxy-a57</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-galaxy-a57.png</image:loc>
+      <image:title>Samsung Galaxy A57</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-s22</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-s22.png</image:loc>
+      <image:title>Samsung S22</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-s22-plus</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-s22-plus.png</image:loc>
+      <image:title>Samsung S22+</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-s22-ultra</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-s22-ultra.png</image:loc>
+      <image:title>Samsung S22 Ultra</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-s23</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-s23.png</image:loc>
+      <image:title>Samsung S23</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-s23-fe</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-s23-fe.png</image:loc>
+      <image:title>Samsung S23 FE</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-s23-plus</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-s23-plus.png</image:loc>
+      <image:title>Samsung S23+</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-s23-ultra</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-s23-ultra.png</image:loc>
+      <image:title>Samsung S23 Ultra</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-s24</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-s24.png</image:loc>
+      <image:title>Samsung S24</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-s24-fe</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-s24-fe.png</image:loc>
+      <image:title>Samsung S24 FE</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-s24-plus</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-s24-plus.png</image:loc>
+      <image:title>Samsung S24+</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-s24-ultra</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-s24-ultra.png</image:loc>
+      <image:title>Samsung S24 Ultra</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-s25-fe</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-s25-fe.png</image:loc>
+      <image:title>Samsung S25 FE</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-s25-ultra</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-s25-ultra.png</image:loc>
+      <image:title>Samsung S25 Ultra</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-s26</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-s26.png</image:loc>
+      <image:title>Samsung S26</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-s26-plus</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-s26-plus.png</image:loc>
+      <image:title>Samsung S26+</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-s26-ultra</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-s26-ultra.png</image:loc>
+      <image:title>Samsung S26 Ultra</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-z-flip-6</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-z-flip-6.png</image:loc>
+      <image:title>Samsung Z Flip 6</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-z-flip-7</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-z-flip-7.png</image:loc>
+      <image:title>Samsung Z Flip 7</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-z-flip-7-fe</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-z-flip-7-fe.png</image:loc>
+      <image:title>Samsung Z Flip 7 FE</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-z-fold-6</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-z-fold-6.png</image:loc>
+      <image:title>Samsung Z Fold 6</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/samsung-z-fold-7</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/samsung-z-fold-7.png</image:loc>
+      <image:title>Samsung Z Fold 7</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/vivo-v70-5g</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/vivo-v70-5g.png</image:loc>
+      <image:title>Vivo V70 5G</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/vivo-x200-fe</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/vivo-x200-fe.png</image:loc>
+      <image:title>Vivo X200 FE</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/vivo-x300</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/vivo-x300.png</image:loc>
+      <image:title>Vivo X300</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/vivo-x300-pro</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/vivo-x300-pro.png</image:loc>
+      <image:title>Vivo X300 Pro</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/xiaomi-15t</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/xiaomi-15t.png</image:loc>
+      <image:title>Xiaomi 15T</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/xiaomi-15t-pro</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/xiaomi-15t-pro.png</image:loc>
+      <image:title>Xiaomi 15T Pro</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/xiaomi-17</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/xiaomi-17.png</image:loc>
+      <image:title>Xiaomi 17</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/xiaomi-17-ultra</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/xiaomi-17-ultra.png</image:loc>
+      <image:title>Xiaomi 17 Ultra</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/xiaomi-redmi-note-13</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/xiaomi-redmi-note-13.png</image:loc>
+      <image:title>Xiaomi Redmi Note 13</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/xiaomi-redmi-note-14-4g</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/xiaomi-redmi-note-14-4g.png</image:loc>
+      <image:title>Xiaomi Redmi Note 14 4G</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/xiaomi-redmi-note-15-4g</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/xiaomi-redmi-note-15-4g.png</image:loc>
+      <image:title>Xiaomi Redmi Note 15 4G</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/xiaomi-redmi-note-15-5g</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/xiaomi-redmi-note-15-5g.png</image:loc>
+      <image:title>Xiaomi Redmi Note 15 5G</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/xiaomi-redmi-note-15-pro-4g</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/xiaomi-redmi-note-15-pro-4g.png</image:loc>
+      <image:title>Xiaomi Redmi Note 15 Pro 4G</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/xiaomi-redmi-note-15-pro-5g</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/xiaomi-redmi-note-15-pro-5g.png</image:loc>
+      <image:title>Xiaomi Redmi Note 15 Pro 5G</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://clictec.es/moviles/xiaomi-redmi-note-15-pro-plus</loc>
+    <lastmod>2026-03-31</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/xiaomi-redmi-note-15-pro-plus.png</image:loc>
+      <image:title>Xiaomi Redmi Note 15 Pro+</image:title>
+    </image:image>
   </url>
 </urlset>

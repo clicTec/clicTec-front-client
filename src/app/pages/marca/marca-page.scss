@@ -198,11 +198,17 @@
   outline: 0;
   background: transparent;
   color: vars.$color-ink-900;
+  -webkit-text-fill-color: vars.$color-ink-900;
+  caret-color: vars.$color-ink-900;
   font: inherit;
 }
 
 .marca-page__search-input::placeholder {
   color: vars.$color-text-muted;
+}
+
+.marca-page__search-input:focus::placeholder {
+  color: transparent;
 }
 
 :host-context(body[data-theme='dark']) .marca-page__title {
@@ -233,6 +239,12 @@
 :host-context(body[data-theme='dark']) .marca-page__filter-label,
 :host-context(body[data-theme='dark']) .marca-page__search-input::placeholder {
   color: var(--client-dark-text-muted);
+}
+
+:host-context(body[data-theme='dark']) .marca-page__search-input {
+  color: var(--client-dark-text);
+  -webkit-text-fill-color: var(--client-dark-text);
+  caret-color: var(--client-dark-text);
 }
 
 :host-context(body[data-theme='dark']) .marca-page__filter-select {
@@ -272,23 +284,6 @@
   box-shadow: vars.$shadow-soft;
 }
 
-.moviles-phone__media {
-  width: 44px;
-  height: 44px;
-  margin-bottom: 0.9rem;
-  overflow: hidden;
-  border-radius: 12px;
-  border: vars.$border-width-thin solid rgba(vars.$color-ink-900, 0.08);
-  background: rgba(vars.$color-background, 0.98);
-}
-
-.moviles-phone__media img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 .moviles-phone__top {
   display: flex;
   align-items: center;
@@ -302,21 +297,6 @@
   font-weight: 600;
   color: vars.$color-accent;
   letter-spacing: 0.03em;
-}
-
-.moviles-phone__score {
-  margin: 0;
-  min-width: 46px;
-  height: 32px;
-  padding: 0 0.6rem;
-  border-radius: vars.$radius-pill;
-  background: rgba(vars.$color-accent, 0.08);
-  color: vars.$color-accent;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.84rem;
-  font-weight: 700;
 }
 
 .moviles-phone__name {
@@ -415,15 +395,27 @@
   align-self: flex-end;
   min-width: 9.5rem;
   min-height: 44px;
-  margin-top: auto;
-  padding: 0 1.35rem;
+  margin-top: 1rem;
+  padding: 0 1.5rem;
+  border: vars.$border-width-thin solid rgba(vars.$color-accent, 0.14);
   border-radius: vars.$radius-pill;
-  background: vars.$color-accent;
+  background: linear-gradient(180deg, rgba(vars.$color-accent, 0.92), vars.$color-accent);
+  box-shadow: 0 12px 24px -18px rgba(vars.$color-accent, 0.72);
   color: vars.$color-surface;
   font-size: 0.92rem;
   font-weight: 600;
   text-align: center;
   text-decoration: none;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+.moviles-phone__cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 28px -18px rgba(vars.$color-accent, 0.8);
+  filter: saturate(1.05);
 }
 
 .marca-page__empty {

@@ -5,8 +5,21 @@
     <p>{{ errorMessage }}</p>
   } @else if (home) {
     <header class="inicio-home__masthead">
-      <h1 class="inicio-home__title">{{ home.title }}</h1>
-      <p class="inicio-home__subtitle">{{ home.subtitle }}</p>
+      <div class="inicio-home__masthead-copy">
+        <h1 class="inicio-home__title">{{ home.title }}</h1>
+        <p class="inicio-home__subtitle">{{ home.subtitle }}</p>
+      </div>
+
+      <figure class="inicio-home__hero-visual" aria-hidden="true">
+        <div class="inicio-home__hero-glow inicio-home__hero-glow--primary"></div>
+        <div class="inicio-home__hero-glow inicio-home__hero-glow--secondary"></div>
+        <img
+          class="inicio-home__hero-image"
+          src="/mobile-images/samsung-s25-ultra.png"
+          alt=""
+          loading="eager"
+        />
+      </figure>
     </header>
 
     @if (home.updates.length > 0) {

@@ -7,7 +7,7 @@
     <p>{{ errorMessage }}</p>
   }
 
-  <header class="moviles-page__hero" [class.moviles-page__hero--single]="launchCalendar.length === 0">
+  <header class="moviles-page__hero">
     <div class="moviles-page__intro">
       <h1 class="moviles-page__title">Encuentra el smartphone ideal por perfil y presupuesto</h1>
       <p class="moviles-page__description">
@@ -16,22 +16,26 @@
       </p>
     </div>
 
-    @if (launchCalendar.length > 0) {
-      <article class="moviles-launches" aria-label="Próximos lanzamientos">
-        <h2 class="moviles-launches__title">Radar de lanzamientos</h2>
-        <div class="moviles-launches__list">
-          @for (entry of launchCalendar; track entry.device) {
-            <article class="moviles-launch">
-              <p class="moviles-launch__month">{{ entry.month }}</p>
-              <h3 class="moviles-launch__device">{{ entry.device }}</h3>
-              <p class="moviles-launch__target">{{ entry.target }}</p>
-              <p class="moviles-launch__notes">{{ entry.notes }}</p>
-            </article>
-          }
-        </div>
-      </article>
-    }
+    <figure class="moviles-page__hero-visual" aria-hidden="true">
+      <img class="moviles-page__hero-image" src="/mobile-images/google-pixel-10-pro.png" alt="" loading="eager" />
+    </figure>
   </header>
+
+  @if (launchCalendar.length > 0) {
+    <section class="moviles-launches" aria-label="Próximos lanzamientos">
+      <h2 class="moviles-launches__title">Radar de lanzamientos</h2>
+      <div class="moviles-launches__list">
+        @for (entry of launchCalendar; track entry.device) {
+          <article class="moviles-launch">
+            <p class="moviles-launch__month">{{ entry.month }}</p>
+            <h3 class="moviles-launch__device">{{ entry.device }}</h3>
+            <p class="moviles-launch__target">{{ entry.target }}</p>
+            <p class="moviles-launch__notes">{{ entry.notes }}</p>
+          </article>
+        }
+      </div>
+    </section>
+  }
 
   <section class="moviles-catalog" aria-label="Listado de móviles">
     <header class="moviles-catalog__header">
@@ -120,27 +124,11 @@
 
             <header class="moviles-phone__top">
               <p class="moviles-phone__segment">{{ phone.segment }}</p>
-              <p class="moviles-phone__score">{{ phone.score }}</p>
             </header>
 
             <h3 class="moviles-phone__name">{{ phone.brand }} {{ phone.model }}</h3>
             <p class="moviles-phone__meta">{{ phone.brand }} · {{ phone.price }}</p>
             <div class="moviles-phone__summary" [innerHTML]="phone.review | consentAwareHtml : true"></div>
-
-            <ul class="moviles-phone__specs">
-              @for (spec of phone.specs; track spec.label) {
-                <li class="moviles-phone__spec">
-                  <span class="moviles-phone__spec-label">{{ spec.label }}</span>
-                  <span class="moviles-phone__spec-value">{{ spec.value }}</span>
-                </li>
-              }
-            </ul>
-
-            <div class="moviles-phone__chips">
-              @for (chip of phone.chips; track chip) {
-                <span class="moviles-phone__chip">{{ chip }}</span>
-              }
-            </div>
 
             <a
               class="moviles-phone__cta"

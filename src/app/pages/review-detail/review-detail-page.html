@@ -16,8 +16,14 @@
             }
           </header>
 
+          @if (review.coverImage) {
+            <figure class="mobile-review__hero-media">
+              <img class="mobile-review__hero-image" [src]="review.coverImage" [alt]="review.title" loading="lazy" />
+            </figure>
+          }
+
           @if (hasSummaryCards()) {
-            <section class="mobile-review__summary">
+            <section class="mobile-review__summary" [class.mobile-review__summary--single]="hasSingleSummaryCard()">
               @if (positiveSummaryItems.length > 0) {
                 <article class="summary-card summary-card--positive">
                   <h2 class="summary-card__title">Lo mejor</h2>
@@ -44,13 +50,24 @@
 
           @if (reviewBlocks.length > 0) {
             <section class="mobile-review__content">
-              @for (block of reviewBlocks; track block.title) {
+              @for (block of reviewBlocks; track $index) {
                 <article class="review-block">
                   <h2>{{ block.title }}</h2>
                   @for (paragraph of block.paragraphs; track paragraph) {
                     <p>{{ paragraph }}</p>
                   }
                 </article>
+
+                @if (getInlineImageAfterBlock($index); as inlineImage) {
+                  <figure class="mobile-review__inline-media">
+                    <img
+                      class="mobile-review__inline-image"
+                      [src]="inlineImage.url"
+                      [alt]="inlineImage.alt"
+                      loading="lazy"
+                    />
+                  </figure>
+                }
               }
             </section>
           } @else {

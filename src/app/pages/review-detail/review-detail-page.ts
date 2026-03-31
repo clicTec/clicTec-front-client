@@ -2,7 +2,11 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import { ConsentAwareHtmlPipe } from '../../shared/pipes/consent-aware-html.pipe';
-import { ContentApiService, ReviewDetailResponse } from '../../shared/services/content-api.service';
+import {
+  ContentApiService,
+  ReviewDetailResponse,
+  ReviewImageResponse
+} from '../../shared/services/content-api.service';
 import { SeoService } from '../../shared/services/seo.service';
 
 interface ReviewContentBlock {
@@ -29,6 +33,7 @@ export class ReviewDetailPageComponent implements OnInit {
   protected reviewBlocks: readonly ReviewContentBlock[] = [];
   protected positiveSummaryItems: readonly string[] = [];
   protected considerationSummaryItems: readonly string[] = [];
+  protected inlineImagesByBlockIndex: readonly (ReviewImageResponse | null)[] = [];
 
   ngOnInit(): void {
     const slug = (this.route.snapshot.paramMap.get('slug') ?? '').trim();
@@ -90,6 +95,16 @@ export class ReviewDetailPageComponent implements OnInit {
     return this.positiveSummaryItems.length > 0 || this.considerationSummaryItems.length > 0;
   }
 
+  protected hasSingleSummaryCard(): boolean {
+    const cardsCount =
+      Number(this.positiveSummaryItems.length > 0) + Number(this.considerationSummaryItems.length > 0);
+    return cardsCount === 1;
+  }
+
+  protected getInlineImageAfterBlock(blockIndex: number): ReviewImageResponse | null {
+    return this.inlineImagesByBlockIndex[blockIndex] ?? null;
+  }
+
   private applyReview(review: ReviewDetailResponse, source: 'mobile' | 'review'): void {
     this.review = review;
     this.isMobileReview = source === 'mobile';
@@ -97,6 +112,9 @@ export class ReviewDetailPageComponent implements OnInit {
     this.positiveSummaryItems = this.isMobileReview ? this.buildPositiveSummaryItems(this.reviewBlocks) : [];
     this.considerationSummaryItems = this.isMobileReview
       ? this.buildConsiderationSummaryItems(this.reviewBlocks)
+      : [];
+    this.inlineImagesByBlockIndex = this.isMobileReview
+      ? this.buildInlineImagesByBlockIndex(this.reviewBlocks, review.images)
       : [];
     this.isLoading = false;
     this.seoService.applyPage({
@@ -209,6 +227,45 @@ export class ReviewDetailPageComponent implements OnInit {
     }
 
     return [];
+  }
+
+  private buildInlineImagesByBlockIndex(
+    blocks: readonly ReviewContentBlock[],
+    images: readonly ReviewImageResponse[]
+  ): (ReviewImageResponse | null)[] {
+    if (blocks.length === 0) {
+      return [];
+    }
+
+    const inlineImages = images.filter((image) => image.type === 'inline');
+    if (inlineImages.length === 0) {
+      return Array.from({ length: blocks.length }, () => null);
+    }
+
+    const imagesByBlockIndex = Array.from({ length: blocks.length }, () => null as ReviewImageResponse | null);
+    const imagesToPlace = inlineImages.slice(0, blocks.length);
+    const usedIndexes = new Set<number>();
+
+    imagesToPlace.forEach((image, imageIndex) => {
+      let targetIndex =
+        Math.floor(((imageIndex + 1) * (blocks.length + 1)) / (imagesToPlace.length + 1)) - 1;
+      targetIndex = Math.min(Math.max(targetIndex, 0), blocks.length - 1);
+
+      while (usedIndexes.has(targetIndex) && targetIndex < blocks.length - 1) {
+        targetIndex += 1;
+      }
+
+      while (usedIndexes.has(targetIndex) && targetIndex > 0) {
+        targetIndex -= 1;
+      }
+
+      if (!usedIndexes.has(targetIndex)) {
+        imagesByBlockIndex[targetIndex] = image;
+        usedIndexes.add(targetIndex);
+      }
+    });
+
+    return imagesByBlockIndex;
   }
 
   private normalizeText(value: string): string {

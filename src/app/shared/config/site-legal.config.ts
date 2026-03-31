@@ -51,6 +51,7 @@ export interface LegalSiteConfig {
   readonly domain: string;
   readonly ownerName: string;
   readonly contactEmail: string;
+  readonly contactPhone: string;
   readonly socialProfiles: LegalSocialProfiles;
   readonly consentVersion: string;
   readonly consentRetentionMonths: number;
@@ -97,6 +98,7 @@ export const EMPTY_LEGAL_SITE_CONFIG: LegalSiteConfig = {
   domain: '',
   ownerName: '',
   contactEmail: '',
+  contactPhone: '',
   socialProfiles: {
     facebook: '',
     x: '',
