@@ -47,50 +47,6 @@
     <header class="moviles-catalog__header">
       <h2 class="moviles-catalog__title">Catálogo de móviles disponibles</h2>
       <div class="moviles-catalog__tools">
-        @if (orderedFilterGroups.length > 0) {
-          <div class="moviles-catalog__filter">
-            <button
-              type="button"
-              class="moviles-catalog__filter-toggle"
-              [class.is-open]="isFilterMenuOpen"
-              [class.has-active-filters]="activeFilterCount > 0"
-              (click)="toggleFilterMenu()"
-              aria-haspopup="menu"
-              [attr.aria-expanded]="isFilterMenuOpen"
-            >
-              <span>Filtrar</span>
-              @if (activeFilterCount > 0) {
-                <span class="moviles-catalog__filter-count">{{ activeFilterCount }}</span>
-              }
-              <span class="moviles-catalog__filter-chevron" [class.is-open]="isFilterMenuOpen"></span>
-            </button>
-
-            @if (isFilterMenuOpen) {
-              <div class="moviles-catalog__filter-menu" role="menu" aria-label="Filtros de móviles">
-                @for (group of orderedFilterGroups; track group.key) {
-                  <label class="moviles-catalog__filter-field">
-                    <span class="moviles-catalog__filter-label">{{ group.title }}</span>
-                    <select
-                      class="moviles-catalog__filter-select"
-                      [value]="selectedFilters[group.key]"
-                      (change)="setFilter(group.key, $any($event.target).value)"
-                    >
-                      <option value="">Todas</option>
-                      @for (option of group.options; track option) {
-                        <option [value]="option">{{ option }}</option>
-                      }
-                    </select>
-                  </label>
-                }
-
-                <button type="button" class="moviles-catalog__filter-reset" (click)="resetFilters()">
-                  Limpiar filtros
-                </button>
-              </div>
-            }
-          </div>
-        }
-
         <div class="moviles-catalog__search">
           <button
             type="button"

@@ -1,5 +1,5 @@
 import { NgStyle } from '@angular/common';
-import { Component, ElementRef, HostListener, OnDestroy, OnInit, inject } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import {
@@ -12,11 +12,8 @@ import { ConsentAwareHtmlPipe } from '../../shared/pipes/consent-aware-html.pipe
 import {
   ContentApiService,
   LaunchEntryResponse,
-  MobileCardResponse,
-  MobileFilterGroupResponse
+  MobileCardResponse
 } from '../../shared/services/content-api.service';
-
-type FilterKey = 'brand' | 'tier' | 'priceRange' | 'os';
 
 @Component({
   selector: 'app-moviles-page',
@@ -37,34 +34,15 @@ export class MovilesPageComponent implements OnInit, OnDestroy {
   protected readonly cardImageOverrides = MOBILE_CARD_IMAGE_OVERRIDES;
   protected isLoading = true;
   protected errorMessage = '';
-  protected selectedFilters: Record<FilterKey, string> = {
-    brand: '',
-    tier: '',
-    priceRange: '',
-    os: ''
-  };
-  protected isFilterMenuOpen = false;
   protected currentPage = 1;
   protected searchDraft = '';
   private searchQuery = '';
 
-  protected filterGroups: readonly MobileFilterGroupResponse[] = [];
   protected mobileCatalog: readonly MobileCardResponse[] = [];
   protected launchCalendar: readonly LaunchEntryResponse[] = [];
   protected buyingChecklist: readonly string[] = [];
   protected totalItems = 0;
   protected totalPages = 1;
-
-  protected get orderedFilterGroups(): readonly MobileFilterGroupResponse[] {
-    const order: Record<FilterKey, number> = {
-      brand: 0,
-      tier: 1,
-      os: 2,
-      priceRange: 3
-    };
-
-    return [...this.filterGroups].sort((left, right) => order[left.key] - order[right.key]);
-  }
 
   ngOnInit(): void {
     this.queryParamSubscription = this.route.queryParamMap.subscribe((params) => {
@@ -125,10 +103,6 @@ export class MovilesPageComponent implements OnInit, OnDestroy {
     return 'No hay móviles disponibles ahora mismo.';
   }
 
-  protected get activeFilterCount(): number {
-    return Object.values(this.selectedFilters).filter((value) => value.trim().length > 0).length;
-  }
-
   protected getPhoneImageSource(phone: MobileCardResponse): string {
     const overrideSource = this.getPhoneImageOverride(phone.slug)?.src?.trim();
     return overrideSource && overrideSource.length > 0 ? overrideSource : phone.image.trim();
@@ -140,40 +114,6 @@ export class MovilesPageComponent implements OnInit, OnDestroy {
 
   protected getPhoneImageStyle(slug: string): MobileImageStyle | null {
     return this.getPhoneImageOverride(slug)?.imageStyle ?? null;
-  }
-
-  protected toggleFilterMenu(): void {
-    this.isFilterMenuOpen = !this.isFilterMenuOpen;
-  }
-
-  protected setFilter(key: FilterKey, value: string): void {
-    if (this.selectedFilters[key] === value) {
-      return;
-    }
-
-    this.selectedFilters = {
-      ...this.selectedFilters,
-      [key]: value
-    };
-    this.currentPage = 1;
-    this.loadMobilePage();
-  }
-
-  @HostListener('document:click', ['$event'])
-  protected onDocumentClick(event: MouseEvent): void {
-    const target = event.target as Node | null;
-    if (!target) {
-      return;
-    }
-
-    const filterMenu = this.host.nativeElement.querySelector('.moviles-catalog__filter');
-    if (filterMenu instanceof HTMLElement && !filterMenu.contains(target)) {
-      this.isFilterMenuOpen = false;
-    }
-  }
-
-  protected isSelectedFilter(key: FilterKey, value: string): boolean {
-    return this.selectedFilters[key] === value;
   }
 
   protected previousPage(): void {
@@ -220,35 +160,22 @@ export class MovilesPageComponent implements OnInit, OnDestroy {
     this.loadMobilePage();
   }
 
-  protected resetFilters(): void {
-    this.selectedFilters = {
-      brand: '',
-      tier: '',
-      priceRange: '',
-      os: ''
-    };
-    this.isFilterMenuOpen = false;
-    this.currentPage = 1;
-    this.loadMobilePage();
-  }
-
   private loadMobilePage(): void {
     this.isLoading = true;
     this.errorMessage = '';
 
     this.contentApiService
       .getMobilePage({
-        brand: this.selectedFilters.brand,
-        tier: this.selectedFilters.tier,
-        priceRange: this.selectedFilters.priceRange,
-        os: this.selectedFilters.os,
+        brand: '',
+        tier: '',
+        priceRange: '',
+        os: '',
         search: this.searchQuery,
         page: this.currentPage,
         size: this.pageSize
       })
       .subscribe({
         next: (response) => {
-          this.filterGroups = response.filterGroups;
           this.launchCalendar = response.launchCalendar;
           this.buyingChecklist = response.buyingChecklist;
           this.mobileCatalog = response.catalog.items;
