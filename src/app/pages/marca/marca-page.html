@@ -87,9 +87,14 @@
           <div class="marca-page__grid">
             @for (phone of mobileCatalog; track phone.slug) {
               <article class="moviles-phone">
-                @if (phone.image) {
-                  <div class="moviles-phone__media">
-                    <img [src]="phone.image" [alt]="phone.brand + ' ' + phone.model" loading="lazy" />
+                @if (getPhoneImageSource(phone); as phoneImageSource) {
+                  <div class="moviles-phone__media" [ngStyle]="getPhoneImageFrameStyle(phone.slug)">
+                    <img
+                      [src]="phoneImageSource"
+                      [alt]="phone.brand + ' ' + phone.model"
+                      [ngStyle]="getPhoneImageStyle(phone.slug)"
+                      loading="lazy"
+                    />
                   </div>
                 }
 

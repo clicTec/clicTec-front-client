@@ -1,16 +1,16 @@
-export type MovilesImageStyle = Readonly<Record<string, string>>;
+export type MobileImageStyle = Readonly<Record<string, string>>;
 
-export interface MovilesImageOverride {
+export interface MobileImageOverride {
   src?: string;
-  frameStyle?: MovilesImageStyle;
-  imageStyle?: MovilesImageStyle;
+  frameStyle?: MobileImageStyle;
+  imageStyle?: MobileImageStyle;
 }
 
-export const MOVILES_HERO_IMAGE: Readonly<MovilesImageOverride & { src: string }> = {
+export const MOVILES_HERO_IMAGE: Readonly<MobileImageOverride & { src: string }> = {
   src: '/mobile-images/google-pixel-10-pro.png'
 };
 
-export const MOVILES_CARD_IMAGE_OVERRIDES: Readonly<Record<string, MovilesImageOverride>> = {
+export const MOBILE_CARD_IMAGE_OVERRIDES: Readonly<Record<string, MobileImageOverride>> = {
   // Ajusta cada móvil por slug.
   // Ejemplo:
   // 'iphone-16-pro': {

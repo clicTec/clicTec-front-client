@@ -2,6 +2,12 @@ import { NgStyle } from '@angular/common';
 import { Component, ElementRef, HostListener, OnDestroy, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
+import {
+  MOBILE_CARD_IMAGE_OVERRIDES,
+  MobileImageOverride,
+  MobileImageStyle,
+  MOVILES_HERO_IMAGE
+} from '../../shared/config/mobile-card-image.config';
 import { ConsentAwareHtmlPipe } from '../../shared/pipes/consent-aware-html.pipe';
 import {
   ContentApiService,
@@ -9,12 +15,6 @@ import {
   MobileCardResponse,
   MobileFilterGroupResponse
 } from '../../shared/services/content-api.service';
-import {
-  MOVILES_CARD_IMAGE_OVERRIDES,
-  MOVILES_HERO_IMAGE,
-  MovilesImageOverride,
-  MovilesImageStyle
-} from './moviles-page-image.config';
 
 type FilterKey = 'brand' | 'tier' | 'priceRange' | 'os';
 
@@ -30,10 +30,11 @@ export class MovilesPageComponent implements OnInit, OnDestroy {
   private readonly host = inject(ElementRef<HTMLElement>);
   private readonly route = inject(ActivatedRoute);
   private readonly pageSize = 9;
+  private readonly maxVisiblePages = 5;
   private queryParamSubscription?: Subscription;
 
   protected readonly heroImage = MOVILES_HERO_IMAGE;
-  protected readonly cardImageOverrides = MOVILES_CARD_IMAGE_OVERRIDES;
+  protected readonly cardImageOverrides = MOBILE_CARD_IMAGE_OVERRIDES;
   protected isLoading = true;
   protected errorMessage = '';
   protected selectedFilters: Record<FilterKey, string> = {
@@ -42,13 +43,6 @@ export class MovilesPageComponent implements OnInit, OnDestroy {
     priceRange: '',
     os: ''
   };
-  protected filterInputValues: Record<FilterKey, string> = {
-    brand: '',
-    tier: '',
-    priceRange: '',
-    os: ''
-  };
-  protected activeDropdown: FilterKey | null = null;
   protected isFilterMenuOpen = false;
   protected currentPage = 1;
   protected searchDraft = '';
@@ -95,7 +89,20 @@ export class MovilesPageComponent implements OnInit, OnDestroy {
   }
 
   protected get pageNumbers(): readonly number[] {
-    return [this.currentPage];
+    if (this.totalPages <= this.maxVisiblePages) {
+      return Array.from({ length: this.totalPages }, (_, index) => index + 1);
+    }
+
+    const halfWindow = Math.floor(this.maxVisiblePages / 2);
+    let start = Math.max(1, this.currentPage - halfWindow);
+    let end = start + this.maxVisiblePages - 1;
+
+    if (end > this.totalPages) {
+      end = this.totalPages;
+      start = end - this.maxVisiblePages + 1;
+    }
+
+    return Array.from({ length: end - start + 1 }, (_, index) => start + index);
   }
 
   protected get visibleStart(): number {
@@ -127,11 +134,11 @@ export class MovilesPageComponent implements OnInit, OnDestroy {
     return overrideSource && overrideSource.length > 0 ? overrideSource : phone.image.trim();
   }
 
-  protected getPhoneImageFrameStyle(slug: string): MovilesImageStyle | null {
+  protected getPhoneImageFrameStyle(slug: string): MobileImageStyle | null {
     return this.getPhoneImageOverride(slug)?.frameStyle ?? null;
   }
 
-  protected getPhoneImageStyle(slug: string): MovilesImageStyle | null {
+  protected getPhoneImageStyle(slug: string): MobileImageStyle | null {
     return this.getPhoneImageOverride(slug)?.imageStyle ?? null;
   }
 
@@ -141,11 +148,6 @@ export class MovilesPageComponent implements OnInit, OnDestroy {
 
   protected setFilter(key: FilterKey, value: string): void {
     if (this.selectedFilters[key] === value) {
-      this.filterInputValues = {
-        ...this.filterInputValues,
-        [key]: value
-      };
-      this.activeDropdown = null;
       return;
     }
 
@@ -153,51 +155,8 @@ export class MovilesPageComponent implements OnInit, OnDestroy {
       ...this.selectedFilters,
       [key]: value
     };
-    this.filterInputValues = {
-      ...this.filterInputValues,
-      [key]: value
-    };
-    this.activeDropdown = null;
     this.currentPage = 1;
     this.loadMobilePage();
-  }
-
-  protected onFilterInput(key: FilterKey, value: string): void {
-    this.filterInputValues = {
-      ...this.filterInputValues,
-      [key]: value
-    };
-    this.activeDropdown = key;
-  }
-
-  protected openDropdown(key: FilterKey): void {
-    this.activeDropdown = key;
-  }
-
-  protected closeDropdown(key: FilterKey): void {
-    window.setTimeout(() => {
-      if (this.activeDropdown === key) {
-        this.activeDropdown = null;
-        this.filterInputValues = {
-          ...this.filterInputValues,
-          [key]: this.selectedFilters[key]
-        };
-      }
-    }, 120);
-  }
-
-  protected getFilteredOptions(key: FilterKey): readonly string[] {
-    const group = this.filterGroups.find((item) => item.key === key);
-    if (!group) {
-      return [];
-    }
-
-    const query = this.filterInputValues[key].trim().toLowerCase();
-    if (!query) {
-      return group.options;
-    }
-
-    return group.options.filter((option) => option.toLowerCase().includes(query));
   }
 
   @HostListener('document:click', ['$event'])
@@ -205,23 +164,6 @@ export class MovilesPageComponent implements OnInit, OnDestroy {
     const target = event.target as Node | null;
     if (!target) {
       return;
-    }
-
-    const dropdowns = this.host.nativeElement.querySelectorAll('.moviles-filter-select') as NodeListOf<HTMLElement>;
-    let clickedInsideDropdown = false;
-    dropdowns.forEach((dropdown) => {
-      if (dropdown.contains(target)) {
-        clickedInsideDropdown = true;
-      }
-    });
-
-    if (!clickedInsideDropdown && this.activeDropdown) {
-      const activeKey = this.activeDropdown;
-      this.activeDropdown = null;
-      this.filterInputValues = {
-        ...this.filterInputValues,
-        [activeKey]: this.selectedFilters[activeKey]
-      };
     }
 
     const filterMenu = this.host.nativeElement.querySelector('.moviles-catalog__filter');
@@ -285,13 +227,7 @@ export class MovilesPageComponent implements OnInit, OnDestroy {
       priceRange: '',
       os: ''
     };
-    this.filterInputValues = {
-      brand: '',
-      tier: '',
-      priceRange: '',
-      os: ''
-    };
-    this.activeDropdown = null;
+    this.isFilterMenuOpen = false;
     this.currentPage = 1;
     this.loadMobilePage();
   }
@@ -339,7 +275,7 @@ export class MovilesPageComponent implements OnInit, OnDestroy {
     window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
   }
 
-  private getPhoneImageOverride(slug: string): MovilesImageOverride | undefined {
+  private getPhoneImageOverride(slug: string): MobileImageOverride | undefined {
     return this.cardImageOverrides[slug];
   }
 
