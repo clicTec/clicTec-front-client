@@ -190,6 +190,14 @@
   color: var(--client-dark-text);
 }
 
+:host-context(body[data-theme='dark']) .inicio-home__title {
+  color: var(--client-dark-text);
+}
+
+:host-context(body[data-theme='dark']) .inicio-home__subtitle {
+  color: var(--client-dark-text-muted);
+}
+
 :host-context(body[data-theme='dark']) .inicio-home__hero-visual {
   background:
     radial-gradient(circle at 20% 18%, rgb(110 188 255 / 0.24), transparent 28%),
@@ -347,14 +355,25 @@
   }
 
   .inicio-home__hero-visual {
-    width: min(100%, 25rem);
-    min-height: 16rem;
+    width: min(100%, 22rem);
+    min-height: 13.5rem;
     margin-inline: auto;
   }
 
   .inicio-home__hero-image {
-    width: min(100%, 16rem);
-    max-height: 16rem;
+    width: min(100%, 13.25rem);
+    max-height: 13.25rem;
+  }
+
+  .inicio-update-card__media {
+    aspect-ratio: 5 / 4;
+    padding: 0.85rem;
+  }
+
+  .inicio-update-card__media img {
+    width: min(100%, 11.5rem);
+    max-height: 10.5rem;
+    margin-inline: auto;
   }
 
   .inicio-home__updates {

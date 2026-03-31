@@ -377,9 +377,27 @@
     padding-top: 1.8rem;
   }
 
+  .review-detail-page__cover {
+    max-height: 17rem;
+    object-fit: contain;
+  }
+
   .mobile-review__subtitle {
     font-size: 1rem;
     line-height: 1.8;
+  }
+
+  .mobile-review__hero-media {
+    width: min(100%, 18.5rem);
+    aspect-ratio: 4 / 3;
+    margin-bottom: 1.8rem;
+    padding: 0.85rem;
+  }
+
+  .mobile-review__hero-image {
+    width: min(100%, 13.5rem);
+    height: auto;
+    margin-inline: auto;
   }
 
   .review-block {
@@ -390,6 +408,18 @@
   .mobile-review__inline-media--shifted {
     width: 100%;
     margin: -0.15rem auto 0.2rem;
+  }
+
+  .mobile-review__inline-image {
+    width: min(100%, 13rem);
+    max-height: 12rem;
+    margin-inline: auto;
+  }
+
+  .review-detail-page__gallery-card img {
+    min-height: 0;
+    max-height: 12.5rem;
+    object-fit: contain;
   }
 
   .review-block h2 {

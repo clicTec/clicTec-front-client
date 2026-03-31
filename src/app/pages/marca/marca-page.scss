@@ -477,4 +477,16 @@
   .moviles-phone {
     border-radius: 1.6rem;
   }
+
+  .marca-pagination {
+    justify-content: center;
+    margin-top: 1.15rem;
+  }
+
+  .marca-pagination__controls {
+    width: auto;
+    max-width: 100%;
+    margin-inline: auto;
+    justify-content: center;
+  }
 }

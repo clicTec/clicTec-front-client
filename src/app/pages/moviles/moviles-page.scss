@@ -489,6 +489,10 @@
     padding-inline: 0.15rem;
   }
 
+  .moviles-page__hero {
+    gap: 0.75rem;
+  }
+
   .moviles-page__intro,
   .moviles-filter-group,
   .moviles-phone {
@@ -505,6 +509,16 @@
     font-size: clamp(2rem, 10vw, 3.2rem);
   }
 
+  .moviles-page__hero-visual {
+    min-height: 11.5rem;
+    padding: 0.85rem;
+    border-radius: 1.5rem;
+  }
+
+  .moviles-page__hero-image {
+    width: min(100%, 10.75rem);
+  }
+
   .moviles-filters__head,
   .moviles-catalog__header {
     flex-direction: column;
@@ -512,7 +526,7 @@
   }
 
   .moviles-pagination {
-    justify-content: flex-end;
+    justify-content: center;
   }
 
   .moviles-launch,
@@ -531,7 +545,22 @@
   }
 
   .moviles-pagination__controls {
-    width: 100%;
+    width: auto;
+    max-width: 100%;
+    margin-inline: auto;
+    justify-content: center;
+  }
+
+  .moviles-phone__media {
+    aspect-ratio: auto;
+    min-height: 10.75rem;
+    padding: 0.8rem;
+  }
+
+  .moviles-phone__media img {
+    width: min(100%, 11.5rem);
+    height: auto;
+    max-height: 11.5rem;
   }
 
   .moviles-phone__spec {
