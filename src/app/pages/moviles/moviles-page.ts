@@ -1,3 +1,4 @@
+import { NgStyle } from '@angular/common';
 import { Component, ElementRef, HostListener, OnDestroy, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -8,13 +9,19 @@ import {
   MobileCardResponse,
   MobileFilterGroupResponse
 } from '../../shared/services/content-api.service';
+import {
+  MOVILES_CARD_IMAGE_OVERRIDES,
+  MOVILES_HERO_IMAGE,
+  MovilesImageOverride,
+  MovilesImageStyle
+} from './moviles-page-image.config';
 
 type FilterKey = 'brand' | 'tier' | 'priceRange' | 'os';
 
 @Component({
   selector: 'app-moviles-page',
   standalone: true,
-  imports: [RouterLink, ConsentAwareHtmlPipe],
+  imports: [RouterLink, ConsentAwareHtmlPipe, NgStyle],
   templateUrl: './moviles-page.html',
   styleUrl: './moviles-page.scss'
 })
@@ -25,6 +32,8 @@ export class MovilesPageComponent implements OnInit, OnDestroy {
   private readonly pageSize = 9;
   private queryParamSubscription?: Subscription;
 
+  protected readonly heroImage = MOVILES_HERO_IMAGE;
+  protected readonly cardImageOverrides = MOVILES_CARD_IMAGE_OVERRIDES;
   protected isLoading = true;
   protected errorMessage = '';
   protected selectedFilters: Record<FilterKey, string> = {
@@ -111,6 +120,19 @@ export class MovilesPageComponent implements OnInit, OnDestroy {
 
   protected get activeFilterCount(): number {
     return Object.values(this.selectedFilters).filter((value) => value.trim().length > 0).length;
+  }
+
+  protected getPhoneImageSource(phone: MobileCardResponse): string {
+    const overrideSource = this.getPhoneImageOverride(phone.slug)?.src?.trim();
+    return overrideSource && overrideSource.length > 0 ? overrideSource : phone.image.trim();
+  }
+
+  protected getPhoneImageFrameStyle(slug: string): MovilesImageStyle | null {
+    return this.getPhoneImageOverride(slug)?.frameStyle ?? null;
+  }
+
+  protected getPhoneImageStyle(slug: string): MovilesImageStyle | null {
+    return this.getPhoneImageOverride(slug)?.imageStyle ?? null;
   }
 
   protected toggleFilterMenu(): void {
@@ -315,6 +337,10 @@ export class MovilesPageComponent implements OnInit, OnDestroy {
     const offset = window.innerWidth <= 760 ? 88 : 112;
     const top = catalogSection.getBoundingClientRect().top + window.scrollY - offset;
     window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
+  }
+
+  private getPhoneImageOverride(slug: string): MovilesImageOverride | undefined {
+    return this.cardImageOverrides[slug];
   }
 
 }

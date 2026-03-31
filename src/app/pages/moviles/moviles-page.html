@@ -16,8 +16,14 @@
       </p>
     </div>
 
-    <figure class="moviles-page__hero-visual" aria-hidden="true">
-      <img class="moviles-page__hero-image" src="/mobile-images/google-pixel-10-pro.png" alt="" loading="eager" />
+    <figure class="moviles-page__hero-visual" [ngStyle]="heroImage.frameStyle ?? null" aria-hidden="true">
+      <img
+        class="moviles-page__hero-image"
+        [src]="heroImage.src"
+        [ngStyle]="heroImage.imageStyle ?? null"
+        alt=""
+        loading="eager"
+      />
     </figure>
   </header>
 
@@ -116,9 +122,14 @@
         <div class="moviles-catalog__grid">
           @for (phone of paginatedCatalog; track phone.slug) {
             <article class="moviles-phone">
-              @if (phone.image) {
-                <div class="moviles-phone__media">
-                  <img [src]="phone.image" [alt]="phone.brand + ' ' + phone.model" loading="lazy" />
+              @if (getPhoneImageSource(phone); as phoneImageSource) {
+                <div class="moviles-phone__media" [ngStyle]="getPhoneImageFrameStyle(phone.slug)">
+                  <img
+                    [src]="phoneImageSource"
+                    [alt]="phone.brand + ' ' + phone.model"
+                    [ngStyle]="getPhoneImageStyle(phone.slug)"
+                    loading="lazy"
+                  />
                 </div>
               }
 

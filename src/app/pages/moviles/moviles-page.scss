@@ -39,6 +39,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   min-height: clamp(15rem, 24vw, 20rem);
   padding: 1rem;
   border: vars.$border-width-thin solid rgba(vars.$color-ink-900, 0.08);
@@ -49,6 +50,8 @@
 .moviles-page__hero-image {
   display: block;
   width: min(100%, 15.5rem);
+  object-fit: contain;
+  object-position: center;
 }
 
 .moviles-launch__month,
@@ -124,6 +127,12 @@
     radial-gradient(circle at top, rgb(129 198 255 / 0.14), transparent 58%),
     linear-gradient(180deg, rgb(18 31 64 / 0.88) 0%, rgb(10 19 43 / 0.92) 100%);
   box-shadow: 0 22px 46px -36px rgb(0 0 0 / 0.72);
+}
+
+:host-context(body[data-theme='dark']) .moviles-phone__media {
+  background:
+    radial-gradient(circle at top, rgb(129 198 255 / 0.1), transparent 60%),
+    linear-gradient(180deg, rgb(18 30 48 / 0.9) 0%, rgb(11 20 38 / 0.94) 100%);
 }
 
 :host-context(body[data-theme='dark']) .moviles-filter-select__input,
@@ -438,6 +447,32 @@
   align-self: start;
   overflow: hidden;
   padding: 0;
+}
+
+.moviles-phone__media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  min-height: var(--moviles-phone-media-height);
+  padding: 1rem 1rem 0.35rem;
+  background: linear-gradient(180deg, rgba(vars.$color-background, 0.94), rgba(vars.$color-surface, 0.96));
+}
+
+.moviles-phone__media img {
+  display: block;
+  width: min(100%, var(--moviles-phone-image-width));
+  height: var(--moviles-phone-image-height);
+  object-fit: contain;
+  object-position: center;
+}
+
+.moviles-phone__body {
+  display: grid;
+  align-content: start;
+  gap: 0.1rem;
+  flex: 1;
+  padding: 0 1.35rem 1.35rem;
 }
 
 .moviles-phone__top {
