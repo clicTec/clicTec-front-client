@@ -427,6 +427,7 @@
 .moviles-catalog__grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
   gap: 1rem;
   margin-top: 1rem;
 }
@@ -435,6 +436,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  align-self: start;
   overflow: hidden;
   padding: 0;
 }
