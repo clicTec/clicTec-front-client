@@ -48,10 +48,6 @@
   height: auto;
 }
 
-.header-logo--dark {
-  display: none;
-}
-
 .nav {
   margin-left: auto;
 }
@@ -298,14 +294,6 @@
   border-color: var(--client-dark-border);
   background: rgba(16, 27, 43, 0.82);
   box-shadow: 0 24px 44px -34px rgb(0 0 0 / 0.82);
-}
-
-:host-context(body[data-theme='dark']) .header-logo--light {
-  display: none;
-}
-
-:host-context(body[data-theme='dark']) .header-logo--dark {
-  display: block;
 }
 
 :host-context(body[data-theme='dark']) .nav-link,

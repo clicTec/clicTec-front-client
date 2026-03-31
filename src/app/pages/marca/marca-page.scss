@@ -304,7 +304,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  padding: 1.2rem 1.2rem 1.35rem;
+  padding: 0;
   border-radius: 2rem;
   border: vars.$border-width-thin solid rgba(vars.$color-ink-900, 0.06);
   background: rgba(vars.$color-surface, 0.94);
@@ -419,10 +419,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  align-self: flex-end;
+  align-self: flex-start;
   min-width: 9.5rem;
   min-height: 44px;
-  margin-top: 1rem;
+  margin-top: auto;
   padding: 0 1.5rem;
   border: vars.$border-width-thin solid rgba(vars.$color-accent, 0.14);
   border-radius: vars.$radius-pill;
@@ -503,6 +503,10 @@
 
   .moviles-phone {
     border-radius: 1.6rem;
+  }
+
+  .moviles-phone__body {
+    padding: 1rem 1.1rem 1.2rem;
   }
 
   .marca-pagination {

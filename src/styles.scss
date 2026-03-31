@@ -434,8 +434,35 @@ body[data-theme='dark'] .moviles-pagination__button {
   color: var(--client-dark-text);
 }
 
+body[data-theme='dark'] .marca-pagination__controls,
+body[data-theme='dark'] .moviles-pagination__controls {
+  background: rgb(14 24 40 / 0.58);
+  border: 1px solid var(--client-dark-border-soft);
+  box-shadow: 0 18px 30px -24px rgb(0 0 0 / 0.42);
+}
+
+body[data-theme='dark'] .marca-pagination__button {
+  background: rgb(39 62 88 / 0.82);
+  color: var(--client-dark-text);
+}
+
+body[data-theme='dark'] .marca-pagination__button:hover:not(:disabled),
 body[data-theme='dark'] .moviles-pagination__button:hover:not(:disabled) {
   background: var(--client-dark-pill-hover);
+}
+
+body[data-theme='dark'] .marca-pagination__button.is-active,
+body[data-theme='dark'] .moviles-pagination__button.is-active {
+  background: var(--client-dark-pill-hover);
+  color: #fff;
+}
+
+body[data-theme='dark'] .marca-pagination__button:disabled,
+body[data-theme='dark'] .moviles-pagination__button:disabled {
+  opacity: 1;
+  background: rgb(22 35 52 / 0.78);
+  color: rgb(208 222 234 / 0.38);
+  box-shadow: none;
 }
 
 body[data-theme='dark'] .moviles-filter-select__input::placeholder {
@@ -500,10 +527,8 @@ body[data-theme='dark'] .moviles-checklist::before {
 }
 
 body[data-theme='dark'] .moviles-phone__media {
-  border-color: var(--client-dark-border-soft);
-  background:
-    radial-gradient(circle at top, rgb(129 198 255 / 0.14), transparent 58%),
-    linear-gradient(180deg, rgb(18 31 64 / 0.88) 0%, rgb(10 19 43 / 0.92) 100%);
+  border-bottom-color: rgb(148 163 184 / 0.22);
+  background: linear-gradient(180deg, rgb(246 248 252 / 0.98), rgb(235 239 246 / 0.98));
 }
 
 .moviles-phone__media {
@@ -511,26 +536,31 @@ body[data-theme='dark'] .moviles-phone__media {
   align-items: center;
   justify-content: center;
   width: 100%;
-  aspect-ratio: 16 / 11;
-  margin-bottom: 0.9rem;
-  padding: 1.15rem;
+  min-height: 11rem;
+  height: clamp(11rem, 18vw, 12rem);
+  margin-bottom: 0;
+  padding: 1rem 1.15rem;
   overflow: hidden;
-  border-radius: 1.35rem;
-  border: 1px solid rgb(15 23 42 / 0.08);
-  background:
-    radial-gradient(circle at top, rgb(129 198 255 / 0.14), transparent 58%),
-    linear-gradient(180deg, rgb(247 250 255 / 0.98), rgb(255 255 255 / 0.96));
+  border-bottom: 1px solid rgb(15 23 42 / 0.08);
+  background: linear-gradient(180deg, rgb(246 248 252 / 0.98), rgb(235 239 246 / 0.98));
 }
 
 .moviles-phone__media img {
   display: block;
-  width: auto;
-  height: auto;
-  max-width: min(100%, 12.25rem);
-  max-height: 12rem;
+  width: clamp(8.25rem, 44%, 10.35rem);
+  height: clamp(7rem, 11vw, 8.6rem);
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
   object-position: center;
   filter: drop-shadow(0 16px 28px rgb(15 23 42 / 0.16));
+}
+
+.moviles-phone__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 1.2rem 1.2rem 1.35rem;
 }
 
 body[data-theme='dark'] .moviles-filter-select__option {
@@ -723,10 +753,17 @@ body[data-theme='dark'] .moviles-catalog__tools,
 .marca-pagination__controls,
 .moviles-pagination__controls {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
   justify-content: flex-end;
   gap: 0.45rem;
+  width: fit-content;
   margin-left: auto;
+  padding: 0.35rem;
+  border: 1px solid rgb(15 23 42 / 0.08);
+  border-radius: 1rem;
+  background: rgb(245 248 252 / 0.88);
+  box-shadow: 0 16px 28px -24px rgb(15 23 42 / 0.16);
 }
 
 .marca-pagination__button,
@@ -734,20 +771,45 @@ body[data-theme='dark'] .moviles-catalog__tools,
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 34px;
-  padding: 0 0.85rem;
+  min-width: 2.65rem;
+  min-height: 2.65rem;
+  padding: 0 0.95rem;
   border: 0;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.05);
+  border-radius: 0.95rem;
+  background: rgb(226 234 244 / 0.8);
   color: #172033;
-  font-size: 0.84rem;
+  font-size: 0.92rem;
+  font-weight: 700;
   text-align: center;
   cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.marca-pagination__button:hover:not(:disabled),
+.moviles-pagination__button:hover:not(:disabled) {
+  background: rgb(199 214 230 / 0.95);
+  transform: translateY(-1px);
+}
+
+.marca-pagination__button.is-active,
+.moviles-pagination__button.is-active {
+  background: linear-gradient(180deg, #6ec4e6 0%, #48a8d0 100%);
+  color: #0f2030;
+}
+
+.marca-pagination__button:first-child,
+.marca-pagination__button:last-child,
+.moviles-pagination__button:first-child,
+.moviles-pagination__button:last-child {
+  min-width: 5.6rem;
 }
 
 .marca-pagination__button:disabled,
 .moviles-pagination__button:disabled {
-  opacity: 0.5;
+  opacity: 0.58;
   cursor: default;
 }
 

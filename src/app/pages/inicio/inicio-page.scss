@@ -124,27 +124,30 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  aspect-ratio: 16 / 9;
-  padding: 1rem;
+  min-height: 11rem;
+  height: clamp(11rem, 18vw, 12rem);
+  padding: 1rem 1.15rem;
   overflow: hidden;
-  background:
-    radial-gradient(circle at top, rgb(129 198 255 / 0.22), transparent 56%),
-    color-mix(in srgb, var(--color-surface) 82%, var(--color-ink-900) 18%);
+  border-bottom: 1px solid rgb(15 23 42 / 0.08);
+  background: linear-gradient(180deg, rgb(246 248 252 / 0.98), rgb(235 239 246 / 0.98));
 }
 
 .inicio-update-card__media img {
-  width: 100%;
-  height: 100%;
+  width: clamp(8.25rem, 44%, 10.35rem);
+  height: clamp(7rem, 11vw, 8.6rem);
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
   display: block;
   filter: drop-shadow(0 18px 28px rgb(2 6 23 / 0.16));
 }
 
 .inicio-update-card__body {
-  display: grid;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
   gap: 0.8rem;
   padding: 1.2rem;
-  align-content: start;
 }
 
 .inicio-update-card__title {
@@ -166,7 +169,8 @@
   align-items: center;
   justify-self: start;
   min-height: 2.5rem;
-  margin-top: 0.25rem;
+  width: fit-content;
+  margin-top: auto;
   padding: 0.65rem 1rem;
   border: 1px solid color-mix(in srgb, var(--color-border) 100%, transparent);
   border-radius: 999px;
@@ -366,13 +370,14 @@
   }
 
   .inicio-update-card__media {
-    aspect-ratio: 5 / 4;
-    padding: 0.85rem;
+    min-height: 9.75rem;
+    height: 9.75rem;
+    padding: 0.8rem 0.95rem;
   }
 
   .inicio-update-card__media img {
-    width: min(100%, 11.5rem);
-    max-height: 10.5rem;
+    width: min(100%, 9.5rem);
+    height: 7.6rem;
     margin-inline: auto;
   }
 
