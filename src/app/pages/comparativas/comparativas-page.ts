@@ -5,6 +5,8 @@ interface CountdownUnit {
   readonly value: string;
 }
 
+const COMPARATOR_LAUNCH_DATE = '2026-04-08T17:00:00+02:00';
+
 @Component({
   selector: 'app-comparativas-page',
   standalone: true,
@@ -12,9 +14,10 @@ interface CountdownUnit {
   styleUrl: './comparativas-page.scss'
 })
 export class ComparativasPageComponent implements OnInit, OnDestroy {
-  private readonly targetDate = new Date(2026, 3, 2, 0, 0, 0);
+  private readonly targetDate = new Date(COMPARATOR_LAUNCH_DATE);
   private intervalId: ReturnType<typeof setInterval> | null = null;
 
+  protected readonly countdownAriaLabel = this.createCountdownAriaLabel();
   protected countdownUnits: readonly CountdownUnit[] = [];
   protected isFinished = false;
 
@@ -62,5 +65,17 @@ export class ComparativasPageComponent implements OnInit, OnDestroy {
 
   private formatUnit(value: number): string {
     return String(value).padStart(2, '0');
+  }
+
+  private createCountdownAriaLabel(): string {
+    return `Cuenta atrás hasta el ${new Intl.DateTimeFormat('es-ES', {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      timeZone: 'Europe/Madrid'
+    }).format(this.targetDate)}`;
   }
 }
