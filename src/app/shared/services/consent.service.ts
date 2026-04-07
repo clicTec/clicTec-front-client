@@ -10,6 +10,7 @@ import {
   LegalConsentResponse,
   LegalSiteConfig
 } from '../config/site-legal.config';
+import { GOOGLE_TAG_MANAGER_CONTAINER_ID } from '../config/tracking.config';
 import { LegalApiService } from './legal-api.service';
 
 declare global {
@@ -24,6 +25,8 @@ declare global {
   providedIn: 'root'
 })
 export class ConsentService {
+  private readonly googleTagManagerContainerId = GOOGLE_TAG_MANAGER_CONTAINER_ID;
+  private readonly tagManagerScriptId = 'clictec-gtm-script';
   private readonly document = inject(DOCUMENT);
   private readonly legalApiService = inject(LegalApiService);
   private readonly analyticsScriptId = 'clictec-gtag-script';
@@ -234,6 +237,12 @@ export class ConsentService {
 
     this.applyGoogleConsent(preferences, this.hasAnswered() ? 'update' : 'default');
 
+    if (this.shouldLoadTagManager(preferences)) {
+      this.ensureTagManagerScript();
+    } else {
+      this.removeScript(this.tagManagerScriptId);
+    }
+
     if (preferences.analytics) {
       this.ensureAnalyticsScript();
     } else {
@@ -292,6 +301,10 @@ export class ConsentService {
   }
 
   private ensureAnalyticsScript(): void {
+    if (this.googleTagManagerContainerId) {
+      return;
+    }
+
     const analyticsId = this.siteConfig().googleAnalyticsId;
     if (!analyticsId || this.document.getElementById(this.analyticsScriptId)) {
       return;
@@ -323,6 +336,46 @@ export class ConsentService {
     script.crossOrigin = 'anonymous';
     script.src =
       `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClientId}`;
+    this.document.head.appendChild(script);
+  }
+
+  private shouldLoadTagManager(preferences: ConsentPreferences): boolean {
+    return Boolean(this.googleTagManagerContainerId)
+      && (preferences.analytics || preferences.ads || preferences.affiliate);
+  }
+
+  private ensureTagManagerScript(): void {
+    if (
+      typeof window === 'undefined'
+      || !this.googleTagManagerContainerId
+      || this.document.getElementById(this.tagManagerScriptId)
+    ) {
+      return;
+    }
+
+    const dataLayer = window.dataLayer ?? [];
+    const hasGtmStartEvent = dataLayer.some((entry) => {
+      if (!entry || typeof entry !== 'object' || Array.isArray(entry)) {
+        return false;
+      }
+
+      return (entry as Record<string, unknown>)['event'] === 'gtm.js';
+    });
+
+    if (!hasGtmStartEvent) {
+      dataLayer.push({
+        'gtm.start': Date.now(),
+        event: 'gtm.js'
+      });
+    }
+
+    window.dataLayer = dataLayer;
+
+    const script = this.document.createElement('script');
+    script.id = this.tagManagerScriptId;
+    script.async = true;
+    script.src =
+      `https://www.googletagmanager.com/gtm.js?id=${this.googleTagManagerContainerId}`;
     this.document.head.appendChild(script);
   }
 

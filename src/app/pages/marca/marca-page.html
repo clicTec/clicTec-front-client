@@ -87,21 +87,28 @@
           <div class="marca-page__grid">
             @for (phone of mobileCatalog; track phone.slug) {
               <article class="moviles-phone">
-                @if (phone.image) {
-                  <div class="moviles-phone__media">
-                    <img [src]="phone.image" [alt]="phone.brand + ' ' + phone.model" loading="lazy" />
+                @if (getPhoneImageSource(phone); as phoneImageSource) {
+                  <div class="moviles-phone__media" [ngStyle]="getPhoneImageFrameStyle(phone.slug)">
+                    <img
+                      [src]="phoneImageSource"
+                      [alt]="phone.brand + ' ' + phone.model"
+                      [ngStyle]="getPhoneImageStyle(phone.slug)"
+                      loading="lazy"
+                    />
                   </div>
                 }
 
-                <header class="moviles-phone__top">
-                  <p class="moviles-phone__segment">{{ phone.segment }}</p>
-                </header>
+                <div class="moviles-phone__body">
+                  <header class="moviles-phone__top">
+                    <p class="moviles-phone__segment">{{ phone.segment }}</p>
+                  </header>
 
-                <h2 class="moviles-phone__name">{{ phone.brand }} {{ phone.model }}</h2>
-                <p class="moviles-phone__meta">{{ phone.brand }} · {{ phone.price }}</p>
-                <div class="moviles-phone__summary" [innerHTML]="phone.review | consentAwareHtml : true"></div>
+                  <h2 class="moviles-phone__name">{{ phone.brand }} {{ phone.model }}</h2>
+                  <p class="moviles-phone__meta">{{ phone.brand }} · {{ phone.price }}</p>
+                  <div class="moviles-phone__summary" [innerHTML]="phone.review | consentAwareHtml : true"></div>
 
-                <a class="moviles-phone__cta" [routerLink]="['/moviles', phone.slug]">Ver review</a>
+                  <a class="moviles-phone__cta" [routerLink]="['/moviles', phone.slug]">Ver review</a>
+                </div>
               </article>
             }
           </div>
