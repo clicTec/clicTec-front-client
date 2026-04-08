@@ -1,60 +1,26 @@
-# FrontClient
+# clicTec Front Client
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.0.
+Frontend publico de clicTec para analisis, comparativas y fichas de moviles.
 
-## Development server
+## Requisitos
 
-To start a local development server, run:
+- Node.js 24+
+- npm 11+
 
-```bash
-ng serve
-```
+## Scripts
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- `npm install` instala dependencias.
+- `npm start` arranca el entorno de desarrollo.
+- `npm run build` genera la build de produccion.
+- `npm test` ejecuta los tests con Vitest.
+- `npm run generate:sitemap` regenera el sitemap.
 
-## Code scaffolding
+## Prerender
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Para construir el sitio con prerender y resolver datos contra una API concreta:
 
 ```bash
-ng generate --help
+PRERENDER_API_BASE=http://localhost:8080 npm run build
 ```
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-# clicTec-front-client
+La salida final se genera en `dist/front-client/browser`.
