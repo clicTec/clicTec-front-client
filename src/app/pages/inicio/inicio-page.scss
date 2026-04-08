@@ -110,9 +110,9 @@
 }
 
 .inicio-update-card {
-  --inicio-update-card-media-height: 10.4rem;
-  --inicio-update-card-image-width: 8.75rem;
-  --inicio-update-card-image-height: 7.7rem;
+  --inicio-update-card-media-height: 12.6rem;
+  --inicio-update-card-image-width: 10.7rem;
+  --inicio-update-card-image-height: 9.6rem;
   display: grid;
   width: 100%;
   overflow: hidden;
@@ -129,7 +129,7 @@
   justify-content: center;
   min-height: var(--inicio-update-card-media-height);
   height: var(--inicio-update-card-media-height);
-  padding: 0.9rem 1rem 0.8rem;
+  padding: 0.55rem 0.8rem 0.45rem;
   overflow: hidden;
   border-bottom: 1px solid rgb(15 23 42 / 0.08);
   background:
