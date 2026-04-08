@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
@@ -22,6 +23,7 @@ interface ReviewContentBlock {
   styleUrl: './review-detail-page.scss'
 })
 export class ReviewDetailPageComponent implements OnInit {
+  private readonly document = inject(DOCUMENT);
   private readonly route = inject(ActivatedRoute);
   private readonly contentApiService = inject(ContentApiService);
   private readonly seoService = inject(SeoService);
@@ -139,9 +141,13 @@ export class ReviewDetailPageComponent implements OnInit {
       return [];
     }
 
-    const parser = new DOMParser();
-    const document = parser.parseFromString(`<div>${contentHtml}</div>`, 'text/html');
-    const container = document.body.firstElementChild;
+    const parsedDocument = this.document.implementation?.createHTMLDocument('review-detail');
+    if (!parsedDocument) {
+      return [];
+    }
+
+    parsedDocument.body.innerHTML = `<div>${contentHtml}</div>`;
+    const container = parsedDocument.body.firstElementChild;
     if (!container) {
       return [];
     }

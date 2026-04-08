@@ -15,7 +15,7 @@ export class HeaderComponent implements OnDestroy {
   private readonly contentApiService = inject(ContentApiService);
   private readonly searchDebounceMs = 180;
 
-  private searchDebounceId: ReturnType<typeof window.setTimeout> | null = null;
+  private searchDebounceId: number | null = null;
   private latestSearchToken = 0;
 
   protected isMenuOpen = false;

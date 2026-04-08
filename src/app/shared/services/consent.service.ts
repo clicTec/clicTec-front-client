@@ -212,25 +212,28 @@ export class ConsentService {
 
   private applyConsentSideEffects(): void {
     const root = this.document.documentElement;
-    root.dataset['cmpMode'] = this.usesExternalCmp() ? 'external-certified' : 'custom-banner';
-    root.dataset['consentVersion'] = this.siteConfig().consentVersion || '';
+    if (!root || !this.document.head) {
+      return;
+    }
+
+    root.setAttribute('data-cmp-mode', this.usesExternalCmp() ? 'external-certified' : 'custom-banner');
+    root.setAttribute('data-consent-version', this.siteConfig().consentVersion || '');
 
     if (this.usesExternalCmp()) {
-      root.dataset['consentStatus'] = 'external-cmp';
+      root.setAttribute('data-consent-status', 'external-cmp');
       this.dispatchConsentChange();
       return;
     }
 
     const preferences = this.preferences();
 
-    root.dataset['consentAnalytics'] = String(preferences.analytics);
-    root.dataset['consentAds'] = String(preferences.ads);
-    root.dataset['consentAffiliate'] = String(preferences.affiliate);
-    root.dataset['consentStatus'] = this.hasAnswered()
-      ? 'configured'
-      : this.ready()
-        ? 'pending'
-        : 'loading';
+    root.setAttribute('data-consent-analytics', String(preferences.analytics));
+    root.setAttribute('data-consent-ads', String(preferences.ads));
+    root.setAttribute('data-consent-affiliate', String(preferences.affiliate));
+    root.setAttribute(
+      'data-consent-status',
+      this.hasAnswered() ? 'configured' : this.ready() ? 'pending' : 'loading'
+    );
 
     this.applyGoogleConsent(preferences, this.hasAnswered() ? 'update' : 'default');
 
@@ -279,6 +282,10 @@ export class ConsentService {
   }
 
   private ensureExternalCmpScript(): void {
+    if (!this.document.head) {
+      return;
+    }
+
     const { scriptUrl } = this.siteConfig().cmp;
     if (!scriptUrl || this.document.getElementById(this.cmpScriptId)) {
       return;
@@ -292,6 +299,10 @@ export class ConsentService {
   }
 
   private ensureAnalyticsScript(): void {
+    if (!this.document.head) {
+      return;
+    }
+
     const analyticsId = this.siteConfig().googleAnalyticsId;
     if (!analyticsId || this.document.getElementById(this.analyticsScriptId)) {
       return;
@@ -312,6 +323,10 @@ export class ConsentService {
   }
 
   private ensureAdsenseScript(): void {
+    if (!this.document.head) {
+      return;
+    }
+
     const adsenseClientId = this.siteConfig().googleAdsenseClientId;
     if (!adsenseClientId || this.document.getElementById(this.adsenseScriptId)) {
       return;
@@ -327,6 +342,10 @@ export class ConsentService {
   }
 
   private removeScript(id: string): void {
+    if (!this.document.head) {
+      return;
+    }
+
     const script = this.document.getElementById(id);
     if (script) {
       script.remove();

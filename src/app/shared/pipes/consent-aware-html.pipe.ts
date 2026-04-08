@@ -61,12 +61,12 @@ export class ConsentAwareHtmlPipe implements PipeTransform {
       return '';
     }
 
-    if (typeof DOMParser === 'undefined') {
+    const parsedDocument = this.document.implementation?.createHTMLDocument('consent-aware-html');
+    if (!parsedDocument) {
       return html;
     }
 
-    const parser = new DOMParser();
-    const parsedDocument = parser.parseFromString(html, 'text/html');
+    parsedDocument.body.innerHTML = html;
     const baseOrigin = this.document.location?.origin ?? 'http://localhost';
     const preferences = this.consentService.preferences();
     const cacheKey = [

@@ -2,6 +2,9 @@ FROM node:22.19.0 AS build
 
 WORKDIR /opt/app
 
+ARG PRERENDER_API_BASE=https://api.clictec.es
+ENV PRERENDER_API_BASE=${PRERENDER_API_BASE}
+
 COPY package*.json ./
 RUN npm ci
 
@@ -32,7 +35,7 @@ RUN printf '%s\n' \
   '  }' \
   '' \
   '  location / {' \
-  '    try_files $uri $uri/ /index.html;' \
+  '    try_files $uri $uri/ =404;' \
   '  }' \
   '}' > /etc/nginx/templates/default.conf.template
 

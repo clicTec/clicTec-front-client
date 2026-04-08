@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, OnDestroy, OnInit, PLATFORM_ID, inject } from '@angular/core';
 
 interface CountdownUnit {
   readonly label: string;
@@ -12,6 +13,7 @@ interface CountdownUnit {
   styleUrl: './comparativas-page.scss'
 })
 export class ComparativasPageComponent implements OnInit, OnDestroy {
+  private readonly platformId = inject(PLATFORM_ID);
   private readonly targetDate = new Date(2026, 3, 2, 0, 0, 0);
   private intervalId: ReturnType<typeof setInterval> | null = null;
 
@@ -20,7 +22,9 @@ export class ComparativasPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.updateCountdown();
-    this.intervalId = setInterval(() => this.updateCountdown(), 1000);
+    if (isPlatformBrowser(this.platformId)) {
+      this.intervalId = setInterval(() => this.updateCountdown(), 1000);
+    }
   }
 
   ngOnDestroy(): void {

@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
+import { API_BASE_URL, resolveApiUrl } from '../config/api-base.token';
 
 export interface HomeFeatureResponse {
   tag: string;
@@ -231,12 +232,15 @@ export interface MobilePageRequest {
   providedIn: 'root'
 })
 export class ContentApiService {
-  private readonly apiBase = '/api';
+  private readonly httpClient = inject(HttpClient);
+  private readonly apiBaseUrl = inject(API_BASE_URL);
 
-  constructor(private readonly httpClient: HttpClient) {}
+  private resolveUrl(path: string): string {
+    return resolveApiUrl(this.apiBaseUrl, `/api${path}`);
+  }
 
   getHomePage(): Observable<HomeResponse> {
-    return this.httpClient.get<HomeResponse>(`${this.apiBase}/home`);
+    return this.httpClient.get<HomeResponse>(this.resolveUrl('/home'));
   }
 
   getMobilePage(request: MobilePageRequest): Observable<MobileResponse> {
@@ -252,34 +256,34 @@ export class ContentApiService {
       }
     });
 
-    return this.httpClient.get<MobileResponse>(`${this.apiBase}/moviles`, { params });
+    return this.httpClient.get<MobileResponse>(this.resolveUrl('/moviles'), { params });
   }
 
   getComparisonPage(): Observable<ComparisonResponse> {
-    return this.httpClient.get<ComparisonResponse>(`${this.apiBase}/comparativas`);
+    return this.httpClient.get<ComparisonResponse>(this.resolveUrl('/comparativas'));
   }
 
   getGuidePage(): Observable<GuideResponse> {
-    return this.httpClient.get<GuideResponse>(`${this.apiBase}/guias`);
+    return this.httpClient.get<GuideResponse>(this.resolveUrl('/guias'));
   }
 
   getRankingPage(): Observable<RankingResponse> {
-    return this.httpClient.get<RankingResponse>(`${this.apiBase}/rankings`);
+    return this.httpClient.get<RankingResponse>(this.resolveUrl('/rankings'));
   }
 
   getReviewPage(): Observable<ReviewResponse> {
-    return this.httpClient.get<ReviewResponse>(`${this.apiBase}/reviews`);
+    return this.httpClient.get<ReviewResponse>(this.resolveUrl('/reviews'));
   }
 
   getTechNews(): Observable<TechNewsResponse[]> {
-    return this.httpClient.get<TechNewsResponse[]>(`${this.apiBase}/tech-news`);
+    return this.httpClient.get<TechNewsResponse[]>(this.resolveUrl('/tech-news'));
   }
 
   getReviewBySlug(slug: string): Observable<ReviewDetailResponse> {
-    return this.httpClient.get<ReviewDetailResponse>(`${this.apiBase}/reviews/${slug}`);
+    return this.httpClient.get<ReviewDetailResponse>(this.resolveUrl(`/reviews/${slug}`));
   }
 
   getMobileReviewBySlug(slug: string): Observable<ReviewDetailResponse> {
-    return this.httpClient.get<ReviewDetailResponse>(`${this.apiBase}/moviles/${slug}`);
+    return this.httpClient.get<ReviewDetailResponse>(this.resolveUrl(`/moviles/${slug}`));
   }
 }
