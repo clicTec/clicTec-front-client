@@ -244,35 +244,15 @@ export class MarcaPageComponent implements OnInit, OnDestroy {
     this.totalItems = 0;
     this.totalPages = 1;
 
-    this.contentApiService
-      .getMobilePage({
-        brand: '',
-        tier: '',
-        priceRange: '',
-        os: '',
-        search: '',
-        page: 1,
-        size: 500
-      })
-      .subscribe({
-        next: (response) => {
-          const existingBrands = Array.from(new Set(response.catalog.items.map((item) => item.brand)));
-          const brandName = resolveBrandNameFromSlug(brandSlug, existingBrands);
+    const brandName = resolveBrandNameFromSlug(brandSlug, []);
 
-          if (!brandName) {
-            this.handleNotFound(brandSlug);
-            return;
-          }
+    if (!brandName) {
+      this.handleNotFound(brandSlug);
+      return;
+    }
 
-          this.brandName = brandName;
-          this.loadBrandCatalog(brandName);
-        },
-        error: () => {
-          this.errorMessage = 'No se pudo cargar la marca.';
-          this.isLoading = false;
-          this.seoService.applyNotFound(`/marcas/${brandSlug}`);
-        }
-      });
+    this.brandName = brandName;
+    this.loadBrandCatalog(brandName);
   }
 
   private loadBrandCatalog(brandName: string): void {
