@@ -18,7 +18,13 @@
 
           @if (review.coverImage) {
             <figure class="mobile-review__hero-media">
-              <img class="mobile-review__hero-image" [src]="review.coverImage" [alt]="review.title" loading="lazy" />
+              <img
+                class="mobile-review__hero-image"
+                [src]="review.coverImage"
+                [alt]="review.title"
+                [ngStyle]="heroImageStyle"
+                loading="lazy"
+              />
             </figure>
           }
 

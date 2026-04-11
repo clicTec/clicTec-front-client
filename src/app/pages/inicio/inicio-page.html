@@ -31,9 +31,9 @@
         <div class="inicio-home__updates-grid">
           @for (item of home.updates; track item.route) {
             <article class="inicio-update-card">
-              @if (item.imageUrl) {
-                <div class="inicio-update-card__media">
-                  <img [src]="item.imageUrl" [alt]="item.title" loading="lazy" />
+              @if (getUpdateImageSource(item); as imageSource) {
+                <div class="inicio-update-card__media" [ngStyle]="getUpdateImageFrameStyle(item)">
+                  <img [src]="imageSource" [alt]="item.title" [ngStyle]="getUpdateImageStyle(item)" loading="lazy" />
                 </div>
               }
 

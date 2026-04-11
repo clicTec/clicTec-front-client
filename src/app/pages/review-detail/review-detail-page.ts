@@ -1,7 +1,9 @@
+import { NgStyle } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import { ConsentAwareHtmlPipe } from '../../shared/pipes/consent-aware-html.pipe';
+import { getReviewHeroImageStyle } from './review-hero-image.config';
 import {
   ContentApiService,
   ReviewDetailResponse,
@@ -17,7 +19,7 @@ interface ReviewContentBlock {
 @Component({
   selector: 'app-review-detail-page',
   standalone: true,
-  imports: [RouterLink, ConsentAwareHtmlPipe],
+  imports: [RouterLink, NgStyle, ConsentAwareHtmlPipe],
   templateUrl: './review-detail-page.html',
   styleUrl: './review-detail-page.scss'
 })
@@ -103,6 +105,18 @@ export class ReviewDetailPageComponent implements OnInit {
 
   protected getInlineImageAfterBlock(blockIndex: number): ReviewImageResponse | null {
     return this.inlineImagesByBlockIndex[blockIndex] ?? null;
+  }
+
+  protected get heroImageStyle(): Record<string, string> {
+    const style = getReviewHeroImageStyle(this.review?.slug);
+
+    return {
+      '--mobile-review-hero-image-width': `${style.widthPct}%`,
+      '--mobile-review-hero-image-max-width': `${style.maxWidthPct}%`,
+      '--mobile-review-hero-image-max-height': `${style.maxHeightPct}%`,
+      '--mobile-review-hero-image-shift-x': `${style.translateXPct}%`,
+      '--mobile-review-hero-image-shift-y': `${style.translateYPct}%`
+    };
   }
 
   private applyReview(review: ReviewDetailResponse, source: 'mobile' | 'review'): void {
