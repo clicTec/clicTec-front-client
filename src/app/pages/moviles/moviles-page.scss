@@ -5,8 +5,16 @@
   gap: 1.25rem;
 }
 
-.moviles-filter-group,
 .moviles-phone {
+  --moviles-phone-media-height: 10.5rem;
+  --moviles-phone-image-width: 8.75rem;
+  --moviles-phone-image-height: 7.85rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-self: start;
+  overflow: hidden;
+  padding: 0;
   border-radius: 2rem;
   border: vars.$border-width-thin solid rgba(vars.$color-ink-900, 0.06);
   background: rgba(vars.$color-surface, 0.94);
@@ -21,8 +29,6 @@
 }
 
 .moviles-launches,
-.moviles-checklist,
-.moviles-filters,
 .moviles-catalog {
   padding: clamp(1.35rem, 2.6vw, 2.2rem) 0 0;
   border-top: vars.$border-width-thin solid rgba(vars.$color-ink-900, 0.08);
@@ -39,6 +45,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   min-height: clamp(15rem, 24vw, 20rem);
   padding: 1rem;
   border: vars.$border-width-thin solid rgba(vars.$color-ink-900, 0.08);
@@ -49,10 +56,11 @@
 .moviles-page__hero-image {
   display: block;
   width: min(100%, 15.5rem);
+  object-fit: contain;
+  object-position: center;
 }
 
-.moviles-launch__month,
-.moviles-phone__segment {
+.moviles-launch__month {
   margin: 0;
   font-size: 0.8rem;
   font-weight: 600;
@@ -68,7 +76,6 @@
 }
 
 .moviles-page__description,
-.moviles-filters__text,
 .moviles-catalog__empty,
 .moviles-launch__notes,
 .moviles-phone__summary {
@@ -78,12 +85,50 @@
 }
 
 .moviles-launches__title,
-.moviles-checklist__title,
-.moviles-filters__title,
 .moviles-catalog__title {
   margin: 0;
   font-size: clamp(1.5rem, 2vw, 2rem);
   color: vars.$color-ink-900;
+}
+
+:host-context(body[data-theme='dark']) .moviles-page__title,
+:host-context(body[data-theme='dark']) .moviles-launches__title,
+:host-context(body[data-theme='dark']) .moviles-catalog__title,
+:host-context(body[data-theme='dark']) .moviles-launch__device,
+:host-context(body[data-theme='dark']) .moviles-phone__name {
+  color: var(--client-dark-text);
+}
+
+:host-context(body[data-theme='dark']) .moviles-page__description,
+:host-context(body[data-theme='dark']) .moviles-catalog__empty,
+:host-context(body[data-theme='dark']) .moviles-launch__notes,
+:host-context(body[data-theme='dark']) .moviles-launch__target,
+:host-context(body[data-theme='dark']) .moviles-phone__meta,
+:host-context(body[data-theme='dark']) .moviles-phone__summary,
+:host-context(body[data-theme='dark']) .moviles-pagination__summary {
+  color: var(--client-dark-text-muted);
+}
+
+:host-context(body[data-theme='dark']) .moviles-launch,
+:host-context(body[data-theme='dark']) .moviles-phone {
+  border-color: var(--client-dark-border);
+  background: var(--client-dark-surface);
+  box-shadow: 0 22px 46px -36px rgb(0 0 0 / 0.72);
+}
+
+:host-context(body[data-theme='dark']) .moviles-phone__media {
+  border-bottom-color: var(--client-dark-border-soft);
+  background:
+    radial-gradient(circle at top, rgb(110 188 255 / 0.16), transparent 58%),
+    linear-gradient(180deg, rgb(24 39 61 / 0.96), rgb(17 29 47 / 0.98));
+}
+
+:host-context(body[data-theme='dark']) .moviles-page__hero-visual {
+  border-color: var(--client-dark-border-soft);
+  background:
+    radial-gradient(circle at top, rgb(129 198 255 / 0.14), transparent 58%),
+    linear-gradient(180deg, rgb(18 31 64 / 0.88) 0%, rgb(10 19 43 / 0.92) 100%);
+  box-shadow: 0 22px 46px -36px rgb(0 0 0 / 0.72);
 }
 
 .moviles-launches {
@@ -103,78 +148,19 @@
   background: vars.$color-background;
 }
 
-.moviles-launch__device,
-.moviles-phone__name {
+.moviles-launch__device {
   margin: 0.35rem 0 0;
   font-size: 1.2rem;
   font-weight: 800;
   color: vars.$color-ink-900;
 }
 
-.moviles-launch__target,
-.moviles-phone__meta {
+.moviles-launch__target {
   margin: 0.2rem 0 0;
   color: vars.$color-text-muted;
   font-size: 0.95rem;
 }
 
-.moviles-bottom {
-  display: grid;
-}
-
-.moviles-checklist {
-  display: grid;
-  gap: 1rem;
-}
-
-.moviles-checklist::before {
-  content: '';
-  width: 88px;
-  height: 88px;
-  border-radius: 1.7rem;
-  background:
-    rgba(vars.$color-background, 0.96)
-    url('/store/store-glyph.svg') center/42px no-repeat;
-  box-shadow: inset 0 0 0 1px rgba(vars.$color-ink-900, 0.05);
-}
-
-.moviles-checklist__list {
-  margin: 0;
-  padding-left: 1.25rem;
-  display: grid;
-  gap: 0.55rem;
-  color: vars.$color-text-muted;
-  line-height: 1.6;
-}
-
-.moviles-checklist__item::marker {
-  color: vars.$color-accent;
-}
-
-.moviles-checklist__cta,
-.moviles-phone__cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  padding: 0 1.1rem;
-  border-radius: vars.$radius-pill;
-  background: vars.$color-accent;
-  color: vars.$color-surface;
-  font-size: 0.92rem;
-  font-weight: 600;
-}
-
-.moviles-checklist__cta {
-  justify-self: start;
-}
-
-.moviles-filters {
-  display: grid;
-  gap: 1rem;
-}
-
-.moviles-filters__head,
 .moviles-catalog__header {
   display: flex;
   align-items: center;
@@ -182,182 +168,42 @@
   gap: 1rem;
 }
 
-.moviles-filters__actions {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-}
-
-.moviles-filters__reset {
-  min-height: 40px;
-  padding: 0 0.95rem;
-  border: vars.$border-width-thin solid rgba(vars.$color-ink-900, 0.08);
-  border-radius: vars.$radius-pill;
-  background: rgba(vars.$color-surface, 0.94);
-  color: vars.$color-ink-900;
-  font-size: 0.86rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition:
-    border-color 0.2s ease,
-    background-color 0.2s ease,
-    color 0.2s ease;
-}
-
-.moviles-filters__reset:hover {
-  border-color: rgba(vars.$color-accent, 0.24);
-  background: rgba(vars.$color-accent, 0.06);
-  color: vars.$color-accent;
-}
-
-.moviles-filters__groups {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1rem;
-}
-
-.moviles-filter-group {
-  padding: 1rem;
-  background: vars.$color-background;
-  box-shadow: none;
-}
-
-.moviles-filter-group__title,
-.moviles-phone__spec-label {
-  margin: 0;
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: vars.$color-text-muted;
-}
-
-.moviles-filter-select {
-  position: relative;
-  margin-top: 0.75rem;
-}
-
-.moviles-filter-select__input {
-  width: 100%;
-  min-height: 46px;
-  padding: 0 0.95rem;
-  border: vars.$border-width-thin solid rgba(vars.$color-ink-900, 0.08);
-  border-radius: 1rem;
-  background: rgba(vars.$color-surface, 0.94);
-  color: vars.$color-ink-900;
-  font-size: 0.9rem;
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    background-color 0.2s ease;
-}
-
-.moviles-filter-select__input:focus {
-  outline: none;
-  border-color: rgba(vars.$color-accent, 0.28);
-  box-shadow: 0 0 0 3px rgba(vars.$color-accent, 0.12);
-  background: vars.$color-surface;
-}
-
-.moviles-filter-select__menu {
-  position: absolute;
-  top: calc(100% + 0.4rem);
-  left: 0;
-  right: 0;
-  z-index: 20;
-  margin: 0;
-  padding: 0.35rem;
-  list-style: none;
-  border: vars.$border-width-thin solid rgba(vars.$color-ink-900, 0.08);
-  border-radius: 1rem;
-  background: rgba(vars.$color-surface, 0.98);
-  box-shadow: 0 18px 32px -26px rgba(vars.$color-ink-900, 0.24);
-  max-height: 220px;
-  overflow-y: auto;
-}
-
-.moviles-filter-select__option {
-  display: block;
-  width: 100%;
-  min-height: 40px;
-  padding: 0 0.8rem;
-  border: 0;
-  border-radius: 0.8rem;
-  background: transparent;
-  color: vars.$color-ink-900;
-  font-size: 0.88rem;
-  text-align: left;
-  cursor: pointer;
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease;
-}
-
-.moviles-filter-select__option:hover {
-  background: rgba(vars.$color-ink-900, 0.05);
-}
-
-.moviles-filter-select__option.is-selected {
-  background: vars.$color-ink-900;
-  color: vars.$color-surface;
-}
-
-.moviles-filter-select__empty {
-  padding: 0.7rem 0.8rem;
-  font-size: 0.86rem;
-  color: vars.$color-text-muted;
-}
-
-.moviles-phone__chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
-  margin-top: 0.75rem;
-  margin-bottom: 1.1rem;
-}
-
-.moviles-filter-chip,
-.moviles-phone__chip,
-.moviles-pagination__button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 34px;
-  padding: 0 0.85rem;
-  border-radius: vars.$radius-pill;
-  border: 0;
-  background: rgba(vars.$color-ink-900, 0.05);
-  color: vars.$color-ink-900;
-  font-size: 0.84rem;
-  text-align: center;
-  cursor: pointer;
-}
-
-.moviles-filter-chip.is-selected,
-.moviles-pagination__button.is-active {
-  background: vars.$color-ink-900;
-  color: vars.$color-surface;
-}
-
-.moviles-catalog__link {
-  color: vars.$color-accent;
-  font-size: 0.94rem;
-  font-weight: 600;
-}
-
 .moviles-catalog__grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
   gap: 1rem;
   margin-top: 1rem;
 }
 
-.moviles-phone {
-  position: relative;
+.moviles-phone__media {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  padding: 1.2rem 1.2rem 1.35rem;
+  min-height: var(--moviles-phone-media-height);
+  padding: 0.9rem 1rem 0.8rem;
+  border-bottom: vars.$border-width-thin solid rgba(vars.$color-ink-900, 0.06);
+  background:
+    radial-gradient(circle at top, rgb(53 108 230 / 0.1), transparent 58%),
+    linear-gradient(180deg, rgb(24 36 56 / 0.98), rgb(15 25 42 / 0.98));
+}
+
+.moviles-phone__media img {
+  display: block;
+  width: min(100%, var(--moviles-phone-image-width));
+  height: var(--moviles-phone-image-height);
+  object-fit: contain;
+  object-position: center;
+  filter: drop-shadow(0 16px 24px rgb(2 6 23 / 0.16));
+}
+
+.moviles-phone__body {
+  display: grid;
+  align-content: start;
+  gap: 0.1rem;
+  flex: 1;
+  padding: 0 1.35rem 1.35rem;
 }
 
 .moviles-phone__top {
@@ -365,6 +211,27 @@
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
+}
+
+.moviles-phone__segment {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: vars.$color-accent;
+  letter-spacing: 0.03em;
+}
+
+.moviles-phone__name {
+  margin: 0.35rem 0 0;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: vars.$color-ink-900;
+}
+
+.moviles-phone__meta {
+  margin: 0.2rem 0 0;
+  color: vars.$color-text-muted;
+  font-size: 0.95rem;
 }
 
 .moviles-phone__summary {
@@ -389,37 +256,25 @@
   color: vars.$color-ink-900;
 }
 
-.moviles-phone__specs {
-  margin: 1rem 0 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  gap: 0.5rem;
-}
-
-.moviles-phone__spec {
-  display: flex;
-  justify-content: space-between;
-  gap: 0.8rem;
-  padding-top: 0.5rem;
-  border-top: vars.$border-width-thin solid rgba(vars.$color-ink-900, 0.06);
-}
-
-.moviles-phone__spec-value {
-  font-size: 0.88rem;
-  font-weight: 600;
-  color: vars.$color-ink-900;
-  text-align: right;
-}
-
 .moviles-phone__cta {
-  align-self: flex-end;
-  min-width: 9.5rem;
-  margin-top: 1rem;
-  padding-inline: 1.5rem;
-  border: vars.$border-width-thin solid rgba(vars.$color-accent, 0.14);
-  background: linear-gradient(180deg, rgba(vars.$color-accent, 0.92), vars.$color-accent);
-  box-shadow: 0 12px 24px -18px rgba(vars.$color-accent, 0.72);
+  display: inline-flex;
+  align-items: center;
+  align-self: stretch;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
+  min-height: 4.55rem;
+  margin-top: auto;
+  padding: 0 1.5rem;
+  border: vars.$border-width-thin solid rgba(110, 196, 230, 0.18);
+  border-radius: 999px;
+  background: linear-gradient(180deg, #66bce0 0%, #428fbb 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 14px 28px -22px rgba(72, 168, 208, 0.72);
+  color: vars.$color-surface;
+  font-size: 1.02rem;
+  font-weight: 700;
   text-decoration: none;
   text-align: center;
   transition:
@@ -430,7 +285,9 @@
 
 .moviles-phone__cta:hover {
   transform: translateY(-1px);
-  box-shadow: 0 16px 28px -18px rgba(vars.$color-accent, 0.8);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 18px 30px -22px rgba(72, 168, 208, 0.82);
   filter: saturate(1.05);
 }
 
@@ -448,22 +305,8 @@
   color: vars.$color-text-muted;
 }
 
-.moviles-pagination__controls {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 0.45rem;
-  margin-left: auto;
-}
-
-.moviles-pagination__button:disabled {
-  opacity: 0.5;
-  cursor: default;
-}
-
 @media (max-width: 1180px) {
   .moviles-page__hero,
-  .moviles-filters__groups,
   .moviles-catalog__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -476,11 +319,6 @@
     flex-direction: column;
     align-items: flex-start;
   }
-
-  .moviles-catalog__tools {
-    width: 100%;
-    justify-content: flex-start;
-  }
 }
 
 @media (max-width: 760px) {
@@ -489,9 +327,11 @@
     padding-inline: 0.15rem;
   }
 
-  .moviles-page__intro,
-  .moviles-filter-group,
-  .moviles-phone {
+  .moviles-page__hero {
+    gap: 0.75rem;
+  }
+
+  .moviles-page__intro {
     border-radius: 1.6rem;
   }
 
@@ -505,47 +345,42 @@
     font-size: clamp(2rem, 10vw, 3.2rem);
   }
 
-  .moviles-filters__head,
+  .moviles-page__hero-visual {
+    min-height: 11.5rem;
+    padding: 0.85rem;
+    border-radius: 1.5rem;
+  }
+
+  .moviles-page__hero-image {
+    width: min(100%, 10.75rem);
+  }
+
   .moviles-catalog__header {
     flex-direction: column;
     align-items: flex-start;
   }
 
   .moviles-pagination {
-    justify-content: flex-end;
+    justify-content: center;
   }
 
-  .moviles-launch,
-  .moviles-filter-group,
-  .moviles-phone {
+  .moviles-launch {
     padding-inline: 1.1rem;
   }
 
-  .moviles-filters__actions {
-    justify-content: flex-start;
+  .moviles-phone {
+    --moviles-phone-media-height: 9.6rem;
+    --moviles-phone-image-width: 8.2rem;
+    --moviles-phone-image-height: 7.05rem;
+    padding-inline: 0;
+    border-radius: 1.6rem;
   }
 
-  .moviles-filters__groups,
   .moviles-catalog__grid {
     grid-template-columns: 1fr;
   }
 
-  .moviles-pagination__controls {
-    width: 100%;
-  }
-
-  .moviles-phone__spec {
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .moviles-phone__spec-value {
-    text-align: left;
-  }
-
-  .moviles-phone__cta {
-    align-self: flex-end;
-    width: auto;
-    margin-top: 1rem;
+  .moviles-phone__body {
+    padding: 1rem 1.1rem 1.2rem;
   }
 }

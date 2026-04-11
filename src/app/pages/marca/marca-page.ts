@@ -1,7 +1,13 @@
+import { NgStyle } from '@angular/common';
 import { Component, ElementRef, HostListener, OnDestroy, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 
+import {
+  MOBILE_CARD_IMAGE_OVERRIDES,
+  MobileImageOverride,
+  MobileImageStyle
+} from '../../shared/config/mobile-card-image.config';
 import { ConsentAwareHtmlPipe } from '../../shared/pipes/consent-aware-html.pipe';
 import {
   ContentApiService,
@@ -16,7 +22,7 @@ type FilterKey = 'brand' | 'tier' | 'priceRange' | 'os';
 @Component({
   selector: 'app-marca-page',
   standalone: true,
-  imports: [RouterLink, ConsentAwareHtmlPipe],
+  imports: [RouterLink, ConsentAwareHtmlPipe, NgStyle],
   templateUrl: './marca-page.html',
   styleUrls: ['./marca-page.scss']
 })
@@ -30,6 +36,7 @@ export class MarcaPageComponent implements OnInit, OnDestroy {
   private routeSubscription?: Subscription;
   private searchQuery = '';
 
+  protected readonly cardImageOverrides = MOBILE_CARD_IMAGE_OVERRIDES;
   protected isLoading = true;
   protected errorMessage = '';
   protected brandName = '';
@@ -170,6 +177,19 @@ export class MarcaPageComponent implements OnInit, OnDestroy {
     return this.selectedFilters[key as FilterKey] ?? '';
   }
 
+  protected getPhoneImageSource(phone: MobileCardResponse): string {
+    const overrideSource = this.getPhoneImageOverride(phone.slug)?.src?.trim();
+    return overrideSource && overrideSource.length > 0 ? overrideSource : phone.image.trim();
+  }
+
+  protected getPhoneImageFrameStyle(slug: string): MobileImageStyle | null {
+    return this.getPhoneImageOverride(slug)?.frameStyle ?? null;
+  }
+
+  protected getPhoneImageStyle(slug: string): MobileImageStyle | null {
+    return this.getPhoneImageOverride(slug)?.imageStyle ?? null;
+  }
+
   protected previousPage(): void {
     if (this.currentPage === 1) {
       return;
@@ -291,7 +311,7 @@ export class MarcaPageComponent implements OnInit, OnDestroy {
                 ? `Móviles y reviews publicadas de ${brandName} en clicTec.`
                 : `Página de marca ${brandName} en clicTec.`,
             path: `/marcas/${this.brandSlug}`,
-            image: this.mobileCatalog[0]?.image || undefined,
+            image: this.mobileCatalog[0] ? this.getPhoneImageSource(this.mobileCatalog[0]) : undefined,
             type: 'website'
           });
         },
@@ -317,5 +337,9 @@ export class MarcaPageComponent implements OnInit, OnDestroy {
 
     const top = catalogGrid.getBoundingClientRect().top + window.scrollY - 24;
     window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
+  }
+
+  private getPhoneImageOverride(slug: string): MobileImageOverride | undefined {
+    return this.cardImageOverrides[slug];
   }
 }

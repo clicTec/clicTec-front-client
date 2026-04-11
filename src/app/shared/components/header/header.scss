@@ -290,6 +290,30 @@
   background: rgba(18, 30, 48, 0.96);
 }
 
+:host-context(body[data-theme='dark']) .topbar-shell {
+  border-color: var(--client-dark-border);
+  background: rgba(16, 27, 43, 0.82);
+  box-shadow: 0 24px 44px -34px rgb(0 0 0 / 0.82);
+}
+
+:host-context(body[data-theme='dark']) .nav-link,
+:host-context(body[data-theme='dark']) .nav-search,
+:host-context(body[data-theme='dark']) .nav-toggle {
+  color: var(--client-dark-text);
+}
+
+:host-context(body[data-theme='dark']) .nav-toggle {
+  background: rgba(83, 167, 195, 0.12);
+}
+
+:host-context(body[data-theme='dark']) .nav-link:hover,
+:host-context(body[data-theme='dark']) .nav-link.is-active,
+:host-context(body[data-theme='dark']) .nav-search:hover,
+:host-context(body[data-theme='dark']) .nav-toggle:hover {
+  background: rgba(83, 167, 195, 0.16);
+  color: var(--client-dark-text);
+}
+
 :host-context(body[data-theme='dark']) .topbar-search__input {
   border-color: var(--client-dark-border-soft);
   background: rgba(11, 20, 36, 0.9);
@@ -420,6 +444,12 @@
     transition:
       opacity 0.2s ease,
       transform 0.2s ease;
+  }
+
+  :host-context(body[data-theme='dark']) .nav {
+    border-color: var(--client-dark-border);
+    background: rgba(15, 25, 40, 0.97);
+    box-shadow: 0 28px 56px -36px rgb(0 0 0 / 0.78);
   }
 
   .nav-center {

@@ -110,6 +110,9 @@
 }
 
 .inicio-update-card {
+  --inicio-update-card-media-height: 12.6rem;
+  --inicio-update-card-image-width: 10.7rem;
+  --inicio-update-card-image-height: 9.6rem;
   display: grid;
   width: 100%;
   overflow: hidden;
@@ -124,27 +127,30 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  aspect-ratio: 16 / 9;
-  padding: 1rem;
+  min-height: var(--inicio-update-card-media-height);
+  height: var(--inicio-update-card-media-height);
+  padding: 0.55rem 0.8rem 0.45rem;
   overflow: hidden;
+  border-bottom: 1px solid rgb(15 23 42 / 0.08);
   background:
-    radial-gradient(circle at top, rgb(129 198 255 / 0.22), transparent 56%),
-    color-mix(in srgb, var(--color-surface) 82%, var(--color-ink-900) 18%);
+    radial-gradient(circle at top, rgb(125 183 255 / 0.12), transparent 58%),
+    linear-gradient(180deg, rgb(246 248 252 / 0.98), rgb(235 239 246 / 0.98));
 }
 
 .inicio-update-card__media img {
-  width: 100%;
-  height: 100%;
+  width: min(100%, var(--inicio-update-card-image-width));
+  height: var(--inicio-update-card-image-height);
   object-fit: contain;
   display: block;
   filter: drop-shadow(0 18px 28px rgb(2 6 23 / 0.16));
 }
 
 .inicio-update-card__body {
-  display: grid;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
   gap: 0.8rem;
   padding: 1.2rem;
-  align-content: start;
 }
 
 .inicio-update-card__title {
@@ -166,7 +172,8 @@
   align-items: center;
   justify-self: start;
   min-height: 2.5rem;
-  margin-top: 0.25rem;
+  width: fit-content;
+  margin-top: auto;
   padding: 0.65rem 1rem;
   border: 1px solid color-mix(in srgb, var(--color-border) 100%, transparent);
   border-radius: 999px;
@@ -190,6 +197,14 @@
   color: var(--client-dark-text);
 }
 
+:host-context(body[data-theme='dark']) .inicio-home__title {
+  color: var(--client-dark-text);
+}
+
+:host-context(body[data-theme='dark']) .inicio-home__subtitle {
+  color: var(--client-dark-text-muted);
+}
+
 :host-context(body[data-theme='dark']) .inicio-home__hero-visual {
   background:
     radial-gradient(circle at 20% 18%, rgb(110 188 255 / 0.24), transparent 28%),
@@ -205,6 +220,13 @@
     var(--client-dark-surface);
   border-color: var(--client-dark-border);
   box-shadow: 0 22px 46px -36px rgb(0 0 0 / 0.72);
+}
+
+:host-context(body[data-theme='dark']) .inicio-update-card__media {
+  border-bottom-color: var(--client-dark-border-soft);
+  background:
+    radial-gradient(circle at top, rgb(110 188 255 / 0.16), transparent 58%),
+    linear-gradient(180deg, rgb(24 39 61 / 0.96), rgb(17 29 47 / 0.98));
 }
 
 :host-context(body[data-theme='dark']) .inicio-update-card__title {
@@ -347,14 +369,24 @@
   }
 
   .inicio-home__hero-visual {
-    width: min(100%, 25rem);
-    min-height: 16rem;
+    width: min(100%, 22rem);
+    min-height: 13.5rem;
     margin-inline: auto;
   }
 
   .inicio-home__hero-image {
-    width: min(100%, 16rem);
-    max-height: 16rem;
+    width: min(100%, 13.25rem);
+    max-height: 13.25rem;
+  }
+
+  .inicio-update-card {
+    --inicio-update-card-media-height: 9.6rem;
+    --inicio-update-card-image-width: 8.2rem;
+    --inicio-update-card-image-height: 7.05rem;
+  }
+
+  .inicio-update-card__media {
+    margin-inline: auto;
   }
 
   .inicio-home__updates {

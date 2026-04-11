@@ -16,8 +16,14 @@
       </p>
     </div>
 
-    <figure class="moviles-page__hero-visual" aria-hidden="true">
-      <img class="moviles-page__hero-image" src="/mobile-images/google-pixel-10-pro.png" alt="" loading="eager" />
+    <figure class="moviles-page__hero-visual" [ngStyle]="heroImage.frameStyle ?? null" aria-hidden="true">
+      <img
+        class="moviles-page__hero-image"
+        [src]="heroImage.src"
+        [ngStyle]="heroImage.imageStyle ?? null"
+        alt=""
+        loading="eager"
+      />
     </figure>
   </header>
 
@@ -40,106 +46,43 @@
   <section class="moviles-catalog" aria-label="Listado de móviles">
     <header class="moviles-catalog__header">
       <h2 class="moviles-catalog__title">Catálogo de móviles disponibles</h2>
-      <div class="moviles-catalog__tools">
-        @if (orderedFilterGroups.length > 0) {
-          <div class="moviles-catalog__filter">
-            <button
-              type="button"
-              class="moviles-catalog__filter-toggle"
-              [class.is-open]="isFilterMenuOpen"
-              [class.has-active-filters]="activeFilterCount > 0"
-              (click)="toggleFilterMenu()"
-              aria-haspopup="menu"
-              [attr.aria-expanded]="isFilterMenuOpen"
-            >
-              <span>Filtrar</span>
-              @if (activeFilterCount > 0) {
-                <span class="moviles-catalog__filter-count">{{ activeFilterCount }}</span>
-              }
-              <span class="moviles-catalog__filter-chevron" [class.is-open]="isFilterMenuOpen"></span>
-            </button>
-
-            @if (isFilterMenuOpen) {
-              <div class="moviles-catalog__filter-menu" role="menu" aria-label="Filtros de móviles">
-                @for (group of orderedFilterGroups; track group.key) {
-                  <label class="moviles-catalog__filter-field">
-                    <span class="moviles-catalog__filter-label">{{ group.title }}</span>
-                    <select
-                      class="moviles-catalog__filter-select"
-                      [value]="selectedFilters[group.key]"
-                      (change)="setFilter(group.key, $any($event.target).value)"
-                    >
-                      <option value="">Todas</option>
-                      @for (option of group.options; track option) {
-                        <option [value]="option">{{ option }}</option>
-                      }
-                    </select>
-                  </label>
-                }
-
-                <button type="button" class="moviles-catalog__filter-reset" (click)="resetFilters()">
-                  Limpiar filtros
-                </button>
-              </div>
-            }
-          </div>
-        }
-
-        <div class="moviles-catalog__search">
-          <button
-            type="button"
-            class="moviles-catalog__search-button"
-            (click)="applySearch(searchInput.value)"
-            aria-label="Buscar móvil"
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path
-                d="M10.5 4a6.5 6.5 0 1 0 4.01 11.62l4.43 4.44 1.06-1.06-4.44-4.43A6.5 6.5 0 0 0 10.5 4Zm0 1.5a5 5 0 1 1 0 10a5 5 0 0 1 0-10Z"
-              />
-            </svg>
-          </button>
-          <input
-            #searchInput
-            type="search"
-            class="moviles-catalog__search-input"
-            placeholder="Buscar móvil"
-            aria-label="Buscar móvil"
-            [value]="searchDraft"
-            (input)="updateSearchDraft($any($event.target).value)"
-            (keydown.enter)="applySearch(searchInput.value)"
-          />
-        </div>
-      </div>
     </header>
 
     @if (filteredCatalog.length > 0) {
-      <div class="moviles-catalog__grid">
-        @for (phone of paginatedCatalog; track phone.slug) {
-          <article class="moviles-phone">
-            @if (phone.image) {
-              <div class="moviles-phone__media">
-                <img [src]="phone.image" [alt]="phone.brand + ' ' + phone.model" loading="lazy" />
+        <div class="moviles-catalog__grid">
+          @for (phone of paginatedCatalog; track phone.slug) {
+            <article class="moviles-phone">
+              @if (getPhoneImageSource(phone); as phoneImageSource) {
+                <div class="moviles-phone__media" [ngStyle]="getPhoneImageFrameStyle(phone.slug)">
+                  <img
+                    [src]="phoneImageSource"
+                    [alt]="phone.brand + ' ' + phone.model"
+                    [ngStyle]="getPhoneImageStyle(phone.slug)"
+                    loading="lazy"
+                  />
+                </div>
+              }
+
+              <div class="moviles-phone__body">
+                <header class="moviles-phone__top">
+                  <p class="moviles-phone__segment">{{ phone.segment }}</p>
+                </header>
+
+                <h3 class="moviles-phone__name">{{ phone.brand }} {{ phone.model }}</h3>
+                <p class="moviles-phone__meta">{{ phone.brand }} · {{ phone.price }}</p>
+                <div class="moviles-phone__summary" [innerHTML]="phone.review | consentAwareHtml : true"></div>
+
+                <a
+                  class="moviles-phone__cta"
+                  [routerLink]="['/moviles', phone.slug]"
+                  [attr.aria-label]="'Ver review de ' + phone.brand + ' ' + phone.model"
+                >
+                  Ver review
+                </a>
               </div>
-            }
-
-            <header class="moviles-phone__top">
-              <p class="moviles-phone__segment">{{ phone.segment }}</p>
-            </header>
-
-            <h3 class="moviles-phone__name">{{ phone.brand }} {{ phone.model }}</h3>
-            <p class="moviles-phone__meta">{{ phone.brand }} · {{ phone.price }}</p>
-            <div class="moviles-phone__summary" [innerHTML]="phone.review | consentAwareHtml : true"></div>
-
-            <a
-              class="moviles-phone__cta"
-              [routerLink]="['/moviles', phone.slug]"
-              [attr.aria-label]="'Ver review de ' + phone.brand + ' ' + phone.model"
-            >
-              Ver review
-            </a>
-          </article>
-        }
-      </div>
+            </article>
+          }
+        </div>
 
       <nav class="moviles-pagination" aria-label="Paginación de modelos recomendados">
         <div class="moviles-pagination__controls">
