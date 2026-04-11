@@ -3,7 +3,8 @@
     <p class="comparativas-page__eyebrow">Comparador</p>
     <h1 class="comparativas-page__title">Disponible en</h1>
 
-    <div class="comparativas-page__countdown" [attr.aria-label]="countdownAriaLabel">
+    <!-- aria-label temporalmente desactivado para evitar dependencia del binding countdownAriaLabel -->
+    <div class="comparativas-page__countdown">
       @for (unit of countdownUnits; track unit.label) {
         <article class="countdown-unit">
           <p class="countdown-unit__value">{{ unit.value }}</p>

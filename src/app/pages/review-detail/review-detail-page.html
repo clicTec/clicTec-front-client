@@ -18,11 +18,11 @@
 
           @if (review.coverImage) {
             <figure class="mobile-review__hero-media">
+              <!-- ngStyle temporalmente desactivado para evitar dependencia del binding heroImageStyle -->
               <img
                 class="mobile-review__hero-image"
                 [src]="review.coverImage"
                 [alt]="review.title"
-                [ngStyle]="heroImageStyle"
                 loading="lazy"
               />
             </figure>
