@@ -127,6 +127,8 @@ export interface ComparisonDeviceResponse {
   id: string;
   name: string;
   brand: string;
+  image: string;
+  launchDate: string;
   segment: string;
   os: string;
   tier: string;
@@ -134,10 +136,16 @@ export interface ComparisonDeviceResponse {
   priceLabel: string;
   priceValue: number;
   chipset: string;
+  antutu: number;
+  storageBase: string;
+  ramBase: string;
+  display: string;
   cameraMain: string;
   batteryMah: number;
   chargingW: number;
+  wirelessCharging: string;
   softwareYears: number;
+  usbPort: string;
   performance: number;
   camera: number;
   battery: number;
