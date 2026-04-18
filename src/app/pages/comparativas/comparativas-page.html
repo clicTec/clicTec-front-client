@@ -1,20 +1,248 @@
 <section class="comparativas-page">
-  <div class="comparativas-page__shell">
-    <p class="comparativas-page__eyebrow">Comparador</p>
-    <h1 class="comparativas-page__title">Disponible en</h1>
-
-    <!-- aria-label temporalmente desactivado para evitar dependencia del binding countdownAriaLabel -->
-    <div class="comparativas-page__countdown">
-      @for (unit of countdownUnits; track unit.label) {
-        <article class="countdown-unit">
-          <p class="countdown-unit__value">{{ unit.value }}</p>
-          <p class="countdown-unit__label">{{ unit.label }}</p>
-        </article>
-      }
+  @if (isLoading) {
+    <div class="comparativas-state">
+      <p class="comparativas-state__eyebrow">Comparador</p>
+      <h1 class="comparativas-state__title">Cargando base de datos técnica</h1>
+      <p class="comparativas-state__text">
+        Estoy preparando el comparador con los móviles y métricas guardadas en base de datos.
+      </p>
     </div>
+  } @else if (errorMessage) {
+    <div class="comparativas-state comparativas-state--error">
+      <p class="comparativas-state__eyebrow">Comparador</p>
+      <h1 class="comparativas-state__title">No se pudo abrir el comparador</h1>
+      <p class="comparativas-state__text">{{ errorMessage }}</p>
+    </div>
+  } @else {
+    <header class="comparativas-hero">
+      <div class="comparativas-hero__copy">
+        <p class="comparativas-hero__eyebrow">Comparador real</p>
+        <h1 class="comparativas-hero__title">Cruza precio, potencia y cámara sin salir del mismo flujo</h1>
+        <p class="comparativas-hero__text">
+          La selección se alimenta desde la base de datos del proyecto. Cambia dos móviles, elige el foco de
+          análisis y compara la ficha técnica sin depender de datos embebidos en el front.
+        </p>
+      </div>
 
-    @if (isFinished) {
-      <p class="comparativas-page__status">La cuenta atrás ha terminado.</p>
+      <div class="comparativas-hero__stats" aria-label="Resumen del comparador">
+        <article class="comparativas-stat">
+          <p class="comparativas-stat__value">{{ deviceCount }}</p>
+          <p class="comparativas-stat__label">Móviles en BD</p>
+        </article>
+        <article class="comparativas-stat">
+          <p class="comparativas-stat__value">{{ brandCount }}</p>
+          <p class="comparativas-stat__label">Marcas activas</p>
+        </article>
+        <article class="comparativas-stat">
+          <p class="comparativas-stat__value">{{ selectedFocus?.label ?? 'Balance general' }}</p>
+          <p class="comparativas-stat__label">Foco actual</p>
+        </article>
+      </div>
+    </header>
+
+    <section class="comparativas-console">
+      <div class="comparativas-console__toolbar">
+        <div class="comparativas-console__selects">
+          <label class="device-select">
+            <span class="device-select__label">Móvil izquierdo</span>
+            <select [value]="leftDeviceId" (change)="selectDevice('left', $any($event.target).value)">
+              @for (group of deviceGroups; track trackGroup($index, group)) {
+                <optgroup [label]="group.brand">
+                  @for (device of group.devices; track trackDevice($index, device)) {
+                    <option [value]="device.id">{{ device.name }}</option>
+                  }
+                </optgroup>
+              }
+            </select>
+          </label>
+
+          <button type="button" class="comparativas-console__swap" (click)="swapDevices()">
+            Intercambiar
+          </button>
+
+          <label class="device-select">
+            <span class="device-select__label">Móvil derecho</span>
+            <select [value]="rightDeviceId" (change)="selectDevice('right', $any($event.target).value)">
+              @for (group of deviceGroups; track trackGroup($index, group)) {
+                <optgroup [label]="group.brand">
+                  @for (device of group.devices; track trackDevice($index, device)) {
+                    <option [value]="device.id">{{ device.name }}</option>
+                  }
+                </optgroup>
+              }
+            </select>
+          </label>
+        </div>
+
+        <div class="comparativas-focus" role="tablist" aria-label="Foco de comparación">
+          @for (focus of focusOptions; track trackFocus($index, focus)) {
+            <button
+              type="button"
+              class="comparativas-focus__chip"
+              [class.is-active]="focus.id === selectedFocusId"
+              (click)="activateFocus(focus.id)"
+            >
+              {{ focus.label }}
+            </button>
+          }
+        </div>
+      </div>
+
+      <div class="comparativas-summary">
+        <article class="comparativas-summary__card" [class.is-left]="summaryWinner.side === 'left'" [class.is-right]="summaryWinner.side === 'right'">
+          <p class="comparativas-summary__eyebrow">Veredicto del foco</p>
+          <h2 class="comparativas-summary__title">{{ summaryWinner.title }}</h2>
+          <p class="comparativas-summary__text">{{ summaryWinner.detail }}</p>
+        </article>
+
+        <article class="comparativas-summary__card">
+          <p class="comparativas-summary__eyebrow">Diferencia económica</p>
+          <h2 class="comparativas-summary__title">{{ priceDeltaText }}</h2>
+          <p class="comparativas-summary__text">Útil para detectar si el salto técnico compensa de verdad.</p>
+        </article>
+
+        <article class="comparativas-summary__card">
+          <p class="comparativas-summary__eyebrow">Lectura rápida</p>
+          <h2 class="comparativas-summary__title">{{ selectedFocus?.label ?? 'Balance general' }}</h2>
+          <p class="comparativas-summary__text">{{ headlineDifference }}</p>
+        </article>
+      </div>
+
+      <div class="comparativas-duel">
+        <article class="device-panel device-panel--left">
+          <div class="device-panel__media" [class.is-empty]="!leftDevice?.image">
+            @if (leftDevice?.image) {
+              <img [src]="leftDevice?.image" [alt]="leftDevice?.name" loading="lazy" />
+            } @else {
+              <span class="device-panel__fallback">{{ getDeviceInitial(leftDevice) }}</span>
+            }
+          </div>
+
+          <div class="device-panel__body">
+            <p class="device-panel__kicker">{{ leftDevice?.brand }} · {{ leftDevice?.segment }}</p>
+            <h2 class="device-panel__title">{{ leftDevice?.name }}</h2>
+            <p class="device-panel__price">{{ leftDevice?.priceLabel }}</p>
+
+            <div class="device-panel__meta">
+              <span>{{ leftDevice?.launchDate }}</span>
+              <span>{{ leftDevice?.tier }}</span>
+              <span>{{ leftDevice?.os }}</span>
+            </div>
+
+            <div class="device-panel__focus-score">
+              <span class="device-panel__focus-label">{{ selectedFocus?.label ?? 'Balance general' }}</span>
+              <strong>{{ leftDevice ? formatScore(getFocusScore(leftDevice, selectedFocusId)) : '--' }}/10</strong>
+            </div>
+
+            <p class="device-panel__chipset">{{ leftDevice?.chipset }}</p>
+          </div>
+        </article>
+
+        <article class="duel-core">
+          <p class="duel-core__eyebrow">Foco activo</p>
+          <h2 class="duel-core__title">{{ selectedFocus?.label ?? 'Balance general' }}</h2>
+          <p class="duel-core__text">{{ selectedFocus?.description }}</p>
+
+          <div class="duel-core__scores">
+            @for (card of scoreCards; track trackScoreCard($index, card)) {
+              <article class="duel-score" [class.is-active]="card.id === selectedFocusId">
+                <div class="duel-score__row">
+                  <span>{{ card.label }}</span>
+                  <strong>{{ formatScore(card.leftScore) }} · {{ formatScore(card.rightScore) }}</strong>
+                </div>
+                <div class="duel-score__bars" aria-hidden="true">
+                  <span class="duel-score__bar duel-score__bar--left" [style.width.%]="card.leftScore * 10"></span>
+                  <span class="duel-score__bar duel-score__bar--right" [style.width.%]="card.rightScore * 10"></span>
+                </div>
+              </article>
+            }
+          </div>
+        </article>
+
+        <article class="device-panel device-panel--right">
+          <div class="device-panel__media" [class.is-empty]="!rightDevice?.image">
+            @if (rightDevice?.image) {
+              <img [src]="rightDevice?.image" [alt]="rightDevice?.name" loading="lazy" />
+            } @else {
+              <span class="device-panel__fallback">{{ getDeviceInitial(rightDevice) }}</span>
+            }
+          </div>
+
+          <div class="device-panel__body">
+            <p class="device-panel__kicker">{{ rightDevice?.brand }} · {{ rightDevice?.segment }}</p>
+            <h2 class="device-panel__title">{{ rightDevice?.name }}</h2>
+            <p class="device-panel__price">{{ rightDevice?.priceLabel }}</p>
+
+            <div class="device-panel__meta">
+              <span>{{ rightDevice?.launchDate }}</span>
+              <span>{{ rightDevice?.tier }}</span>
+              <span>{{ rightDevice?.os }}</span>
+            </div>
+
+            <div class="device-panel__focus-score">
+              <span class="device-panel__focus-label">{{ selectedFocus?.label ?? 'Balance general' }}</span>
+              <strong>{{ rightDevice ? formatScore(getFocusScore(rightDevice, selectedFocusId)) : '--' }}/10</strong>
+            </div>
+
+            <p class="device-panel__chipset">{{ rightDevice?.chipset }}</p>
+          </div>
+        </article>
+      </div>
+
+      <section class="comparativas-metrics" aria-label="Comparación técnica detallada">
+        <header class="comparativas-metrics__header">
+          <div>
+            <p class="comparativas-metrics__eyebrow">Cara a cara</p>
+            <h2 class="comparativas-metrics__title">Ficha técnica comparada</h2>
+          </div>
+          <p class="comparativas-metrics__text">
+            Resalto el lado que gana cada punto. Cuando no hay ventaja clara, la fila queda neutra.
+          </p>
+        </header>
+
+        <div class="comparativas-metrics__list">
+          @for (metric of metricRows; track trackMetric($index, metric)) {
+            <article class="metric-row">
+              <div class="metric-row__side" [class.is-winner]="metric.winner === 'left'">
+                <p class="metric-row__value">{{ metric.leftValue }}</p>
+              </div>
+
+              <div class="metric-row__center">
+                <p class="metric-row__label">{{ metric.label }}</p>
+                <p class="metric-row__note">{{ metric.note }}</p>
+              </div>
+
+              <div class="metric-row__side metric-row__side--right" [class.is-winner]="metric.winner === 'right'">
+                <p class="metric-row__value">{{ metric.rightValue }}</p>
+              </div>
+            </article>
+          }
+        </div>
+      </section>
+    </section>
+
+    @if (featuredDuels.length > 0) {
+      <section class="comparativas-featured" aria-label="Duelos destacados">
+        <header class="comparativas-featured__header">
+          <div>
+            <p class="comparativas-featured__eyebrow">Arranques rápidos</p>
+            <h2 class="comparativas-featured__title">Duelos recomendados</h2>
+          </div>
+          <p class="comparativas-featured__text">
+            Cambian el foco y la pareja con un toque para acelerar el análisis.
+          </p>
+        </header>
+
+        <div class="comparativas-featured__grid">
+          @for (duel of featuredDuels; track trackDuel($index, duel)) {
+            <button type="button" class="featured-duel" (click)="applyFeaturedDuel(duel)">
+              <p class="featured-duel__tag">{{ duel.tag }}</p>
+              <h3 class="featured-duel__title">{{ duel.title }}</h3>
+              <p class="featured-duel__summary">{{ duel.summary }}</p>
+            </button>
+          }
+        </div>
+      </section>
     }
-  </div>
+  }
 </section>
