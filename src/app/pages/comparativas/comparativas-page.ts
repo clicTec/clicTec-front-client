@@ -2,8 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import {
   ComparisonDeviceResponse,
   ComparisonFocusOptionResponse,
-  ContentApiService,
-  FeaturedDuelResponse
+  ContentApiService
 } from '../../shared/services/content-api.service';
 
 type FocusId = 'global' | 'camera' | 'performance' | 'battery' | 'value';
@@ -42,11 +41,6 @@ interface MetricRow {
 export class ComparativasPageComponent implements OnInit {
   private readonly contentApiService = inject(ContentApiService);
   private readonly integerFormatter = new Intl.NumberFormat('es-ES');
-  private readonly currencyFormatter = new Intl.NumberFormat('es-ES', {
-    style: 'currency',
-    currency: 'EUR',
-    maximumFractionDigits: 0
-  });
 
   protected isLoading = true;
   protected errorMessage = '';
@@ -55,7 +49,6 @@ export class ComparativasPageComponent implements OnInit {
   protected rightDeviceId = '';
   protected focusOptions: readonly ComparisonFocusOptionResponse[] = [];
   protected devices: readonly ComparisonDeviceResponse[] = [];
-  protected featuredDuels: readonly FeaturedDuelResponse[] = [];
   protected deviceGroups: readonly DeviceGroup[] = [];
 
   ngOnInit(): void {
@@ -63,7 +56,6 @@ export class ComparativasPageComponent implements OnInit {
       next: (page) => {
         this.focusOptions = page.focusOptions;
         this.devices = page.devices;
-        this.featuredDuels = page.featuredDuels;
         this.deviceGroups = this.buildDeviceGroups(page.devices);
         this.selectedFocusId = page.activeFocusId;
         this.leftDeviceId = this.resolveDeviceId(page.leftDeviceId, page.devices, 0);
@@ -87,85 +79,6 @@ export class ComparativasPageComponent implements OnInit {
 
   protected get rightDevice(): ComparisonDeviceResponse | undefined {
     return this.devices.find((device) => device.id === this.rightDeviceId);
-  }
-
-  protected get summaryWinner(): { side: BetterSide; title: string; detail: string } {
-    const leftDevice = this.leftDevice;
-    const rightDevice = this.rightDevice;
-
-    if (!leftDevice || !rightDevice) {
-      return {
-        side: 'tie',
-        title: 'Comparación lista',
-        detail: 'Selecciona dos móviles para ver el veredicto por foco.'
-      };
-    }
-
-    const leftScore = this.getFocusScore(leftDevice, this.selectedFocusId);
-    const rightScore = this.getFocusScore(rightDevice, this.selectedFocusId);
-    const winner = this.compareNumbers(leftScore, rightScore, 'higher');
-
-    if (winner === 'tie') {
-      return {
-        side: 'tie',
-        title: 'Duelo muy igualado',
-        detail: `En ${this.selectedFocus?.label.toLowerCase() ?? 'este enfoque'} ambos están prácticamente empatados.`
-      };
-    }
-
-    const winningDevice = winner === 'left' ? leftDevice : rightDevice;
-    return {
-      side: winner,
-      title: `${winningDevice.brand} ${winningDevice.name.replace(`${winningDevice.brand} `, '')}`.trim(),
-      detail: `Toma ventaja en ${this.selectedFocus?.label.toLowerCase() ?? 'el análisis'} con ${this.formatScore(
-        Math.max(leftScore, rightScore)
-      )}/10.`
-    };
-  }
-
-  protected get priceDeltaText(): string {
-    const leftDevice = this.leftDevice;
-    const rightDevice = this.rightDevice;
-
-    if (!leftDevice || !rightDevice) {
-      return 'Sin selección';
-    }
-
-    const delta = Math.abs(leftDevice.priceValue - rightDevice.priceValue);
-    if (delta === 0) {
-      return 'Mismo precio de lanzamiento';
-    }
-
-    const cheaperDevice = leftDevice.priceValue <= rightDevice.priceValue ? leftDevice : rightDevice;
-    return `${cheaperDevice.brand} ${cheaperDevice.name.replace(`${cheaperDevice.brand} `, '')} cuesta ${this.currencyFormatter.format(
-      delta
-    )} menos`;
-  }
-
-  protected get headlineDifference(): string {
-    const leftDevice = this.leftDevice;
-    const rightDevice = this.rightDevice;
-
-    if (!leftDevice || !rightDevice) {
-      return 'Activa un duelo para ver diferencias clave.';
-    }
-
-    const strongerPerformance = this.compareNumbers(leftDevice.antutu, rightDevice.antutu, 'higher');
-    const biggerBattery = this.compareNumbers(leftDevice.batteryMah, rightDevice.batteryMah, 'higher');
-
-    if (strongerPerformance !== 'tie') {
-      const winningDevice = strongerPerformance === 'left' ? leftDevice : rightDevice;
-      const losingDevice = strongerPerformance === 'left' ? rightDevice : leftDevice;
-      const delta = Math.abs(leftDevice.antutu - rightDevice.antutu);
-      return `${winningDevice.name} saca ${this.integerFormatter.format(delta)} puntos Antutu frente a ${losingDevice.name}.`;
-    }
-
-    if (biggerBattery !== 'tie') {
-      const winningDevice = biggerBattery === 'left' ? leftDevice : rightDevice;
-      return `${winningDevice.name} ofrece la batería más generosa del duelo.`;
-    }
-
-    return 'Los dos perfiles están bastante equilibrados en especificaciones clave.';
   }
 
   protected get scoreCards(): readonly ScoreCard[] {
@@ -321,10 +234,6 @@ export class ComparativasPageComponent implements OnInit {
     ];
   }
 
-  protected activateFocus(focusId: FocusId): void {
-    this.selectedFocusId = focusId;
-  }
-
   protected selectDevice(side: Side, nextDeviceId: string): void {
     if (!nextDeviceId || nextDeviceId === (side === 'left' ? this.leftDeviceId : this.rightDeviceId)) {
       return;
@@ -344,26 +253,6 @@ export class ComparativasPageComponent implements OnInit {
     this.rightDeviceId = nextDeviceId;
   }
 
-  protected swapDevices(): void {
-    if (!this.leftDeviceId || !this.rightDeviceId) {
-      return;
-    }
-
-    const previousLeft = this.leftDeviceId;
-    this.leftDeviceId = this.rightDeviceId;
-    this.rightDeviceId = previousLeft;
-  }
-
-  protected applyFeaturedDuel(duel: FeaturedDuelResponse): void {
-    this.selectedFocusId = duel.focus;
-    this.leftDeviceId = duel.leftDeviceId;
-    this.rightDeviceId = duel.rightDeviceId;
-  }
-
-  protected trackFocus(_: number, focus: ComparisonFocusOptionResponse): string {
-    return focus.id;
-  }
-
   protected trackGroup(_: number, group: DeviceGroup): string {
     return group.brand;
   }
@@ -378,10 +267,6 @@ export class ComparativasPageComponent implements OnInit {
 
   protected trackMetric(_: number, metric: MetricRow): string {
     return metric.id;
-  }
-
-  protected trackDuel(_: number, duel: FeaturedDuelResponse): string {
-    return duel.id;
   }
 
   protected getFocusScore(device: ComparisonDeviceResponse, focusId: FocusId): number {

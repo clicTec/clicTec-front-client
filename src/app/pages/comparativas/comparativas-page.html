@@ -35,16 +35,12 @@
               @for (group of deviceGroups; track trackGroup($index, group)) {
                 <optgroup [label]="group.brand">
                   @for (device of group.devices; track trackDevice($index, device)) {
-                    <option [value]="device.id">{{ device.name }}</option>
+                    <option [value]="device.id" [selected]="device.id === leftDeviceId">{{ device.name }}</option>
                   }
                 </optgroup>
               }
             </select>
           </label>
-
-          <button type="button" class="comparativas-console__swap" (click)="swapDevices()">
-            Intercambiar
-          </button>
 
           <label class="device-select">
             <span class="device-select__label">Móvil derecho</span>
@@ -52,7 +48,7 @@
               @for (group of deviceGroups; track trackGroup($index, group)) {
                 <optgroup [label]="group.brand">
                   @for (device of group.devices; track trackDevice($index, device)) {
-                    <option [value]="device.id">{{ device.name }}</option>
+                    <option [value]="device.id" [selected]="device.id === rightDeviceId">{{ device.name }}</option>
                   }
                 </optgroup>
               }
@@ -60,38 +56,6 @@
           </label>
         </div>
 
-        <div class="comparativas-focus" role="tablist" aria-label="Foco de comparación">
-          @for (focus of focusOptions; track trackFocus($index, focus)) {
-            <button
-              type="button"
-              class="comparativas-focus__chip"
-              [class.is-active]="focus.id === selectedFocusId"
-              (click)="activateFocus(focus.id)"
-            >
-              {{ focus.label }}
-            </button>
-          }
-        </div>
-      </div>
-
-      <div class="comparativas-summary">
-        <article class="comparativas-summary__card" [class.is-left]="summaryWinner.side === 'left'" [class.is-right]="summaryWinner.side === 'right'">
-          <p class="comparativas-summary__eyebrow">Veredicto del foco</p>
-          <h2 class="comparativas-summary__title">{{ summaryWinner.title }}</h2>
-          <p class="comparativas-summary__text">{{ summaryWinner.detail }}</p>
-        </article>
-
-        <article class="comparativas-summary__card">
-          <p class="comparativas-summary__eyebrow">Diferencia económica</p>
-          <h2 class="comparativas-summary__title">{{ priceDeltaText }}</h2>
-          <p class="comparativas-summary__text">Útil para detectar si el salto técnico compensa de verdad.</p>
-        </article>
-
-        <article class="comparativas-summary__card">
-          <p class="comparativas-summary__eyebrow">Lectura rápida</p>
-          <h2 class="comparativas-summary__title">{{ selectedFocus?.label ?? 'Balance general' }}</h2>
-          <p class="comparativas-summary__text">{{ headlineDifference }}</p>
-        </article>
       </div>
 
       <div class="comparativas-duel">
@@ -207,28 +171,5 @@
       </section>
     </section>
 
-    @if (featuredDuels.length > 0) {
-      <section class="comparativas-featured" aria-label="Duelos destacados">
-        <header class="comparativas-featured__header">
-          <div>
-            <p class="comparativas-featured__eyebrow">Arranques rápidos</p>
-            <h2 class="comparativas-featured__title">Duelos recomendados</h2>
-          </div>
-          <p class="comparativas-featured__text">
-            Cambian el foco y la pareja con un toque para acelerar el análisis.
-          </p>
-        </header>
-
-        <div class="comparativas-featured__grid">
-          @for (duel of featuredDuels; track trackDuel($index, duel)) {
-            <button type="button" class="featured-duel" (click)="applyFeaturedDuel(duel)">
-              <p class="featured-duel__tag">{{ duel.tag }}</p>
-              <h3 class="featured-duel__title">{{ duel.title }}</h3>
-              <p class="featured-duel__summary">{{ duel.summary }}</p>
-            </button>
-          }
-        </div>
-      </section>
-    }
   }
 </section>
