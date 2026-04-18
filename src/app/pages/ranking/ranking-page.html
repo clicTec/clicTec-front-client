@@ -1,14 +1,38 @@
-<section class="ranking-page">
+<section class="ranking-page" aria-labelledby="ranking-title">
   @if (isLoading) {
-    <p>Cargando ranking...</p>
+    <p class="ranking-page__state">Cargando ranking...</p>
   } @else if (errorMessage) {
-    <p>{{ errorMessage }}</p>
+    <p class="ranking-page__state ranking-page__state--error">{{ errorMessage }}</p>
   } @else if (ranking) {
-    <h1 class="ranking-page__title">{{ ranking.title }}</h1>
-    <ul class="ranking-page__list">
-      @for (item of ranking.items; track item) {
-        <li class="ranking-page__item">{{ item }}</li>
+    <header class="ranking-page__header">
+      <p class="ranking-page__eyebrow">{{ ranking.eyebrow || 'Ranking editorial' }}</p>
+      <h1 id="ranking-title" class="ranking-page__title">{{ ranking.title }}</h1>
+      <p class="ranking-page__description">
+        Clasificaciones pensadas para comprar mejor, no para premiar solo la ficha técnica más grande.
+        Revisamos precio real, soporte, cámara, autonomía y rendimiento sostenido.
+      </p>
+    </header>
+
+    <div class="ranking-page__grid">
+      @for (article of rankingArticles; track article.title) {
+        <article class="ranking-page__item">
+          <h2>{{ article.title }}</h2>
+          <p>{{ article.summary }}</p>
+          <ul>
+            @for (criterion of article.criteria; track criterion) {
+              <li>{{ criterion }}</li>
+            }
+          </ul>
+        </article>
       }
-    </ul>
+    </div>
+
+    <section class="ranking-page__method" aria-label="Criterios de actualización">
+      <h2>Cómo se actualiza</h2>
+      <p>
+        Los rankings deben cambiar cuando baja el precio, llega una actualización importante o aparece
+        un rival directo. Por eso se revisan como listas vivas y se cruzan con las comparativas.
+      </p>
+    </section>
   }
 </section>

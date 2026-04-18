@@ -30,7 +30,6 @@ export class App implements OnInit {
   private readonly seoService = inject(SeoService);
   protected showMonetizationDisclosure = false;
   protected isFullBleedMain = false;
-  protected hasImmersiveNewsBackground = false;
 
   ngOnInit(): void {
     this.applyCurrentRouteSeo(this.router.url);
@@ -67,7 +66,6 @@ export class App implements OnInit {
     const canonicalPath = String(activeRoute.data['seoCanonicalPath'] ?? url);
     this.showMonetizationDisclosure = activeRoute.data['showMonetizationDisclosure'] === true;
     this.isFullBleedMain = activeRoute.data['fullBleedMain'] === true;
-    this.hasImmersiveNewsBackground = activeRoute.data['immersiveNewsBackground'] === true;
 
     this.seoService.applyPage({
       title,
