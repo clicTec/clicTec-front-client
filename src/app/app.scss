@@ -12,12 +12,6 @@ app-footer {
   display: block;
 }
 
-.page--immersive-news {
-  background:
-    linear-gradient(180deg, rgb(5 11 28 / 0.14), rgb(5 11 28 / 0.34)),
-    url('/placeholders/noticias-tec-coming-soon.svg') center top / cover no-repeat;
-}
-
 .page__main {
   flex: 1 0 auto;
   width: 100%;
@@ -33,16 +27,6 @@ app-footer {
   padding: 3.95rem 0 0;
 }
 
-.page--immersive-news .page__main--full-bleed {
-  padding-bottom: 0;
-}
-
-.page--immersive-news :is(.topbar-shell, .site-footer__shell) {
-  background: rgb(9 18 38 / 0.62);
-  border-color: rgb(120 159 238 / 0.2);
-  box-shadow: 0 24px 48px -38px rgb(0 0 0 / 0.6);
-}
-
 app-monetization-disclosure {
   width: min(100%, 1320px);
   margin: 0 auto;
@@ -56,10 +40,6 @@ app-monetization-disclosure {
 
   .page__main--full-bleed {
     padding: 3.8rem 0 0;
-  }
-
-  .page--immersive-news {
-    background-position: center center;
   }
 
   app-monetization-disclosure {

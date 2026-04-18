@@ -92,7 +92,6 @@
 
 .comparativas-hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.45fr) minmax(18rem, 0.9fr);
   gap: clamp(1rem, 3vw, 2rem);
   padding: clamp(1.4rem, 3.5vw, 2.6rem);
 }
@@ -121,23 +120,6 @@
   line-height: 0.95;
 }
 
-.comparativas-hero__stats {
-  display: grid;
-  gap: 0.9rem;
-}
-
-.comparativas-stat {
-  display: grid;
-  gap: 0.22rem;
-  padding: 1rem 1.05rem;
-  border-radius: 1.35rem;
-  border: 1px solid var(--line-soft);
-  background:
-    linear-gradient(180deg, rgb(21 35 57 / 0.98), rgb(14 24 41 / 0.98)),
-    var(--surface-card);
-}
-
-.comparativas-stat__value,
 .comparativas-summary__title,
 .duel-core__title,
 .device-panel__title,
@@ -148,12 +130,6 @@
   color: var(--ink-strong);
 }
 
-.comparativas-stat__value {
-  font-size: clamp(1.35rem, 2vw, 1.8rem);
-  font-weight: 800;
-}
-
-.comparativas-stat__label,
 .device-select__label,
 .device-panel__kicker,
 .device-panel__focus-label,

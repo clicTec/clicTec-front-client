@@ -8,7 +8,6 @@ import { MovilesPageComponent } from './pages/moviles/moviles-page';
 import { NotFoundPageComponent } from './pages/not-found/not-found-page';
 import { ReviewDetailPageComponent } from './pages/review-detail/review-detail-page';
 import { RankingPageComponent } from './pages/ranking/ranking-page';
-import { ReviewsPageComponent } from './pages/reviews/reviews-page';
 
 export const routes: Routes = [
   {
@@ -61,20 +60,8 @@ export const routes: Routes = [
     data: {
       seoTitle: 'Comparador de móviles',
       seoDescription:
-        'Comparador técnico de móviles por cámara, rendimiento, batería y relación calidad-precio.',
+        'Comparador interactivo de móviles por cámara, rendimiento, batería, precio, soporte de software y equilibrio general.',
       seoCanonicalPath: '/comparativas'
-    }
-  },
-  {
-    path: 'reviews',
-    component: ReviewsPageComponent,
-    data: {
-      seoTitle: 'Actualidad tecnológica',
-      seoDescription:
-        'Noticias tecnológicas y actualidad editorial publicadas desde el panel de administración.',
-      seoCanonicalPath: '/reviews',
-      fullBleedMain: true,
-      immersiveNewsBackground: true
     }
   },
   {
@@ -83,7 +70,7 @@ export const routes: Routes = [
     data: {
       seoTitle: 'Guías de compra y uso',
       seoDescription:
-        'Guías prácticas para elegir móvil, entender especificaciones y comprar con más criterio.',
+        'Guías prácticas para elegir móvil por presupuesto, cámara, batería, gaming y formato compacto sin pagar de más.',
       seoCanonicalPath: '/guias'
     }
   },

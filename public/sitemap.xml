@@ -2,103 +2,97 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://clictec.es/</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://clictec.es/moviles</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://clictec.es/comparativas</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://clictec.es/reviews</loc>
-    <lastmod>2026-03-31</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://clictec.es/guias</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://clictec.es/ranking</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://clictec.es/privacidad</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://clictec.es/cookies</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
     <loc>https://clictec.es/aviso-legal</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://clictec.es/publicidad-afiliacion</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://clictec.es/marcas/apple</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://clictec.es/marcas/google</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://clictec.es/marcas/oppo</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://clictec.es/marcas/samsung</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://clictec.es/marcas/vivo</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://clictec.es/marcas/xiaomi</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://clictec.es/moviles/google-pixel-10</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -108,7 +102,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/google-pixel-10-pro</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -118,7 +112,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/google-pixel-10-pro-xl</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -128,7 +122,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/google-pixel-10a</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -138,7 +132,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/iphone-11</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -148,7 +142,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/iphone-12</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -158,7 +152,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/iphone-13</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -168,7 +162,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/iphone-13-pro</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -178,7 +172,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/iphone-13-pro-max</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -188,7 +182,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/iphone-14</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -198,7 +192,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/iphone-14-pro</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -208,7 +202,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/iphone-14-pro-max</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -218,7 +212,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/iphone-15</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -228,7 +222,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/iphone-15-plus</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -238,7 +232,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/iphone-15-pro</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -248,7 +242,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/iphone-15-pro-max</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -258,7 +252,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/iphone-16</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -268,7 +262,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/iphone-16-plus</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -278,7 +272,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/iphone-16-pro</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -288,7 +282,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/iphone-16-pro-max</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -298,7 +292,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/iphone-16e</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -308,7 +302,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/iphone-17</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -318,7 +312,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/iphone-17-pro</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -328,7 +322,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/iphone-17-pro-max</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -338,7 +332,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/iphone-17e</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -348,7 +342,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/iphone-air</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -358,7 +352,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/oppo-a5-pro-4g</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -368,7 +362,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/oppo-a5-pro-5g</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -378,7 +372,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/oppo-a6-pro-5g</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -388,7 +382,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/oppo-find-x8-pro</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -398,7 +392,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/oppo-find-x9</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -408,7 +402,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/oppo-find-x9-pro</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -418,7 +412,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/oppo-reno-14</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -428,7 +422,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/oppo-reno-14-f-5g</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -438,7 +432,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/oppo-reno-14-fs-5g</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -448,7 +442,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-galaxy-a05</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -458,7 +452,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-galaxy-a15</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -468,7 +462,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-galaxy-a16</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -478,7 +472,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-galaxy-a17-5g</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -488,7 +482,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-galaxy-a25</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -498,7 +492,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-galaxy-a34</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -508,7 +502,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-galaxy-a35</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -518,7 +512,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-galaxy-a36-5g</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -528,7 +522,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-galaxy-a37</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -538,7 +532,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-galaxy-a54</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -548,7 +542,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-galaxy-a55</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -558,7 +552,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-galaxy-a56</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -568,7 +562,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-galaxy-a57</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -578,7 +572,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-s22</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -588,7 +582,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-s22-plus</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -598,7 +592,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-s22-ultra</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -608,7 +602,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-s23</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -618,7 +612,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-s23-fe</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -628,7 +622,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-s23-plus</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -638,7 +632,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-s23-ultra</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -648,7 +642,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-s24</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -658,7 +652,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-s24-fe</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -668,7 +662,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-s24-plus</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -678,7 +672,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-s24-ultra</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -688,7 +682,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-s25-fe</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -698,7 +692,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-s25-ultra</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -708,7 +702,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-s26</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -718,7 +712,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-s26-plus</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -728,7 +722,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-s26-ultra</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -738,7 +732,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-z-flip-6</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -748,7 +742,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-z-flip-7</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -758,7 +752,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-z-flip-7-fe</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -768,7 +762,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-z-fold-6</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -778,7 +772,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/samsung-z-fold-7</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -788,7 +782,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/vivo-v70-5g</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -798,7 +792,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/vivo-x200-fe</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -808,7 +802,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/vivo-x300</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -818,7 +812,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/vivo-x300-pro</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -828,7 +822,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/xiaomi-15t</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -838,7 +832,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/xiaomi-15t-pro</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -848,7 +842,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/xiaomi-17</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -858,7 +852,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/xiaomi-17-ultra</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -868,7 +862,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/xiaomi-redmi-note-13</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -878,7 +872,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/xiaomi-redmi-note-14-4g</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -888,7 +882,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/xiaomi-redmi-note-15-4g</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -898,7 +892,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/xiaomi-redmi-note-15-5g</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -908,7 +902,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/xiaomi-redmi-note-15-pro-4g</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -918,7 +912,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/xiaomi-redmi-note-15-pro-5g</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -928,7 +922,7 @@
   </url>
   <url>
     <loc>https://clictec.es/moviles/xiaomi-redmi-note-15-pro-plus</loc>
-    <lastmod>2026-03-31</lastmod>
+    <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>

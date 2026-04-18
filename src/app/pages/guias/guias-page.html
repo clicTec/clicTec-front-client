@@ -1,14 +1,38 @@
-<section class="guias-page">
+<section class="guias-page" aria-labelledby="guias-title">
   @if (isLoading) {
-    <p>Cargando guías...</p>
+    <p class="guias-page__state">Cargando guías...</p>
   } @else if (errorMessage) {
-    <p>{{ errorMessage }}</p>
+    <p class="guias-page__state guias-page__state--error">{{ errorMessage }}</p>
   } @else if (guide) {
-    <h1 class="guias-page__title">{{ guide.title }}</h1>
-    <ul class="guias-page__list">
-      @for (item of guide.items; track item) {
-        <li class="guias-page__item">{{ item }}</li>
+    <header class="guias-page__header">
+      <p class="guias-page__eyebrow">{{ guide.eyebrow || 'Guías de compra' }}</p>
+      <h1 id="guias-title" class="guias-page__title">{{ guide.title }}</h1>
+      <p class="guias-page__description">
+        Recomendaciones prácticas para elegir móvil con criterio: presupuesto, cámara, batería,
+        gaming, tamaño y años de actualizaciones.
+      </p>
+    </header>
+
+    <div class="guias-page__grid">
+      @for (article of guideArticles; track article.title) {
+        <article class="guias-page__item">
+          <h2>{{ article.title }}</h2>
+          <p>{{ article.summary }}</p>
+          <ul>
+            @for (check of article.checks; track check) {
+              <li>{{ check }}</li>
+            }
+          </ul>
+        </article>
       }
-    </ul>
+    </div>
+
+    <section class="guias-page__method" aria-label="Método de las guías">
+      <h2>Antes de comprar</h2>
+      <p>
+        Cruza siempre tres datos: precio real, años de soporte y uso principal. Un móvil más barato
+        puede salir peor si pierde actualizaciones pronto o si su batería no aguanta tu rutina.
+      </p>
+    </section>
   }
 </section>

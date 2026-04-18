@@ -4,43 +4,82 @@
   position: relative;
   overflow: hidden;
   width: 100%;
+  display: grid;
+  gap: clamp(1.2rem, 3vw, 2rem);
   padding: clamp(1.8rem, 4vw, 3.2rem) 0;
 }
 
-.guias-page::before {
-  content: '';
-  display: block;
-  width: 100%;
-  height: 220px;
-  margin-bottom: 1.25rem;
-  border-radius: 1.8rem;
-  background:
-    linear-gradient(180deg, rgba(vars.$color-surface, 0.44), rgba(vars.$color-surface, 0.94)),
-    rgba(vars.$color-background, 0.96)
-    url('/store/store-glyph.svg') center/112px no-repeat;
+.guias-page__header {
+  display: grid;
+  gap: 0.75rem;
+  max-width: 900px;
+}
+
+.guias-page__eyebrow {
+  margin: 0;
+  color: vars.$color-accent;
+  font-size: vars.$font-size-eyebrow;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
 }
 
 .guias-page__title {
-  margin: 0.45rem 0 0;
-  max-width: 14ch;
-  font-size: clamp(2.4rem, 4vw, 4rem);
+  margin: 0;
+  max-width: 15ch;
+  font-size: clamp(2.35rem, 5vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: 0;
   color: vars.$color-ink-900;
 }
 
-.guias-page__list {
-  margin: 1.25rem 0 0;
-  padding: 0;
-  list-style: none;
+.guias-page__description,
+.guias-page__state,
+.guias-page__item p,
+.guias-page__method p {
+  max-width: 48rem;
+  margin: 0;
+  color: vars.$color-text-muted;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.guias-page__state--error {
+  color: #b42318;
+}
+
+.guias-page__grid {
   display: grid;
-  gap: 0.8rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: 1rem;
 }
 
-.guias-page__item {
-  padding: 1rem 1.1rem;
-  border-radius: 1.35rem;
-  background: vars.$color-background;
+.guias-page__item,
+.guias-page__method {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem;
+  border: 1px solid rgb(17 27 37 / 0.08);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 24px 56px -44px rgb(17 27 37 / 0.32);
+}
+
+.guias-page__item h2,
+.guias-page__method h2 {
+  margin: 0;
   color: vars.$color-ink-900;
-  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.guias-page__item ul {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+  padding-left: 1.1rem;
+  color: vars.$color-text-muted;
+  line-height: 1.55;
 }
 
 @media (max-width: 760px) {
@@ -48,13 +87,8 @@
     padding: 1.4rem 0;
   }
 
-  .guias-page::before {
-    height: 160px;
-    border-radius: 1.4rem;
-  }
-
   .guias-page__title {
     max-width: none;
-    font-size: clamp(2rem, 10vw, 3rem);
+    font-size: clamp(2.1rem, 11vw, 3rem);
   }
 }

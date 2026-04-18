@@ -89,14 +89,6 @@ export class ComparativasPageComponent implements OnInit {
     return this.devices.find((device) => device.id === this.rightDeviceId);
   }
 
-  protected get deviceCount(): number {
-    return this.devices.length;
-  }
-
-  protected get brandCount(): number {
-    return new Set(this.devices.map((device) => device.brand)).size;
-  }
-
   protected get summaryWinner(): { side: BetterSide; title: string; detail: string } {
     const leftDevice = this.leftDevice;
     const rightDevice = this.rightDevice;

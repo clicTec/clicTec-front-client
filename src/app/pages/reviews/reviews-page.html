@@ -1,8 +1,54 @@
-<section class="reviews-page" aria-label="Noticias Tec próximamente">
-  <div class="reviews-page__hero">
-    <div class="reviews-page__headline">
-      <span class="reviews-page__icon" aria-hidden="true">🚀</span>
-      <h1 class="reviews-page__title">Muy pronto en ClicTec</h1>
-    </div>
-  </div>
+<section class="reviews-page" aria-labelledby="reviews-title">
+  @if (isLoading) {
+    <p class="reviews-page__state">Cargando análisis...</p>
+  } @else if (errorMessage) {
+    <p class="reviews-page__state reviews-page__state--error">{{ errorMessage }}</p>
+  } @else if (reviews) {
+    <header class="reviews-page__header">
+      <p class="reviews-page__eyebrow">{{ reviews.eyebrow || 'Análisis editorial' }}</p>
+      <h1 id="reviews-title" class="reviews-page__title">{{ reviews.title }}</h1>
+      <p class="reviews-page__description">{{ reviews.description }}</p>
+    </header>
+
+    @if (reviews.items.length > 0) {
+      <div class="reviews-page__grid">
+        @for (item of reviews.items; track item.slug) {
+          <article class="reviews-card">
+            @if (item.coverImage) {
+              <img class="reviews-card__image" [src]="item.coverImage" [alt]="item.title" loading="lazy" />
+            }
+
+            <div class="reviews-card__body">
+              <p class="reviews-card__score">Nota editorial {{ item.score.toFixed(1) }}</p>
+              <h2 class="reviews-card__title">{{ item.title }}</h2>
+              <p class="reviews-card__excerpt">{{ item.excerpt }}</p>
+              <a class="reviews-card__link" [routerLink]="['/moviles', item.slug]">Leer análisis</a>
+            </div>
+          </article>
+        }
+      </div>
+    }
+
+    <section class="reviews-method" aria-labelledby="reviews-method-title">
+      <div>
+        <p class="reviews-method__eyebrow">Cómo evaluamos</p>
+        <h2 id="reviews-method-title" class="reviews-method__title">Criterio claro antes que titulares rápidos</h2>
+      </div>
+
+      <div class="reviews-method__grid">
+        <article class="reviews-method__item">
+          <h3>Uso real</h3>
+          <p>Priorizamos autonomía, comodidad, brillo de pantalla, estabilidad y cámara en situaciones normales.</p>
+        </article>
+        <article class="reviews-method__item">
+          <h3>Datos comparables</h3>
+          <p>Comparamos precio, soporte de software, carga, batería, sensores y rendimiento frente a rivales directos.</p>
+        </article>
+        <article class="reviews-method__item">
+          <h3>Transparencia</h3>
+          <p>Las piezas con patrocinio, publicidad o afiliación deben estar señalizadas para separar criterio y promoción.</p>
+        </article>
+      </div>
+    </section>
+  }
 </section>
