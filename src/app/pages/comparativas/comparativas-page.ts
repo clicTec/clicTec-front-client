@@ -131,17 +131,17 @@ export class ComparativasPageComponent implements OnInit {
         'higher',
         'La fecha ayuda a entender soporte y generación.'
       ),
-      this.createMetricRow(
+      this.createOptionalMetricRow(
         'antutu',
         'Antutu',
-        this.integerFormatter.format(leftDevice.antutu),
-        this.integerFormatter.format(rightDevice.antutu),
+        leftDevice.antutu > 0 ? this.integerFormatter.format(leftDevice.antutu) : '',
+        rightDevice.antutu > 0 ? this.integerFormatter.format(rightDevice.antutu) : '',
         leftDevice.antutu,
         rightDevice.antutu,
         'higher',
         'Indica potencia agregada para tareas pesadas.'
       ),
-      this.createMetricRow(
+      this.createOptionalMetricRow(
         'storage',
         'Almacenamiento base',
         leftDevice.storageBase,
@@ -151,7 +151,7 @@ export class ComparativasPageComponent implements OnInit {
         'higher',
         'Capacidad inicial sin pagar un salto de memoria.'
       ),
-      this.createMetricRow(
+      this.createOptionalMetricRow(
         'ram',
         'RAM base',
         leftDevice.ramBase,
@@ -161,7 +161,7 @@ export class ComparativasPageComponent implements OnInit {
         'higher',
         'Más RAM suele dar más margen en multitarea.'
       ),
-      this.createMetricRow(
+      this.createOptionalMetricRow(
         'display',
         'Pantalla',
         leftDevice.display,
@@ -201,7 +201,7 @@ export class ComparativasPageComponent implements OnInit {
         'higher',
         'Aquí manda la potencia declarada de carga.'
       ),
-      this.createMetricRow(
+      this.createOptionalMetricRow(
         'wireless',
         'Carga inalámbrica',
         leftDevice.wirelessCharging,
@@ -221,7 +221,7 @@ export class ComparativasPageComponent implements OnInit {
         'higher',
         'Más soporte suele alargar mejor la vida útil.'
       ),
-      this.createMetricRow(
+      this.createOptionalMetricRow(
         'usb',
         'Puerto USB',
         leftDevice.usbPort,
@@ -231,7 +231,7 @@ export class ComparativasPageComponent implements OnInit {
         'higher',
         'La versión influye en velocidad de datos y vídeo.'
       )
-    ];
+    ].filter((metric): metric is MetricRow => metric !== null);
   }
 
   protected selectDevice(side: Side, nextDeviceId: string): void {
@@ -345,6 +345,32 @@ export class ComparativasPageComponent implements OnInit {
     };
   }
 
+  private createOptionalMetricRow(
+    id: string,
+    label: string,
+    leftValue: string | undefined,
+    rightValue: string | undefined,
+    leftNumeric: number,
+    rightNumeric: number,
+    mode: MetricMode,
+    note: string
+  ): MetricRow | null {
+    if (!this.hasMetricContent(leftValue, leftNumeric) && !this.hasMetricContent(rightValue, rightNumeric)) {
+      return null;
+    }
+
+    return this.createMetricRow(
+      id,
+      label,
+      this.withMetricFallback(leftValue),
+      this.withMetricFallback(rightValue),
+      leftNumeric,
+      rightNumeric,
+      mode,
+      note
+    );
+  }
+
   private compareNumbers(leftValue: number, rightValue: number, mode: MetricMode): BetterSide {
     if (Math.abs(leftValue - rightValue) < 0.0001) {
       return 'tie';
@@ -357,13 +383,22 @@ export class ComparativasPageComponent implements OnInit {
     return leftValue > rightValue ? 'left' : 'right';
   }
 
-  private extractFirstInteger(value: string): number {
-    const match = value.match(/\d+/);
+  private extractFirstInteger(value: string | undefined): number {
+    const match = value?.match(/\d+/);
     return match ? Number(match[0]) : 0;
   }
 
-  private scoreDisplay(value: string): number {
-    const normalized = value.toLowerCase();
+  private hasMetricContent(value: string | undefined, numericValue: number): boolean {
+    return (value?.trim().length ?? 0) > 0 || numericValue > 0;
+  }
+
+  private withMetricFallback(value: string | undefined): string {
+    const normalizedValue = value?.trim() ?? '';
+    return normalizedValue.length > 0 ? normalizedValue : 'No disponible';
+  }
+
+  private scoreDisplay(value: string | undefined): number {
+    const normalized = value?.toLowerCase() ?? '';
     const refreshRate = Number(normalized.match(/(\d+)\s*hz/)?.[1] ?? '60');
     const diagonal = Number(normalized.match(/(\d+(?:\.\d+)?)"/)?.[1] ?? '6');
     const panelScore = normalized.includes('amoled') || normalized.includes('oled')
@@ -375,12 +410,12 @@ export class ComparativasPageComponent implements OnInit {
     return (refreshRate * 10) + Math.round(diagonal * 10) + panelScore;
   }
 
-  private scoreBinary(value: string): number {
-    return value.toLowerCase().startsWith('s') ? 1 : 0;
+  private scoreBinary(value: string | undefined): number {
+    return value?.toLowerCase().startsWith('s') ? 1 : 0;
   }
 
-  private scoreUsb(value: string): number {
-    const normalized = value.toLowerCase();
+  private scoreUsb(value: string | undefined): number {
+    const normalized = value?.toLowerCase() ?? '';
     if (normalized.includes('3.2')) {
       return 32;
     }

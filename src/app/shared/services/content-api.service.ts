@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { API_BASE_URL, resolveApiUrl } from '../config/api-base.token';
 
 export interface HomeFeatureResponse {
@@ -153,6 +153,17 @@ export interface ComparisonDeviceResponse {
   value: number;
 }
 
+type ApiComparisonDeviceResponse = Omit<
+  ComparisonDeviceResponse,
+  'image' | 'launchDate' | 'antutu' | 'storageBase' | 'ramBase' | 'display' | 'wirelessCharging' | 'usbPort'
+> &
+  Partial<
+    Pick<
+      ComparisonDeviceResponse,
+      'image' | 'launchDate' | 'antutu' | 'storageBase' | 'ramBase' | 'display' | 'wirelessCharging' | 'usbPort'
+    >
+  >;
+
 export interface FeaturedDuelResponse {
   id: string;
   title: string;
@@ -170,6 +181,10 @@ export interface ComparisonResponse {
   focusOptions: ComparisonFocusOptionResponse[];
   devices: ComparisonDeviceResponse[];
   featuredDuels: FeaturedDuelResponse[];
+}
+
+interface ApiComparisonResponse extends Omit<ComparisonResponse, 'devices'> {
+  devices: ApiComparisonDeviceResponse[];
 }
 
 export interface GuideResponse {
@@ -268,7 +283,12 @@ export class ContentApiService {
   }
 
   getComparisonPage(): Observable<ComparisonResponse> {
-    return this.httpClient.get<ComparisonResponse>(this.resolveUrl('/comparativas'));
+    return this.httpClient.get<ApiComparisonResponse>(this.resolveUrl('/comparativas')).pipe(
+      map((page) => ({
+        ...page,
+        devices: page.devices.map((device) => this.normalizeComparisonDevice(device))
+      }))
+    );
   }
 
   getGuidePage(): Observable<GuideResponse> {
@@ -293,5 +313,40 @@ export class ContentApiService {
 
   getMobileReviewBySlug(slug: string): Observable<ReviewDetailResponse> {
     return this.httpClient.get<ReviewDetailResponse>(this.resolveUrl(`/moviles/${slug}`));
+  }
+
+  private normalizeComparisonDevice(device: ApiComparisonDeviceResponse): ComparisonDeviceResponse {
+    const normalizedId = device.id.trim();
+
+    return {
+      ...device,
+      id: normalizedId,
+      image: this.normalizeComparisonImage(device.image, normalizedId),
+      launchDate: this.normalizeComparisonLaunchDate(device.launchDate, device.manufactureYear),
+      antutu: this.normalizePositiveNumber(device.antutu),
+      storageBase: this.normalizeText(device.storageBase),
+      ramBase: this.normalizeText(device.ramBase),
+      display: this.normalizeText(device.display),
+      wirelessCharging: this.normalizeText(device.wirelessCharging),
+      usbPort: this.normalizeText(device.usbPort)
+    };
+  }
+
+  private normalizeComparisonImage(image: string | undefined, fallbackId: string): string {
+    const normalizedImage = this.normalizeText(image);
+    return normalizedImage || (fallbackId ? `/mobile-images/${fallbackId}.png` : '');
+  }
+
+  private normalizeComparisonLaunchDate(launchDate: string | undefined, manufactureYear: number): string {
+    const normalizedLaunchDate = this.normalizeText(launchDate);
+    return normalizedLaunchDate || (manufactureYear > 0 ? String(manufactureYear) : '');
+  }
+
+  private normalizeText(value: string | undefined): string {
+    return value?.trim() ?? '';
+  }
+
+  private normalizePositiveNumber(value: number | undefined): number {
+    return typeof value === 'number' && Number.isFinite(value) && value > 0 ? value : 0;
   }
 }
