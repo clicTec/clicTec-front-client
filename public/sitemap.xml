@@ -411,6 +411,16 @@
     </image:image>
   </url>
   <url>
+    <loc>https://clictec.es/moviles/oppo-find-x9-ultra</loc>
+    <lastmod>2026-04-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://clictec.es/mobile-images/oppo-find-x9-ultra.png</image:loc>
+      <image:title>Oppo Find X9 Ultra</image:title>
+    </image:image>
+  </url>
+  <url>
     <loc>https://clictec.es/moviles/oppo-reno-14</loc>
     <lastmod>2026-04-18</lastmod>
     <changefreq>weekly</changefreq>
